@@ -1,0 +1,32 @@
+.home__title___1U_GH {
+  border: 1px solid blue;
+}.styles__container___26pRP {
+  position: relative;
+}
+
+.styles__input___FTH4g {
+  border: none;
+  border-bottom: 1px solid #e1e0e1;
+  color: #555;
+  font-weight: 300;
+  outline: 0;
+  padding: 10px 0;
+  width: 100%;
+}
+
+.styles__input___FTH4g:focus ~ .styles__bar___2NgVJ {
+  width: 100%;
+}
+
+.styles__bar___2NgVJ {
+  height: 2px;
+  width: 0;
+  transition: width .3s;
+  position: absolute;
+  bottom: 0;
+}
+
+/* COLORS
+  #e1e0e1 = Gray color for input border-bottom
+  #555 = Dark gray for input text color
+*/
