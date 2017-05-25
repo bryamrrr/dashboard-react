@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from './home.css';
 
 import FormInput from '../form-input';
 import FormButton from '../form-button';
@@ -7,7 +6,6 @@ import FormButton from '../form-button';
 function Home() {
   return (
     <div>
-      <h1 className={styles.title}>:)</h1>
       <FormInput
         name="user"
         placeholder="Usuario"
@@ -19,7 +17,10 @@ function Home() {
         placeholder="Contraseña"
         includeIcon="linearicon-lock"
       />
-      <FormButton />
+      <FormButton
+        callToAction="Iniciar sesión"
+        includeIcon="linearicon-cart"
+      />
     </div>
   );
 }

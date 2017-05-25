@@ -2,7 +2,7 @@
   align-items: flex-end;
   display: flex;
   margin-top: 15px;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 
 .container.hasIcon .inputContainer {
@@ -11,6 +11,7 @@
 }
 
 .icon {
+  color: #2391e6;
   display: block;
   font-size: 1.2em;
   line-height: 37px;
@@ -46,6 +47,7 @@
 }
 
 .bar {
+  background-color: #2391e6;
   bottom: 0;
   height: 2px;
   position: absolute;

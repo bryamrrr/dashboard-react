@@ -39,7 +39,6 @@ class TextInput extends Component {
         { this.props.includeIcon !== '' &&
           <i
             className={`${styles.icon} ${this.props.includeIcon}`}
-            style={{ color: this.props.iconColor }}
           />
         }
         <div className={styles.inputContainer}>
@@ -52,7 +51,6 @@ class TextInput extends Component {
           />
           <div
             className={styles.bar}
-            style={{ backgroundColor: this.props.lineColor }}
           />
           <label
             htmlFor={this.props.name}
@@ -68,21 +66,17 @@ class TextInput extends Component {
 
 TextInput.propTypes = {
   name: PropTypes.string.isRequired,
-  type: PropTypes.PropTypes.oneOf([
+  type: PropTypes.oneOf([
     'text',
     'password',
     'email',
   ]).isRequired,
   placeholder: PropTypes.string,
-  lineColor: PropTypes.string,
-  iconColor: PropTypes.string,
   includeIcon: PropTypes.string,
 };
 
 TextInput.defaultProps = {
   type: 'text',
-  lineColor: '#2391e6',
-  iconColor: '#2391e6',
   placeholder: '',
   includeIcon: '',
 };
