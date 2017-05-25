@@ -8,6 +8,7 @@ function Layout(props) {
         <meta charSet="utf-8" />
         <title>{props.title}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href={`${props.domain}/css/base.css`} />
         <link rel="stylesheet" href={`${props.domain}/styles.css`} />
       </head>
       <body>
