@@ -1,11 +1,27 @@
 .container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.container.hasIcon .input {
+  width: calc(100% - 40px);
+}
+
+.icon {
+  display: block;
+  width: 40px;
+}
+
+.inputContainer {
+  margin-left: 40px;
   position: relative;
 }
 
 .input {
-  border: none;
-  border-bottom: 1px solid #e1e0e1;
+  border: none; /* Remove all borders before add border bottom */
+  border-bottom: 1px solid #e1e1e1;
   color: #555;
+  font-size: 13px;
   font-weight: 300;
   outline: 0;
   padding: 10px 0;
@@ -16,15 +32,33 @@
   width: 100%;
 }
 
+.input:focus ~ .label, .container.hasContent .label {
+  bottom: 30px;
+  left: -7px;
+  transform: scale(.86);
+}
+
 .bar {
-  height: 2px;
-  width: 0;
-  transition: width .3s;
-  position: absolute;
   bottom: 0;
+  height: 2px;
+  position: absolute;
+  transition: width .2s;
+  width: 0;
+}
+
+.label {
+  bottom: 9px;
+  color: #ccc;
+  font-size: 13px;
+  font-weight: 300;
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  transition: all .2s;
 }
 
 /* COLORS
-  #e1e0e1 = Gray color for input border-bottom
+  #e1e1e1 = Gray color for input border-bottom
+  #ccc = label color
   #555 = Dark gray for input text color
 */

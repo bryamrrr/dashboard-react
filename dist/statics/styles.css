@@ -1,13 +1,29 @@
 .home__title___1U_GH {
   border: 1px solid blue;
 }.styles__container___26pRP {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.styles__container___26pRP.styles__hasIcon___1Y3yI .styles__input___FTH4g {
+  width: calc(100% - 40px);
+}
+
+.styles__icon___3_nCe {
+  display: block;
+  width: 40px;
+}
+
+.styles__inputContainer___3epmV {
+  margin-left: 40px;
   position: relative;
 }
 
 .styles__input___FTH4g {
-  border: none;
-  border-bottom: 1px solid #e1e0e1;
+  border: none; /* Remove all borders before add border bottom */
+  border-bottom: 1px solid #e1e1e1;
   color: #555;
+  font-size: 13px;
   font-weight: 300;
   outline: 0;
   padding: 10px 0;
@@ -18,15 +34,33 @@
   width: 100%;
 }
 
+.styles__input___FTH4g:focus ~ .styles__label___1FvPg, .styles__container___26pRP.styles__hasContent___K_QAe .styles__label___1FvPg {
+  bottom: 30px;
+  left: -7px;
+  transform: scale(.86);
+}
+
 .styles__bar___2NgVJ {
-  height: 2px;
-  width: 0;
-  transition: width .3s;
-  position: absolute;
   bottom: 0;
+  height: 2px;
+  position: absolute;
+  transition: width .2s;
+  width: 0;
+}
+
+.styles__label___1FvPg {
+  bottom: 9px;
+  color: #ccc;
+  font-size: 13px;
+  font-weight: 300;
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  transition: all .2s;
 }
 
 /* COLORS
-  #e1e0e1 = Gray color for input border-bottom
+  #e1e1e1 = Gray color for input border-bottom
+  #ccc = label color
   #555 = Dark gray for input text color
 */

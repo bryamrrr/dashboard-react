@@ -6,8 +6,12 @@ import TextInput from '../text-input';
 function Home() {
   return (
     <div>
-      <h1 className={styles.title}>Bienvenido :) hola mundo</h1>
-      <TextInput placeholder="Ingresa tu usuario" />
+      <h1 className={styles.title}>:)</h1>
+      <TextInput
+        name="user"
+        placeholder="Ingresa tu usuario"
+        includeIcon="linearicon-user"
+      />
     </div>
   );
 }
