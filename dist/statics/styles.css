@@ -1,18 +1,18 @@
 .home__title___1U_GH {
   border: 1px solid blue;
-}.styles__container___26pRP {
+}.styles__container___1QbrV {
   align-items: flex-end;
   display: flex;
   margin-top: 15px;
   margin-bottom: 30px;
 }
 
-.styles__container___26pRP.styles__hasIcon___1Y3yI .styles__inputContainer___3epmV {
+.styles__container___1QbrV.styles__hasIcon___33MEo .styles__inputContainer___2i6mu {
   flex-basis: calc(100% - 40px);
   margin-left: 0;
 }
 
-.styles__icon___3_nCe {
+.styles__icon___2GKmw {
   display: block;
   font-size: 1.2em;
   line-height: 37px;
@@ -20,12 +20,12 @@
   width: 40px;
 }
 
-.styles__inputContainer___3epmV {
+.styles__inputContainer___2i6mu {
   position: relative;
   width: 100%;
 }
 
-.styles__input___FTH4g {
+.styles__input___3_1gK {
   border: none; /* Remove all borders before add border-bottom */
   border-bottom: 1px solid #e1e1e1;
   color: #555;
@@ -36,18 +36,18 @@
   width: 100%;
 }
 
-.styles__input___FTH4g:focus ~ .styles__bar___2NgVJ {
+.styles__input___3_1gK:focus ~ .styles__bar___APNb1 {
   width: 100%;
 }
 
-.styles__input___FTH4g:focus ~ .styles__label___1FvPg, .styles__container___26pRP.styles__hasContent___K_QAe .styles__label___1FvPg {
+.styles__input___3_1gK:focus ~ .styles__label___2orGZ, .styles__container___1QbrV.styles__hasContent___2gZQh .styles__label___2orGZ {
   bottom: 33px;
   color: #ccc;
   left: -7px;
   transform: scale(.86);
 }
 
-.styles__bar___2NgVJ {
+.styles__bar___APNb1 {
   bottom: 0;
   height: 2px;
   position: absolute;
@@ -55,7 +55,7 @@
   width: 0;
 }
 
-.styles__label___1FvPg {
+.styles__label___2orGZ {
   bottom: 9px;
   color: #ddd;
   font-size: 14px;

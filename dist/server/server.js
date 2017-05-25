@@ -8919,9 +8919,13 @@ var _home = __webpack_require__(88);
 
 var _home2 = _interopRequireDefault(_home);
 
-var _textInput = __webpack_require__(86);
+var _formInput = __webpack_require__(186);
 
-var _textInput2 = _interopRequireDefault(_textInput);
+var _formInput2 = _interopRequireDefault(_formInput);
+
+var _formButton = __webpack_require__(185);
+
+var _formButton2 = _interopRequireDefault(_formButton);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -8934,151 +8938,25 @@ function Home() {
       { className: _home2.default.title },
       ':)'
     ),
-    _react2.default.createElement(_textInput2.default, {
+    _react2.default.createElement(_formInput2.default, {
       name: 'user',
       placeholder: 'Usuario',
       includeIcon: 'linearicon-user'
     }),
-    _react2.default.createElement(_textInput2.default, {
+    _react2.default.createElement(_formInput2.default, {
       name: 'password',
+      type: 'password',
       placeholder: 'Contrase\xF1a',
       includeIcon: 'linearicon-lock'
-    })
+    }),
+    _react2.default.createElement(_formButton2.default, null)
   );
 }
 
 exports.default = Home;
 
 /***/ }),
-/* 86 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(15);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = __webpack_require__(79);
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _styles = __webpack_require__(89);
-
-var _styles2 = _interopRequireDefault(_styles);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var TextInput = function (_Component) {
-  _inherits(TextInput, _Component);
-
-  function TextInput(props) {
-    _classCallCheck(this, TextInput);
-
-    var _this = _possibleConstructorReturn(this, (TextInput.__proto__ || Object.getPrototypeOf(TextInput)).call(this, props));
-
-    var includeIcon = _this.props.includeIcon !== '';
-    var containerClasses = includeIcon ? _styles2.default.container + ' ' + _styles2.default.hasIcon : _styles2.default.container;
-
-    _this.state = {
-      containerClasses: containerClasses,
-      value: ''
-    };
-    return _this;
-  }
-
-  _createClass(TextInput, [{
-    key: 'onInputChange',
-    value: function onInputChange(value) {
-      var containerClasses = '';
-
-      if (value !== '') {
-        containerClasses = _styles2.default.container + ' ' + _styles2.default.hasIcon + ' ' + _styles2.default.hasContent;
-      } else {
-        containerClasses = _styles2.default.container + ' ' + _styles2.default.hasIcon;
-      }
-
-      this.setState({
-        containerClasses: containerClasses,
-        value: value
-      });
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
-
-      return _react2.default.createElement(
-        'div',
-        { className: this.state.containerClasses },
-        this.props.includeIcon !== '' && _react2.default.createElement('i', {
-          className: _styles2.default.icon + ' ' + this.props.includeIcon,
-          style: { color: this.props.iconColor }
-        }),
-        _react2.default.createElement(
-          'div',
-          { className: _styles2.default.inputContainer },
-          _react2.default.createElement('input', {
-            className: _styles2.default.input,
-            id: this.props.name,
-            value: this.state.balue,
-            onChange: function onChange(event) {
-              return _this2.onInputChange(event.target.value);
-            },
-            type: this.props.type
-          }),
-          _react2.default.createElement('div', {
-            className: _styles2.default.bar,
-            style: { backgroundColor: this.props.lineColor }
-          }),
-          _react2.default.createElement(
-            'label',
-            {
-              htmlFor: this.props.name,
-              className: _styles2.default.label
-            },
-            this.props.placeholder
-          )
-        )
-      );
-    }
-  }]);
-
-  return TextInput;
-}(_react.Component);
-
-TextInput.propTypes = {
-  name: _propTypes2.default.string.isRequired,
-  type: _propTypes2.default.string.isRequired,
-  placeholder: _propTypes2.default.string,
-  lineColor: _propTypes2.default.string,
-  iconColor: _propTypes2.default.string,
-  includeIcon: _propTypes2.default.string
-};
-
-TextInput.defaultProps = {
-  lineColor: '#2391e6',
-  iconColor: '#2391e6',
-  placeholder: '',
-  includeIcon: ''
-};
-
-exports.default = TextInput;
-
-/***/ }),
+/* 86 */,
 /* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9152,21 +9030,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 89 */
-/***/ (function(module, exports) {
-
-module.exports = {
-	"container": "styles__container___26pRP",
-	"hasIcon": "styles__hasIcon___1Y3yI",
-	"inputContainer": "styles__inputContainer___3epmV",
-	"icon": "styles__icon___3_nCe",
-	"input": "styles__input___FTH4g",
-	"bar": "styles__bar___2NgVJ",
-	"label": "styles__label___1FvPg",
-	"hasContent": "styles__hasContent___K_QAe"
-};
-
-/***/ }),
+/* 89 */,
 /* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -21181,6 +21045,178 @@ function traverseAllChildren(children, callback, traverseContext) {
 }
 
 module.exports = traverseAllChildren;
+
+/***/ }),
+/* 185 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(15);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function FormButton() {
+  return _react2.default.createElement(
+    'button',
+    null,
+    'Enviar'
+  );
+}
+
+exports.default = FormButton;
+
+/***/ }),
+/* 186 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(15);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(79);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _styles = __webpack_require__(187);
+
+var _styles2 = _interopRequireDefault(_styles);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var TextInput = function (_Component) {
+  _inherits(TextInput, _Component);
+
+  function TextInput(props) {
+    _classCallCheck(this, TextInput);
+
+    var _this = _possibleConstructorReturn(this, (TextInput.__proto__ || Object.getPrototypeOf(TextInput)).call(this, props));
+
+    var includeIcon = _this.props.includeIcon !== '';
+    var containerClasses = includeIcon ? _styles2.default.container + ' ' + _styles2.default.hasIcon : _styles2.default.container;
+
+    _this.state = {
+      containerClasses: containerClasses,
+      value: ''
+    };
+    return _this;
+  }
+
+  _createClass(TextInput, [{
+    key: 'onInputChange',
+    value: function onInputChange(value) {
+      var containerClasses = '';
+
+      if (value !== '') {
+        containerClasses = _styles2.default.container + ' ' + _styles2.default.hasIcon + ' ' + _styles2.default.hasContent;
+      } else {
+        containerClasses = _styles2.default.container + ' ' + _styles2.default.hasIcon;
+      }
+
+      this.setState({
+        containerClasses: containerClasses,
+        value: value
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      return _react2.default.createElement(
+        'div',
+        { className: this.state.containerClasses },
+        this.props.includeIcon !== '' && _react2.default.createElement('i', {
+          className: _styles2.default.icon + ' ' + this.props.includeIcon,
+          style: { color: this.props.iconColor }
+        }),
+        _react2.default.createElement(
+          'div',
+          { className: _styles2.default.inputContainer },
+          _react2.default.createElement('input', {
+            className: _styles2.default.input,
+            id: this.props.name,
+            value: this.state.balue,
+            onChange: function onChange(event) {
+              return _this2.onInputChange(event.target.value);
+            },
+            type: this.props.type
+          }),
+          _react2.default.createElement('div', {
+            className: _styles2.default.bar,
+            style: { backgroundColor: this.props.lineColor }
+          }),
+          _react2.default.createElement(
+            'label',
+            {
+              htmlFor: this.props.name,
+              className: _styles2.default.label
+            },
+            this.props.placeholder
+          )
+        )
+      );
+    }
+  }]);
+
+  return TextInput;
+}(_react.Component);
+
+TextInput.propTypes = {
+  name: _propTypes2.default.string.isRequired,
+  type: _propTypes2.default.PropTypes.oneOf(['text', 'password', 'email']).isRequired,
+  placeholder: _propTypes2.default.string,
+  lineColor: _propTypes2.default.string,
+  iconColor: _propTypes2.default.string,
+  includeIcon: _propTypes2.default.string
+};
+
+TextInput.defaultProps = {
+  type: 'text',
+  lineColor: '#2391e6',
+  iconColor: '#2391e6',
+  placeholder: '',
+  includeIcon: ''
+};
+
+exports.default = TextInput;
+
+/***/ }),
+/* 187 */
+/***/ (function(module, exports) {
+
+module.exports = {
+	"container": "styles__container___1QbrV",
+	"hasIcon": "styles__hasIcon___33MEo",
+	"inputContainer": "styles__inputContainer___2i6mu",
+	"icon": "styles__icon___2GKmw",
+	"input": "styles__input___3_1gK",
+	"bar": "styles__bar___APNb1",
+	"label": "styles__label___2orGZ",
+	"hasContent": "styles__hasContent___2gZQh"
+};
 
 /***/ })
 /******/ ]);

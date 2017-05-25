@@ -68,7 +68,11 @@ class TextInput extends Component {
 
 TextInput.propTypes = {
   name: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
+  type: PropTypes.PropTypes.oneOf([
+    'text',
+    'password',
+    'email',
+  ]).isRequired,
   placeholder: PropTypes.string,
   lineColor: PropTypes.string,
   iconColor: PropTypes.string,
@@ -76,6 +80,7 @@ TextInput.propTypes = {
 };
 
 TextInput.defaultProps = {
+  type: 'text',
   lineColor: '#2391e6',
   iconColor: '#2391e6',
   placeholder: '',
