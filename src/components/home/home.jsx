@@ -9,8 +9,13 @@ function Home() {
       <h1 className={styles.title}>:)</h1>
       <TextInput
         name="user"
-        placeholder="Ingresa tu usuario"
+        placeholder="Usuario"
         includeIcon="linearicon-user"
+      />
+      <TextInput
+        name="password"
+        placeholder="Contraseña"
+        includeIcon="linearicon-lock"
       />
     </div>
   );

@@ -1,27 +1,33 @@
 .container {
-  margin-top: 20px;
-  margin-bottom: 20px;
+  align-items: flex-end;
+  display: flex;
+  margin-top: 15px;
+  margin-bottom: 30px;
 }
 
-.container.hasIcon .input {
-  width: calc(100% - 40px);
+.container.hasIcon .inputContainer {
+  flex-basis: calc(100% - 40px);
+  margin-left: 0;
 }
 
 .icon {
   display: block;
+  font-size: 1.2em;
+  line-height: 37px;
+  text-align: center;
   width: 40px;
 }
 
 .inputContainer {
-  margin-left: 40px;
   position: relative;
+  width: 100%;
 }
 
 .input {
-  border: none; /* Remove all borders before add border bottom */
+  border: none; /* Remove all borders before add border-bottom */
   border-bottom: 1px solid #e1e1e1;
   color: #555;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 300;
   outline: 0;
   padding: 10px 0;
@@ -33,7 +39,8 @@
 }
 
 .input:focus ~ .label, .container.hasContent .label {
-  bottom: 30px;
+  bottom: 33px;
+  color: #ccc;
   left: -7px;
   transform: scale(.86);
 }
@@ -48,8 +55,8 @@
 
 .label {
   bottom: 9px;
-  color: #ccc;
-  font-size: 13px;
+  color: #ddd;
+  font-size: 14px;
   font-weight: 300;
   left: 0;
   pointer-events: none;
@@ -59,6 +66,7 @@
 
 /* COLORS
   #e1e1e1 = Gray color for input border-bottom
-  #ccc = label color
+  #ddd = label color
+  #ccc = label color on focus
   #555 = Dark gray for input text color
 */

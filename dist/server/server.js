@@ -8754,7 +8754,7 @@ function Layout(props) {
         props.title
       ),
       _react2.default.createElement('meta', { name: 'viewport', content: 'width=device-width, initial-scale=1.0' }),
-      _react2.default.createElement('link', { rel: 'stylesheet', href: props.domain + '/base.css' }),
+      _react2.default.createElement('link', { rel: 'stylesheet', href: props.domain + '/css/base.css' }),
       _react2.default.createElement('link', { rel: 'stylesheet', href: props.domain + '/styles.css' })
     ),
     _react2.default.createElement(
@@ -8849,7 +8849,7 @@ module.exports = {
 		"clean": "rimraf dist",
 		"webpack": "npm run clean && webpack",
 		"watch": "webpack -w",
-		"sfs": "serve ./dist/statics --port 8081 --cache 0",
+		"sfs": "node ./dist/server/statics.js --cache 0",
 		"bff": "node ./dist/server/server.js",
 		"start": "concurrently --kill-others \"npm run sfs\" \"npm run bff\" \"npm run watch\""
 	},
@@ -8863,6 +8863,7 @@ module.exports = {
 		"babel-preset-env": "^1.4.0",
 		"babel-preset-react": "^6.24.1",
 		"concurrently": "^3.4.0",
+		"copy-webpack-plugin": "^4.0.1",
 		"css-loader": "^0.28.1",
 		"eslint": "^3.19.0",
 		"eslint-config-airbnb": "^14.1.0",
@@ -8881,6 +8882,7 @@ module.exports = {
 		"webpack-livereload-plugin": "^0.11.0"
 	},
 	"dependencies": {
+		"cors": "^2.8.3",
 		"express": "^4.15.2",
 		"lodash": "^4.17.4",
 		"prop-types": "^15.5.9",
@@ -8934,8 +8936,13 @@ function Home() {
     ),
     _react2.default.createElement(_textInput2.default, {
       name: 'user',
-      placeholder: 'Ingresa tu usuario',
+      placeholder: 'Usuario',
       includeIcon: 'linearicon-user'
+    }),
+    _react2.default.createElement(_textInput2.default, {
+      name: 'password',
+      placeholder: 'Contrase\xF1a',
+      includeIcon: 'linearicon-lock'
     })
   );
 }
@@ -8987,7 +8994,6 @@ var TextInput = function (_Component) {
     var containerClasses = includeIcon ? _styles2.default.container + ' ' + _styles2.default.hasIcon : _styles2.default.container;
 
     _this.state = {
-      barStyles: { background: props.lineColor },
       containerClasses: containerClasses,
       value: ''
     };
@@ -9018,7 +9024,10 @@ var TextInput = function (_Component) {
       return _react2.default.createElement(
         'div',
         { className: this.state.containerClasses },
-        this.props.includeIcon !== '' && _react2.default.createElement('i', { className: _styles2.default.icon + ' ' + this.props.includeIcon }),
+        this.props.includeIcon !== '' && _react2.default.createElement('i', {
+          className: _styles2.default.icon + ' ' + this.props.includeIcon,
+          style: { color: this.props.iconColor }
+        }),
         _react2.default.createElement(
           'div',
           { className: _styles2.default.inputContainer },
@@ -9029,11 +9038,11 @@ var TextInput = function (_Component) {
             onChange: function onChange(event) {
               return _this2.onInputChange(event.target.value);
             },
-            type: 'text'
+            type: this.props.type
           }),
           _react2.default.createElement('div', {
             className: _styles2.default.bar,
-            style: this.state.barStyles
+            style: { backgroundColor: this.props.lineColor }
           }),
           _react2.default.createElement(
             'label',
@@ -9053,13 +9062,16 @@ var TextInput = function (_Component) {
 
 TextInput.propTypes = {
   name: _propTypes2.default.string.isRequired,
+  type: _propTypes2.default.string.isRequired,
   placeholder: _propTypes2.default.string,
   lineColor: _propTypes2.default.string,
+  iconColor: _propTypes2.default.string,
   includeIcon: _propTypes2.default.string
 };
 
 TextInput.defaultProps = {
   lineColor: '#2391e6',
+  iconColor: '#2391e6',
   placeholder: '',
   includeIcon: ''
 };
@@ -9146,9 +9158,9 @@ module.exports = {
 module.exports = {
 	"container": "styles__container___26pRP",
 	"hasIcon": "styles__hasIcon___1Y3yI",
-	"input": "styles__input___FTH4g",
-	"icon": "styles__icon___3_nCe",
 	"inputContainer": "styles__inputContainer___3epmV",
+	"icon": "styles__icon___3_nCe",
+	"input": "styles__input___FTH4g",
 	"bar": "styles__bar___2NgVJ",
 	"label": "styles__label___1FvPg",
 	"hasContent": "styles__hasContent___K_QAe"

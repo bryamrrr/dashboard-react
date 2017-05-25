@@ -13,7 +13,6 @@ class TextInput extends Component {
      : styles.container;
 
     this.state = {
-      barStyles: { background: props.lineColor },
       containerClasses,
       value: '',
     };
@@ -38,7 +37,10 @@ class TextInput extends Component {
     return (
       <div className={this.state.containerClasses}>
         { this.props.includeIcon !== '' &&
-          <i className={`${styles.icon} ${this.props.includeIcon}`} />
+          <i
+            className={`${styles.icon} ${this.props.includeIcon}`}
+            style={{ color: this.props.iconColor }}
+          />
         }
         <div className={styles.inputContainer}>
           <input
@@ -46,11 +48,11 @@ class TextInput extends Component {
             id={this.props.name}
             value={this.state.balue}
             onChange={event => this.onInputChange(event.target.value)}
-            type="text"
+            type={this.props.type}
           />
           <div
             className={styles.bar}
-            style={this.state.barStyles}
+            style={{ backgroundColor: this.props.lineColor }}
           />
           <label
             htmlFor={this.props.name}
@@ -66,13 +68,16 @@ class TextInput extends Component {
 
 TextInput.propTypes = {
   name: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
   lineColor: PropTypes.string,
+  iconColor: PropTypes.string,
   includeIcon: PropTypes.string,
 };
 
 TextInput.defaultProps = {
   lineColor: '#2391e6',
+  iconColor: '#2391e6',
   placeholder: '',
   includeIcon: '',
 };

@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const LiveReloadPlugin = require('webpack-livereload-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const config = {
   entry: './src/client.jsx',
@@ -56,7 +57,10 @@ const config = {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development')
       }
     }),
-    new ExtractTextPlugin('styles.css')
+    new ExtractTextPlugin('styles.css'),
+    new CopyWebpackPlugin([{
+      from: './assets'
+    }], {})
   ]
 };
 

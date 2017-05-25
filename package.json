@@ -9,7 +9,7 @@
     "clean": "rimraf dist",
     "webpack": "npm run clean && webpack",
     "watch": "webpack -w",
-    "sfs": "serve ./dist/statics --port 8081 --cache 0",
+    "sfs": "node ./dist/server/statics.js --cache 0",
     "bff": "node ./dist/server/server.js",
     "start": "concurrently --kill-others \"npm run sfs\" \"npm run bff\" \"npm run watch\""
   },
@@ -23,6 +23,7 @@
     "babel-preset-env": "^1.4.0",
     "babel-preset-react": "^6.24.1",
     "concurrently": "^3.4.0",
+    "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.1",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^14.1.0",
@@ -41,6 +42,7 @@
     "webpack-livereload-plugin": "^0.11.0"
   },
   "dependencies": {
+    "cors": "^2.8.3",
     "express": "^4.15.2",
     "lodash": "^4.17.4",
     "prop-types": "^15.5.9",
