@@ -5,9 +5,10 @@
   color: #fff;
   cursor: pointer;
   display: block;
-  font-size: 1em;
+  font-size: 15px;
   font-weight: 400;
   margin-top: 40px;
+  outline: none;
   padding: 12px;
   text-overflow: ellipsis;
   text-transform: uppercase;

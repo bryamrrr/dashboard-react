@@ -43,6 +43,7 @@ class TextInput extends Component {
         }
         <div className={styles.inputContainer}>
           <input
+            {...this.props.field.input}
             className={styles.input}
             id={this.props.name}
             value={this.state.balue}
@@ -65,6 +66,7 @@ class TextInput extends Component {
 }
 
 TextInput.propTypes = {
+  field: PropTypes.object,
   name: PropTypes.string.isRequired,
   type: PropTypes.oneOf([
     'text',
