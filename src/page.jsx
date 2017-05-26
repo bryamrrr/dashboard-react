@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom';
 
 import Login from './modules/login/view';
+import Signup from './modules/signup/view';
 
 export default function () {
   return (
@@ -14,6 +15,11 @@ export default function () {
           path="/login"
           exact
           component={Login}
+        />
+        <Route
+          path="/registro"
+          exact
+          component={Signup}
         />
       </Switch>
     </main>

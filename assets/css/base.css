@@ -39,6 +39,8 @@ h1 {
   margin: 0;
 }
 
+form { margin: 0; }
+
 @font-face {
   font-family: 'Linearicons';
   src: url("../fonts/Linearicons.eot?-m09hd");
