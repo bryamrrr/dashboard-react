@@ -2,20 +2,27 @@
   align-items: flex-end;
   display: flex;
   margin-top: 15px;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 
 .container.hasIcon .inputContainer {
-  flex-basis: calc(100% - 40px);
+  flex-basis: calc(100% - 30px);
   margin-left: 0;
 }
 
+.container.hasError .bar {
+  background-color: red;
+  height: 1px;
+  width: 100%;
+}
+
 .icon {
+  color: #f7a80d;
   display: block;
   font-size: 1.2em;
   line-height: 37px;
   text-align: center;
-  width: 40px;
+  width: 30px;
 }
 
 .inputContainer {
@@ -46,6 +53,7 @@
 }
 
 .bar {
+  background-color: #f7a80d;
   bottom: 0;
   height: 2px;
   position: absolute;
@@ -62,6 +70,15 @@
   pointer-events: none;
   position: absolute;
   transition: all .2s;
+}
+
+.errorText {
+  bottom: -18px;
+  color: red;
+  font-size: 12px;
+  font-weight: 300;
+  left: 0;
+  position: absolute;
 }
 
 /* COLORS

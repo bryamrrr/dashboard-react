@@ -1,0 +1,33 @@
+.button {
+  background-color: #ff5a00;
+  border-radius: 23px;
+  border: 0;
+  color: #fff;
+  cursor: pointer;
+  display: block;
+  font-size: 15px;
+  font-weight: 400;
+  margin-top: 40px;
+  outline: none;
+  padding: 12px;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  transition: background-color .3s;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.button:hover {
+  background-color: #ff8745;
+}
+
+.button span {
+  line-height: 21px;
+  vertical-align: top;
+}
+
+.icon {
+  font-size: 1.3em;
+  font-weight: 700;
+  margin-right: .4em;
+}

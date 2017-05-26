@@ -4,16 +4,16 @@ import {
   Switch,
 } from 'react-router-dom';
 
-import Home from './components/home/home';
+import Login from './modules/login/view';
 
 export default function () {
   return (
     <main role="application">
       <Switch>
         <Route
-          path="/"
+          path="/login"
           exact
-          component={Home}
+          component={Login}
         />
       </Switch>
     </main>

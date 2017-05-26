@@ -7,52 +7,45 @@ class TextInput extends Component {
   constructor(props) {
     super(props);
 
-    const includeIcon = (this.props.includeIcon !== '');
-    const containerClasses = (includeIcon)
-     ? `${styles.container} ${styles.hasIcon}`
-     : styles.container;
+    const value = (this.props.field !== {})
+      ? (this.props.field.input.value)
+      : '';
 
-    this.state = {
-      containerClasses,
-      value: '',
-    };
+    this.state = { value };
   }
 
   onInputChange(value) {
-    let containerClasses = '';
-
-    if (value !== '') {
-      containerClasses = `${styles.container} ${styles.hasIcon} ${styles.hasContent}`;
-    } else {
-      containerClasses = `${styles.container} ${styles.hasIcon}`;
-    }
-
-    this.setState({
-      containerClasses,
-      value,
-    });
+    this.setState({ value });
   }
 
   render() {
+    const { includeIcon } = this.props;
+    const { input, meta } = this.props.field;
+
+    const className = `${styles.container} \
+      ${includeIcon !== '' ? styles.hasIcon : ''} \
+      ${this.state.value !== '' ? styles.hasContent : ''} \
+      ${meta.touched && meta.error ? styles.hasError : ''}`;
+
     return (
-      <div className={this.state.containerClasses}>
-        { this.props.includeIcon !== '' &&
-          <i
-            className={`${styles.icon} ${this.props.includeIcon}`}
-            style={{ color: this.props.iconColor }}
-          />
+      <div className={className}>
+        {
+          includeIcon !== '' && <i className={`${styles.icon} ${includeIcon}`} />
         }
         <div className={styles.inputContainer}>
           <input
+            {...input}
             className={styles.input}
             id={this.props.name}
-            value={this.state.balue}
-            onChange={event => this.onInputChange(event.target.value)}
+            value={this.state.value}
+            onChange={(event) => {
+              if (this.props.field !== {}) input.onChange();
+              this.onInputChange(event.target.value);
+            }}
             type={this.props.type}
           />
           <div
             className={styles.bar}
-            style={{ backgroundColor: this.props.lineColor }}
           />
           <label
             htmlFor={this.props.name}
@@ -60,6 +53,9 @@ class TextInput extends Component {
           >
             {this.props.placeholder}
           </label>
+          {meta.touched && (
+            <span className={styles.errorText}>{meta.error}</span>
+          )}
         </div>
       </div>
     );
@@ -67,22 +63,26 @@ class TextInput extends Component {
 }
 
 TextInput.propTypes = {
+  field: PropTypes.shape({
+    input: PropTypes.object,
+    meta: PropTypes.object,
+  }),
   name: PropTypes.string.isRequired,
-  type: PropTypes.PropTypes.oneOf([
+  type: PropTypes.oneOf([
     'text',
     'password',
     'email',
   ]).isRequired,
   placeholder: PropTypes.string,
-  lineColor: PropTypes.string,
-  iconColor: PropTypes.string,
   includeIcon: PropTypes.string,
 };
 
 TextInput.defaultProps = {
+  field: {
+    input: {},
+    meta: {},
+  },
   type: 'text',
-  lineColor: '#2391e6',
-  iconColor: '#2391e6',
   placeholder: '',
   includeIcon: '',
 };

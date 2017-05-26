@@ -1,0 +1,13 @@
+.link {
+  border-bottom: 1px solid #ffceb3;
+  color: #f7a80d;
+  font-size: 13px;
+  font-weight: 300;
+  text-decoration: none;
+  transition: border-color .2s;
+}
+
+.link:hover {
+  border-color: transparent;
+  cursor: pointer;
+}

@@ -1,0 +1,54 @@
+.container { padding: 0 35px; }
+
+.loginContainer {
+  margin: 0 auto;
+  max-width: 360px;
+}
+
+.title {
+  margin-bottom: 40px;
+  text-transform: uppercase;
+}
+
+.bar {
+  background-color: #ff5a00;
+  height: 40px;
+  left: 0;
+  position: absolute;
+  top: 50px;
+  width: 5px;
+}
+
+.roundButton {
+  background-color: #ff5a00;
+  border-radius: 50%;
+  box-shadow: 0 5px 10px rgba(0,0,0,.2);
+  color: white;
+  font-size: 32px;
+  font-weight: 300;
+  height: 80px;
+  line-height: 80px;
+  position: absolute;
+  right: -40px;
+  text-align: center;
+  transition: background-color .3s;
+  top: 25px;
+  width: 80px;
+}
+
+.roundButton:hover {
+  background-color: #ff8745;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 480px) {
+  .container { padding: 0 25px; }
+
+  .roundButton {
+    height: 50px;
+    line-height: 50px;
+    right: -25px;
+    top: 40px;
+    width: 50px;
+  }
+}

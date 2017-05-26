@@ -3,6 +3,9 @@ import React from 'react';
 import { renderToString, renderToStaticMarkup } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 
+import { Provider } from 'react-redux';
+import store from './reducers/store';
+
 import Layout from './layout';
 import Page from './page';
 import { description } from '../package.json';
@@ -17,9 +20,11 @@ const app = express();
 app.get('*', (req, res) => {
   const context = {};
   const html = renderToString(
-    <StaticRouter location={req.url} context={context}>
-      <Page />
-    </StaticRouter>,
+    <Provider store={store}>
+      <StaticRouter location={req.url} context={context}>
+        <Page />
+      </StaticRouter>
+    </Provider>,
   );
 
   res.setHeader('Content-Type', 'text/html');
