@@ -23,6 +23,10 @@
   font-family: 'Roboto', 'sans-serif';
 }
 
+a {
+  text-decoration: none;
+}
+
 @font-face {
   font-family: 'Linearicons';
   src: url("../fonts/Linearicons.eot?-m09hd");

@@ -6,7 +6,7 @@
 }
 
 .container.hasIcon .inputContainer {
-  flex-basis: calc(100% - 40px);
+  flex-basis: calc(100% - 30px);
   margin-left: 0;
 }
 

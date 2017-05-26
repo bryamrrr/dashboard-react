@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import { Link } from 'react-router-dom';
+
 import { Field, reduxForm } from 'redux-form';
 
 import FormInput from '../../../components/form-input';
 import FormButton from '../../../components/form-button';
+import Anchor from '../../../components/anchor';
+
+import styles from './styles.css';
 
 function renderUsername(field) {
   return (
@@ -43,7 +48,10 @@ class LoginForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
+      <form
+        onSubmit={this.props.handleSubmit(this.onSubmit)}
+        className={styles.form}
+      >
         <Field
           name="username"
           component={renderUsername}
@@ -52,6 +60,9 @@ class LoginForm extends Component {
           name="password"
           component={renderPassword}
         />
+        <Link to="/reset">
+          <Anchor text="¿Olvidaste tu contraseña?" />
+        </Link>
         <FormButton
           callToAction="Iniciar sesión"
           type="submit"
