@@ -1,6 +1,6 @@
 .link {
   border-bottom: 1px solid #ffceb3;
-  color: #FF5A00;
+  color: #f7a80d;
   font-size: 13px;
   font-weight: 300;
   text-decoration: none;
@@ -9,4 +9,5 @@
 
 .link:hover {
   border-color: transparent;
+  cursor: pointer;
 }

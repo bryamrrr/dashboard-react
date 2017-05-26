@@ -60,13 +60,20 @@ class LoginForm extends Component {
           name="password"
           component={renderPassword}
         />
-        <Link to="/reset">
+        <Link to="/reset" className={styles.reset}>
           <Anchor text="¿Olvidaste tu contraseña?" />
         </Link>
         <FormButton
           callToAction="Iniciar sesión"
           type="submit"
         />
+
+        <div className={styles.simpleText}>
+          <span>¿No tienes una cuenta? </span>
+          <Link to="/registro">
+            <Anchor text="Regístrate" />
+          </Link>
+        </div>
       </form>
     );
   }

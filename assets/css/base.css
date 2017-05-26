@@ -27,6 +27,18 @@ a {
   text-decoration: none;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 300;
+  text-rendering: optimizeLegibility;
+}
+
+h1 {
+  color: #ff5a00;
+  font-size: 32px;
+  line-height: 1.25em;
+  margin: 0;
+}
+
 @font-face {
   font-family: 'Linearicons';
   src: url("../fonts/Linearicons.eot?-m09hd");

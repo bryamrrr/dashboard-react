@@ -1,5 +1,5 @@
 .button {
-  background-color: #f7a80d;
+  background-color: #ff5a00;
   border-radius: 23px;
   border: 0;
   color: #fff;
@@ -12,13 +12,13 @@
   padding: 12px;
   text-overflow: ellipsis;
   text-transform: uppercase;
-  transition: background-color .2s;
+  transition: background-color .3s;
   white-space: nowrap;
   width: 100%;
 }
 
 .button:hover {
-  background-color: #f8ba2e;
+  background-color: #ff8745;
 }
 
 .button span {
