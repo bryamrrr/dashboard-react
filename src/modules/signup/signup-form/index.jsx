@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { Field, reduxForm } from 'redux-form';
@@ -54,35 +54,51 @@ function renderRepeatPassword(field) {
   );
 }
 
-function onSubmit(values) {
-  console.log(values);
-}
+class SignupForm extends Component {
+  constructor(props) {
+    super(props);
 
-function SignupForm(props) {
-  return (
-    <form onSubmit={props.handleSubmit(onSubmit)}>
-      <Field
-        name="username"
-        component={renderUsername}
-      />
-      <Field
-        name="email"
-        component={renderEmail}
-      />
-      <Field
-        name="password"
-        component={renderPassword}
-      />
-      <Field
-        name="repeatPassword"
-        component={renderRepeatPassword}
-      />
-      <FormButton
-        callToAction="Registrar"
-        type="submit"
-      />
-    </form>
-  );
+    this.state = { loading: false };
+
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  onSubmit(values) {
+    console.log(values);
+
+    this.setState({ loading: true });
+    setTimeout(() => {
+      this.setState({ loading: false });
+    }, 3000);
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
+        <Field
+          name="username"
+          component={renderUsername}
+        />
+        <Field
+          name="email"
+          component={renderEmail}
+        />
+        <Field
+          name="password"
+          component={renderPassword}
+        />
+        <Field
+          name="repeatPassword"
+          component={renderRepeatPassword}
+        />
+        <FormButton
+          callToAction="Registrar"
+          loading={this.state.loading}
+          type="submit"
+        />
+      </form>
+    );
+  }
 }
 
 function validate(values) {

@@ -10,6 +10,7 @@
   margin-top: 40px;
   outline: none;
   padding: 12px;
+  position: relative;
   text-overflow: ellipsis;
   text-transform: uppercase;
   transition: background-color .3s;
@@ -17,8 +18,11 @@
   width: 100%;
 }
 
-.button:hover {
-  background-color: #ff8745;
+.button:hover { background-color: #ff8745; }
+
+.button.isLoading {
+  background-color: rgba(0,0,0,0.26);
+  cursor: default;
 }
 
 .button span {

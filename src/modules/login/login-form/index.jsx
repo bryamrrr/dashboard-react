@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { Link } from 'react-router-dom';
@@ -34,37 +34,53 @@ function renderPassword(field) {
   );
 }
 
-function onSubmit(values) {
-  console.log('values', values);
-}
+class LoginForm extends Component {
+  constructor(props) {
+    super(props);
 
-function LoginForm(props) {
-  return (
-    <form onSubmit={props.handleSubmit(onSubmit)}>
-      <Field
-        name="username"
-        component={renderUsername}
-      />
-      <Field
-        name="password"
-        component={renderPassword}
-      />
-      <Link to="/reset" className={styles.reset}>
-        <Anchor text="¿Olvidaste tu contraseña?" />
-      </Link>
-      <FormButton
-        callToAction="Iniciar sesión"
-        type="submit"
-      />
+    this.state = { loading: false };
 
-      <div className={styles.simpleText}>
-        <span>¿No tienes una cuenta? </span>
-        <Link to="/registro">
-          <Anchor text="Regístrate" />
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  onSubmit(values) {
+    console.log('values', values);
+
+    this.setState({ loading: true });
+    setTimeout(() => {
+      this.setState({ loading: false });
+    }, 3000);
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
+        <Field
+          name="username"
+          component={renderUsername}
+        />
+        <Field
+          name="password"
+          component={renderPassword}
+        />
+        <Link to="/reset" className={styles.reset}>
+          <Anchor text="¿Olvidaste tu contraseña?" />
         </Link>
-      </div>
-    </form>
-  );
+        <FormButton
+          callToAction="Iniciar sesión"
+          loading={this.state.loading}
+          type="submit"
+        />
+
+        <div className={styles.simpleText}>
+          <span>¿No tienes una cuenta? </span>
+          <Link to="/registro">
+            <Anchor text="Regístrate" />
+          </Link>
+        </div>
+      </form>
+    );
+  }
 }
 
 function validate(values) {
