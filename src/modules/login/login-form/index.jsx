@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Link } from 'react-router-dom';
@@ -34,49 +34,37 @@ function renderPassword(field) {
   );
 }
 
-class LoginForm extends Component {
-  constructor(props) {
-    super(props);
+function onSubmit(values) {
+  console.log('values', values);
+}
 
-    this.onSubmit = this.onSubmit.bind(this);
-  }
+function LoginForm(props) {
+  return (
+    <form onSubmit={props.handleSubmit(onSubmit)}>
+      <Field
+        name="username"
+        component={renderUsername}
+      />
+      <Field
+        name="password"
+        component={renderPassword}
+      />
+      <Link to="/reset" className={styles.reset}>
+        <Anchor text="¿Olvidaste tu contraseña?" />
+      </Link>
+      <FormButton
+        callToAction="Iniciar sesión"
+        type="submit"
+      />
 
-  onSubmit(values) {
-    console.log('values', values);
-    console.log(this);
-  }
-
-  render() {
-    return (
-      <form
-        onSubmit={this.props.handleSubmit(this.onSubmit)}
-        className={styles.form}
-      >
-        <Field
-          name="username"
-          component={renderUsername}
-        />
-        <Field
-          name="password"
-          component={renderPassword}
-        />
-        <Link to="/reset" className={styles.reset}>
-          <Anchor text="¿Olvidaste tu contraseña?" />
+      <div className={styles.simpleText}>
+        <span>¿No tienes una cuenta? </span>
+        <Link to="/registro">
+          <Anchor text="Regístrate" />
         </Link>
-        <FormButton
-          callToAction="Iniciar sesión"
-          type="submit"
-        />
-
-        <div className={styles.simpleText}>
-          <span>¿No tienes una cuenta? </span>
-          <Link to="/registro">
-            <Anchor text="Regístrate" />
-          </Link>
-        </div>
-      </form>
-    );
-  }
+      </div>
+    </form>
+  );
 }
 
 function validate(values) {

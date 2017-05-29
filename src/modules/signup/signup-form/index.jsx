@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Field, reduxForm } from 'redux-form';
 
@@ -51,9 +52,13 @@ function renderRepeatPassword(field) {
   );
 }
 
-function SignupForm() {
+function onSubmit(values) {
+  console.log(values);
+}
+
+function SignupForm(props) {
   return (
-    <form>
+    <form onSubmit={props.handleSubmit(onSubmit)}>
       <Field
         name="username"
         component={renderUsername}
@@ -78,6 +83,33 @@ function SignupForm() {
   );
 }
 
+function validate(values) {
+  const errors = {};
+
+  if (!values.username) errors.username = 'Ingresa un nombre de usuario';
+
+  if (!values.email) errors.email = 'Ingresa tu correo';
+
+  if (!values.password) errors.password = 'Ingresa una contraseña';
+
+  if (!values.repeatPassword) {
+    errors.repeatPassword = 'Ingresa una contraseña';
+  } else if (values.repeatPassword !== values.password) {
+    errors.repeatPassword = 'Las contraseñas no coinciden';
+  }
+
+  console.log(errors);
+
+  // If errors is empty, the form is fine to submit
+  // If errors has any properties, redux form assumes form is invalid
+  return errors;
+}
+
+SignupForm.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+};
+
 export default reduxForm({
+  validate,
   form: 'UserSignup',
 })(SignupForm);

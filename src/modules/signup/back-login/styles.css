@@ -1,0 +1,10 @@
+.link i {
+  border-bottom: 1px solid #ffceb3;
+  color: #f7a80d;
+  padding-right: 5px;
+  padding-bottom: 1px;
+  position: relative;
+  top: 1px;
+}
+
+.link:hover i, .link:hover span { border: none; }
