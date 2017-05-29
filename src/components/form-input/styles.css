@@ -73,12 +73,12 @@
 }
 
 .errorText {
-  bottom: -18px;
   color: red;
   font-size: 12px;
   font-weight: 300;
   left: 0;
   position: absolute;
+  top: 40px;
 }
 
 /* COLORS

@@ -6,6 +6,8 @@ import { Field, reduxForm } from 'redux-form';
 import FormInput from '../../../components/form-input';
 import FormButton from '../../../components/form-button';
 
+import regex from '../../../regex';
+
 function renderUsername(field) {
   return (
     <FormInput
@@ -88,9 +90,17 @@ function validate(values) {
 
   if (!values.username) errors.username = 'Ingresa un nombre de usuario';
 
-  if (!values.email) errors.email = 'Ingresa tu correo';
+  if (!values.email) {
+    errors.email = 'Ingresa tu correo';
+  } else if (!regex.validate.email.test(values.email)) {
+    errors.email = regex.message.email;
+  }
 
-  if (!values.password) errors.password = 'Ingresa una contraseña';
+  if (!values.password) {
+    errors.password = 'Ingresa una contraseña';
+  } else if (!regex.validate.password.test(values.password)) {
+    errors.password = regex.message.password;
+  }
 
   if (!values.repeatPassword) {
     errors.repeatPassword = 'Ingresa una contraseña';
