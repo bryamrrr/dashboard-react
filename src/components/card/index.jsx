@@ -12,7 +12,7 @@ function Card(props) {
 }
 
 Card.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.arrayOf(PropTypes.element).isRequired,
 };
 
 export default Card;

@@ -15,7 +15,7 @@ function Login() {
           <Link to="/registro">
             <div className={styles.roundButton}>+</div>
           </Link>
-          <h1 className={styles.title}>Iniciar sesión</h1>
+          <h1>Iniciar sesión</h1>
           <LoginForm />
         </Card>
       </div>

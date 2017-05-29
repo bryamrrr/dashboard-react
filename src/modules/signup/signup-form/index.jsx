@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { Link } from 'react-router-dom';
-
 import { Field, reduxForm } from 'redux-form';
 
 import FormInput from '../../../components/form-input';
 import FormButton from '../../../components/form-button';
-import Anchor from '../../../components/anchor';
 
-import styles from './styles.css';
+import regex from '../../../regex';
 
 function renderUsername(field) {
   return (
@@ -18,6 +15,17 @@ function renderUsername(field) {
       name="username"
       placeholder="Usuario"
       includeIcon="linearicon-user"
+    />
+  );
+}
+
+function renderEmail(field) {
+  return (
+    <FormInput
+      field={field}
+      name="email"
+      placeholder="Correo electrónico"
+      includeIcon="linearicon-envelope"
     />
   );
 }
@@ -34,7 +42,19 @@ function renderPassword(field) {
   );
 }
 
-class LoginForm extends Component {
+function renderRepeatPassword(field) {
+  return (
+    <FormInput
+      field={field}
+      name="verifyPassword"
+      type="password"
+      placeholder="Repetir contraseña"
+      includeIcon="linearicon-lock"
+    />
+  );
+}
+
+class SignupForm extends Component {
   constructor(props) {
     super(props);
 
@@ -44,7 +64,7 @@ class LoginForm extends Component {
   }
 
   onSubmit(values) {
-    console.log('values', values);
+    console.log(values);
 
     this.setState({ loading: true });
     setTimeout(() => {
@@ -60,24 +80,22 @@ class LoginForm extends Component {
           component={renderUsername}
         />
         <Field
+          name="email"
+          component={renderEmail}
+        />
+        <Field
           name="password"
           component={renderPassword}
         />
-        <Link to="/reset" className={styles.reset}>
-          <Anchor text="¿Olvidaste tu contraseña?" />
-        </Link>
+        <Field
+          name="repeatPassword"
+          component={renderRepeatPassword}
+        />
         <FormButton
-          callToAction="Iniciar sesión"
+          callToAction="Registrar"
           loading={this.state.loading}
           type="submit"
         />
-
-        <div className={styles.simpleText}>
-          <span>¿No tienes una cuenta? </span>
-          <Link to="/registro">
-            <Anchor text="Regístrate" />
-          </Link>
-        </div>
       </form>
     );
   }
@@ -86,20 +104,38 @@ class LoginForm extends Component {
 function validate(values) {
   const errors = {};
 
-  if (!values.username) errors.username = 'Ingresa tu usuario';
+  if (!values.username) errors.username = 'Ingresa un nombre de usuario';
 
-  if (!values.password) errors.password = 'Ingresa tu contraseña';
+  if (!values.email) {
+    errors.email = 'Ingresa tu correo';
+  } else if (!regex.validate.email.test(values.email)) {
+    errors.email = regex.message.email;
+  }
+
+  if (!values.password) {
+    errors.password = 'Ingresa una contraseña';
+  } else if (!regex.validate.password.test(values.password)) {
+    errors.password = regex.message.password;
+  }
+
+  if (!values.repeatPassword) {
+    errors.repeatPassword = 'Ingresa una contraseña';
+  } else if (values.repeatPassword !== values.password) {
+    errors.repeatPassword = 'Las contraseñas no coinciden';
+  }
+
+  console.log(errors);
 
   // If errors is empty, the form is fine to submit
   // If errors has any properties, redux form assumes form is invalid
   return errors;
 }
 
-LoginForm.propTypes = {
+SignupForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
 };
 
 export default reduxForm({
   validate,
-  form: 'UserLogin',
-})(LoginForm);
+  form: 'UserSignup',
+})(SignupForm);

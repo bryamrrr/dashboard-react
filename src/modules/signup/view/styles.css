@@ -1,0 +1,29 @@
+.container { padding: 0 25px; }
+
+.signupContainer {
+  margin: 0 auto;
+  max-width: 400px;
+}
+
+.bar {
+  background-color: #ff5a00;
+  height: 40px;
+  left: 0;
+  position: absolute;
+  top: 50px;
+  width: 5px;
+}
+
+.linkTop {
+  right: 30px;
+  position: absolute;
+  top: 50px;
+  height: 40px;
+}
+
+.linkTop i,
+.linkTop a {
+  line-height: 40px;
+}
+
+.linkBottom { margin-top: 40px; }
