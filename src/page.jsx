@@ -4,6 +4,8 @@ import {
   Switch,
 } from 'react-router-dom';
 
+import PrivateRoute from './components/private-route';
+
 import Login from './modules/login/view';
 import Signup from './modules/signup/view';
 import Reset from './modules/reset/view';
@@ -17,6 +19,7 @@ export default function () {
         <Route path="/registro" exact component={Signup} />
         <Route path="/reset" exact component={Reset} />
         <Route path="/users/:email/forgotpassword/:hash" exact component={Retrieve} />
+        <PrivateRoute path="/inicio" exact component={Retrieve} />
       </Switch>
     </main>
   );
