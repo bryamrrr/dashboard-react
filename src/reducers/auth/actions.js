@@ -1,5 +1,5 @@
-import httpRequest from '../httpRequest';
-import constants from '../constants';
+import httpRequest from '../../extra/httpRequest';
+import constants from '../../extra/constants';
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';

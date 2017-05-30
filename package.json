@@ -1,7 +1,7 @@
 {
-  "name": "react-boilerplate",
+  "name": "dashboard-yachay-react",
   "version": "0.1.0",
-  "description": "React Boilerplate",
+  "description": "Yachay | Dashboard",
   "main": "./built/server/server.js",
   "repository": "ssh://git@git.rcp.pe:4488/devteam/react-boilerplate.git",
   "scripts": {
