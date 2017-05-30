@@ -4,9 +4,12 @@ import {
   LOGIN_FAILURE,
 } from './actions';
 
-function reducer(state = {
-  token: localStorage.getItem('token') || '',
-}, action) {
+const isNode = typeof localStorage === 'undefined';
+let token = '';
+
+if (!isNode) token = localStorage.getItem('token') || '';
+
+function reducer(state = { token }, action) {
   switch (action.type) {
     case LOGIN_REQUEST:
       return Object.assign({}, state, {
