@@ -52,7 +52,7 @@ class LoginForm extends Component {
     const data = await this.props.loginUser(values);
 
     console.log('Éxito!', data);
-    this.setState({ loading: false });
+    // this.setState({ loading: false });
   }
 
   render() {

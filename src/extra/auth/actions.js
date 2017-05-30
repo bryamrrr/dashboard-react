@@ -36,7 +36,8 @@ export function loginUser(creds) {
     };
 
     try {
-      const { user, access_token } = await httpRequest('POST', `${constants.urls.API_SECURITY}/access_token`, toSend);
+      const response = await httpRequest('POST', `${constants.urls.API_SECURITY}/access_token`, toSend);
+      const { user, access_token } = await response.json();
 
       localStorage.setItem('userData', JSON.stringify(user));
       localStorage.setItem('token', access_token);
