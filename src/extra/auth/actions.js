@@ -30,8 +30,13 @@ export function loginUser(creds) {
   return async (dispatch) => {
     dispatch(requestLogin(creds));
 
+    const toSend = { // FIXME
+      email: creds.username,
+      password: creds.password,
+    };
+
     try {
-      const { user, access_token } = await httpRequest('POST', `${constants.urls.API_SECURITY}/access_token`, creds);
+      const { user, access_token } = await httpRequest('POST', `${constants.urls.API_SECURITY}/access_token`, toSend);
 
       localStorage.setItem('userData', JSON.stringify(user));
       localStorage.setItem('token', access_token);

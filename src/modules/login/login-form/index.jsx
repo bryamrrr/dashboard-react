@@ -11,7 +11,7 @@ import FormInput from '../../../components/form-input';
 import FormButton from '../../../components/form-button';
 import Anchor from '../../../components/anchor';
 
-import actions from '../../../extra/auth/actions';
+import { loginUser } from '../../../extra/auth/actions';
 
 import styles from './styles.css';
 
@@ -49,7 +49,7 @@ class LoginForm extends Component {
 
   async onSubmit(values) {
     this.setState({ loading: true });
-    const data = await this.props.actions.loginUser(values);
+    const data = await this.props.loginUser(values);
 
     console.log('Éxito!', data);
     this.setState({ loading: false });
@@ -100,13 +100,11 @@ function validate(values) {
 
 LoginForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  actions: PropTypes.shaped({
-    loginUser: PropTypes.func.isRequired,
-  }),
+  loginUser: PropTypes.func.isRequired,
 };
 
 function mapDispatchToProps(dispatch) {
-  return { actions: bindActionCreators(actions, dispatch) };
+  return { loginUser: bindActionCreators(loginUser, dispatch) };
 }
 
 const LoginFormConnected = connect(null, mapDispatchToProps)(LoginForm);

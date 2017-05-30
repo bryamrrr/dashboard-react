@@ -1,5 +1,6 @@
 const fs = require('fs');
 const webpack = require('webpack');
+require("babel-polyfill");
 
 const nodeModules = fs
   .readdirSync('node_modules')
@@ -10,7 +11,7 @@ const nodeModules = fs
   )
 
 const config = {
-  entry: './src/server.jsx',
+  entry: ['babel-polyfill', './src/server.jsx'],
   output: {
     filename: 'server.js'
   },
