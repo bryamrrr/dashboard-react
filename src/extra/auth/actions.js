@@ -31,7 +31,7 @@ export function loginUser(creds) {
     dispatch(requestLogin(creds));
 
     try {
-      const { user, access_token } = await httpRequest('POST', constants.urls.API_SECURITY, creds);
+      const { user, access_token } = await httpRequest('POST', `${constants.urls.API_SECURITY}/access_token`, creds);
 
       localStorage.setItem('userData', JSON.stringify(user));
       localStorage.setItem('token', access_token);
