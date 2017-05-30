@@ -1,0 +1,41 @@
+.container {
+  border-left: 1px solid #E7EAEC;
+  display: inline-block;
+  margin-top: 20px;
+  padding-left: 24px;
+  vertical-align: top;
+}
+
+.list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.list i {
+  color: #000;
+  transition: color .2s;
+}
+
+.list i:hover {
+  color: #666;
+}
+
+.list li {
+  display: inline-block;
+}
+
+.item {
+  font-weight: 300;
+  font-size: 15px;
+  margin-left: 12px;
+}
+
+.item:last-of-type {
+  font-weight: 400;
+}
+
+.item span {
+  color: #E7EAEC;
+  margin-right: 12px;
+}

@@ -34,9 +34,7 @@ function MenuAside(props) {
 }
 
 function mapStateToProps({ context }) {
-  return {
-    context,
-  };
+  return { context };
 }
 
 MenuAside.propTypes = {
