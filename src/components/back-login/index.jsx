@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Anchor from '../../../components/anchor';
+import Anchor from '../anchor';
 
 import styles from './styles.css';
 

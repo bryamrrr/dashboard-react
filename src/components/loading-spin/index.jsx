@@ -28,7 +28,7 @@ function LoadingSpin(props) {
 }
 
 LoadingSpin.propTypes = {
-  size: PropTypes.string,
+  size: PropTypes.number,
 };
 
 LoadingSpin.defaultProps = {

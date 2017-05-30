@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import Card from '../../../components/card';
-import BackLogin from '../back-login';
+import BackLogin from '../../../components/back-login';
 import SignupForm from '../signup-form';
 
 import styles from './styles.css';

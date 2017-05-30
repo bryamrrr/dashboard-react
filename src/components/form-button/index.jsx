@@ -20,7 +20,7 @@ function FormButton(props) {
         <i className={`${styles.icon} ${props.includeIcon}`} />
       }
       <span>{props.callToAction}</span>
-      { props.loading && <LoadingSpin size="19" /> }
+      { props.loading && <LoadingSpin size={19} /> }
     </button>
   );
 }

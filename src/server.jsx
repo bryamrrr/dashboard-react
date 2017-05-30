@@ -33,7 +33,6 @@ app.get('*', (req, res) => {
     res.writeHead(301, {
       Location: context.url,
     });
-    res.end();
   }
 
   res.write(
@@ -45,8 +44,10 @@ app.get('*', (req, res) => {
         env={env}
       />,
     ),
+    () => {
+      res.end();
+    },
   );
-  res.end();
 });
 
 const port = 8080;

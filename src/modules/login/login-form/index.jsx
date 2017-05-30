@@ -3,11 +3,15 @@ import PropTypes from 'prop-types';
 
 import { Link } from 'react-router-dom';
 
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 
 import FormInput from '../../../components/form-input';
 import FormButton from '../../../components/form-button';
 import Anchor from '../../../components/anchor';
+
+import { loginUser } from '../../../extra/auth/actions';
 
 import styles from './styles.css';
 
@@ -43,13 +47,12 @@ class LoginForm extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  onSubmit(values) {
-    console.log('values', values);
-
+  async onSubmit(values) {
     this.setState({ loading: true });
-    setTimeout(() => {
-      this.setState({ loading: false });
-    }, 3000);
+    const data = await this.props.loginUser(values);
+
+    console.log('Éxito!', data);
+    // this.setState({ loading: false });
   }
 
   render() {
@@ -97,9 +100,16 @@ function validate(values) {
 
 LoginForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
+  loginUser: PropTypes.func.isRequired,
 };
+
+function mapDispatchToProps(dispatch) {
+  return { loginUser: bindActionCreators(loginUser, dispatch) };
+}
+
+const LoginFormConnected = connect(null, mapDispatchToProps)(LoginForm);
 
 export default reduxForm({
   validate,
   form: 'UserLogin',
-})(LoginForm);
+})(LoginFormConnected);

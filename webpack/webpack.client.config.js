@@ -2,9 +2,10 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const LiveReloadPlugin = require('webpack-livereload-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+require("babel-polyfill");
 
 const config = {
-  entry: './src/client.jsx',
+  entry: ['babel-polyfill', './src/client.jsx'],
   output: {
     filename: 'bundle.js'
   },
