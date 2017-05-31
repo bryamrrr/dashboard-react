@@ -1,5 +1,5 @@
 .container {
-  border-left: 1px solid #E7EAEC;
+  border-left: 1px solid #e7eaec;
   display: inline-block;
   margin-top: 20px;
   padding-left: 24px;
@@ -36,6 +36,6 @@
 }
 
 .item span {
-  color: #E7EAEC;
+  color: #e7eaec;
   margin-right: 12px;
 }

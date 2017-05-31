@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import Dashboard from '../dashboard';
+import Dashboard from '../../modules/dashboard/view';
 
 function PrivateRoute(props) {
   return (

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import BreadCrumb from '../../components/bread-crumb';
+import Settings from '../../modules/dashboard/settings';
 
 import styles from './styles.css';
 
@@ -9,6 +10,7 @@ function Header() {
     <header className={styles.header}>
       <i className={`${styles.icon} linearicon-list`} />
       <BreadCrumb />
+      <Settings />
     </header>
   );
 }

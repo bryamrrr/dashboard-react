@@ -19,7 +19,10 @@
   font-style: normal;
 }
 
-* { font-family: 'Roboto', 'sans-serif'; }
+* {
+  font-family: 'Roboto', 'sans-serif';
+  outline: none;
+}
 
 body { margin: 0; }
 

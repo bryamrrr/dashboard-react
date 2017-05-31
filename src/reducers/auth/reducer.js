@@ -6,10 +6,14 @@ import {
 
 const isNode = typeof localStorage === 'undefined';
 let token = '';
+let user = {};
 
-if (!isNode) token = localStorage.getItem('token') || '';
+if (!isNode) {
+  token = localStorage.getItem('token') || '';
+  user = JSON.parse(localStorage.getItem('userData') || '');
+}
 
-function reducer(state = { token }, action) {
+function reducer(state = { token, user }, action) {
   switch (action.type) {
     case LOGIN_REQUEST:
       return Object.assign({}, state, {
