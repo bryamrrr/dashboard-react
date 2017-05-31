@@ -46,30 +46,35 @@ export function loginUser(creds) {
 
     try {
       const url = `${constants.urls.API_SECURITY}/access_token`;
-      const response = await httpRequest('POST', url, toSend);
-      const { user, access_token } = await response.json();
+      const {
+        data: { user, access_token },
+        meta,
+      } = await httpRequest('POST', url, toSend);
 
-      localStorage.setItem('userData', JSON.stringify(user));
-      localStorage.setItem('token', access_token);
+      if (meta.ok) {
+        dispatch(receiveLogin({ user, access_token }));
 
-      dispatch(receiveLogin({ user, access_token }));
+        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('token', access_token);
+      } else {
+        dispatch(loginError(meta));
+      }
     } catch (error) {
-      console.error(error);
-      dispatch(loginError(error));
+      console.error(`Unhandled error in loginUser action creator: ${error}`);
     }
   };
 }
 
 export function logoutUser() {
-  return async (dispatch) => {
+  return (dispatch) => {
     try {
+      dispatch(receiveLogout());
+
       const url = `${constants.urls.API_SECURITY}/logout`;
-      await httpRequest('POST', url);
+      httpRequest('POST', url);
 
       localStorage.removeItem('userData');
       localStorage.removeItem('token');
-
-      dispatch(receiveLogout());
     } catch (error) {
       console.error(error);
     }
