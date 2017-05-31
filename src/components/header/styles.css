@@ -1,4 +1,5 @@
 .header {
+  background-color: white;
   border-bottom: 1px solid #E7EAEC;
   box-sizing: border-box;
   height: 57px;
@@ -7,6 +8,7 @@
   top: 0;
   right: 0;
   left: 220px;
+  z-index: 2;
 }
 
 .icon {

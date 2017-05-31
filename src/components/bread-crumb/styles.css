@@ -17,13 +17,9 @@
   transition: color .2s;
 }
 
-.list i:hover {
-  color: #666;
-}
+.list i:hover { color: #ff5a00; }
 
-.list li {
-  display: inline-block;
-}
+.list li { display: inline-block; }
 
 .item {
   font-weight: 300;
@@ -31,9 +27,7 @@
   margin-left: 12px;
 }
 
-.item:last-of-type {
-  font-weight: 400;
-}
+.item:last-of-type { font-weight: 400; }
 
 .item span {
   color: #e7eaec;

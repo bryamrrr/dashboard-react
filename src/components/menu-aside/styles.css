@@ -1,10 +1,11 @@
 .container {
-  background-color: #2B343F;
+  background-color: #252d37;
   position: absolute;
   bottom: 0;
   left: 0;
   top: 0;
   width: 220px;
+  z-index: 1;
 }
 
 .header {
