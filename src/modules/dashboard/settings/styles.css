@@ -19,7 +19,7 @@
 }
 
 .title {
-  font-size: 16px;
+  font-size: 15px;
   margin: 0 8px;
 }
 
@@ -60,7 +60,7 @@
 .list a {
   color: black;
   display: block;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 300;
   padding: 12px 20px;
 }

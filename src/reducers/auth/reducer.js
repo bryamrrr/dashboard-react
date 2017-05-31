@@ -2,6 +2,7 @@ import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
+  LOGOUT_SUCCESS,
 } from './actions';
 
 const isNode = typeof localStorage === 'undefined';
@@ -10,7 +11,7 @@ let user = {};
 
 if (!isNode) {
   token = localStorage.getItem('token') || '';
-  user = JSON.parse(localStorage.getItem('userData') || '');
+  user = JSON.parse(localStorage.getItem('userData'));
 }
 
 function reducer(state = { token, user }, action) {
@@ -28,6 +29,8 @@ function reducer(state = { token, user }, action) {
       return Object.assign({}, state, {
         error: 'Error en el login',
       });
+    case LOGOUT_SUCCESS:
+      return { token, user };
     default:
       return state;
   }

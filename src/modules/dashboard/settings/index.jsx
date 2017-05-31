@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 
 import Gravatar from 'react-gravatar';
+
+import { logoutUser } from '../../../reducers/auth/actions';
 
 import styles from './styles.css';
 
@@ -16,6 +19,7 @@ class Settings extends Component {
 
     this.onClick = this.onClick.bind(this);
     this.onBlur = this.onBlur.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
   onClick() {
@@ -24,6 +28,10 @@ class Settings extends Component {
 
   onBlur() {
     this.setState({ open: false });
+  }
+
+  logout() {
+    this.props.logoutUser();
   }
 
   render() {
@@ -61,10 +69,13 @@ class Settings extends Component {
               <Link to="/usuario/contrasena">Cambiar contraseña</Link>
             </li>
             <li>
-              <Link to="/usuario/contrasena">
+              <a
+                onClick={this.logout}
+                aria-hidden
+              >
                 Salir
                 <i className={`${styles.logoutIcon} linearicon-exit`} />
-              </Link>
+              </a>
             </li>
           </ul>
         </div>
@@ -78,10 +89,15 @@ Settings.propTypes = {
     token: PropTypes.string.isRequired,
     user: PropTypes.object.isRequired,
   }).isRequired,
+  logoutUser: PropTypes.func.isRequired,
 };
 
 function mapStateToProps({ auth }) {
   return { auth };
 }
 
-export default connect(mapStateToProps)(Settings);
+function mapDispatchToProps(dispatch) {
+  return { logoutUser: bindActionCreators(logoutUser, dispatch) };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Settings);
