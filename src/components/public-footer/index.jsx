@@ -56,9 +56,6 @@ function PublicFooter() {
       <div className={styles.sales}>
         <div className={styles.salesContainer}>
           <p>Compras 100% seguras con:</p>
-          <div>
-            
-          </div>
         </div>
       </div>
     </div>

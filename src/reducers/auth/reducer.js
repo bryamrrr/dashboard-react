@@ -11,7 +11,7 @@ let user = {};
 
 if (!isNode) {
   token = localStorage.getItem('token') || '';
-  user = JSON.parse(localStorage.getItem('userData'));
+  user = JSON.parse(localStorage.getItem('user'));
 }
 
 function reducer(state = { token, user }, action) {

@@ -20,6 +20,8 @@ class Settings extends Component {
     this.onClick = this.onClick.bind(this);
     this.onBlur = this.onBlur.bind(this);
     this.logout = this.logout.bind(this);
+
+    console.log(props);
   }
 
   onClick() {

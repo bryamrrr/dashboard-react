@@ -21,7 +21,10 @@ function Card(props) {
 }
 
 Card.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.element).isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.element).isRequired,
+    PropTypes.element.isRequired,
+  ]).isRequired,
   color: PropTypes.string,
   includeBorder: PropTypes.bool,
 };

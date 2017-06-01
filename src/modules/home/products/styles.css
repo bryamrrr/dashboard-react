@@ -66,8 +66,6 @@
   z-index: 1;
   width: 49.50px;
   height: 49.50px;
-  -webkit-transform: scaleY(0.5774) rotate(-45deg);
-  -ms-transform: scaleY(0.5774) rotate(-45deg);
   transform: scaleY(0.5774) rotate(-45deg);
   background-color: inherit;
   left: 9.21566px;
