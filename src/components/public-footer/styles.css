@@ -1,0 +1,60 @@
+.footer {
+  background-color: #293846;
+  margin-top: 36px;
+  padding: 50px 25px;
+}
+
+.container,
+.salesContainer {
+  margin: 0 auto;
+  max-width: 900px;
+}
+
+.container {
+  display: flex;
+}
+
+.salesContainer {
+  text-align: center;
+  padding: 50px 0;
+}
+
+.container article {
+  border-right: 1px solid rgba(255, 255, 255, .075);
+  flex-basis: 33.3%;
+  text-align: center;
+}
+
+.miniContainer {
+  display: inline-block;
+  text-align: left;
+}
+
+.container h3 {
+  color: white;
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 30px;
+}
+
+.container ul {
+  padding: 0;
+  list-style-type: none;
+  margin: 0;
+}
+
+.container li {
+  margin-bottom: 12px;
+}
+
+.container a {
+  color: rgba(255, 255, 255, .5);
+  font-weight: 300;
+  text-decoration: none;
+  transition: color .2s;
+}
+
+.container a:hover {
+  color: rgba(255, 255, 255, 1);
+  cursor: pointer;
+}
