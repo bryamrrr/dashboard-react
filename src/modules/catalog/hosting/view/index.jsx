@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { connect } from 'react-redux';
+
 import CatalogCard from '../../catalog-card';
 
 import styles from './styles.css';
@@ -14,4 +16,8 @@ function Hosting() {
   );
 }
 
-export default Hosting;
+function mapStateToProps({ catalog: { hosting } }) {
+  return { hosting };
+}
+
+export default connect(mapStateToProps)(Hosting);

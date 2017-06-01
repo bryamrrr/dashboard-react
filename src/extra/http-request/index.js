@@ -1,3 +1,7 @@
+import { history } from 'react-router-dom';
+
+console.log(history);
+
 export default async (method, url, data = {}) => {
   const token = (typeof localStorage !== 'undefined')
     ? localStorage.getItem('token')
