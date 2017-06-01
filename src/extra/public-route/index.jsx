@@ -7,13 +7,20 @@ import {
 } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import PublicHeader from '../../components/public-header';
+import PublicFooter from '../../components/public-footer';
+
 function PublicRoute(props) {
   return (
     <Route
       {...props.routeProps}
       render={() => (
         (props.auth.token === '')
-          ? <div>{props.children}</div>
+          ? (<div>
+            <PublicHeader />
+            {props.children}
+            <PublicFooter />
+          </div>)
           : <Redirect to={{ pathname: '/inicio' }} />
       )}
     />
