@@ -30,7 +30,10 @@ function reducer(state = { token, user }, action) {
         error: 'Error en el login',
       });
     case LOGOUT_SUCCESS:
-      return { token, user };
+      return {
+        token: '',
+        user: {},
+      };
     default:
       return state;
   }
