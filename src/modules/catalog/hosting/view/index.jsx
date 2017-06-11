@@ -6,7 +6,7 @@ import CatalogCard from '../../catalog-card';
 
 import styles from './styles.css';
 
-function Hosting() {
+function HostingCatalog() {
   return (
     <div className={styles.container}>
       <CatalogCard />
@@ -20,4 +20,4 @@ function mapStateToProps({ catalog: { hosting } }) {
   return { hosting };
 }
 
-export default connect(mapStateToProps)(Hosting);
+export default connect(mapStateToProps)(HostingCatalog);
