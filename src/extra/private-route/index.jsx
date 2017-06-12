@@ -7,13 +7,15 @@ import {
 } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import Dashboard from '../../modules/dashboard/view';
+
 function PrivateRoute(props) {
   return (
     <Route
       {...props.routeProps}
       render={() => (
         (props.auth.token !== '') ? (
-          <div>{props.children}</div>
+          <Dashboard>{props.children}</Dashboard>
         ) : (
           <Redirect
             to={{

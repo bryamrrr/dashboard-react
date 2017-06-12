@@ -1,0 +1,86 @@
+.container {
+  background-color: #252d37;
+  position: relative;
+}
+
+.container:hover, .container.isOpen {
+  background-color: #1c2228;
+}
+
+.title {
+  color: #fff;
+  padding: 20px;
+  user-select: none;
+}
+
+.title:hover {
+  background-color: #1c2228;
+  cursor: pointer;
+}
+
+.title:hover h4,
+.title:hover i,
+.isOpen .title h4,
+.isOpen .title i {
+  color: rgba(255, 255, 255, 1);
+}
+
+.title h4 {
+  display: inline-block;
+  font-size: 15px;
+  margin: 0;
+  margin-left: .7em;
+}
+
+.title h4,
+.title i {
+  color: rgba(255, 255, 255, .7);
+  transition: color .2s;
+}
+
+.arrow {
+  font-size: 12px;
+  float: right;
+  line-height: 19px;
+  transition: all .3s;
+}
+
+.isOpen .arrow { transform: rotate(90deg); }
+
+.items {
+  display: none;
+  margin: 0;
+  padding: 0;
+  padding: 0 20px 15px;
+}
+
+.items a {
+  box-sizing: border-box;
+  color: rgba(255, 255, 255, 0.8);
+  display: inline-block;
+  font-weight: 300;
+  font-size: 14px;
+  padding: 7px 0 7px 28px;
+  transition: color .3s;
+  width: 100%;
+}
+
+.items a:hover { color: rgba(255, 255, 255, 1);; }
+
+.isOpen .items {
+  display: block;
+}
+
+.bar {
+  background-color: #ff5a00;
+  left: 0;
+  height: 0;
+  position: absolute;
+  top: 0;
+  transition: height .2s;
+  width: 3px;
+}
+
+.isOpen .bar {
+  height: 100%;
+}

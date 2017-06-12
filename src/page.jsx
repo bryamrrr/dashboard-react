@@ -10,6 +10,10 @@ import Reset from './modules/reset/view';
 import Retrieve from './modules/retrieve/view';
 import Home from './modules/home/view';
 
+import DomainsCatalog from './modules/catalog/domains/view';
+import HostingCatalog from './modules/catalog/hosting/view';
+import MailsCatalog from './modules/catalog/mails/view';
+
 export default function () {
   return (
     <main role="application">
@@ -20,6 +24,10 @@ export default function () {
         <PublicRoute path="/users/:email/forgotpassword/:hash" exact><Retrieve /></PublicRoute>
 
         <PrivateRoute path="/inicio" exact><Home /></PrivateRoute>
+
+        <PrivateRoute path="/catalogo/dominios" exact><DomainsCatalog /></PrivateRoute>
+        <PrivateRoute path="/catalogo/hosting" exact><HostingCatalog /></PrivateRoute>
+        <PrivateRoute path="/catalogo/correo" exact><MailsCatalog /></PrivateRoute>
       </Switch>
     </main>
   );

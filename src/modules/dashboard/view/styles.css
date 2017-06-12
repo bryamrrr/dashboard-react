@@ -1,0 +1,15 @@
+.container {
+  padding: 24px;
+  overflow-y: scroll;
+  position: absolute;
+  top: 57px;
+  left: 220px;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+.card {
+  background-color: white;
+  padding: 48px 24px;
+}

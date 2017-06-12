@@ -1,0 +1,26 @@
+.container {
+  margin: 15px 0;
+  padding: 20px;
+}
+
+.container.warning {
+  background-color: #fef5e0;
+  border: 1px solid #fde7b6;
+}
+
+.container.success {
+  background-color: #d7e9c1;
+  border-color: #b7e7a1;
+}
+
+.container.warning .text,
+.container.warning i { color: #9e6a05; }
+
+.container.success .text,
+.container.success i { color: #388C4C; }
+
+.text {
+  display: inline-block;
+  font-weight: 300;
+  margin: 0 15px;
+}

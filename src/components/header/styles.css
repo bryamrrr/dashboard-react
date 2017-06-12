@@ -1,0 +1,19 @@
+.header {
+  background-color: white;
+  border-bottom: 1px solid #E7EAEC;
+  box-sizing: border-box;
+  height: 57px;
+  padding: 0 24px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 220px;
+  z-index: 2;
+}
+
+.icon {
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 57px;
+  margin-right: 24px;
+}

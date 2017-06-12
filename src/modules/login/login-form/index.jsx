@@ -11,7 +11,7 @@ import FormInput from '../../../components/form-input';
 import FormButton from '../../../components/form-button';
 import Anchor from '../../../components/anchor';
 
-import { loginUser } from '../../../extra/auth/actions';
+import { loginUser } from '../../../reducers/auth/actions';
 
 import styles from './styles.css';
 

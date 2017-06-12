@@ -2,14 +2,21 @@ import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
+  LOGOUT_SUCCESS,
 } from './actions';
 
 const isNode = typeof localStorage === 'undefined';
 let token = '';
+let user = {};
 
-if (!isNode) token = localStorage.getItem('token') || '';
+if (!isNode) {
+  token = localStorage.getItem('token') || '';
+  user = JSON.parse(localStorage.getItem('user'));
+} else {
+  token = 'servertoken';
+}
 
-function reducer(state = { token }, action) {
+function reducer(state = { token, user }, action) {
   switch (action.type) {
     case LOGIN_REQUEST:
       return Object.assign({}, state, {
@@ -24,6 +31,11 @@ function reducer(state = { token }, action) {
       return Object.assign({}, state, {
         error: 'Error en el login',
       });
+    case LOGOUT_SUCCESS:
+      return {
+        token: '',
+        user: {},
+      };
     default:
       return state;
   }
