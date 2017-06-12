@@ -11,22 +11,54 @@ class DomainsCatalog extends Component {
     super(props);
 
     this.state = {
-      search: null,
       domains: null,
     };
+
+    this.addToCart = this.addToCart.bind(this);
+    this.getDomains = this.getDomains.bind(this);
+  }
+
+  getDomains(domains) {
+    this.setState({ domains });
+  }
+
+  addToCart(item) {
+    const domain = item || this.state.domains[0];
+
+    // TODO: Send domain to Redux Cart
+    console.log(domain);
+
+    // TODO: Send to order details view
   }
 
   render() {
+    const { domains } = this.state;
+    let text = '';
+    let type = 'info';
+
+    if (domains && domains[0]) {
+      if (domains[0].available) {
+        text = `El dominio ${domains[0].domain} se encuentra disponible.`;
+        type = 'success';
+      } else {
+        text = `El dominio ${domains[0]} no se encuentra disponible.`;
+        type = 'warning';
+      }
+    }
+
     return (
       <div>
         <DomainSearch
-          zones={this.state.zones}
+          getDomains={this.getDomains}
         />
-        {(this.state.search &&
+        {(domains &&
           <Info
-            icon="linearicon-user"
-            text="Hola mundo"
-          /> &&
+            text={text}
+            type={type}
+            addToCart={this.addToCart}
+          />
+        )}
+        {(domains && domains.length > 1 &&
           <DomainsTable
             domains={{}}
           />
@@ -34,17 +66,6 @@ class DomainsCatalog extends Component {
       </div>
     );
   }
-  // async initialFetch() {
-  //   if (this.props.user && this.props.comments.size > 0)
-  //     return this.setState({ loading: false });
-
-  //   await Promise.all([
-  //     this.props.actions.loadUser(this.props.userId),
-  //     this.props.actions.loadCommentsForPost(this.props.id),
-  //   ]);
-
-  //   return this.setState({ loading: false });
-  // }
 }
 
 function mapStateToProps({ catalog }) {

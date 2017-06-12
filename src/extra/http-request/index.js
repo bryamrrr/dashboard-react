@@ -9,7 +9,9 @@ export default async (method, url, data = {}) => {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(data),
+    body: (method === 'GET')
+      ? null
+      : JSON.stringify(data),
   };
 
   let response = {};
@@ -36,7 +38,7 @@ export default async (method, url, data = {}) => {
       console.log(`Unhandled status ${response.status}`);
     }
   } catch (error) {
-    console.log('Request error unhandled', error);
+    console.log('Error unhandled', error);
   }
 
   return response;

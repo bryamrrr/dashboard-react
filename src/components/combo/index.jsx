@@ -37,8 +37,10 @@ class Combo extends Component {
 
   select(event) {
     const id = event.target.getAttribute('data-id');
+    const selected = this.state.options[id];
 
-    this.setState({ selected: this.state.options[id] });
+    this.setState({ selected });
+    this.props.changeSelected(selected);
   }
 
   render() {
@@ -84,6 +86,7 @@ class Combo extends Component {
 }
 
 Combo.propTypes = {
+  changeSelected: PropTypes.func.isRequired,
   options: PropTypes.objectOf(PropTypes.object).isRequired,
   placeholder: PropTypes.string,
   selected: PropTypes.shape({
