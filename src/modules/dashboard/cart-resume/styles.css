@@ -1,0 +1,25 @@
+.container {
+  float: right;
+  margin-top: 17px;
+  margin-right: 24px;
+  position: relative;
+}
+
+.container:hover {
+  cursor: pointer;
+}
+
+.container i {
+  font-size: 1.5em;
+}
+
+.counter {
+  background-color: #F44336;
+  border-radius: 3px;
+  color: white;
+  font-size: .75em;
+  padding: 1px 4px;
+  position: absolute;
+  right: -5px;
+  top: -6px;
+}

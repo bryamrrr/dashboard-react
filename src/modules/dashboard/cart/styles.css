@@ -1,0 +1,9 @@
+.container {
+  background-color: white;
+  box-shadow: 0 0 10px rgba(77,77,77,.2);
+  position: absolute;
+  right: 0;
+  top: 57px;
+  width: 300px;
+  z-index: 2;
+}
