@@ -1,9 +1,101 @@
 .container {
   background-color: white;
-  box-shadow: 0 0 10px rgba(77,77,77,.2);
+  box-shadow: -1px 2px 9px -2px rgba(0,0,0,0.5);
   position: absolute;
-  right: 0;
+  bottom: 0;
+  right: -300px;
   top: 57px;
+  transition: .3s all;
   width: 300px;
   z-index: 2;
 }
+
+.container.isOpen { right: 0; }
+
+.header {
+  border-bottom: 1px solid #e7eaec;
+  padding: 25px;
+}
+
+.header span {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.header i {
+  color: #f7a80d;
+  float: right;
+}
+
+.header i:hover {
+  cursor: pointer;
+  animation-name: moveLeftRight;
+  animation-duration: .85s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+@-webkit-keyframes moveLeftRight {
+  0% { transform: translate(0); }
+  50% { transform: translate(-3px); }
+  100% { transform: translate(0); }
+}
+
+@keyframes moveLeftRight {
+  0% { transform: translate(0); }
+  50% { transform: translate(-3px); }
+  100% { transform: translate(0); }
+}
+
+
+
+.body {
+  position: absolute;
+  bottom: 157px;
+  top: 69px;
+  width: 100%;
+}
+
+.info {
+  font-weight: 300;
+  padding: 25px;
+}
+
+
+
+
+.footer {
+  bottom: 0;
+  position: absolute;
+  width: 100%;
+}
+
+.total {
+  align-items: flex-end;
+  background-color: #388c4c;
+  color: white;
+  display: flex;
+  font-weight: 300;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.text {
+  font-size: 15px;
+  font-weight: 300;
+  text-transform: uppercase;
+}
+
+.amount {
+  font-size: 32px;
+  font-weight: bold;
+  line-height: 32px;
+  margin-left: 10px;
+}
+
+.pay {
+  background-color: #f6f6f6;
+  padding: 20px;
+}
+
+.pay button { margin-top: 0; }
