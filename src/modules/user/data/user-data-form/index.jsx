@@ -2,6 +2,7 @@ import React from 'react';
 
 import FormInput from '../../../../components/form-input';
 import Combo from '../../../../components/combo';
+import FormButton from '../../../../components/form-button';
 
 import styles from './styles.css';
 
@@ -120,6 +121,9 @@ function UserDataForm() {
           options={businessareas}
         />
       </article>
+      <FormButton
+        callToAction="Actualizar mis datos"
+      />
     </div>
   );
 }

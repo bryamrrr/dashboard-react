@@ -1,0 +1,30 @@
+.coverphoto {
+  height: 150px;
+  background-size: cover;
+  background-position: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  margin: 0 24px;
+}
+
+.avatar img {
+  border: 5px solid white;
+  border-radius: 4px;
+}
+
+h2 {
+  color: #ff5a00;
+  padding: 5px 10px;
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 3px;
+  text-transform: uppercase;
+  background-color: rgba(255, 255, 255, .7);
+}

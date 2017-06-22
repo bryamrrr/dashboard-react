@@ -12,4 +12,5 @@
 .card {
   background-color: white;
   padding: 48px 24px;
+  position: relative;
 }

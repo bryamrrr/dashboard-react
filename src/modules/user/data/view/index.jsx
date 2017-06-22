@@ -1,11 +1,17 @@
 import React from 'react';
+
 import UserDataForm from '../user-data-form';
+import CoverPhoto from '../../coverphoto';
+
+import styles from './styles.css';
 
 function UserData() {
   return (
     <div>
-      <h1>Actualizar mis datos</h1>
-      <UserDataForm />
+      <CoverPhoto />
+      <div className={styles.form}>
+        <UserDataForm />
+      </div>
     </div>
   );
 }
