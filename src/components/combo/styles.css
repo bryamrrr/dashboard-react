@@ -1,18 +1,27 @@
 .container {
+  height: 40px;
+  margin-bottom: 40px;
+  margin-top: 15px;
   position: relative;
 }
 
 .selected {
-  background: linear-gradient(to bottom, #fefefe, #f2f2f2);
-  border: 1px solid #b8b8b8;
+  background: transparent;
+  border: 1px solid #e1e1e1;
   border-radius: 3px;
   box-sizing: border-box;
   color: #303030;
   font-size: 12px;
   font-weight: 300;
   position: relative;
-  padding: 8px;
+  padding: 11px;
   user-select: none;
+  height: 100%;
+}
+
+.selected span {
+  color: #cdcdcd;
+  font-size: 13px;
 }
 
 .selected:hover {
@@ -20,9 +29,11 @@
 }
 
 .selected i {
-  float: right;
-  font-size: 11px;
+  color: #f9bf4c;
   display: inline-block;
+  float: right;
+  font-size: 12px;
+  font-weight: 800;
   margin-top: 3px;
 }
 
