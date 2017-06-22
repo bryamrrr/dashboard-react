@@ -13,10 +13,10 @@ function Coverphoto(props) {
       <figure className={styles.avatar}>
         <Gravatar
           email={props.auth.user.email}
-          size={100}
+          size={130}
         />
       </figure>
-      <h2>Actualizar mis datos</h2>
+      <h2>{props.title}</h2>
     </div>
   );
 }
@@ -26,6 +26,7 @@ Coverphoto.propTypes = {
   auth: PropTypes.shape({
     user: PropTypes.object.isRequired,
   }).isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 function mapStateToProps({ context, auth }) {

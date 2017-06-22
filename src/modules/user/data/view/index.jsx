@@ -8,7 +8,7 @@ import styles from './styles.css';
 function UserData() {
   return (
     <div>
-      <CoverPhoto />
+      <CoverPhoto title="Actualizar mis datos" />
       <div className={styles.form}>
         <UserDataForm />
       </div>
