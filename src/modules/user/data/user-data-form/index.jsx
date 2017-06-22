@@ -94,6 +94,7 @@ function UserDataForm() {
       </article>
       <article>
         <Combo
+          includeIcon="linearicon-register"
           placeholder="Selecciona un tipo de documento"
           options={documentTypes}
         />
@@ -101,18 +102,20 @@ function UserDataForm() {
       <article>
         <FormInput
           name="document"
-          includeIcon="linearicon-license2"
+          includeIcon="linearicon-profile"
           placeholder="Número de documento"
         />
       </article>
       <article>
         <Combo
+          includeIcon="linearicon-users"
           placeholder="Selecciona un tipo de persona"
           options={customerTypes}
         />
       </article>
       <article>
         <Combo
+          includeIcon="linearicon-library"
           placeholder="Selecciona un Rubro"
           options={businessareas}
         />
