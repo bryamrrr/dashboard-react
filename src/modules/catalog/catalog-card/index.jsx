@@ -26,7 +26,7 @@ function CatalogCard() {
             <li>50 cuentas</li>
             <li>1 sitio web</li>
             <li>100 GB de transferencia mensual</li>
-            <li>(el pago es anual)</li>
+            <li>* Pago anual</li>
           </ul>
           <FormButton
             callToAction="Agregar al carrito"
