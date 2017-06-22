@@ -30,7 +30,7 @@
 .header i:hover {
   cursor: pointer;
   animation-name: moveLeftRight;
-  animation-duration: .85s;
+  animation-duration: .75s;
   animation-iteration-count: infinite;
   animation-timing-function: ease-in-out;
 }

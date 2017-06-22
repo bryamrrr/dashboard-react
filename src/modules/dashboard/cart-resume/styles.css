@@ -5,13 +5,9 @@
   position: relative;
 }
 
-.container:hover {
-  cursor: pointer;
-}
+.container:hover { cursor: pointer; }
 
-.container i {
-  font-size: 1.5em;
-}
+.container i { font-size: 1.5em; }
 
 .counter {
   background-color: #F44336;
@@ -22,4 +18,5 @@
   position: absolute;
   right: -5px;
   top: -6px;
+  user-select: none;
 }

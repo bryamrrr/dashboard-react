@@ -2,7 +2,7 @@ import reducer from './reducer';
 import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
-} from '../../actions';
+} from './actions';
 
 describe('Reducer - Auth', () => {
   let action;
