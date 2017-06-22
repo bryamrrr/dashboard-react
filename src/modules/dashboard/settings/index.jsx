@@ -66,7 +66,7 @@ class Settings extends Component {
               <Link to="/usuario/datos">Mis datos</Link>
             </li>
             <li>
-              <Link to="/usuario/contrasena">Cambiar contraseña</Link>
+              <Link to="/usuario/cambiar-contraseña">Cambiar contraseña</Link>
             </li>
             <li>
               <a

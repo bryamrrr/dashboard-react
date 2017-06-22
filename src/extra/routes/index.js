@@ -80,7 +80,7 @@ export default [
       },
       {
         title: 'Cambiar contraseña',
-        url: '/usuario/contrasena',
+        url: '/usuario/cambio-contraseña',
         state: {
           module: 'Usuario',
           view: 'Cambiar contraseña',
