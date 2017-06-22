@@ -15,7 +15,7 @@
 .icon {
   color: #f7a80d;
   display: block;
-  font-size: 1.2em;
+  font-size: 18px;
   line-height: 40px;
   text-align: center;
   width: 40px;
@@ -46,7 +46,7 @@
 }
 
 .input:focus ~ .label, .container.hasContent .label {
-  color: #dbdbdb;
+  color: #d8d8d8;
   font-weight: 500;
   left: 0;
   font-size: 12px;
@@ -54,7 +54,7 @@
 }
 
 .label {
-  color: #ccc;
+  color: #d8d8d8;
   font-size: 14px;
   font-weight: 300;
   line-height: 40px;

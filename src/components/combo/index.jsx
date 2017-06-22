@@ -45,14 +45,21 @@ class Combo extends Component {
 
   render() {
     const { options, selected } = this.state;
+    const { includeIcon } = this.props;
 
     const text = (selected.name)
       ? selected.name
-      : this.props.placeholder;
+      : '';
 
-    const className = (this.state.open)
+    let className = (this.state.open)
       ? `${styles.container} ${styles.isOpen}`
       : styles.container;
+
+    className += (includeIcon !== '') ? ` ${styles.icon}` : '';
+
+    const classLabel = (text !== '')
+      ? `${styles.label} ${styles.isSelected}`
+      : styles.label;
 
     return (
       <div
@@ -63,8 +70,14 @@ class Combo extends Component {
         aria-hidden
       >
         <div className={styles.selected}>
-          <span>{text}</span>
-          <i className="linearicon-chevron-down" />
+          {
+            includeIcon !== '' && <i className={`${styles.comboIcon} ${includeIcon}`} />
+          }
+          <span className={classLabel}>{this.props.placeholder}</span>
+          {
+            text !== '' && <span>{text}</span>
+          }
+          <i className={`linearicon-chevron-down ${styles.arrow}`} />
         </div>
         <ul
           className={styles.list}
@@ -87,6 +100,7 @@ class Combo extends Component {
 
 Combo.propTypes = {
   changeSelected: PropTypes.func.isRequired,
+  includeIcon: PropTypes.string,
   options: PropTypes.objectOf(PropTypes.object).isRequired,
   placeholder: PropTypes.string,
   selected: PropTypes.shape({
@@ -96,6 +110,7 @@ Combo.propTypes = {
 };
 
 Combo.defaultProps = {
+  includeIcon: '',
   placeholder: 'Selecciona una opción',
   selected: {},
 };

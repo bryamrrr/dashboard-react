@@ -80,6 +80,7 @@ function UserDataForm() {
       </article>
       <article>
         <Combo
+          includeIcon="linearicon-earth"
           placeholder="Selecciona un país"
           options={countries}
         />
