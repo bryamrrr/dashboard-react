@@ -32,31 +32,26 @@ class TextInput extends Component {
         {
           includeIcon !== '' && <i className={`${styles.icon} ${includeIcon}`} />
         }
-        <div className={styles.inputContainer}>
-          <input
-            {...input}
-            className={styles.input}
-            id={this.props.name}
-            value={this.state.value}
-            onChange={(event) => {
-              if (this.props.field !== {}) input.onChange(event);
-              this.onInputChange(event.target.value);
-            }}
-            type={this.props.type}
-          />
-          <div
-            className={styles.bar}
-          />
-          <label
-            htmlFor={this.props.name}
-            className={styles.label}
-          >
-            {this.props.placeholder}
-          </label>
-          {meta.touched && (
-            <span className={styles.errorText}>{meta.error}</span>
-          )}
-        </div>
+        <input
+          {...input}
+          className={styles.input}
+          id={this.props.name}
+          value={this.state.value}
+          onChange={(event) => {
+            if (this.props.field !== {}) input.onChange(event);
+            this.onInputChange(event.target.value);
+          }}
+          type={this.props.type}
+        />
+        <label
+          htmlFor={this.props.name}
+          className={styles.label}
+        >
+          {this.props.placeholder}
+        </label>
+        {meta.touched && (
+          <span className={styles.errorText}>{meta.error}</span>
+        )}
       </div>
     );
   }

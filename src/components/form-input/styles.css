@@ -1,29 +1,25 @@
 .container {
   align-items: flex-end;
   display: flex;
-  margin-top: 15px;
-  margin-bottom: 40px;
+  margin-top: 20px;
+  margin-bottom: 30px;
   text-align: left;
+  position: relative;
+  width: 100%
 }
 
-.container.hasIcon .inputContainer {
-  flex-basis: calc(100% - 30px);
-  margin-left: 0;
-}
-
-.container.hasError .bar {
-  background-color: red;
-  height: 1px;
-  width: 100%;
+.container.hasError input {
+  border-color: red;
 }
 
 .icon {
   color: #f7a80d;
   display: block;
   font-size: 1.2em;
-  line-height: 37px;
+  line-height: 40px;
   text-align: center;
-  width: 30px;
+  width: 40px;
+  position: absolute;
 }
 
 .inputContainer {
@@ -32,54 +28,49 @@
 }
 
 .input {
-  border: none; /* Remove all borders before add border-bottom */
-  border-bottom: 1px solid #e1e1e1;
+  border: 1px solid #e1e1e1;
+  border-radius: 3px;
   color: #555;
   font-size: 14px;
   font-weight: 300;
+  height: 40px;
   outline: 0;
   padding: 10px 0;
+  padding-left: 40px;
   width: 100%;
+  transition: border .2s;
 }
 
-.input:focus ~ .bar {
-  width: 100%;
+.input:focus {
+  border-color: #f7a80d;
 }
 
 .input:focus ~ .label, .container.hasContent .label {
-  bottom: 33px;
-  color: #ccc;
-  left: -7px;
-  transform: scale(.86);
-}
-
-.bar {
-  background-color: #f7a80d;
-  bottom: 0;
-  height: 2px;
-  position: absolute;
-  transition: width .2s;
-  width: 0;
+  color: #dbdbdb;
+  font-weight: 500;
+  left: 0;
+  font-size: 12px;
+  transform: translate3d(2px,-31px,0);
 }
 
 .label {
-  bottom: 9px;
-  color: #ddd;
+  color: #ccc;
   font-size: 14px;
   font-weight: 300;
-  left: 0;
+  line-height: 40px;
   pointer-events: none;
   position: absolute;
-  transition: all .2s;
+  transition: transform cubic-bezier(.25,.8,.25,1) .25s;
+  transform: translate3d(40px,0,0);
 }
 
 .errorText {
   color: red;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 300;
-  left: 0;
+  left: 2;
   position: absolute;
-  top: 40px;
+  top: 42px;
 }
 
 /* COLORS
