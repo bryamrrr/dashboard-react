@@ -7,14 +7,13 @@
 
 .selected {
   background: transparent;
-  border: 1px solid #e1e1e1;
+  border: 1px solid #eef0f3;
   border-radius: 3px;
   box-sizing: border-box;
-  color: #303030;
+  color: #4d6171;
   font-size: 12px;
   font-weight: 300;
   overflow: hidden;
-  position: relative;
   padding: 11px;
   user-select: none;
   height: 100%;

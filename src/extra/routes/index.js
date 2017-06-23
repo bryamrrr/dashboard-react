@@ -88,6 +88,15 @@ export default [
         },
       },
       {
+        title: 'Contactos',
+        url: '/usuario/contactos',
+        state: {
+          module: 'Usuario',
+          view: 'Contactos',
+          method: '',
+        },
+      },
+      {
         title: 'Mis pagos',
         url: '/usuario/pagos',
         state: {

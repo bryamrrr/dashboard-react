@@ -1,0 +1,8 @@
+===========================
+        COLORS LIST
+===========================
+
+
+- Text color: #4d6171
+- Orange primary: #ff5a00
+- Yellow primary: #f39c12
