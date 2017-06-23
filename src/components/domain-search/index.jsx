@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import httpRequest from '../../extra/http-request';
-import Combo from '../combo';
+import ComboSearch from '../combo-search';
 
 import styles from './styles.css';
 
@@ -36,7 +36,6 @@ class DomainSearch extends Component {
     const url = 'http://staging-backoffice.rcp.pe:8100/dashboard/api/v1/domains/search';
     const { data: { results } } = await httpRequest('GET', url);
 
-    console.log(results);
     this.props.getDomains(results);
   }
 
@@ -44,33 +43,34 @@ class DomainSearch extends Component {
     const options = {
       1: {
         id: 1,
-        name: 'pe',
+        name: '.com.pe',
       },
       2: {
         id: 2,
-        name: 'com',
+        name: '.org.pe',
       },
       3: {
         id: 3,
-        name: 'net',
+        name: '.net.pe',
       },
     };
 
     return (
       <div className={styles.container}>
-        <input
-          type="text"
-          placeholder="Busca tu dominio"
-          value={this.state.name}
-          onChange={event => this.onInputChange(event.target.value)}
-        />
-        <Combo
+        <div className={styles.searchBar}>
+          <i className="linearicon-magnifier" />
+          <input
+            type="text"
+            placeholder="Busca tu dominio"
+            value={this.state.name}
+            onChange={event => this.onInputChange(event.target.value)}
+          />
+        </div>
+        <ComboSearch
           options={options}
           changeSelected={this.changeSelected}
         />
-        <button
-          onClick={this.search}
-        >
+        <button onClick={this.search} >
           Buscar
         </button>
       </div>
