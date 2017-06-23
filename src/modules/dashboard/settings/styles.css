@@ -42,7 +42,7 @@
   top: -100%;
   transform: scale(0);
   transition: all .2s;
-  width: 200px;
+  width: 220px;
 }
 
 .optionsContainer.isOpen {
@@ -77,4 +77,20 @@
 .logoutIcon {
   float: right;
   font-size: 18px;
+}
+
+@media screen and (max-width: 768px) {
+  .title {
+    display: none;
+  }
+
+  .image {
+    margin-right: 8px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    padding-left: 12px;
+  }
 }

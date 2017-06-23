@@ -53,6 +53,46 @@ class DomainSearch extends Component {
         id: '3',
         name: '.net.pe',
       },
+      4: {
+        id: '4',
+        name: '.net.pe',
+      },
+      5: {
+        id: '5',
+        name: '.nom.pe',
+      },
+      6: {
+        id: '6',
+        name: '.pe',
+      },
+      7: {
+        id: '7',
+        name: '.com',
+      },
+      8: {
+        id: '8',
+        name: '.net',
+      },
+      9: {
+        id: '9',
+        name: '.org',
+      },
+      10: {
+        id: '10',
+        name: '.biz',
+      },
+      11: {
+        id: '11',
+        name: '.me',
+      },
+      12: {
+        id: '12',
+        name: '.tel',
+      },
+      13: {
+        id: '13',
+        name: '.in',
+      },
     };
 
     return (

@@ -20,3 +20,9 @@
   top: -6px;
   user-select: none;
 }
+
+@media screen and (max-width: 480px) {
+  .container {
+    margin-right: 12px;
+  }
+}

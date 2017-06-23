@@ -14,18 +14,27 @@
 
 .icon {
   cursor: pointer;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 57px;
   margin: 0 24px;
+  margin-left: 0;
+  display: inline-block;
+  vertical-align: top;
 }
 
 .logo {
   display: inline-block;
-  width: 200px;
+  width: 220px;
 }
 
 .logo img {
   display: block;
-  margin: 0 auto;
+  margin: 15px auto;
   width: 100px;
+}
+
+@media screen and (max-width: 480px) {
+  .logo {
+    width: 150px;
+  }
 }

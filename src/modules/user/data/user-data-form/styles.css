@@ -12,10 +12,10 @@
   margin-right: 0;
 }
 
-@media and screen (max-width: 480px) {
+@media screen and (max-width: 768px) {
   .container article {
+    flex-basis: 100%;
     width: 100%;
     margin-right: 0;
-    flex: 1;
   }
 }

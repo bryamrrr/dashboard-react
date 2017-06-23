@@ -24,11 +24,10 @@
 }
 
 .selected .label {
-  /*color: #d8d8d8;*/
   font-size: 14px;
   font-weight: 300;
   left: 10px;
-  line-height: 30px;
+  line-height: 26px;
   pointer-events: none;
   top: 0;
 }
@@ -59,6 +58,8 @@
 
 .isOpen .list {
   display: block;
+  max-height: 130px;
+  overflow-y: auto;
 }
 
 .isOpen .selected .arrow {
@@ -84,12 +85,31 @@
 
 .list li {
   color: #303030;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 300;
-  padding: 8px;
+  padding: 10px;
 }
 
 .list li:hover {
   background-color: #f5fafd;
   cursor: pointer;
+}
+
+@media screen and (max-width: 480px) {
+  .selected {
+    padding: 11px 5px;
+  }
+
+  .selected .label.isSelected {
+    font-size: 13px;
+    line-height: 25px;
+  }
+
+  .selected .arrow {
+    line-height: 25px;
+  }
+
+  .selected .arrow {
+    font-size: 9px;
+  }
 }

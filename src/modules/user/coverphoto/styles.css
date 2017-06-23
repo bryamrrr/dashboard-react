@@ -36,3 +36,34 @@
   text-transform: uppercase;
   width: 100%;
 }
+
+@media screen and (max-width: 768px) {
+  .coverphoto {
+    height: 120px;
+  }
+
+  .avatar img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .title {
+    padding-left: 150px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .coverphoto {
+    height: 100px;
+  }
+
+  .avatar img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .title {
+    padding-left: 120px;
+    font-size: 16px;
+  }
+}

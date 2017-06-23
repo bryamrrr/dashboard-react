@@ -18,7 +18,7 @@ function Header(props) {
           alt=""
         />
       </div>
-      <i className={`${styles.icon} linearicon-list`} />
+      <i className={`${styles.icon} linearicon-options`} />
       <BreadCrumb />
       <Settings />
       <CartResume />
