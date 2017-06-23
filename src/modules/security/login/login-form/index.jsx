@@ -50,9 +50,6 @@ class LoginForm extends Component {
   async onSubmit(values) {
     this.setState({ loading: true });
     const data = await this.props.loginUser(values);
-
-    console.log('Éxito!', data);
-    // this.setState({ loading: false });
   }
 
   render() {

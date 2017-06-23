@@ -6,6 +6,7 @@
   margin-bottom: 40px;
   margin: 0 auto;
   max-width: 100%;
+  position: relative;
   width: 800px;
 }
 
@@ -54,6 +55,11 @@
 
 .button:hover {
   background-color: #ff792f;
+}
+
+.button.isLoading {
+  background-color: rgba(0,0,0,0.26);
+  cursor: default;
 }
 
 @media screen and (max-width: 480px) {

@@ -1,5 +1,6 @@
 .container {
-  margin: 15px 0;
+  border-radius: 3px;
+  margin: 25px 0;
   padding: 20px;
 }
 
@@ -17,10 +18,20 @@
 .container.warning i { color: #9e6a05; }
 
 .container.success .text,
-.container.success i { color: #388C4C; }
+.container.success i,
+.link { color: #388C4C; }
 
 .text {
   display: inline-block;
   font-weight: 300;
-  margin: 0 15px;
+  margin: 0;
+  margin-left: 15px;
 }
+
+.link {
+  cursor: pointer;
+  font-size: 15px;
+  margin-left: 5px;
+}
+
+.link:hover { text-decoration: underline; }
