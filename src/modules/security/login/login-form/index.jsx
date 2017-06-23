@@ -7,11 +7,11 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 
-import FormInput from '../../../components/form-input';
-import FormButton from '../../../components/form-button';
-import Anchor from '../../../components/anchor';
+import FormInput from '../../../../components/form-input';
+import FormButton from '../../../../components/form-button';
+import Anchor from '../../../../components/anchor';
 
-import { loginUser } from '../../../reducers/auth/actions';
+import { loginUser } from '../../../../reducers/auth/actions';
 
 import styles from './styles.css';
 

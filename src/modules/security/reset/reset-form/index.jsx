@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
 
-import FormInput from '../../../components/form-input';
-import FormButton from '../../../components/form-button';
-import BackLogin from '../../../components/back-login';
+import FormInput from '../../../../components/form-input';
+import FormButton from '../../../../components/form-button';
+import BackLogin from '../../../../components/back-login';
 
-import regex from '../../../regex';
+import regex from '../../../../regex';
 
 import styles from './styles.css';
 

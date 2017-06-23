@@ -4,10 +4,11 @@ import { Switch } from 'react-router-dom';
 import PublicRoute from './extra/public-route';
 import PrivateRoute from './extra/private-route';
 
-import Login from './modules/login/view';
-import Signup from './modules/signup/view';
-import Reset from './modules/reset/view';
-import Retrieve from './modules/retrieve/view';
+import Login from './modules/security/login/view';
+import Signup from './modules/security/signup/view';
+import Reset from './modules/security/reset/view';
+import Retrieve from './modules/security/retrieve/view';
+
 import Home from './modules/home/view';
 
 import DomainsCatalog from './modules/catalog/domains/view';

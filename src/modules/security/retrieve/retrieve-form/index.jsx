@@ -1,34 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import { Link } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
 
-import FormInput from '../../../components/form-input';
-import FormButton from '../../../components/form-button';
+import FormInput from '../../../../components/form-input';
+import FormButton from '../../../../components/form-button';
+import BackLogin from '../../../../components/back-login';
 
-import regex from '../../../regex';
+import regex from '../../../../regex';
 
-function renderUsername(field) {
-  return (
-    <FormInput
-      field={field}
-      name="username"
-      placeholder="Usuario"
-      includeIcon="linearicon-user"
-    />
-  );
-}
-
-function renderEmail(field) {
-  return (
-    <FormInput
-      field={field}
-      name="email"
-      placeholder="Correo electrónico"
-      includeIcon="linearicon-envelope"
-    />
-  );
-}
+import styles from './styles.css';
 
 function renderPassword(field) {
   return (
@@ -46,7 +28,7 @@ function renderRepeatPassword(field) {
   return (
     <FormInput
       field={field}
-      name="verifyPassword"
+      name="repeatPassword"
       type="password"
       placeholder="Repetir contraseña"
       includeIcon="linearicon-lock"
@@ -54,7 +36,7 @@ function renderRepeatPassword(field) {
   );
 }
 
-class SignupForm extends Component {
+class ResetForm extends Component {
   constructor(props) {
     super(props);
 
@@ -64,7 +46,7 @@ class SignupForm extends Component {
   }
 
   onSubmit(values) {
-    console.log(values);
+    console.log('values', values);
 
     this.setState({ loading: true });
     setTimeout(() => {
@@ -74,15 +56,10 @@ class SignupForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
-        <Field
-          name="username"
-          component={renderUsername}
-        />
-        <Field
-          name="email"
-          component={renderEmail}
-        />
+      <form
+        onSubmit={this.props.handleSubmit(this.onSubmit)}
+        className={styles.form}
+      >
         <Field
           name="password"
           component={renderPassword}
@@ -92,10 +69,13 @@ class SignupForm extends Component {
           component={renderRepeatPassword}
         />
         <FormButton
-          callToAction="Registrar"
+          callToAction="Enviar"
           loading={this.state.loading}
           type="submit"
         />
+        <Link to="/login">
+          <BackLogin />
+        </Link>
       </form>
     );
   }
@@ -104,38 +84,26 @@ class SignupForm extends Component {
 function validate(values) {
   const errors = {};
 
-  if (!values.username) errors.username = 'Ingresa un nombre de usuario';
-
-  if (!values.email) {
-    errors.email = 'Ingresa tu correo';
-  } else if (!regex.validate.email.test(values.email)) {
-    errors.email = regex.message.email;
-  }
-
   if (!values.password) {
-    errors.password = 'Ingresa una contraseña';
+    errors.password = 'Ingresa una nueva contraseña';
   } else if (!regex.validate.password.test(values.password)) {
     errors.password = regex.message.password;
   }
 
   if (!values.repeatPassword) {
-    errors.repeatPassword = 'Ingresa una contraseña';
+    errors.repeatPassword = 'Ingresa la nueva contraseña una vez más';
   } else if (values.repeatPassword !== values.password) {
     errors.repeatPassword = 'Las contraseñas no coinciden';
   }
 
-  console.log(errors);
-
-  // If errors is empty, the form is fine to submit
-  // If errors has any properties, redux form assumes form is invalid
   return errors;
 }
 
-SignupForm.propTypes = {
+ResetForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
 };
 
 export default reduxForm({
   validate,
-  form: 'UserSignup',
-})(SignupForm);
+  form: 'UserReset',
+})(ResetForm);

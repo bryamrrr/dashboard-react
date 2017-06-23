@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import Card from '../../../components/card';
+import Card from '../../../../components/card';
 import LoginForm from '../login-form';
 
 import styles from './styles.css';

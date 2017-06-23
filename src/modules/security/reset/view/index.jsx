@@ -1,7 +1,7 @@
 import React from 'react';
 
 import ResetForm from '../reset-form';
-import Card from '../../../components/card';
+import Card from '../../../../components/card';
 
 import styles from './styles.css';
 

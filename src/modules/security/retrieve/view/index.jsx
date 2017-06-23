@@ -1,7 +1,7 @@
 import React from 'react';
 
 import RetrieveForm from '../retrieve-form';
-import Card from '../../../components/card';
+import Card from '../../../../components/card';
 
 import styles from './styles.css';
 
