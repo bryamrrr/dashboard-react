@@ -1,24 +1,22 @@
 .container {
-  height: 40px;
-  margin-bottom: 30px;
-  margin-top: 20px;
+  flex: 1;
+  height: 50px;
   position: relative;
-  min-width: 150px;
 }
 
 .selected {
   background: transparent;
   border: 1px solid #e1e1e1;
-  border-radius: 3px;
+  border-left: 0;
+  border-right: 0;
   box-sizing: border-box;
   color: #303030;
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 300;
-  position: relative;
-  padding: 11px;
-  user-select: none;
   height: 100%;
-  transition: border .2s;
+  padding: 11px;
+  position: relative;
+  user-select: none;
 }
 
 .icon .selected {
@@ -26,27 +24,19 @@
 }
 
 .selected .label {
-  color: #d8d8d8;
+  /*color: #d8d8d8;*/
   font-size: 14px;
   font-weight: 300;
-  line-height: 38px;
-  top: 0;
   left: 10px;
+  line-height: 30px;
   pointer-events: none;
-  position: absolute;
-  transition: transform cubic-bezier(.25,.8,.25,1) .25s;
-}
-
-.icon .selected .label {
-  transform: translate3d(30px, 0, 0);
+  top: 0;
 }
 
 .selected .label.isSelected {
-  color: #d8d8d8;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 300;
   left: 0;
-  font-size: 12px;
-  transform: translate3d(2px,-31px,0);
 }
 
 .selected span {
@@ -59,34 +49,16 @@
 }
 
 .selected .arrow {
-  color: #f9bf4c;
+  color: #a8b2b8;
   display: inline-block;
   float: right;
   font-size: 12px;
   font-weight: 800;
-  margin-top: 3px;
-}
-
-.comboIcon {
-  color: #f7a80d;
-  font-size: 18px;
-  left: 0;
-  line-height: 40px;
-  position: absolute;
-  text-align: center;
-  top: 0;
-  width: 40px;
+  line-height: 30px;
 }
 
 .isOpen .list {
   display: block;
-}
-
-.isOpen .selected {
-  border-bottom: none;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  border-color: #f7a80d;
 }
 
 .isOpen .selected .arrow {
@@ -97,8 +69,7 @@
   background-color: white;
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
-  border: 1px solid #f7a80d;
-  border-top-color: #ececec;
+  border: 1px solid #ececec;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
   display: none;

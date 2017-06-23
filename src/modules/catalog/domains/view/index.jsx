@@ -6,6 +6,8 @@ import DomainSearch from '../../../../components/domain-search';
 import Info from '../../../../components/info';
 import DomainsTable from '../domains-table';
 
+import styles from './styles.css';
+
 class DomainsCatalog extends Component {
   constructor(props) {
     super(props);
@@ -48,6 +50,7 @@ class DomainsCatalog extends Component {
 
     return (
       <div>
+        <h2 className={styles.title}>Encuentra aquí el dominio que buscas</h2>
         <DomainSearch
           getDomains={this.getDomains}
         />

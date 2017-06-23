@@ -42,15 +42,15 @@ class DomainSearch extends Component {
   render() {
     const options = {
       1: {
-        id: 1,
+        id: '1',
         name: '.com.pe',
       },
       2: {
-        id: 2,
+        id: '2',
         name: '.org.pe',
       },
       3: {
-        id: 3,
+        id: '3',
         name: '.net.pe',
       },
     };
@@ -58,19 +58,24 @@ class DomainSearch extends Component {
     return (
       <div className={styles.container}>
         <div className={styles.searchBar}>
-          <i className="linearicon-magnifier" />
+          <i className={`linearicon-magnifier ${styles.searchIcon}`} />
           <input
             type="text"
             placeholder="Busca tu dominio"
             value={this.state.name}
             onChange={event => this.onInputChange(event.target.value)}
+            className={styles.input}
           />
         </div>
         <ComboSearch
           options={options}
           changeSelected={this.changeSelected}
+          selected={options['1']}
         />
-        <button onClick={this.search} >
+        <button
+          onClick={this.search}
+          className={styles.button}
+        >
           Buscar
         </button>
       </div>
