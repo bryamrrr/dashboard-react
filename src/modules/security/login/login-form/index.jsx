@@ -47,9 +47,9 @@ class LoginForm extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  async onSubmit(values) {
+  onSubmit(values) {
     this.setState({ loading: true });
-    const data = await this.props.loginUser(values);
+    this.props.loginUser(values);
   }
 
   render() {

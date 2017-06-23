@@ -1,8 +1,10 @@
 import {
   TOGGLE_CART,
   CLOSE_CART,
+  ADD_PRODUCT,
   toggleCart,
   closeCart,
+  addProduct,
 } from './actions';
 
 describe('Cart - Actions', () => {
@@ -27,6 +29,18 @@ describe('Cart - Actions', () => {
     test('has not payload', () => {
       const action = closeCart();
       expect(action.payload).toBeUndefined();
+    });
+  });
+
+  describe('ADD_PRODUCT', () => {
+    test('has the correct type', () => {
+      const action = addProduct();
+      expect(action.type).toEqual(ADD_PRODUCT);
+    });
+
+    test('has the correct payload', () => {
+      const action = addProduct({ id: '1', name: 'dominio.pe' });
+      expect(action.payload).toEqual({ id: '1', name: 'dominio.pe' });
     });
   });
 });

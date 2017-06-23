@@ -6,6 +6,8 @@ import DomainSearch from '../../../../components/domain-search';
 import Info from '../../../../components/info';
 import DomainsTable from '../domains-table';
 
+import { addProduct } from '../../../../reducers/cart/actions';
+
 import styles from './styles.css';
 
 class DomainsCatalog extends Component {
@@ -27,10 +29,9 @@ class DomainsCatalog extends Component {
   addToCart(item) {
     const domain = item || this.state.domains[0];
 
-    // TODO: Send domain to Redux Cart
-    console.log(domain);
+    addProduct(domain);
 
-    // TODO: Send to order details view
+    window.location.href = '/detalle-compra'; // TODO: state reducer has to do this
   }
 
   render() {
@@ -75,4 +76,4 @@ function mapStateToProps({ catalog }) {
   return { zones: catalog.zones };
 }
 
-export default connect(mapStateToProps)(DomainsCatalog);
+export default connect(mapStateToProps, { addProduct })(DomainsCatalog);

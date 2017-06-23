@@ -15,6 +15,8 @@ import DomainsCatalog from './modules/catalog/domains/view';
 import HostingCatalog from './modules/catalog/hosting/view';
 import MailsCatalog from './modules/catalog/mails/view';
 
+import CartDetails from './modules/sales/cart-details/view';
+
 import DomainsService from './modules/service/domains/view';
 
 import UserData from './modules/user/data/view';
@@ -34,6 +36,8 @@ export default function () {
         <PrivateRoute path="/catalogo/dominios" exact><DomainsCatalog /></PrivateRoute>
         <PrivateRoute path="/catalogo/hosting" exact><HostingCatalog /></PrivateRoute>
         <PrivateRoute path="/catalogo/correo" exact><MailsCatalog /></PrivateRoute>
+
+        <PrivateRoute path="/detalle-compra" exact><CartDetails /></PrivateRoute>
 
         <PrivateRoute path="/servicios/dominios" exact><DomainsService /></PrivateRoute>
 
