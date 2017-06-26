@@ -14,7 +14,7 @@ function CartResume(props) {
       onClick={() => props.toggleCart()}
       aria-hidden
     >
-      <i className="linearicon-cart" />
+      <div className={styles.cart} style={{ backgroundImage: `url(${props.context}/images/shopping-cart.png)` }} />
       <div className={styles.counter}>
         0
       </div>
@@ -24,6 +24,11 @@ function CartResume(props) {
 
 CartResume.propTypes = {
   toggleCart: PropTypes.func.isRequired,
+  context: PropTypes.string.isRequired,
 };
 
-export default connect(null, { toggleCart })(CartResume);
+function mapStateToProps({ context }) {
+  return { context };
+}
+
+export default connect(mapStateToProps, { toggleCart })(CartResume);
