@@ -16,7 +16,9 @@ if (!isNode) {
   token = 'servertoken';
 }
 
-function reducer(state = { token, user }, action) {
+export const initialState = { token, user };
+
+function reducer(state = initialState, action) {
   switch (action.type) {
     case LOGIN_REQUEST:
       return Object.assign({}, state, {

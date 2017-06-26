@@ -97,8 +97,8 @@ DomainSearch.propTypes = {
   getDomains: PropTypes.func.isRequired,
 };
 
-function mapStateToProps({ catalog }) {
-  return { zones: catalog.zones };
+function mapStateToProps({ domains }) {
+  return { zones: domains.zones };
 }
 
 export default connect(mapStateToProps)(DomainSearch);

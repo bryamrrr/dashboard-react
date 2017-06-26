@@ -1,3 +1,5 @@
+import fetch from 'isomorphic-fetch';
+
 export default async (method, url, data = {}) => {
   const token = (typeof localStorage !== 'undefined')
     ? localStorage.getItem('token')

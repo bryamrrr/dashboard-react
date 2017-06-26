@@ -1,4 +1,4 @@
-import reducer from './reducer';
+import reducer, { initialState } from './reducer';
 import {
   TOGGLE_CART,
   CLOSE_CART,
@@ -6,31 +6,32 @@ import {
 } from './actions';
 
 describe('Cart - Reducer', () => {
-  let action;
+  describe('Initial state', () => {
+    test('returns initial state by default', () => {
+      const action = { type: '' };
+      expect(reducer(undefined, action)).toEqual(initialState);
+    })
+  });
 
   describe('TOOGLE_CART', () => {
-    beforeEach(() => {
-      action = { type: TOGGLE_CART };
-    });
-
     test('changes the isOpen property correctly', () => {
+      const action = { type: TOGGLE_CART };
       expect(reducer(undefined, action).isOpen).toBeTruthy();
       expect(reducer({ isOpen: true }, action).isOpen).toBeFalsy();
     })
   });
 
   describe('CLOSE_CART', () => {
-    beforeEach(() => {
-      action = { type: CLOSE_CART };
-    });
-
     test('changes the isOpen property to false', () => {
+      const action = { type: CLOSE_CART };
       expect(reducer(undefined, action).isOpen).toBeFalsy();
       expect(reducer({ isOpen: true }, action).isOpen).toBeFalsy();
     })
   });
 
   describe('ADD_PRODUCT', () => {
+    let action;
+
     beforeEach(() => {
       action = {
         type: ADD_PRODUCT,

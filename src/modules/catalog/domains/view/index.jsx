@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 
@@ -7,6 +8,7 @@ import Info from '../../../../components/info';
 import DomainsTable from '../domains-table';
 
 import { addProduct } from '../../../../reducers/cart/actions';
+import { fetchPrices } from '../../../../reducers/domains/actions';
 
 import styles from './styles.css';
 
@@ -22,6 +24,11 @@ class DomainsCatalog extends Component {
     this.getDomains = this.getDomains.bind(this);
   }
 
+  componentDidMount() {
+    // If store hasn't domain prices, then we make a request
+    if (!this.props.prices.renew && !this.props.prices.buy) this.props.fetchPrices();
+  }
+
   getDomains(domains) {
     this.setState({ domains });
   }
@@ -29,7 +36,7 @@ class DomainsCatalog extends Component {
   addToCart(item) {
     const domain = item || this.state.domains[0];
 
-    addProduct(domain);
+    this.props.addProduct(domain);
 
     window.location.href = '/detalle-compra'; // TODO: state reducer has to do this
   }
@@ -64,7 +71,8 @@ class DomainsCatalog extends Component {
         )}
         {(domains && domains.length > 1 &&
           <DomainsTable
-            domains={{}}
+            domains={domains}
+            prices={this.props.prices}
           />
         )}
       </div>
@@ -72,8 +80,20 @@ class DomainsCatalog extends Component {
   }
 }
 
-function mapStateToProps({ catalog }) {
-  return { zones: catalog.zones };
+DomainsCatalog.propTypes = {
+  prices: PropTypes.objectOf(PropTypes.object).isRequired,
+  addProduct: PropTypes.func.isRequired,
+  fetchPrices: PropTypes.func.isRequired,
+};
+
+function mapStateToProps({ domains: { zones, prices } }) {
+  return {
+    prices,
+    zones,
+  };
 }
 
-export default connect(mapStateToProps, { addProduct })(DomainsCatalog);
+export default connect(mapStateToProps, {
+  addProduct,
+  fetchPrices,
+})(DomainsCatalog);

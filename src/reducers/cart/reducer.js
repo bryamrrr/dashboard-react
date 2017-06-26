@@ -4,12 +4,12 @@ import {
   ADD_PRODUCT,
 } from './actions';
 
-const cart = {
+export const initialState = {
   isOpen: false,
   items: {},
 };
 
-function reducer(state = cart, { type, payload }) {
+function reducer(state = initialState, { type, payload }) {
   switch (type) {
     case TOGGLE_CART:
       return Object.assign({}, state, { isOpen: !state.isOpen });
