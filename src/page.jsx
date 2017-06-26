@@ -22,6 +22,7 @@ import DomainsService from './modules/service/domains/view';
 import UserData from './modules/user/data/view';
 import UserPassword from './modules/user/password/view';
 import UserContact from './modules/user/contact/view';
+import UserContactNew from './modules/user/contact-new/view';
 
 export default function () {
   return (
@@ -45,6 +46,7 @@ export default function () {
         <PrivateRoute path="/usuario/datos" exact><UserData /></PrivateRoute>
         <PrivateRoute path="/usuario/cambio-contraseña" exact><UserPassword /></PrivateRoute>
         <PrivateRoute path="/usuario/contactos" exact><UserContact /></PrivateRoute>
+        <PrivateRoute path="/usuario/nuevo-contacto" exact><UserContactNew /></PrivateRoute>
       </Switch>
     </main>
   );

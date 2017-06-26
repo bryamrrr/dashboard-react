@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Link } from 'react-router-dom';
+
 import UserContactTable from '../user-contact-table';
 
 import Hexagon from '../../../../components/hexagon';
@@ -23,10 +25,12 @@ function UserContact() {
           <TableSearch />
         </div>
         <div className={styles.buttonContainer}>
-          <FormButton
-            callToAction="Nuevo contacto"
-            includeIcon="linearicon-user"
-          />
+          <Link to="/usuario/nuevo-contacto">
+            <FormButton
+              callToAction="Nuevo contacto"
+              includeIcon="linearicon-user"
+            />
+          </Link>
         </div>
       </div>
       <UserContactTable />
