@@ -9,6 +9,7 @@ import DomainsTable from '../domains-table';
 
 import { addProduct } from '../../../../reducers/cart/actions';
 import { fetchPrices } from '../../../../reducers/domains/actions';
+import { setRoute } from '../../../../reducers/routes/actions';
 
 import styles from './styles.css';
 
@@ -22,6 +23,10 @@ class DomainsCatalog extends Component {
 
     this.addToCart = this.addToCart.bind(this);
     this.getDomains = this.getDomains.bind(this);
+  }
+
+  componentWillMount() {
+    this.props.setRoute({ title: 'Catálogo' }, { title: 'Buscar dominio' });
   }
 
   componentDidMount() {
@@ -84,6 +89,7 @@ DomainsCatalog.propTypes = {
   prices: PropTypes.objectOf(PropTypes.object).isRequired,
   addProduct: PropTypes.func.isRequired,
   fetchPrices: PropTypes.func.isRequired,
+  setRoute: PropTypes.func.isRequired,
 };
 
 function mapStateToProps({ domains: { zones, prices } }) {
@@ -96,4 +102,5 @@ function mapStateToProps({ domains: { zones, prices } }) {
 export default connect(mapStateToProps, {
   addProduct,
   fetchPrices,
+  setRoute,
 })(DomainsCatalog);

@@ -37,7 +37,7 @@ export default function () {
 
         <PrivateRoute path="/catalogo/dominios" exact><DomainsCatalog /></PrivateRoute>
         <PrivateRoute path="/catalogo/hosting" exact><HostingCatalog /></PrivateRoute>
-        <PrivateRoute path="/catalogo/correo" exact><MailsCatalog /></PrivateRoute>
+        <PrivateRoute path="/catalogo/correos" exact><MailsCatalog /></PrivateRoute>
 
         <PrivateRoute path="/detalle-compra" exact><CartDetails /></PrivateRoute>
 

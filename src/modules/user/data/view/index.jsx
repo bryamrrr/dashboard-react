@@ -1,19 +1,34 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
+import { connect } from 'react-redux';
 
 import UserDataForm from '../user-data-form';
 import CoverPhoto from '../../coverphoto';
 
+import { setRoute } from '../../../../reducers/routes/actions';
+
 import styles from './styles.css';
 
-function UserData() {
-  return (
-    <div>
-      <CoverPhoto title="Actualizar mis datos" />
-      <div className={styles.form}>
-        <UserDataForm />
+class UserData extends Component {
+  componentWillMount() {
+    this.props.setRoute({ title: 'Mis datos' }, { title: 'Actualizar' });
+  }
+
+  render() {
+    return (
+      <div>
+        <CoverPhoto title="Actualizar mis datos" />
+        <div className={styles.form}>
+          <UserDataForm />
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
-export default UserData;
+UserData.propTypes = {
+  setRoute: PropTypes.func.isRequired,
+};
+
+export default connect(null, { setRoute })(UserData);

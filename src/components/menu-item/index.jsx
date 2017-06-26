@@ -9,9 +9,24 @@ class MenuItem extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { open: false };
+    this.state = {
+      open: false,
+      current: {},
+    };
 
     this.onClick = this.onClick.bind(this);
+  }
+
+  componentWillMount() {
+    const pathname = window.location.pathname;
+    const found = this.props.items.find(item => item.url === pathname);
+
+    if (found) {
+      this.setState({
+        open: true,
+        current: found,
+      });
+    }
   }
 
   onClick() {
@@ -37,14 +52,23 @@ class MenuItem extends Component {
         </div>
         <ul className={styles.items}>
           {this.props.items
-            .map(item => (
-              <li key={item.title}>
-                <Link to={item.url}>
-                  {item.title}
-                </Link>
-              </li>
-            ))
-          }
+            .map((item) => {
+              const active = (item.url === this.state.current.url)
+                ? styles.active
+                : '';
+
+              return (
+                <li
+                  key={item.title}
+                  className={active}
+                >
+                  <Link to={item.url}>
+                    {item.title}
+                  </Link>
+                </li>
+              );
+            },
+          )}
         </ul>
       </div>
     );

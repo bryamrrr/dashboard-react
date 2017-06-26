@@ -1,23 +1,37 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
+import { connect } from 'react-redux';
 
 import UserNewContactForm from '../user-new-contact-form';
-
 import Hexagon from '../../../../components/hexagon';
+
+import { setRoute } from '../../../../reducers/routes/actions';
 
 import styles from './styles.css';
 
-function UserContactNew() {
-  return (
-    <div>
-      <div className={styles.title}>
-        <Hexagon color="orange">
-          <i className="linearicon-user" />
-        </Hexagon>
-        <h2>Nuevo contacto</h2>
+class UserContactNew extends Component {
+  componentWillMount() {
+    this.props.setRoute({ title: 'Mis datos' }, { title: 'Contactos' }, { title: 'Nuevo' });
+  }
+
+  render() {
+    return (
+      <div>
+        <div className={styles.title}>
+          <Hexagon color="orange">
+            <i className="linearicon-user" />
+          </Hexagon>
+          <h2>Nuevo contacto</h2>
+        </div>
+        <UserNewContactForm />
       </div>
-      <UserNewContactForm />
-    </div>
-  );
+    );
+  }
 }
 
-export default UserContactNew;
+UserContactNew.propTypes = {
+  setRoute: PropTypes.func.isRequired,
+};
+
+export default connect(null, { setRoute })(UserContactNew);
