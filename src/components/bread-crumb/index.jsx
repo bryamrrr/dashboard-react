@@ -15,22 +15,22 @@ function BreadCrumb(props) {
             <i className="linearicon-home6" />
           </Link>
         </li>
-        {(props.state.module !== '' &&
+        {(props.routes.module.title &&
           <li className={styles.item}>
             <span>/</span>
-            {props.state.module}
+            {props.routes.module.title}
           </li>
         )}
-        {(props.state.view !== '' &&
+        {(props.routes.view.title &&
           <li className={styles.item}>
             <span>/</span>
-            {props.state.view}
+            {props.routes.view.title}
           </li>
         )}
-        {(props.state.method !== '' &&
+        {(props.routes.method.title &&
           <li className={styles.item}>
             <span>/</span>
-            {props.state.method}
+            {props.routes.method.title}
           </li>
         )}
       </ol>
@@ -38,15 +38,15 @@ function BreadCrumb(props) {
   );
 }
 
-function mapStateToProps({ state }) {
-  return { state };
+function mapStateToProps({ routes }) {
+  return { routes };
 }
 
 BreadCrumb.propTypes = {
-  state: PropTypes.shape({
-    module: PropTypes.string.isRequired,
-    view: PropTypes.string.isRequired,
-    method: PropTypes.string.isRequired,
+  routes: PropTypes.shape({
+    module: PropTypes.object.isRequired,
+    view: PropTypes.object.isRequired,
+    method: PropTypes.object.isRequired,
   }).isRequired,
 };
 

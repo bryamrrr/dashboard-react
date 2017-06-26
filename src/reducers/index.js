@@ -5,15 +5,16 @@ import auth from './auth/reducer';
 import cart from './cart/reducer';
 import domains from './domains/reducer';
 import context from './context/reducer';
-import state from './state/reducer';
+import routes from './routes/reducer';
 
 const rootReducer = combineReducers({
-  form,
   auth,
   cart,
-  domains,
   context,
-  state,
+  domains,
+  form,
+  hosting: {},
+  routes,
 });
 
 export default rootReducer;

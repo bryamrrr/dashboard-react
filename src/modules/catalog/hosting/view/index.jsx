@@ -16,7 +16,7 @@ function HostingCatalog() {
   );
 }
 
-function mapStateToProps({ catalog: { hosting } }) {
+function mapStateToProps({ hosting }) {
   return { hosting };
 }
 
