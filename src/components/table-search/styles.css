@@ -18,8 +18,7 @@
   transition: .3s border-color;
 }
 
-.input:focus { border-color: #f39c12; }
-
+.input:focus,
 .input:focus + .searchButton { border-color: #f39c12; }
 
 .searchButton {
@@ -44,7 +43,8 @@
 
 .searchButton:before {
   background-color: #eeedee;
-  border-radius: 2px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
   content: '';
   display: block;
   height: 100%;

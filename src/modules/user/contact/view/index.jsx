@@ -3,8 +3,9 @@ import React from 'react';
 import UserContactTable from '../user-contact-table';
 
 import Hexagon from '../../../../components/hexagon';
-import FormSearch from '../../../../components/form-search';
 import FormButton from '../../../../components/form-button';
+import TableSearch from '../../../../components/table-search';
+import TablePagination from '../../../../components/table-pagination';
 
 import styles from './styles.css';
 
@@ -19,7 +20,7 @@ function UserContact() {
       </div>
       <div className={styles.filterContainer}>
         <div className={styles.searchContainer}>
-          <FormSearch />
+          <TableSearch />
         </div>
         <div className={styles.buttonContainer}>
           <FormButton
@@ -29,6 +30,7 @@ function UserContact() {
         </div>
       </div>
       <UserContactTable />
+      <TablePagination />
     </div>
   );
 }

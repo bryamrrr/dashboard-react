@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './styles.css';
 
-function FormSearch() {
+function TableSearch() {
   return (
     <form name="form" className={styles.container}>
       <input type="text" className={styles.input} placeholder="Buscar" />
@@ -14,4 +14,4 @@ function FormSearch() {
 }
 
 
-export default FormSearch;
+export default TableSearch;
