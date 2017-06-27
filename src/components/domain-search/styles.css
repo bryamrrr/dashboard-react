@@ -41,7 +41,7 @@
 }
 
 .button {
-  background-color: #ff5a00;
+  background-color: #f39c12;
   border-bottom-right-radius: 23px;
   border-top-right-radius: 23px;
   border: 0;
@@ -54,7 +54,7 @@
 }
 
 .button:hover {
-  background-color: #ff792f;
+  background-color: #f3ae40;
 }
 
 .button.isLoading {

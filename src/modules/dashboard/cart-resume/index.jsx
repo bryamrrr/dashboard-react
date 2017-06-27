@@ -37,7 +37,7 @@ class CartResume extends Component {
       >
         <div className={className} style={{ backgroundImage: `url(${this.props.context}/images/shopping-cart.png)` }} />
         <div className={styles.counter}>
-          { this.props.count }
+          <span>{ this.props.count }</span>
         </div>
       </div>
     );
