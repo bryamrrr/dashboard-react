@@ -40,15 +40,15 @@ class Combo extends Component {
     const selected = this.state.options[id];
 
     this.setState({ selected });
-    this.props.changeSelected(selected);
+    this.props.changeSelected(selected, this.props.trackItem);
   }
 
   render() {
     const { options, selected } = this.state;
-    const { includeIcon } = this.props;
+    const { includeIcon, config } = this.props;
 
-    const text = (selected.name)
-      ? selected.name
+    const text = (selected[config.label])
+      ? selected[config.label]
       : '';
 
     let className = (this.state.open)
@@ -86,10 +86,10 @@ class Combo extends Component {
         >
           {_.map(options, item => (
             <li
-              key={item.id}
-              data-id={item.id}
+              key={item[config.key]}
+              data-id={item[config.value]}
             >
-              {item.name}
+              {item[config.label]}
             </li>
           ))}
         </ul>
@@ -100,19 +100,34 @@ class Combo extends Component {
 
 Combo.propTypes = {
   changeSelected: PropTypes.func.isRequired,
+  config: PropTypes.shape({
+    key: PropTypes.string,
+    value: PropTypes.string,
+    label: PropTypes.string,
+  }),
   includeIcon: PropTypes.string,
-  options: PropTypes.objectOf(PropTypes.object).isRequired,
+  options: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.array,
+  ]).isRequired,
   placeholder: PropTypes.string,
   selected: PropTypes.shape({
     id: PropTypes.string,
     name: PropTypes.string,
   }),
+  trackItem: PropTypes.string,
 };
 
 Combo.defaultProps = {
+  config: {
+    key: 'id',
+    value: 'id',
+    label: 'name',
+  },
   includeIcon: '',
   placeholder: 'Selecciona una opción',
   selected: {},
+  trackItem: null,
 };
 
 export default Combo;

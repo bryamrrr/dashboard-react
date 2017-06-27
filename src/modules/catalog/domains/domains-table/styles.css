@@ -1,0 +1,8 @@
+.link {
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.link:hover { text-decoration: underline; }
+
+.disabled { color: #ccc; }

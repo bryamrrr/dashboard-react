@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import { SET_PRICES } from './actions';
 
 export const initialState = {
@@ -13,7 +15,7 @@ function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_PRICES:
       return Object.assign({}, state, {
-        prices: action.payload.prices,
+        prices: _.mapKeys(action.payload, 'zone'),
       });
     default:
       return state;

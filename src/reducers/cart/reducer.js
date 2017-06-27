@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import {
   CLOSE_CART,
   TOGGLE_CART,
@@ -19,10 +21,10 @@ function reducer(state = initialState, { type, payload }) {
     case ADD_PRODUCT:
       if (state.items[payload.productId]) return state; // TODO: Show toaster
 
-      return Object.assign({}, state, {
-        items: { [payload.productId]: payload },
-        count: state.count + 1,
-      });
+      const newState = _.extend({}, state);
+      newState.items[payload.productId] = payload;
+      newState.count = newState.count + 1;
+      return newState;
     default:
       return state;
   }

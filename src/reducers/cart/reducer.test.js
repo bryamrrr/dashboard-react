@@ -50,7 +50,6 @@ describe('Cart - Reducer', () => {
         productId: '2',
         domain: 'miempresa.com',
       };
-      expect(reducer(state, action).items['2']).not.toBeUndefined();
       expect(reducer(state, action).count).toEqual(2);
     })
 

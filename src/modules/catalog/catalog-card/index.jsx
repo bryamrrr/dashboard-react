@@ -32,7 +32,7 @@ function CatalogCard(props) {
           <FormButton
             callToAction="Agregar al carrito"
             includeIcon="linearicon-cart"
-            onClick={() => props.addToCart({ id: 1, name: 'HOSTI 100' })}
+            onClick={() => props.addToCart({ productId: '1', name: 'HOSTI 100' })}
           />
         </div>
       </div>
