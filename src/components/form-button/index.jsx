@@ -15,6 +15,7 @@ function FormButton(props) {
       className={className}
       disabled={props.loading}
       type={props.type}
+      onClick={() => props.onClick()}
     >
       { (props.includeIcon !== '') &&
         <i className={`${styles.icon} ${props.includeIcon}`} />
@@ -26,6 +27,7 @@ function FormButton(props) {
 }
 
 FormButton.propTypes = {
+  onClick: PropTypes.func,
   callToAction: PropTypes.string,
   type: PropTypes.string,
   includeIcon: PropTypes.string,
@@ -33,6 +35,7 @@ FormButton.propTypes = {
 };
 
 FormButton.defaultProps = {
+  onClick: null,
   callToAction: 'Enviar',
   type: 'button',
   includeIcon: '',

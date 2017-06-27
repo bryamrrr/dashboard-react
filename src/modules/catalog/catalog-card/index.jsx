@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Card from '../../../components/card';
 import FormButton from '../../../components/form-button';
 
 import styles from './styles.css';
 
-function CatalogCard() {
+function CatalogCard(props) {
   return (
     <Card includeBorder>
       <div className={styles.container}>
@@ -31,11 +32,16 @@ function CatalogCard() {
           <FormButton
             callToAction="Agregar al carrito"
             includeIcon="linearicon-cart"
+            onClick={() => props.addToCart({ id: 1, name: 'HOSTI 100' })}
           />
         </div>
       </div>
     </Card>
   );
 }
+
+CatalogCard.propTypes = {
+  addToCart: PropTypes.func.isRequired,
+};
 
 export default CatalogCard;

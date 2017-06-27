@@ -43,7 +43,7 @@ class DomainsCatalog extends Component {
 
     this.props.addProduct(domain);
 
-    window.location.href = '/detalle-compra'; // TODO: state reducer has to do this
+    // window.location.href = '/detalle-compra'; // TODO: state reducer has to do this
   }
 
   render() {

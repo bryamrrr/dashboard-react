@@ -7,6 +7,7 @@ import {
 export const initialState = {
   isOpen: false,
   items: {},
+  count: 0,
 };
 
 function reducer(state = initialState, { type, payload }) {
@@ -20,6 +21,7 @@ function reducer(state = initialState, { type, payload }) {
 
       return Object.assign({}, state, {
         items: { [payload.productId]: payload },
+        count: state.count + 1,
       });
     default:
       return state;

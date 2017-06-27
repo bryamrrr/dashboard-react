@@ -51,6 +51,7 @@ describe('Cart - Reducer', () => {
         domain: 'miempresa.com',
       };
       expect(reducer(state, action).items['2']).not.toBeUndefined();
+      expect(reducer(state, action).count).toEqual(2);
     })
 
     // TODO Show toaster
