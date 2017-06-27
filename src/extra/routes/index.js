@@ -6,7 +6,7 @@ export default [
       {
         title: 'Dominios',
         url: '/catalogo/dominios',
-        state: {
+        route: {
           module: 'Catálogo',
           view: 'Dominios',
           method: '',
@@ -15,7 +15,7 @@ export default [
       {
         title: 'Hosting',
         url: '/catalogo/hosting',
-        state: {
+        route: {
           module: 'Catálogo',
           view: 'Hosting',
           method: '',
@@ -24,7 +24,7 @@ export default [
       {
         title: 'Correos',
         url: '/catalogo/correos',
-        state: {
+        route: {
           module: 'Catálogo',
           view: 'Correos',
           method: '',
@@ -39,8 +39,8 @@ export default [
       {
         title: 'Dominios',
         url: '/servicios/dominios',
-        state: {
-          module: 'Servicios',
+        route: {
+          module: 'Mis servicios',
           view: 'Dominios',
           method: '',
         },
@@ -48,8 +48,8 @@ export default [
       {
         title: 'Hosting',
         url: '/servicios/hosting',
-        state: {
-          module: 'Servicios',
+        route: {
+          module: 'Mis servicios',
           view: 'Hosting',
           method: '',
         },
@@ -57,9 +57,9 @@ export default [
       {
         title: 'Correos',
         url: '/servicios/correos',
-        state: {
-          module: 'Servicios',
-          view: 'Hosting',
+        route: {
+          module: 'Mis servicios',
+          view: 'Correos',
           method: '',
         },
       },
@@ -72,8 +72,8 @@ export default [
       {
         title: 'Datos personales',
         url: '/usuario/datos',
-        state: {
-          module: 'Usuario',
+        route: {
+          module: 'Mis datos',
           view: 'Datos',
           method: '',
         },
@@ -81,8 +81,8 @@ export default [
       {
         title: 'Cambiar contraseña',
         url: '/usuario/cambio-contraseña',
-        state: {
-          module: 'Usuario',
+        route: {
+          module: 'Mis datos',
           view: 'Cambiar contraseña',
           method: '',
         },
@@ -90,8 +90,8 @@ export default [
       {
         title: 'Contactos',
         url: '/usuario/contactos',
-        state: {
-          module: 'Usuario',
+        route: {
+          module: 'Mis datos',
           view: 'Contactos',
           method: '',
         },
@@ -99,8 +99,8 @@ export default [
       {
         title: 'Mis pagos',
         url: '/usuario/pagos',
-        state: {
-          module: 'Usuario',
+        route: {
+          module: 'Mis datos',
           view: 'Mis pagos',
           method: '',
         },
@@ -108,8 +108,8 @@ export default [
       {
         title: 'Pendientes de renovación',
         url: '/usuario/pendientes-renovacion',
-        state: {
-          module: 'Usuario',
+        route: {
+          module: 'Mis datos',
           view: 'Pendientes de renovación',
           method: '',
         },

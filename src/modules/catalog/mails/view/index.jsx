@@ -11,7 +11,7 @@ import styles from './styles.css';
 
 class MailsCatalog extends Component {
   componentWillMount() {
-    this.props.setRoute({ title: 'Catálogo' }, { title: 'Planes de Correo' });
+    this.props.setRoute({ title: 'Catálogo' }, { title: 'Correos' });
   }
   render() {
     return (

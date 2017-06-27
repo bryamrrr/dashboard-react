@@ -11,7 +11,7 @@ import styles from './styles.css';
 
 class HostingCatalog extends Component {
   componentWillMount() {
-    this.props.setRoute({ title: 'Catálogo' }, { title: 'Planes de Hosting' });
+    this.props.setRoute({ title: 'Catálogo' }, { title: 'Hosting' });
   }
   render() {
     return (
