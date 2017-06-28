@@ -3,6 +3,7 @@ import {
   TOGGLE_CART,
   CLOSE_CART,
   ADD_PRODUCT,
+  SET_PACKAGES,
 } from './actions';
 
 describe('Cart - Reducer', () => {
@@ -64,5 +65,22 @@ describe('Cart - Reducer', () => {
     //   }
     //   expect(reducer(state, action).items).toHaveLength(1);
     // })
+  });
+
+  describe('setPackages', () => {
+    const action = {
+      type: SET_PACKAGES,
+      payload: {
+        productId: '1',
+        packages: [{
+          remainingProducts: [{ id: '1' }, { id: '2' }],
+        }],
+      },
+    };
+
+    test('sets packages with the correct payload', () => {
+      const newState = reducer(undefined, action);
+      expect(newState.items['1'].packages).not.toBeUndefined();
+    });
   });
 });

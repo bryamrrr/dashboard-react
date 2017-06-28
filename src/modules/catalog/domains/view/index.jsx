@@ -14,8 +14,8 @@ import { setRoute } from '../../../../reducers/routes/actions';
 import styles from './styles.css';
 
 class DomainsCatalog extends Component {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
 
     this.state = {
       domains: null,
@@ -38,12 +38,12 @@ class DomainsCatalog extends Component {
     this.setState({ domains });
   }
 
-  addToCart(item) {
-    const domain = item || this.state.domains[0];
-
+  addToCart() {
+    const domain = this.state.domains[0];
     this.props.addProduct(domain);
 
-    // window.location.href = '/detalle-compra'; // TODO: state reducer has to do this
+    const url = `/detalle-producto/${domain.productId}/paquetes`;
+    this.context.router.history.push(url);
   }
 
   render() {
@@ -90,6 +90,10 @@ DomainsCatalog.propTypes = {
   addProduct: PropTypes.func.isRequired,
   fetchPrices: PropTypes.func.isRequired,
   setRoute: PropTypes.func.isRequired,
+};
+
+DomainsCatalog.contextTypes = {
+  router: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 function mapStateToProps({ domains: { zones, prices } }) {

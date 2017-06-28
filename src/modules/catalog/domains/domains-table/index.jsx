@@ -12,8 +12,8 @@ import { addProduct } from '../../../../reducers/cart/actions';
 import styles from './styles.css';
 
 class DomainsTable extends Component {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
 
     const domainsData = _.mapKeys(this.props.domains.slice(0), 'productId'); // FIXME remove first item from this array (slice 1)
     const domains = _.map(domainsData, (domain) => {
@@ -37,6 +37,9 @@ class DomainsTable extends Component {
 
   addToCart(domain) {
     this.props.addProduct(domain);
+
+    const url = `/detalle-producto/${domain.productId}/paquetes`;
+    this.context.router.history.push(url);
   }
 
   changeSelected(period, trackItem) {
@@ -109,6 +112,10 @@ DomainsTable.propTypes = {
   addProduct: PropTypes.func.isRequired,
   domains: PropTypes.arrayOf(PropTypes.object).isRequired,
   prices: PropTypes.objectOf(PropTypes.object).isRequired,
+};
+
+DomainsTable.contextTypes = {
+  router: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 export default connect(null, { addProduct })(DomainsTable);
