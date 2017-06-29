@@ -1,4 +1,9 @@
 import {
+  fromJS,
+  Map as map,
+} from 'immutable';
+
+import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
@@ -11,33 +16,30 @@ let user = {};
 
 if (!isNode) {
   token = localStorage.getItem('token') || '';
-  user = JSON.parse(localStorage.getItem('user'));
+  if (localStorage.getItem('user')) user = map(JSON.parse(localStorage.getItem('user')));
 } else {
   token = 'servertoken';
 }
 
-export const initialState = { token, user };
+export const initialState = fromJS({ token, user });
 
 function reducer(state = initialState, action) {
   switch (action.type) {
     case LOGIN_REQUEST:
-      return Object.assign({}, state, {
-        creds: action.payload,
-      });
+      return state.setIn(['user', 'username'], action.payload.username);
     case LOGIN_SUCCESS:
-      return Object.assign({}, state, {
-        token: action.payload.access_token,
-        user: action.payload.user,
-      });
-    case LOGIN_FAILURE:
-      return Object.assign({}, state, {
-        error: 'Error en el login',
-      });
-    case LOGOUT_SUCCESS:
-      return {
-        token: '',
-        user: {},
-      };
+      return state
+        .set('user', map(action.payload.user))
+        .set('token', action.payload.access_token);
+    // case LOGIN_FAILURE:
+    //   return Object.assign({}, state, {
+    //     error: 'Error en el login',
+    //   });
+    // case LOGOUT_SUCCESS:
+    //   return {
+    //     token: '',
+    //     user: {},
+    //   };
     default:
       return state;
   }

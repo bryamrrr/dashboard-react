@@ -2,7 +2,7 @@ import configureStore from 'redux-mock-store';
 import nock from 'nock';
 import thunk from 'redux-thunk';
 
-import initialState from './reducer';
+import { initialState } from './reducer';
 import constants from '../../extra/constants';
 import packages from './packages';
 
@@ -29,7 +29,7 @@ describe('Cart - Actions', () => {
 
     test('has not payload', () => {
       const action = toggleCart();
-      expect(action.type).toBeUndefined;
+      expect(action.payload).toBeUndefined();
     });
   });
 
