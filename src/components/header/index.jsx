@@ -30,8 +30,8 @@ Header.propTypes = {
   context: PropTypes.string.isRequired,
 };
 
-function mapStateToProps({ context }) {
-  return { context };
+function mapStateToProps(state) {
+  return { context: state.get('context') };
 }
 
 export default connect(mapStateToProps)(Header);

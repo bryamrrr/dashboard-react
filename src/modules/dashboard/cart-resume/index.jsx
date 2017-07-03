@@ -50,8 +50,12 @@ CartResume.propTypes = {
   count: PropTypes.number.isRequired,
 };
 
-function mapStateToProps({ context, cart: { count } }) {
-  return { context, count };
+function mapStateToProps(state) {
+  return {
+    context: state.get('context'),
+    count: state.get('cart').count,
+    cart: state.get('cart'),
+  };
 }
 
 export default connect(mapStateToProps, { toggleCart })(CartResume);

@@ -1,13 +1,20 @@
+import {
+  Record,
+  Map as map,
+} from 'immutable';
+
 import { SET_ROUTE } from './actions';
 
-export const initialState = {
-  module: {
+const RoutesRecord = Record({
+  module: map({
     title: 'Bienvenido a Yachay',
     url: '',
-  },
-  view: {},
-  method: {},
-};
+  }),
+  view: map(),
+  method: map(),
+});
+
+export const initialState = new RoutesRecord();
 
 function reducer(state = initialState, action) {
   switch (action.type) {

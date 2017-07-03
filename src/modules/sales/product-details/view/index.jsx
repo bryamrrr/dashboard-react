@@ -17,17 +17,27 @@ class ProductDetails extends Component {
     const productId = this.context.router.route.match.params.productId;
     this.state = {
       fetchingPackages: true,
-      product: this.props.items[productId],
+      product: this.props.items.get(productId),
     };
   }
 
   async componentWillMount() {
-    this.props.setRoute({ title: 'Detalle del producto' }, { title: 'Paquetes' });
-
     if (this.state.product.packages) return this.setState({ fetchingPackages: false });
 
-    await this.props.fetchPackages(this.state.product.productId);
+    await this.props.fetchPackages(this.state.product.get('productId'));
     return this.setState({ fetchingPackages: false });
+  }
+
+  componentDidMount() {
+    setTimeout(() =>
+      this.props.setRoute({ title: 'Detalle del producto' }, { title: 'Paquetes' })
+    , 600);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const productId = this.state.product.get('productId');
+    const product = nextProps.items.get(productId);
+    if (product) this.setState({ product });
   }
 
   addToCart(packageData) {
@@ -46,10 +56,10 @@ class ProductDetails extends Component {
             ||
             (!this.state.fetchingPackages && <div>
               <h2>Paquetes encontrados</h2>
-              {this.state.product.packages.map(packageData =>
-                <section key={packageData.remainingProducts[0].id}>
+              {this.state.product.get('packages').valueSeq().map(packageData =>
+                <section key={packageData.id}>
                   {packageData.remainingProducts.map(product =>
-                    <article>
+                    <article key={product.id}>
                       <span>{JSON.stringify(product)}</span>
                     </article>,
                   )}
@@ -71,7 +81,11 @@ class ProductDetails extends Component {
 }
 
 ProductDetails.propTypes = {
-  items: PropTypes.objectOf(PropTypes.object).isRequired,
+  items: PropTypes.objectOf(PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.bool,
+    PropTypes.object,
+  ])).isRequired,
   fetchPackages: PropTypes.func.isRequired,
   setRoute: PropTypes.func.isRequired,
 };
@@ -80,8 +94,8 @@ ProductDetails.contextTypes = {
   router: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
-function mapStateToProps({ cart: { items } }) {
-  return { items };
+function mapStateToProps(state) {
+  return { items: state.get('cart').items };
 }
 
 export default connect(mapStateToProps, {

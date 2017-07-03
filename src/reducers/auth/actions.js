@@ -7,32 +7,29 @@ export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 
-function requestLogin(creds) {
+export function requestLogin(creds) {
   return {
     type: LOGIN_REQUEST,
     payload: creds,
   };
 }
 
-function receiveLogin(data) {
+export function receiveLogin(data) {
   return {
     type: LOGIN_SUCCESS,
     payload: data,
   };
 }
 
-function loginError(error) {
+export function loginError(error) {
   return {
     type: LOGIN_FAILURE,
     payload: error,
   };
 }
 
-function receiveLogout() {
-  return {
-    type: LOGOUT_SUCCESS,
-    payload: {},
-  };
+export function receiveLogout() {
+  return { type: LOGOUT_SUCCESS };
 }
 
 export function loginUser(creds) {
@@ -66,12 +63,12 @@ export function loginUser(creds) {
 }
 
 export function logoutUser() {
-  return (dispatch) => {
+  return async (dispatch) => {
     try {
       dispatch(receiveLogout());
 
       const url = `${constants.urls.API_SECURITY}/logout`;
-      httpRequest('POST', url);
+      await httpRequest('POST', url);
 
       localStorage.removeItem('userData');
       localStorage.removeItem('token');

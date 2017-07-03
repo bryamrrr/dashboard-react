@@ -2,7 +2,7 @@ import configureStore from 'redux-mock-store';
 import nock from 'nock';
 import thunk from 'redux-thunk';
 
-import initialState from './reducer';
+import { initialState } from './reducer';
 import constants from '../../extra/constants';
 import prices from './prices';
 

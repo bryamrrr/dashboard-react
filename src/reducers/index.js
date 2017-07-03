@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from 'redux-immutable';
 
 import { reducer as form } from 'redux-form';
 import auth from './auth/reducer';
@@ -13,8 +13,8 @@ const rootReducer = combineReducers({
   context,
   domains,
   form,
-  hosting: {},
   routes,
+  // hosting: {},
 });
 
 export default rootReducer;

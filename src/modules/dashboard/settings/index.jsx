@@ -92,8 +92,8 @@ Settings.propTypes = {
   logoutUser: PropTypes.func.isRequired,
 };
 
-function mapStateToProps({ auth }) {
-  return { auth };
+function mapStateToProps(state) {
+  return { auth: state.get('auth') };
 }
 
 function mapDispatchToProps(dispatch) {

@@ -36,8 +36,8 @@ Home.propTypes = {
   setRoute: PropTypes.func.isRequired,
 };
 
-function mapStateToProps({ auth }) {
-  return { user: auth.user };
+function mapStateToProps(state) {
+  return { user: state.get('auth').user };
 }
 
 export default connect(mapStateToProps, { setRoute })(Home);
