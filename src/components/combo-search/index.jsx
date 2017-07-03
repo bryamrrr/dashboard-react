@@ -44,8 +44,10 @@ class ComboSearch extends Component {
   }
 
   render() {
-    const { options, selected } = this.state;
+    const { selected } = this.state;
     const { includeIcon } = this.props;
+
+    const options = _.filter(this.state.options, option => option.id !== selected.id);
 
     const text = (selected.name)
       ? selected.name

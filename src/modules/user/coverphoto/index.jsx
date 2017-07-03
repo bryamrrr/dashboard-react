@@ -8,11 +8,12 @@ import { connect } from 'react-redux';
 import styles from './styles.css';
 
 function Coverphoto(props) {
+  const user = (props.auth.user) ? props.auth.user : {};
   return (
     <div className={styles.coverphoto} style={{ backgroundImage: `url(${props.context}/images/coverphoto.jpg)` }}>
       <figure className={styles.avatar}>
         <Gravatar
-          email={props.auth.user.email}
+          email={user.email}
           size={130}
         />
       </figure>
@@ -23,14 +24,19 @@ function Coverphoto(props) {
 
 Coverphoto.propTypes = {
   context: PropTypes.string.isRequired,
-  auth: PropTypes.shape({
-    user: PropTypes.object.isRequired,
-  }).isRequired,
+  auth: PropTypes.objectOf(PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.bool,
+    PropTypes.object,
+  ])).isRequired,
   title: PropTypes.string.isRequired,
 };
 
-function mapStateToProps({ context, auth }) {
-  return { context, auth };
+function mapStateToProps(state) {
+  return {
+    context: state.get('context'),
+    auth: state.get('auth'),
+  };
 }
 
 export default connect(mapStateToProps)(Coverphoto);

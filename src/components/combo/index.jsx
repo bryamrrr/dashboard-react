@@ -44,8 +44,10 @@ class Combo extends Component {
   }
 
   render() {
-    const { options, selected } = this.state;
+    const { selected } = this.state;
     const { includeIcon, config } = this.props;
+
+    const options = _.filter(this.state.options, option => option.id !== selected.id);
 
     const text = (selected[config.label])
       ? selected[config.label]
