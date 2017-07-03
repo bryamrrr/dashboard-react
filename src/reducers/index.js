@@ -13,8 +13,8 @@ const rootReducer = combineReducers({
   context,
   domains,
   form,
-  hosting: {},
   routes,
+  // hosting: {},
 });
 
 export default rootReducer;

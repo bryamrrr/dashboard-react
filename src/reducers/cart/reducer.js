@@ -1,3 +1,8 @@
+import {
+  Record,
+  Map as map,
+} from 'immutable';
+
 import _ from 'lodash';
 
 import {
@@ -7,33 +12,38 @@ import {
   SET_PACKAGES,
 } from './actions';
 
-export const initialState = {
+const CartRecord = Record({
   isOpen: false,
-  items: {},
+  items: map(),
   count: 0,
-};
+});
 
-function reducer(state = initialState, { type, payload }) {
-  switch (type) {
+export const initialState = new CartRecord();
+
+function reducer(state = initialState, action) {
+  switch (action.type) {
     case TOGGLE_CART:
-      return Object.assign({}, state, { isOpen: !state.isOpen });
+      return state.set('isOpen', !state.isOpen);
     case CLOSE_CART:
-      return Object.assign({}, state, { isOpen: false });
+      return state.set('isOpen', false);
     case ADD_PRODUCT: {
-      if (state.items[payload.productId]) return state; // TODO: Show toaster
+      if (state.items.get(action.payload.productId)) return state; // TODO: Show toaster
 
-      const newState = Object.assign({}, state);
-      newState.items[payload.productId] = payload;
-      newState.count += 1;
+      const newState = state
+        .setIn(['items', action.payload.productId], map(action.payload))
+        .set('count', state.count + 1);
+
       return newState;
     }
-    case SET_PACKAGES: {
-      const newState = _.extend({}, state);
-      newState.items[payload.productId].packages = payload.packages;
-      return newState;
-    }
+    case SET_PACKAGES:
+      return state
+        .setIn([
+          'items',
+          action.payload.productId,
+          'packages',
+        ], map(_.mapKeys(action.payload.packages, 'id')));
     default:
-      return initialState;
+      return state;
   }
 }
 

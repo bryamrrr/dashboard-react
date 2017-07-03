@@ -1,27 +1,40 @@
 import {
-  fromJS,
+  Record,
   Map as map,
 } from 'immutable';
 
 import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
-  LOGIN_FAILURE,
-  LOGOUT_SUCCESS,
+  // LOGIN_FAILURE,
+  // LOGOUT_SUCCESS,
 } from './actions';
+
+const AuthRecord = Record({
+  token: '',
+  user: map(),
+});
+
+const UserRecord = Record({
+  username: '',
+  first_name: '',
+  last_name: '',
+  email: '',
+});
 
 const isNode = typeof localStorage === 'undefined';
 let token = '';
-let user = {};
+let user = map();
 
 if (!isNode) {
   token = localStorage.getItem('token') || '';
-  if (localStorage.getItem('user')) user = map(JSON.parse(localStorage.getItem('user')));
+
+  if (localStorage.getItem('user')) user = new UserRecord(JSON.parse(localStorage.getItem('user')));
 } else {
   token = 'servertoken';
 }
 
-export const initialState = fromJS({ token, user });
+export const initialState = new AuthRecord({ token, user });
 
 function reducer(state = initialState, action) {
   switch (action.type) {
@@ -29,7 +42,7 @@ function reducer(state = initialState, action) {
       return state.setIn(['user', 'username'], action.payload.username);
     case LOGIN_SUCCESS:
       return state
-        .set('user', map(action.payload.user))
+        .set('user', new UserRecord(action.payload.user))
         .set('token', action.payload.access_token);
     // case LOGIN_FAILURE:
     //   return Object.assign({}, state, {

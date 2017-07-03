@@ -52,8 +52,8 @@ Cart.propTypes = {
   closeCart: PropTypes.func.isRequired,
 };
 
-function mapStateToProps({ cart }) {
-  return { cartInfo: cart };
+function mapStateToProps(state) {
+  return { cartInfo: state.get('cart') };
 }
 
 export default connect(mapStateToProps, { closeCart })(Cart);

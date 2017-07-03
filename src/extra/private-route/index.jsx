@@ -50,7 +50,7 @@ PrivateRoute.defaultProps = {
 
 function mapStateToProps(state, ownProps) {
   return {
-    auth: state.auth,
+    auth: state.get('auth'),
     location: ownProps.path,
     routeProps: {
       exact: ownProps.exact,

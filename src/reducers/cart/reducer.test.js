@@ -1,3 +1,8 @@
+import {
+  Record,
+  Map as map,
+} from 'immutable';
+
 import reducer, { initialState } from './reducer';
 import {
   TOGGLE_CART,
@@ -14,20 +19,34 @@ describe('Cart - Reducer', () => {
     })
   });
 
-  describe('TOOGLE_CART', () => {
-    test('changes the isOpen property correctly', () => {
-      const action = { type: TOGGLE_CART };
-      expect(reducer(undefined, action).isOpen).toBeTruthy();
-      expect(reducer({ isOpen: true }, action).isOpen).toBeFalsy();
-    })
-  });
+  describe('is open', () => {
+    let state;
 
-  describe('CLOSE_CART', () => {
-    test('changes the isOpen property to false', () => {
-      const action = { type: CLOSE_CART };
-      expect(reducer(undefined, action).isOpen).toBeFalsy();
-      expect(reducer({ isOpen: true }, action).isOpen).toBeFalsy();
-    })
+    beforeEach(() => {
+      const CartRecord = Record({
+        isOpen: true,
+        items: map(),
+        count: 0,
+      });
+
+      state = new CartRecord();
+    });
+
+    describe('TOOGLE_CART', () => {
+      test('changes the isOpen property correctly', () => {
+        const action = { type: TOGGLE_CART };
+        expect(reducer(undefined, action).isOpen).toBeTruthy();
+        expect(reducer(state, action).isOpen).toBeFalsy();
+      })
+    });
+
+    describe('CLOSE_CART', () => {
+      test('changes the isOpen property to false', () => {
+        const action = { type: CLOSE_CART };
+        expect(reducer(undefined, action).isOpen).toBeFalsy();
+        expect(reducer(state, action).isOpen).toBeFalsy();
+      })
+    });
   });
 
   describe('ADD_PRODUCT', () => {
@@ -45,7 +64,7 @@ describe('Cart - Reducer', () => {
 
     test('add new product to cart', () => {
       const state = reducer(undefined, action);
-      expect(state.items['1']).not.toBeUndefined();
+      expect(state.items.get('1')).not.toBeUndefined();
 
       action.payload = {
         productId: '2',
@@ -54,8 +73,8 @@ describe('Cart - Reducer', () => {
 
       const newState = reducer(state, action);
       expect(newState.count).toEqual(2);
-      expect(newState.items['1']).not.toBeUndefined();
-      expect(newState.items['2']).not.toBeUndefined();
+      expect(newState.items.get('1')).not.toBeUndefined();
+      expect(newState.items.get('2')).not.toBeUndefined();
     })
 
     // TODO Show toaster
@@ -78,9 +97,19 @@ describe('Cart - Reducer', () => {
       },
     };
 
+    const CartRecord = Record({
+      isOpen: false,
+      items: map({
+        1: map({ productId: '1', name: 'test' }),
+      }),
+      count: 1,
+    });
+
+    const state = new CartRecord();
+
     test('sets packages with the correct payload', () => {
-      const newState = reducer(undefined, action);
-      expect(newState.items['1'].packages).not.toBeUndefined();
+      const newState = reducer(state, action);
+      expect(newState.items.get('1').get('packages')).not.toBeUndefined();
     });
   });
 });

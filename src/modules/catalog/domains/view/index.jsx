@@ -86,7 +86,11 @@ class DomainsCatalog extends Component {
 }
 
 DomainsCatalog.propTypes = {
-  prices: PropTypes.objectOf(PropTypes.object).isRequired,
+  prices: PropTypes.objectOf(PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.bool,
+    PropTypes.object,
+  ])).isRequired,
   addProduct: PropTypes.func.isRequired,
   fetchPrices: PropTypes.func.isRequired,
   setRoute: PropTypes.func.isRequired,
@@ -96,10 +100,10 @@ DomainsCatalog.contextTypes = {
   router: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
-function mapStateToProps({ domains: { zones, prices } }) {
+function mapStateToProps(state) {
   return {
-    prices,
-    zones,
+    prices: state.get('domains').prices,
+    zones: state.get('domains').zones,
   };
 }
 

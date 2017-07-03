@@ -35,7 +35,7 @@ describe('Reducer - Auth', () => {
       payload: {
         user: {
           username: 'admin',
-          firstName: 'Nombre del usuario',
+          first_name: 'Nombre del usuario',
         },
         access_token: 'servertoken',
       },
@@ -43,7 +43,7 @@ describe('Reducer - Auth', () => {
 
     const newState = reducer(state, newAction);
     expect(newState.get('user').get('username')).toEqual('admin');
-    expect(newState.get('user').get('firstName')).toEqual('Nombre del usuario');
+    expect(newState.get('user').get('first_name')).toEqual('Nombre del usuario');
     expect(newState.get('token')).toEqual('servertoken');
   });
 });

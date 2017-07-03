@@ -108,8 +108,8 @@ MenuItem.propTypes = {
   routes: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
-function mapStateToProps({ routes }) {
-  return { routes };
+function mapStateToProps(state) {
+  return { routes: state.get('routes') };
 }
 
 export default connect(mapStateToProps)(MenuItem);
