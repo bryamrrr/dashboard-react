@@ -6,7 +6,7 @@ import styles from './styles.css';
 
 function UserContactForm() {
   return (
-    <div className={styles.container}>
+    <div className="table-container">
       <table>
         <thead>
           <tr>

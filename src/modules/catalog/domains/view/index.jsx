@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import _ from 'lodash';
+
 import { connect } from 'react-redux';
 
 import DomainSearch from '../../../../components/domain-search';
@@ -31,7 +33,7 @@ class DomainsCatalog extends Component {
 
   componentDidMount() {
     // If store hasn't domain prices, then we make a request
-    if (!this.props.prices.renew && !this.props.prices.buy) this.props.fetchPrices();
+    if (this.props.prices.size === 0) this.props.fetchPrices();
   }
 
   getDomains(domains) {
@@ -40,6 +42,10 @@ class DomainsCatalog extends Component {
 
   addToCart() {
     const domain = this.state.domains[0];
+    const pricesData = this.props.prices[domain.zone.substring(1)];
+
+    domain.prices = _.mapKeys(pricesData.prices.buy, 'period');
+    domain.selected = domain.prices.Anual;
     this.props.addProduct(domain, 'domain');
 
     const url = `/detalle-producto/${domain.productId}/paquetes`;

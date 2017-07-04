@@ -51,59 +51,61 @@ class DomainsTable extends Component {
 
   render() {
     return (
-      <table>
-        <tbody>
-          {_.map(this.state.domains, (domain) => {
-            const className = (domain.available)
-              ? ''
-              : styles.disabled;
+      <div className="table-container">
+        <table>
+          <tbody>
+            {_.map(this.state.domains, (domain) => {
+              const className = (domain.available)
+                ? ''
+                : styles.disabled;
 
-            return (
-              <tr
-                className={className}
-                key={domain.domain}
-              >
-                <td>
-                  <span>{domain.domain}</span>
-                </td>
-                <td>
-                  {(
-                    domain.available && Object.keys(domain.prices).length > 0 &&
-                    <Combo
-                      placeholder="Periodo"
-                      options={domain.prices} // FIXME Has to be periodId instead of period
-                      selected={domain.selected}
-                      config={{
-                        key: 'period',
-                        value: 'period',
-                        label: 'period',
-                      }}
-                      changeSelected={this.changeSelected}
-                      trackItem={domain.domain}
-                    />
-                  )}
-                </td>
-                <td>
-                  {(domain.available && `${domain.selected.currencySymbol} ${domain.selected.price}.00`)}
-                </td>
-                <td>
-                  {
-                    ((domain.available &&
-                      <span
-                        className={styles.link}
-                        onClick={() => this.addToCart(domain)}
-                        aria-hidden
-                      >
-                        Agregar al carrito
-                      </span>)
-                    || (!domain.available && <span>No disponible</span>))
-                  }
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+              return (
+                <tr
+                  className={className}
+                  key={domain.domain}
+                >
+                  <td>
+                    <span>{domain.domain}</span>
+                  </td>
+                  <td>
+                    {(
+                      domain.available && Object.keys(domain.prices).length > 0 &&
+                      <Combo
+                        placeholder="Periodo"
+                        options={domain.prices}
+                        selected={domain.selected}
+                        config={{
+                          key: 'period',
+                          value: 'period',
+                          label: 'period',
+                        }}
+                        changeSelected={this.changeSelected}
+                        trackItem={domain.domain}
+                      />
+                    )}
+                  </td>
+                  <td>
+                    {(domain.available && `${domain.selected.currencySymbol} ${domain.selected.price}.00`)}
+                  </td>
+                  <td>
+                    {
+                      ((domain.available &&
+                        <span
+                          className={styles.link}
+                          onClick={() => this.addToCart(domain)}
+                          aria-hidden
+                        >
+                          Agregar al carrito
+                        </span>)
+                      || (!domain.available && <span>No disponible</span>))
+                    }
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     );
   }
 }
@@ -111,7 +113,11 @@ class DomainsTable extends Component {
 DomainsTable.propTypes = {
   addProduct: PropTypes.func.isRequired,
   domains: PropTypes.arrayOf(PropTypes.object).isRequired,
-  prices: PropTypes.objectOf(PropTypes.object).isRequired,
+  prices: PropTypes.objectOf(PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.bool,
+    PropTypes.object,
+  ])).isRequired,
 };
 
 DomainsTable.contextTypes = {
