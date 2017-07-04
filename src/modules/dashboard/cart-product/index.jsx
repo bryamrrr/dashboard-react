@@ -35,11 +35,17 @@ function CartProduct(props) {
       <div className={styles.info}>
         <div className={styles.product}>
           <span className={styles.title}>{name}</span>
-          <span className={styles.period}>Anual</span>
+          <span className={styles.period}>
+            {props.info.get('selected').period}
+          </span>
         </div>
         <div>
-          <span className={styles.currency}>S/</span>
-          <span className={styles.price}>197.00</span>
+          <span className={styles.currency}>
+            {props.info.get('prices')[props.info.get('selected').period].currencySymbol}
+          </span>
+          <span className={styles.price}>
+            {`${props.info.get('prices')[props.info.get('selected').period].price}.00`}
+          </span>
         </div>
       </div>
       <button className={styles.close}>

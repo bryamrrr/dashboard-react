@@ -59,6 +59,10 @@ describe('Cart - Reducer', () => {
           item: {
             productId: '1',
             domain: 'miempresa.pe',
+            prices: {
+              Anual: { price: 100 }
+            },
+            selected: { period: 'Anual' },
           },
           category: 'domain',
         },
@@ -73,6 +77,10 @@ describe('Cart - Reducer', () => {
         item: {
           productId: '2',
           domain: 'miempresa.com',
+          prices: {
+            Anual: { price: 100 }
+          },
+          selected: { period: 'Anual' },
         },
         category: 'domain',
       };
@@ -84,6 +92,33 @@ describe('Cart - Reducer', () => {
       expect(newState.items.get('1').get('category')).toEqual('domain');
       expect(newState.items.get('2')).not.toBeUndefined();
       expect(newState.items.get('2').get('category')).toEqual('domain');
+    })
+
+    test('add new product to cart', () => {
+      const state = reducer(undefined, action);
+      expect(state.items.get('1')).not.toBeUndefined();
+      expect(state.total).toEqual(100);
+
+      action.payload = {
+        item: {
+          productId: '2',
+          domain: 'miempresa.com',
+          prices: {
+            Anual: { price: 150 },
+          },
+          selected: { period: 'Anual' },
+        },
+        category: 'domain',
+      };
+
+      const newState = reducer(state, action);
+      expect(newState.count).toEqual(2);
+      expect(newState.items.get('1')).not.toBeUndefined();
+      expect(newState.items.get('1').get('type')).toEqual('product');
+      expect(newState.items.get('1').get('category')).toEqual('domain');
+      expect(newState.items.get('2')).not.toBeUndefined();
+      expect(newState.items.get('2').get('category')).toEqual('domain');
+      expect(newState.total).toEqual(250);
     })
 
     // TODO Show toaster

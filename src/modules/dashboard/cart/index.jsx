@@ -30,18 +30,20 @@ function Cart(props) {
         {(props.cartInfo.items.size === 0 &&
           <div className={styles.info}>El carrito está vacío.</div>)}
         {(props.cartInfo.items.size > 0 &&
-          props.cartInfo.items.map(item =>
-            <CartProduct info={item} />,
-          )
+          props.cartInfo.items.map((item) => {
+            if (item.get('type') === 'product') {
+              return <CartProduct info={item} />;
+            }
+            return <CartPackage />;
+          })
         )}
-        <CartPackage />
       </div>
       <div className={styles.footer}>
         <div className={styles.total}>
           <span className={styles.text}>Total:</span>
           <div>
-            <span>S/</span>
-            <span className={styles.amount}>0.00</span>
+            <span>{props.cartInfo.currencySymbol}</span>
+            <span className={styles.amount}>{`${props.cartInfo.total}.00`}</span>
           </div>
         </div>
         <div className={styles.pay}>
@@ -56,8 +58,10 @@ function Cart(props) {
 
 Cart.propTypes = {
   cartInfo: PropTypes.shape({
+    currencySymbol: PropTypes.string,
     isOpen: PropTypes.bool,
     items: PropTypes.object,
+    total: PropTypes.number,
   }).isRequired,
   closeCart: PropTypes.func.isRequired,
 };

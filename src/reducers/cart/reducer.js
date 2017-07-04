@@ -16,9 +16,36 @@ const CartRecord = Record({
   isOpen: false,
   items: map(),
   count: 0,
+  currencySymbol: 'S/',
+  total: 0,
 });
 
 export const initialState = new CartRecord();
+
+function calcTotal(items) {
+  const values = [];
+
+
+  items.forEach((item) => {
+    const value = (item.get('type') === 'product')
+      ? item.get('prices')[item.get('selected').period].price
+      : item.get('total');
+
+    values.push(value);
+  });
+
+  return values.reduce((accumulation, current) => accumulation + current);
+
+  // return items.reduce((accumulation, current) => {
+  //   console.log('accumulation', accumulation);
+  //   console.log('current', current);
+  //   const value = (current.get('type') === 'product')
+  //     ? current.get('prices')[current.get('selected').period]
+  //     : current.get('total');
+
+  //   return accumulation + value;
+  // });
+}
 
 function reducer(state = initialState, action) {
   switch (action.type) {
@@ -37,7 +64,7 @@ function reducer(state = initialState, action) {
         .setIn(['items', action.payload.item.productId], map(productData))
         .set('count', state.count + 1);
 
-      return newState;
+      return newState.set('total', calcTotal(newState.get('items')));
     }
     case SET_PACKAGES:
       return state
