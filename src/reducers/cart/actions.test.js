@@ -52,8 +52,9 @@ describe('Cart - Actions', () => {
     });
 
     test('has the correct payload', () => {
-      const action = addProduct({ id: '1', name: 'dominio.pe' });
-      expect(action.payload).toEqual({ id: '1', name: 'dominio.pe' });
+      const action = addProduct({ id: '1', name: 'dominio.pe' }, 'domain');
+      expect(action.payload.item).toEqual({ id: '1', name: 'dominio.pe' });
+      expect(action.payload.category).toEqual('domain');
     });
   });
 

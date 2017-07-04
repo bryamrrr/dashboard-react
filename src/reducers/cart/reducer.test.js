@@ -56,8 +56,11 @@ describe('Cart - Reducer', () => {
       action = {
         type: ADD_PRODUCT,
         payload: {
-          productId: '1',
-          domain: 'miempresa.pe',
+          item: {
+            productId: '1',
+            domain: 'miempresa.pe',
+          },
+          category: 'domain',
         },
       };
     });
@@ -67,14 +70,20 @@ describe('Cart - Reducer', () => {
       expect(state.items.get('1')).not.toBeUndefined();
 
       action.payload = {
-        productId: '2',
-        domain: 'miempresa.com',
+        item: {
+          productId: '2',
+          domain: 'miempresa.com',
+        },
+        category: 'domain',
       };
 
       const newState = reducer(state, action);
       expect(newState.count).toEqual(2);
       expect(newState.items.get('1')).not.toBeUndefined();
+      expect(newState.items.get('1').get('type')).toEqual('product');
+      expect(newState.items.get('1').get('category')).toEqual('domain');
       expect(newState.items.get('2')).not.toBeUndefined();
+      expect(newState.items.get('2').get('category')).toEqual('domain');
     })
 
     // TODO Show toaster

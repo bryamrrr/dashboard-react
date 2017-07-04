@@ -36,7 +36,7 @@ class DomainsTable extends Component {
   }
 
   addToCart(domain) {
-    this.props.addProduct(domain);
+    this.props.addProduct(domain, 'domain');
 
     const url = `/detalle-producto/${domain.productId}/paquetes`;
     this.context.router.history.push(url);

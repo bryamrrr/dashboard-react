@@ -40,7 +40,7 @@ class DomainsCatalog extends Component {
 
   addToCart() {
     const domain = this.state.domains[0];
-    this.props.addProduct(domain);
+    this.props.addProduct(domain, 'domain');
 
     const url = `/detalle-producto/${domain.productId}/paquetes`;
     this.context.router.history.push(url);

@@ -14,10 +14,13 @@ export function closeCart() {
   return { type: CLOSE_CART };
 }
 
-export function addProduct(product) {
+export function addProduct(item, category) {
   return {
     type: ADD_PRODUCT,
-    payload: product,
+    payload: {
+      item,
+      category,
+    },
   };
 }
 

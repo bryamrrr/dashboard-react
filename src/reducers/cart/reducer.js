@@ -27,10 +27,14 @@ function reducer(state = initialState, action) {
     case CLOSE_CART:
       return state.set('isOpen', false);
     case ADD_PRODUCT: {
-      if (state.items.get(action.payload.productId)) return state; // TODO: Show toaster
+      if (state.items.get(action.payload.item.productId)) return state; // TODO: Show toaster
 
+      const productData = Object.assign({}, action.payload.item, {
+        type: 'product',
+        category: action.payload.category,
+      });
       const newState = state
-        .setIn(['items', action.payload.productId], map(action.payload))
+        .setIn(['items', action.payload.item.productId], map(productData))
         .set('count', state.count + 1);
 
       return newState;
