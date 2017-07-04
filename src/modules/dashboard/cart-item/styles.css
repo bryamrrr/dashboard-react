@@ -1,4 +1,15 @@
 .container {
   padding: 15px;
-  padding-right: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.container div:nth-child(1) {
+  height: 35px;
+  width: 31px;
+}
+
+.container div:nth-child(1) i {
+  font-size: 13px;
 }
