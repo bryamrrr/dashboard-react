@@ -1,83 +1,22 @@
 .hexagon {
   display: inline-block;
+  height: 85px;
   position: relative;
-  width: 70px;
-  height: 40.41px;
-  margin: 20.21px 0;
-  text-align: center;
+  width: 74px;
 }
 
-.hexagon i { font-size: 28px; }
-
-.hexagon.orange {
-  border-left: solid 1px #f7a80d;
-  border-right: solid 1px #f7a80d;
-}
-
-.hexagon.orange i {
-  color: #f7a80d;
-}
-
-.hexagon.red {
-  border-left: solid 1px #f44336;
-  border-right: solid 1px #f44336;
-}
-
-.hexagon.red i {
-  color: #f44336;
-}
-
-.hexagon.blue {
-  border-left: solid 1px #1e88e5;
-  border-right: solid 1px #1e88e5;
-}
-
-.hexagon.blue i {
-  color: #1e88e5;
-}
-
-.hexagon:before,
-.hexagon:after {
-  content: "";
+.hexagon i {
+  font-size: 28px;
+  left: 50%;
   position: absolute;
-  z-index: 1;
-  width: 49.50px;
-  height: 49.50px;
-  transform: scaleY(0.5774) rotate(-45deg);
-  background-color: inherit;
-  left: 9.21566px;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.hexagon:before { top: -25.5487px; }
+.hexagon.orange svg polygon { stroke: #f7a80d; }
+.hexagon.red svg polygon { stroke: #f44336; }
+.hexagon.blue svg polygon { stroke: #1e88e5; }
 
-.hexagon:after { bottom: -25.5487px; }
-
-.hexagon.orange:before {
-  border-top: solid 1.4142px #f7a80d;
-  border-right: solid 1.4142px #f7a80d;
-}
-
-.hexagon.orange:after {
-  border-bottom: solid 1.4142px #f7a80d;
-  border-left: solid 1.4142px #f7a80d;
-}
-
-.hexagon.red:before {
-  border-top: solid 1.4142px #f44336;
-  border-right: solid 1.4142px #f44336;
-}
-
-.hexagon.red:after {
-  border-bottom: solid 1.4142px #f44336;
-  border-left: solid 1.4142px #f44336;
-}
-
-.hexagon.blue:before {
-  border-top: solid 1.4142px #1e88e5;
-  border-right: solid 1.4142px #1e88e5;
-}
-
-.hexagon.blue:after {
-  border-bottom: solid 1.4142px #1e88e5;
-  border-left: solid 1.4142px #1e88e5;
-}
+.hexagon.orange i { color: #f7a80d; }
+.hexagon.red i { color: #f44336; }
+.hexagon.blue i { color: #1e88e5; }
