@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import LoadingSpin from '../../../../components/loading-spin';
+import Combo from '../../../../components/combo';
 
 import { setRoute } from '../../../../reducers/routes/actions';
 import { fetchPackages } from '../../../../reducers/cart/actions';
@@ -46,21 +47,80 @@ class ProductDetails extends Component {
     console.log('se quiere enviar la data', packageData);
   }
 
+  changeSelected(period) {
+    console.log('algo cambió en el combo', period);
+    console.log(this);
+    // const newDomainData = _.extend({}, this.state.domains);
+    // newDomainData[trackItem].selected = period;
+
+    // this.setState({ domains: newDomainData });
+  }
+
   render() {
+    const { product } = this.state;
+
+    const name = (product.get('domain'))
+      ? product.get('domain')
+      : product.get('name');
+
+    let category = '';
+    switch (product.get('category')) {
+      case 'domain':
+        category = 'Dominio';
+        break;
+      case 'hosting':
+        category = 'Hosting';
+        break;
+      case 'mail':
+        category = 'Mail';
+        break;
+      default:
+        category = 'Producto';
+    }
+
     return (
       <div>
-        <h1>Paquetes</h1>
+        <section className={styles.productInfo}>
+          <article className={styles.product}>
+            <div className={styles.productHeader}>
+              <h3>{category}</h3>
+            </div>
+            <div className={styles.productBody}>
+              <span>{name}</span>
+            </div>
+          </article>
+
+          <div className={styles.period}>
+            <p>Periodo seleccionado: {product.get('selected').period}</p>
+            <Combo
+              placeholder="Periodo"
+              options={product.get('prices')}
+              selected={product.get('selected')}
+              config={{
+                key: 'period',
+                value: 'period',
+                label: 'period',
+              }}
+              changeSelected={this.changeSelected}
+            />
+          </div>
+
+          <div className={styles.price}>
+            {`${product.get('selected').currencySymbol} ${product.get('selected').price}.00`}
+          </div>
+        </section>
+
         <div>
           {(
             (this.state.fetchingPackages && <LoadingSpin />)
             ||
             (!this.state.fetchingPackages && <div>
-              <h2>Paquetes encontrados</h2>
-              {this.state.product.get('packages').valueSeq().map(packageData =>
+              <h2>Complementa tu compra:</h2>
+              {product.get('packages').valueSeq().map(packageData =>
                 <section key={packageData.id}>
-                  {packageData.remainingProducts.map(product =>
-                    <article key={product.id}>
-                      <span>{JSON.stringify(product)}</span>
+                  {packageData.remainingProducts.map(productData =>
+                    <article key={productData.id}>
+                      <span>{JSON.stringify(productData)}</span>
                     </article>,
                   )}
                   <span
