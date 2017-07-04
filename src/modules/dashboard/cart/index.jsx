@@ -14,6 +14,8 @@ function Cart(props) {
     ? `${styles.container} ${styles.isOpen}`
     : styles.container;
 
+  console.log(props.cartInfo.items.size);
+
   return (
     <aside className={className}>
       <div className={styles.header}>
@@ -25,7 +27,15 @@ function Cart(props) {
         />
       </div>
       <div className={styles.body}>
-        <div className={styles.info}>El carrito está vacío.</div>
+        {(props.cartInfo.items.size === 0 &&
+          <div className={styles.info}>El carrito está vacío.</div>)}
+        {(props.cartInfo.items.size > 0 &&
+          props.cartInfo.items.map(item =>
+            <article>
+              <div>{JSON.stringify(item)}</div>
+            </article>,
+          )
+        )}
       </div>
       <div className={styles.footer}>
         <div className={styles.total}>
@@ -47,7 +57,8 @@ function Cart(props) {
 
 Cart.propTypes = {
   cartInfo: PropTypes.shape({
-    isOpen: PropTypes.bool.isRequired,
+    isOpen: PropTypes.bool,
+    items: PropTypes.object,
   }).isRequired,
   closeCart: PropTypes.func.isRequired,
 };
