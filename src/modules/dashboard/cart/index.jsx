@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import FormButton from '../../../components/form-button';
-import CartItem from '../cart-item';
+import CartProduct from '../cart-product';
+import CartPackage from '../cart-package';
 
 import { closeCart } from '../../../reducers/cart/actions';
 
@@ -30,9 +31,10 @@ function Cart(props) {
           <div className={styles.info}>El carrito está vacío.</div>)}
         {(props.cartInfo.items.size > 0 &&
           props.cartInfo.items.map(item =>
-            <CartItem info={item} type="product" />,
+            <CartProduct info={item} />,
           )
         )}
+        <CartPackage />
       </div>
       <div className={styles.footer}>
         <div className={styles.total}>
