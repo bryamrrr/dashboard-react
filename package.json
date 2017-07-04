@@ -63,6 +63,7 @@
     "react-redux": "^5.0.4",
     "react-router-dom": "^4.1.1",
     "redux": "^3.6.0",
+    "redux-devtools-extension": "^2.13.2",
     "redux-form": "^6.7.0",
     "redux-immutable": "^4.0.0",
     "redux-thunk": "^2.2.0"
@@ -72,6 +73,6 @@
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
       "\\.(css|less)$": "identity-obj-proxy"
     },
-    "setupTestFrameworkScriptFile":"<rootDir>/__mocks__/localStorageMock.js"
+    "setupTestFrameworkScriptFile": "<rootDir>/__mocks__/localStorageMock.js"
   }
 }
