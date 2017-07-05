@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import LoadingSpin from '../../../../components/loading-spin';
 import Combo from '../../../../components/combo';
+import Hexagon from '../../../../components/hexagon';
 
 import { setRoute } from '../../../../reducers/routes/actions';
 import { fetchPackages } from '../../../../reducers/cart/actions';
@@ -64,15 +65,23 @@ class ProductDetails extends Component {
       : product.get('name');
 
     let category = '';
+    let icon = '';
+    let color = '';
     switch (product.get('category')) {
       case 'domain':
         category = 'Dominio';
+        icon = 'linearicon-earth';
+        color = 'orange';
         break;
       case 'hosting':
         category = 'Hosting';
+        icon = 'linearicon-drawer2';
+        color = 'red';
         break;
       case 'mail':
         category = 'Mail';
+        icon = 'linearicon-envelope';
+        color = 'blue';
         break;
       default:
         category = 'Producto';
@@ -80,61 +89,75 @@ class ProductDetails extends Component {
 
     return (
       <div>
+        <h2 className={styles.title}>Detalle de pedido</h2>
         <section className={styles.productInfo}>
           <article className={styles.product}>
-            <div className={styles.productHeader}>
-              <h3>{category}</h3>
-            </div>
-            <div className={styles.productBody}>
-              <span>{name}</span>
+            <Hexagon color={color}>
+              <i className={icon} />
+            </Hexagon>
+            <div className={styles.productName}>
+              <span className={styles[color]}>{category}</span>
+              <h3>{name}</h3>
             </div>
           </article>
 
-          <div className={styles.period}>
-            <p>Periodo seleccionado: {product.get('selected').period}</p>
-            <Combo
-              placeholder="Periodo"
-              options={product.get('prices')}
-              selected={product.get('selected')}
-              config={{
-                key: 'period',
-                value: 'period',
-                label: 'period',
-              }}
-              changeSelected={this.changeSelected}
-            />
-          </div>
+          <div className={styles.productDetail}>
+            <div className={styles.period}>
+              <p>Periodo seleccionado: {product.get('selected').period}</p>
+              <Combo
+                placeholder="Periodo"
+                options={product.get('prices')}
+                selected={product.get('selected')}
+                config={{
+                  key: 'period',
+                  value: 'period',
+                  label: 'period',
+                }}
+                changeSelected={this.changeSelected}
+              />
+            </div>
 
-          <div className={styles.price}>
-            {`${product.get('selected').currencySymbol} ${product.get('selected').price}.00`}
+            <div className={styles.price}>
+              {`${product.get('selected').currencySymbol} ${product.get('selected').price}.00`}
+            </div>
           </div>
         </section>
 
-        <div>
-          {(
-            (this.state.fetchingPackages && <LoadingSpin />)
-            ||
-            (!this.state.fetchingPackages && <div>
-              <h2>Complementa tu compra:</h2>
-              {product.get('packages').valueSeq().map(packageData =>
-                <section key={packageData.id}>
-                  {packageData.remainingProducts.map(productData =>
-                    <article key={productData.id}>
-                      <span>{JSON.stringify(productData)}</span>
-                    </article>,
-                  )}
-                  <span
-                    className={styles.link}
-                    onClick={() => this.addToCart(packageData)}
-                    aria-hidden
-                  >
-                    Agregar al carrito
-                  </span>
-                </section>,
-              )}
-            </div>)
-          )}
-        </div>
+        {(
+          (this.state.fetchingPackages && <LoadingSpin />)
+          ||
+          (!this.state.fetchingPackages && <div className={styles.packages}>
+            <h2>Complementa tu compra:</h2>
+            <section className={styles.packageContainer}>
+              <article className={styles.item}>
+                <span className={styles.amount}>+ S/ 130.00</span>
+                <p className={styles.packageDetail}>
+                  Por la compra de este dominio, llévate un correo cPanel 50 y un hosting HOSTI 100
+                </p>
+                <a>Agregar al carrito</a>
+              </article>
+              <article className={styles.item}>Paquete dos</article>
+              <article className={styles.item}>Paquete tres</article>
+              <article className={styles.item}>Paquete cuatro</article>
+            </section>
+            {product.get('packages').valueSeq().map(packageData =>
+              <section key={packageData.id}>
+                {packageData.remainingProducts.map(productData =>
+                  <article key={productData.id}>
+                    <span>{JSON.stringify(productData)}</span>
+                  </article>,
+                )}
+                <span
+                  className={styles.link}
+                  onClick={() => this.addToCart(packageData)}
+                  aria-hidden
+                >
+                  Agregar al carrito
+                </span>
+              </section>,
+            )}
+          </div>)
+        )}
       </div>
     );
   }
@@ -155,7 +178,9 @@ ProductDetails.contextTypes = {
 };
 
 function mapStateToProps(state) {
-  return { items: state.get('cart').items };
+  return {
+    items: state.get('cart').items,
+  };
 }
 
 export default connect(mapStateToProps, {
