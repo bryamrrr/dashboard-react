@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import LoadingSpin from '../../../../components/loading-spin';
 import Combo from '../../../../components/combo';
 import Hexagon from '../../../../components/hexagon';
+import FormButton from '../../../../components/form-button';
 
 import { setRoute } from '../../../../reducers/routes/actions';
 import { fetchPackages } from '../../../../reducers/cart/actions';
@@ -89,7 +90,6 @@ class ProductDetails extends Component {
 
     return (
       <div>
-        <h2 className={styles.title}>Detalle de pedido</h2>
         <section className={styles.productInfo}>
           <article className={styles.product}>
             <Hexagon color={color}>
@@ -128,32 +128,27 @@ class ProductDetails extends Component {
           ||
           (!this.state.fetchingPackages && <div className={styles.packages}>
             <h2>Complementa tu compra:</h2>
-            <section className={styles.packageContainer}>
-              <article className={styles.item}>
-                <span className={styles.amount}>+ S/ 130.00</span>
-                <p className={styles.packageDetail}>
-                  Por la compra de este dominio, llévate un correo cPanel 50 y un hosting HOSTI 100
-                </p>
-                <a>Agregar al carrito</a>
-              </article>
-              <article className={styles.item}>Paquete dos</article>
-              <article className={styles.item}>Paquete tres</article>
-              <article className={styles.item}>Paquete cuatro</article>
-            </section>
             {product.get('packages').valueSeq().map(packageData =>
-              <section key={packageData.id}>
-                {packageData.remainingProducts.map(productData =>
-                  <article key={productData.id}>
-                    <span>{JSON.stringify(productData)}</span>
-                  </article>,
-                )}
-                <span
-                  className={styles.link}
-                  onClick={() => this.addToCart(packageData)}
-                  aria-hidden
-                >
-                  Agregar al carrito
-                </span>
+              <section key={packageData.id} className={styles.packageContainer}>
+                <article className={styles.item}>
+                  <div className={styles.amount}>+ S/ 80.00</div>
+                  <div className={styles.itemInfo}>
+                    <i className="linearicon-papers" />
+                    <div className={styles.packageDetail}>
+                      <p>Por la compra de este {category} llévate:</p>
+                      {packageData.remainingProducts.map(productData =>
+                        <a key={productData.id}>
+                          <span>{productData.name}</span>
+                        </a>,
+                      )}
+                    </div>
+                  </div>
+                  <FormButton
+                    callToAction="Agregar al carrito"
+                    includeIcon="linearicon-cart"
+                    onClick={() => this.addToCart(packageData)}
+                  />
+                </article>
               </section>,
             )}
           </div>)
