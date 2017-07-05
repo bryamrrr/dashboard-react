@@ -1,6 +1,7 @@
 import {
   Record,
   Map as map,
+  isImmutable,
 } from 'immutable';
 
 import _ from 'lodash';
@@ -25,13 +26,12 @@ export const initialState = new CartRecord();
 function calcTotal(items) {
   const values = [];
 
-
   items.forEach((item) => {
     const value = (item.get('type') === 'product')
       ? item.get('prices')[item.get('selected').period].price
       : item.get('total');
 
-    values.push(value);
+    values.push(parseInt(value, 10));
   });
 
   return values.reduce((accumulation, current) => accumulation + current);
@@ -56,12 +56,20 @@ function reducer(state = initialState, action) {
     case ADD_PRODUCT: {
       if (state.items.get(action.payload.item.productId)) return state; // TODO: Show toaster
 
-      const productData = Object.assign({}, action.payload.item, {
-        type: 'product',
-        category: action.payload.category,
-      });
+      let productData;
+      if (isImmutable(action.payload.item)) {
+        productData = action.payload.item
+          .set('type', 'product')
+          .set('category', action.payload.category);
+      } else {
+        productData = map(Object.assign({}, action.payload.item, {
+          type: 'product',
+          category: action.payload.category,
+        }));
+      }
+
       const newState = state
-        .setIn(['items', action.payload.item.productId], map(productData))
+        .setIn(['items', action.payload.item.productId], productData)
         .set('count', state.count + 1);
 
       return newState.set('total', calcTotal(newState.get('items')));

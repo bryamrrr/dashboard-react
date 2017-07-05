@@ -5,6 +5,7 @@ import auth from './auth/reducer';
 import cart from './cart/reducer';
 import domains from './domains/reducer';
 import context from './context/reducer';
+import hostings from './hostings/reducer';
 import routes from './routes/reducer';
 
 const rootReducer = combineReducers({
@@ -13,8 +14,8 @@ const rootReducer = combineReducers({
   context,
   domains,
   form,
+  hostings,
   routes,
-  // hosting: {},
 });
 
 export default rootReducer;

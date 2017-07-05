@@ -1,19 +1,19 @@
 import constants from '../../extra/constants';
 import httpRequest from '../../extra/http-request';
 
-export const SET_PRICES = 'SET_PRICES';
+export const SET_PRODUCTS = 'SET_PRODUCTS';
 
-export function setPrices(data) {
+export function setProducts(data) {
   return {
-    type: SET_PRICES,
+    type: SET_PRODUCTS,
     payload: data,
   };
 }
 
-export function fetchPrices() {
+export function fetchProducts() {
   return async (dispatch) => {
-    const url = `${constants.urls.API_MOCKS}/domains/prices`;
+    const url = `${constants.urls.API_MOCKS}/products/hosting`;
     const { data: { results } } = await httpRequest('GET', url);
-    dispatch(setPrices(results));
+    dispatch(setProducts(results));
   };
 }

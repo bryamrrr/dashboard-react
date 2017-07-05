@@ -60,7 +60,7 @@ describe('Cart - Reducer', () => {
             productId: '1',
             domain: 'miempresa.pe',
             prices: {
-              Anual: { price: 100 }
+              Anual: { price: '100' }
             },
             selected: { period: 'Anual' },
           },
@@ -78,7 +78,7 @@ describe('Cart - Reducer', () => {
           productId: '2',
           domain: 'miempresa.com',
           prices: {
-            Anual: { price: 100 }
+            Anual: { price: '100' }
           },
           selected: { period: 'Anual' },
         },
@@ -104,7 +104,7 @@ describe('Cart - Reducer', () => {
           productId: '2',
           domain: 'miempresa.com',
           prices: {
-            Anual: { price: 150 },
+            Anual: { price: '150' },
           },
           selected: { period: 'Anual' },
         },

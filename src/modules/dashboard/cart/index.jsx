@@ -30,9 +30,9 @@ function Cart(props) {
         {(props.cartInfo.items.size === 0 &&
           <div className={styles.info}>El carrito está vacío.</div>)}
         {(props.cartInfo.items.size > 0 &&
-          props.cartInfo.items.map((item) => {
+          props.cartInfo.items.valueSeq().map((item) => {
             if (item.get('type') === 'product') {
-              return <CartProduct info={item} />;
+              return <CartProduct key={item.get('id')} info={item} />;
             }
             return <CartPackage />;
           })
