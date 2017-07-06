@@ -29,6 +29,7 @@ body {
   margin: 0;
   overflow-x: hidden;
   color: #4d6171;
+  -webkit-font-smoothing: antialiased;
 }
 
 a { text-decoration: none; }
