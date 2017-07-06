@@ -15,9 +15,20 @@ import {
 import styles from './styles.css';
 
 class Cart extends Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.goToPaymentDetails = this.goToPaymentDetails.bind(this);
+  }
+
   deleteItem(item) {
     console.log(this);
     console.log('eliminando', item);
+  }
+
+  goToPaymentDetails() {
+    const url = '/compra';
+    this.context.router.history.push(url);
   }
 
   render() {
@@ -71,6 +82,7 @@ class Cart extends Component {
           <div className={styles.pay}>
             <FormButton
               callToAction="Pagar"
+              onClick={this.goToPaymentDetails}
             />
           </div>
         </div>
@@ -87,6 +99,11 @@ Cart.propTypes = {
     total: PropTypes.number,
   }).isRequired,
   closeCart: PropTypes.func.isRequired,
+};
+
+
+Cart.contextTypes = {
+  router: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 function mapStateToProps(state) {
