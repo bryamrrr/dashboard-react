@@ -11,6 +11,7 @@ import {
   TOGGLE_CART,
   ADD_PRODUCT,
   SET_PACKAGES,
+  ADD_PACKAGE,
 } from './actions';
 
 const CartRecord = Record({
@@ -69,6 +70,30 @@ function reducer(state = initialState, action) {
           action.payload.productId,
           'packages',
         ], map(_.mapKeys(action.payload.packages, 'id')));
+    case ADD_PACKAGE: {
+      const products = map(Object.assign({},
+        _.mapKeys(action.payload.packageData.remainingProducts, (key) => {
+          if (key.productId) return key.productId;
+          return key.id;
+        }),
+      )).map(product => map(product));
+
+      const productId = state.items.get(action.payload.item).get('productId') || state.items.get(action.payload.item).get('id');
+      const product = map({
+        [productId]: state.items.get(action.payload.item),
+      });
+
+      const data = map({
+        type: 'package',
+        products: products.merge(product),
+      });
+
+      return state
+        .setIn([
+          'items',
+          action.payload.item,
+        ], data);
+    }
     default:
       return state;
   }

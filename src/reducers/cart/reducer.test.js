@@ -9,6 +9,7 @@ import {
   CLOSE_CART,
   ADD_PRODUCT,
   SET_PACKAGES,
+  ADD_PACKAGE,
 } from './actions';
 
 describe('Cart - Reducer', () => {
@@ -146,6 +147,57 @@ describe('Cart - Reducer', () => {
     test('sets packages with the correct payload', () => {
       const newState = reducer(state, action);
       expect(newState.items.get('1').get('packages')).not.toBeUndefined();
+    });
+  });
+
+  describe('ADD_PACKAGE', () => {
+    const action = {
+      type: ADD_PRODUCT,
+      payload: {
+        item: {
+          productId: '1',
+          domain: 'miempresa.pe',
+          prices: {
+            Anual: { price: '100' }
+          },
+          selected: { period: 'Anual' },
+        },
+        category: 'domain',
+      },
+    };
+
+    test('add package to cart', () => {
+      const state = reducer(undefined, action);
+      expect(state.items.get('item1')).not.toBeUndefined();
+      expect(state.items.size).toEqual(1);
+
+      const newAction = {
+        type: ADD_PACKAGE,
+        payload: {
+          item: 'item1',
+          packageData: {
+            id: '1',
+            remainingProducts: [{
+              productId: '2',
+              domain: 'HOSTI 100',
+            }],
+          },
+          product: {
+            productId: '1',
+            domain: 'miempresa.pe',
+            prices: {
+              Anual: { price: '100' }
+            },
+            selected: { period: 'Anual' },
+          },
+        },
+      };
+
+      const newState = reducer(state, newAction);
+      expect(newState.count).toEqual(1);
+      expect(newState.items.get('item1').get('type')).toEqual('package');
+      expect(newState.items.get('item1').get('products').size).toEqual(2);
+      expect(newState.items.size).toEqual(1);
     });
   });
 });

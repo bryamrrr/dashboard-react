@@ -5,6 +5,7 @@ export const TOGGLE_CART = 'TOGGLE_CART';
 export const CLOSE_CART = 'CLOSE_CART';
 export const ADD_PRODUCT = 'ADD_PRODUCT';
 export const SET_PACKAGES = 'SET_PACKAGES';
+export const ADD_PACKAGE = 'ADD_PACKAGE';
 
 export function toggleCart() {
   return { type: TOGGLE_CART };
@@ -20,6 +21,16 @@ export function addProduct(item, category) {
     payload: {
       item,
       category,
+    },
+  };
+}
+
+export function addPackage(item, packageData) {
+  return {
+    type: ADD_PACKAGE,
+    payload: {
+      item,
+      packageData,
     },
   };
 }

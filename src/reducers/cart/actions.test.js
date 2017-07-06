@@ -10,9 +10,11 @@ import {
   TOGGLE_CART,
   CLOSE_CART,
   ADD_PRODUCT,
+  ADD_PACKAGE,
   toggleCart,
   closeCart,
   addProduct,
+  addPackage,
   fetchPackages,
   setPackages,
 } from './actions';
@@ -74,6 +76,21 @@ describe('Cart - Actions', () => {
         // return of async actions
         expect(store.getActions()).toEqual([setPackages('123', packages.results)]);
       })
+    });
+  });
+
+  describe('ADD_PACKAGE', () => {
+    test('has the correct type', () => {
+      const action = addPackage();
+      expect(action.type).toEqual(ADD_PACKAGE);
+    });
+
+    test('has the correct payload', () => {
+      const action = addPackage('item1', { id: '1'},);
+      expect(action.payload).toEqual({
+        item: 'item1',
+        packageData: { id: '1'},
+      });
     });
   });
 });
