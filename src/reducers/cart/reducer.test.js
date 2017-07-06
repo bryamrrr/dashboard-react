@@ -10,6 +10,7 @@ import {
   ADD_PRODUCT,
   SET_PACKAGES,
   ADD_PACKAGE,
+  DELETE_ITEM,
 } from './actions';
 
 describe('Cart - Reducer', () => {
@@ -192,4 +193,39 @@ describe('Cart - Reducer', () => {
       expect(newState.items.size).toEqual(1);
     });
   });
+
+  describe('DELETE_ITEM', () => {
+    const action = {
+      type: ADD_PRODUCT,
+      payload: {
+        item: {
+          productId: '1',
+          domain: 'miempresa.pe',
+          prices: {
+            Anual: { price: '100' }
+          },
+          selected: { period: 'Anual' },
+        },
+        category: 'domain',
+      },
+    };
+
+    test('delete an item from cart', () => {
+      const state = reducer(undefined, action);
+      expect(state.items.get('item1')).not.toBeUndefined();
+      expect(state.items.size).toEqual(1);
+
+      const deleteAction = {
+        type: DELETE_ITEM,
+        payload: 'item1',
+      };
+
+      const newState = reducer(state, deleteAction);
+      expect(newState.count).toEqual(1); // Doesnt change
+      expect(newState.items.get('item1')).toBeUndefined();
+      expect(newState.items.size).toEqual(0);
+    });
+  });
 });
+
+

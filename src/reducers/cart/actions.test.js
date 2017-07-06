@@ -11,12 +11,14 @@ import {
   CLOSE_CART,
   ADD_PRODUCT,
   ADD_PACKAGE,
+  DELETE_ITEM,
   toggleCart,
   closeCart,
   addProduct,
   addPackage,
   fetchPackages,
   setPackages,
+  deleteItem,
 } from './actions';
 
 const middlewares = [thunk];
@@ -91,6 +93,18 @@ describe('Cart - Actions', () => {
         item: 'item1',
         packageData: { id: '1'},
       });
+    });
+  });
+
+  describe('DELETE_ITEM', () => {
+    test('has the correct type', () => {
+      const action = deleteItem();
+      expect(action.type).toEqual(DELETE_ITEM);
+    });
+
+    test('has the correct payload', () => {
+      const action = deleteItem('item1');
+      expect(action.payload).toEqual('item1');
     });
   });
 });

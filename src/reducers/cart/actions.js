@@ -6,6 +6,7 @@ export const CLOSE_CART = 'CLOSE_CART';
 export const ADD_PRODUCT = 'ADD_PRODUCT';
 export const SET_PACKAGES = 'SET_PACKAGES';
 export const ADD_PACKAGE = 'ADD_PACKAGE';
+export const DELETE_ITEM = 'DELETE_ITEM';
 
 export function toggleCart() {
   return { type: TOGGLE_CART };
@@ -39,6 +40,13 @@ export function setPackages(productId, packages) {
   return {
     type: SET_PACKAGES,
     payload: { productId, packages },
+  };
+}
+
+export function deleteItem(item) {
+  return {
+    type: DELETE_ITEM,
+    payload: item,
   };
 }
 

@@ -8,7 +8,7 @@ describe('Domains - Reducer', () => {
   beforeEach(() => {
     action = {
       type: SET_PRICES,
-      payload: [{ zone: 'pe', prices: { renew: [], buy: [] } }],
+      payload: [{ id: 'abc', prices: { renew: [], buy: [] } }],
     }
   });
 
@@ -18,8 +18,7 @@ describe('Domains - Reducer', () => {
   });
 
   test('sets prices with the correct payload', () => {
-    expect(reducer(undefined, action).prices).toEqual({
-      'pe': { zone: 'pe', prices: { renew: [], buy: [] } },
-    });
+    expect(reducer(undefined, action).size).toEqual(1);
+    expect(reducer(undefined, action).get('abc')).not.toBeUndefined();
   });
 });

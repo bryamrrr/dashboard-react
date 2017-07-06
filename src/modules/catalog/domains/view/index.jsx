@@ -40,10 +40,10 @@ class DomainsCatalog extends Component {
 
   addToCart() {
     const domain = this.state.domains[0];
-    const pricesData = this.props.prices[domain.zone.substring(1)];
+    const pricesData = this.props.prices.get(domain.productId);
 
     domain.prices = _.mapKeys(pricesData.prices.buy, 'period');
-    domain.selected = domain.prices.Anual;
+    domain.selected = domain.prices['1 Año'];
     this.props.addProduct(domain, 'Dominio');
 
     const url = `/detalle-producto/item${this.props.cart.count + 1}/paquetes`;
@@ -107,8 +107,8 @@ DomainsCatalog.contextTypes = {
 
 function mapStateToProps(state) {
   return {
-    prices: state.get('domains').prices,
-    zones: state.get('domains').zones,
+    prices: state.get('prices').get('domains'),
+    zones: state.get('zones'),
     cart: state.get('cart'),
   };
 }

@@ -22,7 +22,7 @@ describe('Domains - Actions', () => {
 
     test('creates setPrices action when fetching prices has been done', () => {
       nock(constants.urls.API_MOCKS)
-        .get('/domains/prices')
+        .get('/prices?type=dominio')
         .reply(200, prices);
 
       const store = mockStore(initialState);

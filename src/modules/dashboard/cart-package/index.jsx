@@ -10,7 +10,10 @@ function CartPackage(props) {
     <div className={styles.container}>
       <div className={styles.wrapper}>
         <div className={styles.header}>{props.info.get('name')}</div>
-        <button className={styles.close}>
+        <button
+          className={styles.close}
+          onClick={() => props.deleteItem(props.itemId)}
+        >
           <i className="linearicon-cross" />
         </button>
         {props.info.get('products').valueSeq().map((product) => {
@@ -60,6 +63,8 @@ CartPackage.propTypes = {
     PropTypes.bool,
     PropTypes.object,
   ])).isRequired,
+  deleteItem: PropTypes.func.isRequired,
+  itemId: PropTypes.string.isRequired,
 };
 
 export default CartPackage;

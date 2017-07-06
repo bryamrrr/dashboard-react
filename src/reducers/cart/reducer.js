@@ -12,6 +12,7 @@ import {
   ADD_PRODUCT,
   SET_PACKAGES,
   ADD_PACKAGE,
+  DELETE_ITEM,
 } from './actions';
 
 const CartRecord = Record({
@@ -35,7 +36,7 @@ function calcTotal(items) {
     values.push(parseInt(value, 10));
   });
 
-  return values.reduce((accumulation, current) => accumulation + current);
+  return values.reduce((accumulation, current) => accumulation + current, 0);
 }
 
 function reducer(state = initialState, action) {
@@ -98,6 +99,12 @@ function reducer(state = initialState, action) {
 
       const newState = state.set('items', items);
 
+      return newState.set('total', calcTotal(newState.get('items')));
+    }
+    case DELETE_ITEM: {
+      const items = state.get('items').delete(action.payload);
+
+      const newState = state.set('items', items);
       return newState.set('total', calcTotal(newState.get('items')));
     }
     default:

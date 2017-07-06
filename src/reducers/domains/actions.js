@@ -12,7 +12,7 @@ export function setPrices(data) {
 
 export function fetchPrices() {
   return async (dispatch) => {
-    const url = `${constants.urls.API_MOCKS}/domains/prices`;
+    const url = `${constants.urls.API_MOCKS}/prices?type=dominio`;
     const { data: { results } } = await httpRequest('GET', url);
     dispatch(setPrices(results));
   };

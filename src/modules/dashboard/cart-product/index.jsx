@@ -48,7 +48,10 @@ function CartProduct(props) {
           </span>
         </div>
       </div>
-      <button className={styles.close}>
+      <button
+        className={styles.close}
+        onClick={() => props.deleteItem(props.itemId)}
+      >
         <i className="linearicon-cross" />
       </button>
     </div>
@@ -61,6 +64,8 @@ CartProduct.propTypes = {
     PropTypes.bool,
     PropTypes.object,
   ])).isRequired,
+  deleteItem: PropTypes.func.isRequired,
+  itemId: PropTypes.string.isRequired,
 };
 
 export default CartProduct;

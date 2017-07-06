@@ -17,15 +17,16 @@ class DomainsTable extends Component {
 
     const domainsData = _.mapKeys(this.props.domains.slice(0), 'productId'); // FIXME remove first item from this array (slice 1)
     const domains = _.map(domainsData, (domain) => {
-      const pricesData = this.props.prices[domain.zone.substring(1)];
+      const pricesData = this.props.prices.get(domain.productId);
 
       const prices = (pricesData)
         ? _.mapKeys(pricesData.prices.buy, 'period')
         : {};
+      const selected = (Object.keys(prices).length > 0) ? prices['1 Año'] : {};
 
       return Object.assign({}, domain, {
         prices,
-        selected: (Object.keys(prices).length > 0) ? prices.Anual : {},
+        selected,
       });
     });
 
