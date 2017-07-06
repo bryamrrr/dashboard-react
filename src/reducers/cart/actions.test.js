@@ -65,12 +65,12 @@ describe('Cart - Actions', () => {
 
     test('creates setPackages action when fetching packages has been done', () => {
       nock(constants.urls.API_MOCKS)
-        .get('/packages/123')
+        .get('/packages/abc')
         .reply(200, packages);
 
       const store = mockStore(initialState);
 
-      return store.dispatch(fetchPackages('123')).then(() => {
+      return store.dispatch(fetchPackages('123', 'abc')).then(() => {
         // return of async actions
         expect(store.getActions()).toEqual([setPackages('123', packages.results)]);
       })

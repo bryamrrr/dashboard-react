@@ -7,29 +7,29 @@ import constants from '../../extra/constants';
 import products from './products';
 
 import {
-  setHostings,
-  fetchHostings,
+  setMails,
+  fetchMails,
 } from './actions';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
 describe('Domains - Actions', () => {
-  describe('fetchHostings', () => {
+  describe('fetchMails', () => {
     afterEach(() => {
       nock.cleanAll()
     })
 
-    test('creates setHostings action when fetching products has been done', () => {
+    test('creates setMails action when fetching products has been done', () => {
       nock(constants.urls.API_MOCKS)
-        .get('/products/hosting')
+        .get('/products/email')
         .reply(200, products);
 
       const store = mockStore(initialState);
 
-      return store.dispatch(fetchHostings()).then(() => {
+      return store.dispatch(fetchMails()).then(() => {
         // return of async actions
-        expect(store.getActions()).toEqual([setHostings(products.results)]);
+        expect(store.getActions()).toEqual([setMails(products.results)]);
       })
     });
   });

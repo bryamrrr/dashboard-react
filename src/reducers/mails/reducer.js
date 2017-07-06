@@ -5,18 +5,18 @@ import {
 
 import _ from 'lodash';
 
-import { SET_HOSTINGS } from './actions';
+import { SET_MAILS } from './actions';
 
-const HostingsRecord = Record({
+const MailssRecord = Record({
   products: map(),
   prices: map(),
 });
 
-export const initialState = new HostingsRecord();
+export const initialState = new MailssRecord();
 
 function reducer(state = initialState, action) {
   switch (action.type) {
-    case SET_HOSTINGS:
+    case SET_MAILS:
       return state.set('products', map(_.mapKeys(action.payload, 'id')));
     default:
       return state;

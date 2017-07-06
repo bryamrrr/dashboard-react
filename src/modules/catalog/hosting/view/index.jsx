@@ -8,7 +8,7 @@ import LoadingSpin from '../../../../components/loading-spin';
 
 import { setRoute } from '../../../../reducers/routes/actions';
 import { addProduct } from '../../../../reducers/cart/actions';
-import { fetchProducts } from '../../../../reducers/hostings/actions';
+import { fetchHostings } from '../../../../reducers/hostings/actions';
 
 import styles from './styles.css';
 
@@ -18,16 +18,16 @@ class HostingCatalog extends Component {
 
     this.addToCart = this.addToCart.bind(this);
 
-    this.state = { fetchingProducts: true };
+    this.state = { fetchingHostings: true };
   }
 
   async componentWillMount() {
     this.props.setRoute({ title: 'Catálogo' }, { title: 'Hosting' });
 
-    if (this.props.hostings.products.size > 0) return this.setState({ fetchingProducts: false });
+    if (this.props.hostings.products.size > 0) return this.setState({ fetchingHostings: false });
 
-    await this.props.fetchProducts();
-    return this.setState({ fetchingProducts: false });
+    await this.props.fetchHostings();
+    return this.setState({ fetchingHostings: false });
   }
 
   addToCart(item) {
@@ -38,9 +38,9 @@ class HostingCatalog extends Component {
     return (
       <div className={styles.container}>
         {(
-          (this.state.fetchingProducts && <LoadingSpin />)
+          (this.state.fetchingHostings && <LoadingSpin />)
           ||
-          (!this.state.fetchingProducts && this.props.hostings.get('products').valueSeq().map(product =>
+          (!this.state.fetchingHostings && this.props.hostings.get('products').valueSeq().map(product =>
             <CatalogCard
               key={product.id}
               addToCart={this.addToCart}
@@ -58,7 +58,7 @@ HostingCatalog.propTypes = {
     PropTypes.object,
   ])).isRequired,
   addProduct: PropTypes.func.isRequired,
-  fetchProducts: PropTypes.func.isRequired,
+  fetchHostings: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -68,5 +68,5 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, {
   setRoute,
   addProduct,
-  fetchProducts,
+  fetchHostings,
 })(HostingCatalog);

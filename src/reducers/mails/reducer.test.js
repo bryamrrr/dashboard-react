@@ -1,13 +1,13 @@
 import reducer, { initialState } from './reducer';
 
-import { SET_HOSTINGS } from './actions';
+import { SET_MAILS } from './actions';
 
 describe('Domains - Reducer', () => {
   let action;
 
   beforeEach(() => {
     action = {
-      type: SET_HOSTINGS,
+      type: SET_MAILS,
       payload: [{
         period: "Anual",
         price: 178,

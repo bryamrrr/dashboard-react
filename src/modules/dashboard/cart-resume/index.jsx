@@ -15,7 +15,7 @@ class CartResume extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.count > this.props.count) {
+    if (nextProps.cart.items.size > this.props.cart.items.size) {
       this.setState({ addingProduct: true });
 
       setTimeout(() => {
@@ -37,7 +37,7 @@ class CartResume extends Component {
       >
         <div className={className} style={{ backgroundImage: `url(${this.props.context}/images/shopping-cart.png)` }} />
         <div className={styles.counter}>
-          <span>{ this.props.count }</span>
+          <span>{ this.props.cart.items.size }</span>
         </div>
       </div>
     );
@@ -47,13 +47,16 @@ class CartResume extends Component {
 CartResume.propTypes = {
   toggleCart: PropTypes.func.isRequired,
   context: PropTypes.string.isRequired,
-  count: PropTypes.number.isRequired,
+  cart: PropTypes.objectOf(PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.bool,
+    PropTypes.object,
+  ])).isRequired,
 };
 
 function mapStateToProps(state) {
   return {
     context: state.get('context'),
-    count: state.get('cart').count,
     cart: state.get('cart'),
   };
 }

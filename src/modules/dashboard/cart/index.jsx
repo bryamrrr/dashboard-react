@@ -32,7 +32,8 @@ function Cart(props) {
         {(props.cartInfo.items.size > 0 &&
           props.cartInfo.items.valueSeq().map((item) => {
             if (item.get('type') === 'product') {
-              return <CartProduct key={item.get('id')} info={item} />;
+              const productId = item.get('id') || item.get('productId');
+              return <CartProduct key={productId} info={item} />;
             }
             return <CartPackage />;
           })

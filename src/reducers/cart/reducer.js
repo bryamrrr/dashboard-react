@@ -35,16 +35,6 @@ function calcTotal(items) {
   });
 
   return values.reduce((accumulation, current) => accumulation + current);
-
-  // return items.reduce((accumulation, current) => {
-  //   console.log('accumulation', accumulation);
-  //   console.log('current', current);
-  //   const value = (current.get('type') === 'product')
-  //     ? current.get('prices')[current.get('selected').period]
-  //     : current.get('total');
-
-  //   return accumulation + value;
-  // });
 }
 
 function reducer(state = initialState, action) {
@@ -54,8 +44,6 @@ function reducer(state = initialState, action) {
     case CLOSE_CART:
       return state.set('isOpen', false);
     case ADD_PRODUCT: {
-      if (state.items.get(action.payload.item.productId)) return state; // TODO: Show toaster
-
       let productData;
       if (isImmutable(action.payload.item)) {
         productData = action.payload.item
@@ -69,7 +57,7 @@ function reducer(state = initialState, action) {
       }
 
       const newState = state
-        .setIn(['items', action.payload.item.productId], productData)
+        .setIn(['items', `item${state.count + 1}`], productData)
         .set('count', state.count + 1);
 
       return newState.set('total', calcTotal(newState.get('items')));

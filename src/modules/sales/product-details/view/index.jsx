@@ -21,13 +21,15 @@ class ProductDetails extends Component {
     this.state = {
       fetchingPackages: true,
       product: this.props.items.get(productId),
+      itemId: this.context.router.route.match.params.productId,
     };
   }
 
   async componentWillMount() {
     if (this.state.product.packages) return this.setState({ fetchingPackages: false });
 
-    await this.props.fetchPackages(this.state.product.get('productId'));
+    const productId = this.props.items.get(this.state.itemId).get('productId');
+    await this.props.fetchPackages(this.state.itemId, productId);
     return this.setState({ fetchingPackages: false });
   }
 
@@ -38,8 +40,8 @@ class ProductDetails extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const productId = this.state.product.get('productId');
-    const product = nextProps.items.get(productId);
+    // const productId = this.state.product.get('productId');
+    const product = nextProps.items.get(this.state.itemId);
     if (product) this.setState({ product });
   }
 

@@ -1,19 +1,19 @@
 import constants from '../../extra/constants';
 import httpRequest from '../../extra/http-request';
 
-export const SET_HOSTINGS = 'SET_HOSTINGS';
+export const SET_MAILS = 'SET_MAILS';
 
-export function setHostings(data) {
+export function setMails(data) {
   return {
-    type: SET_HOSTINGS,
+    type: SET_MAILS,
     payload: data,
   };
 }
 
-export function fetchHostings() {
+export function fetchMails() {
   return async (dispatch) => {
-    const url = `${constants.urls.API_MOCKS}/products/hosting`;
+    const url = `${constants.urls.API_MOCKS}/products/email`;
     const { data: { results } } = await httpRequest('GET', url);
-    dispatch(setHostings(results));
+    dispatch(setMails(results));
   };
 }

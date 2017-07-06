@@ -31,10 +31,10 @@ export function setPackages(productId, packages) {
   };
 }
 
-export function fetchPackages(productId) {
+export function fetchPackages(itemId, productId) {
   return async (dispatch) => {
     const url = `${constants.urls.API_MOCKS}/packages/${productId}`;
     const { data: { results } } = await httpRequest('GET', url);
-    dispatch(setPackages(productId, results));
+    dispatch(setPackages(itemId, results));
   };
 }

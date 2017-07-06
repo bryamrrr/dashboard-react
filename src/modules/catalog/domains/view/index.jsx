@@ -19,9 +19,7 @@ class DomainsCatalog extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = {
-      domains: null,
-    };
+    this.state = { domains: null };
 
     this.addToCart = this.addToCart.bind(this);
     this.getDomains = this.getDomains.bind(this);
@@ -48,7 +46,7 @@ class DomainsCatalog extends Component {
     domain.selected = domain.prices.Anual;
     this.props.addProduct(domain, 'domain');
 
-    const url = `/detalle-producto/${domain.productId}/paquetes`;
+    const url = `/detalle-producto/item${this.props.cart.count + 1}/paquetes`;
     this.context.router.history.push(url);
   }
 
@@ -98,6 +96,7 @@ DomainsCatalog.propTypes = {
     PropTypes.object,
   ])).isRequired,
   addProduct: PropTypes.func.isRequired,
+  cart: PropTypes.shape({ count: PropTypes.number }).isRequired,
   fetchPrices: PropTypes.func.isRequired,
   setRoute: PropTypes.func.isRequired,
 };
@@ -110,6 +109,7 @@ function mapStateToProps(state) {
   return {
     prices: state.get('domains').prices,
     zones: state.get('domains').zones,
+    cart: state.get('cart'),
   };
 }
 

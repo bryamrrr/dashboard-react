@@ -71,7 +71,7 @@ describe('Cart - Reducer', () => {
 
     test('add new product to cart', () => {
       const state = reducer(undefined, action);
-      expect(state.items.get('1')).not.toBeUndefined();
+      expect(state.items.get('item1')).not.toBeUndefined();
 
       action.payload = {
         item: {
@@ -87,16 +87,16 @@ describe('Cart - Reducer', () => {
 
       const newState = reducer(state, action);
       expect(newState.count).toEqual(2);
-      expect(newState.items.get('1')).not.toBeUndefined();
-      expect(newState.items.get('1').get('type')).toEqual('product');
-      expect(newState.items.get('1').get('category')).toEqual('domain');
-      expect(newState.items.get('2')).not.toBeUndefined();
-      expect(newState.items.get('2').get('category')).toEqual('domain');
+      expect(newState.items.get('item1')).not.toBeUndefined();
+      expect(newState.items.get('item1').get('type')).toEqual('product');
+      expect(newState.items.get('item1').get('category')).toEqual('domain');
+      expect(newState.items.get('item2')).not.toBeUndefined();
+      expect(newState.items.get('item2').get('category')).toEqual('domain');
     })
 
     test('add new product to cart', () => {
       const state = reducer(undefined, action);
-      expect(state.items.get('1')).not.toBeUndefined();
+      expect(state.items.get('item1')).not.toBeUndefined();
       expect(state.total).toEqual(100);
 
       action.payload = {
@@ -113,21 +113,13 @@ describe('Cart - Reducer', () => {
 
       const newState = reducer(state, action);
       expect(newState.count).toEqual(2);
-      expect(newState.items.get('1')).not.toBeUndefined();
-      expect(newState.items.get('1').get('type')).toEqual('product');
-      expect(newState.items.get('1').get('category')).toEqual('domain');
-      expect(newState.items.get('2')).not.toBeUndefined();
-      expect(newState.items.get('2').get('category')).toEqual('domain');
+      expect(newState.items.get('item1')).not.toBeUndefined();
+      expect(newState.items.get('item1').get('type')).toEqual('product');
+      expect(newState.items.get('item1').get('category')).toEqual('domain');
+      expect(newState.items.get('item2')).not.toBeUndefined();
+      expect(newState.items.get('item2').get('category')).toEqual('domain');
       expect(newState.total).toEqual(250);
     })
-
-    // TODO Show toaster
-    // test('doesnt add the same product twice', () => {
-    //   const state = {
-    //     items: [{ productId: "1" }],
-    //   }
-    //   expect(reducer(state, action).items).toHaveLength(1);
-    // })
   });
 
   describe('setPackages', () => {
