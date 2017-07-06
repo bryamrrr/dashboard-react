@@ -30,12 +30,11 @@ function Cart(props) {
         {(props.cartInfo.items.size === 0 &&
           <div className={styles.info}>El carrito está vacío.</div>)}
         {(props.cartInfo.items.size > 0 &&
-          props.cartInfo.items.valueSeq().map((item) => {
-            if (item.get('type') === 'product') {
-              const productId = item.get('id') || item.get('productId');
-              return <CartProduct key={productId} info={item} />;
-            }
-            return <CartPackage />;
+          props.cartInfo.items.entrySeq().map((data) => {
+            const key = data[0];
+            const item = data[1];
+            if (item.get('type') === 'product') return <CartProduct key={key} info={item} />;
+            return <CartPackage key={key} info={item} />;
           })
         )}
       </div>
