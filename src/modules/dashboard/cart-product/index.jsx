@@ -11,12 +11,12 @@ function CartProduct(props) {
   let name = '';
 
   switch (props.info.get('category')) {
-    case 'hosting':
+    case 'Hosting':
       className = 'red';
       iconName = 'linearicon-drawer2';
       name = props.info.get('name');
       break;
-    case 'domain':
+    case 'Dominio':
       className = 'orange';
       iconName = 'linearicon-earth';
       name = props.info.get('domain');

@@ -182,21 +182,13 @@ describe('Cart - Reducer', () => {
               domain: 'HOSTI 100',
             }],
           },
-          product: {
-            productId: '1',
-            domain: 'miempresa.pe',
-            prices: {
-              Anual: { price: '100' }
-            },
-            selected: { period: 'Anual' },
-          },
         },
       };
 
       const newState = reducer(state, newAction);
       expect(newState.count).toEqual(1);
-      expect(newState.items.get('item1').get('type')).toEqual('package');
-      expect(newState.items.get('item1').get('products').size).toEqual(2);
+      expect(newState.items.get('package1').get('type')).toEqual('package');
+      expect(newState.items.get('package1').get('products').size).toEqual(2);
       expect(newState.items.size).toEqual(1);
     });
   });

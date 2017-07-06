@@ -39,7 +39,7 @@ class HostingCatalog extends Component {
   }
 
   addToCart(item) {
-    this.props.addProduct(item, 'hosting');
+    this.props.addProduct(item, 'Hosting');
   }
 
   render() {

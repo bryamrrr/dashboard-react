@@ -31,7 +31,7 @@ class MailsCatalog extends Component {
   }
 
   addToCart(item) {
-    this.props.addProduct(item, 'hosting');
+    this.props.addProduct(item, 'Email'); // Name 'Email' its a backend definition
   }
 
   render() {

@@ -9,7 +9,10 @@ import Hexagon from '../../../../components/hexagon';
 import FormButton from '../../../../components/form-button';
 
 import { setRoute } from '../../../../reducers/routes/actions';
-import { fetchPackages } from '../../../../reducers/cart/actions';
+import {
+  addPackage,
+  fetchPackages,
+} from '../../../../reducers/cart/actions';
 
 import styles from './styles.css';
 
@@ -47,8 +50,9 @@ class ProductDetails extends Component {
 
   addToCart(packageData) {
     // It should sends package data with current product data
-    console.log(this);
-    console.log('se quiere enviar la data', packageData);
+    this.props.addPackage(this.state.itemId, packageData);
+    const url = '/catalogo/dominios';
+    this.context.router.history.push(url);
   }
 
   changeSelected(period) {
@@ -67,22 +71,19 @@ class ProductDetails extends Component {
       ? product.get('domain')
       : product.get('name');
 
-    let category = '';
+    let category = product.get('category');
     let icon = '';
     let color = '';
-    switch (product.get('category')) {
-      case 'domain':
-        category = 'Dominio';
+    switch (category) {
+      case 'Dominio':
         icon = 'linearicon-earth';
         color = 'orange';
         break;
-      case 'hosting':
-        category = 'Hosting';
+      case 'Hosting':
         icon = 'linearicon-drawer2';
         color = 'red';
         break;
-      case 'mail':
-        category = 'Mail';
+      case 'Mail':
         icon = 'linearicon-envelope';
         color = 'blue';
         break;
@@ -167,6 +168,7 @@ ProductDetails.propTypes = {
     PropTypes.object,
   ])).isRequired,
   fetchPackages: PropTypes.func.isRequired,
+  addPackage: PropTypes.func.isRequired,
   setRoute: PropTypes.func.isRequired,
 };
 
@@ -182,5 +184,6 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
   setRoute,
+  addPackage,
   fetchPackages,
 })(ProductDetails);

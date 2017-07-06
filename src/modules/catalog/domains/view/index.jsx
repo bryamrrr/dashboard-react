@@ -44,7 +44,7 @@ class DomainsCatalog extends Component {
 
     domain.prices = _.mapKeys(pricesData.prices.buy, 'period');
     domain.selected = domain.prices.Anual;
-    this.props.addProduct(domain, 'domain');
+    this.props.addProduct(domain, 'Dominio');
 
     const url = `/detalle-producto/item${this.props.cart.count + 1}/paquetes`;
     this.context.router.history.push(url);

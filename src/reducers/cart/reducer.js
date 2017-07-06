@@ -84,15 +84,21 @@ function reducer(state = initialState, action) {
       });
 
       const data = map({
+        period: action.payload.packageData.period,
+        currencySymbol: action.payload.packageData.currencySymbol,
+        total: action.payload.packageData.total,
+        name: action.payload.packageData.name,
         type: 'package',
         products: products.merge(product),
       });
 
-      return state
-        .setIn([
-          'items',
-          action.payload.item,
-        ], data);
+      const items = state.get('items')
+        .delete(action.payload.item)
+        .set(`package${state.count}`, data);
+
+      const newState = state.set('items', items);
+
+      return newState.set('total', calcTotal(newState.get('items')));
     }
     default:
       return state;
