@@ -5,7 +5,10 @@ import {
 
 import _ from 'lodash';
 
-import { SET_HOSTINGS } from './actions';
+import {
+  SET_HOSTINGS,
+  SET_HOSTING_PRICES,
+} from './actions';
 
 const HostingsRecord = Record({
   products: map(),
@@ -18,6 +21,8 @@ function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_HOSTINGS:
       return state.set('products', map(_.mapKeys(action.payload, 'id')));
+    case SET_HOSTING_PRICES:
+      return state.set('prices', _.mapKeys(action.payload, 'id'));
     default:
       return state;
   }

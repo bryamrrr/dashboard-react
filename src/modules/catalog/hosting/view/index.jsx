@@ -8,7 +8,10 @@ import LoadingSpin from '../../../../components/loading-spin';
 
 import { setRoute } from '../../../../reducers/routes/actions';
 import { addProduct } from '../../../../reducers/cart/actions';
-import { fetchHostings } from '../../../../reducers/hostings/actions';
+import {
+  fetchHostings,
+  fetchHostingPrices,
+} from '../../../../reducers/hostings/actions';
 
 import styles from './styles.css';
 
@@ -28,6 +31,11 @@ class HostingCatalog extends Component {
 
     await this.props.fetchHostings();
     return this.setState({ fetchingHostings: false });
+  }
+
+  componentDidMount() {
+    // If store hasn't domain prices, then we make a request
+    if (this.props.hostings.prices.size === 0) this.props.fetchHostingPrices();
   }
 
   addToCart(item) {
@@ -55,10 +63,13 @@ class HostingCatalog extends Component {
 
 HostingCatalog.propTypes = {
   hostings: PropTypes.objectOf(PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.bool,
     PropTypes.object,
   ])).isRequired,
   addProduct: PropTypes.func.isRequired,
   fetchHostings: PropTypes.func.isRequired,
+  fetchHostingPrices: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -69,4 +80,5 @@ export default connect(mapStateToProps, {
   setRoute,
   addProduct,
   fetchHostings,
+  fetchHostingPrices,
 })(HostingCatalog);
