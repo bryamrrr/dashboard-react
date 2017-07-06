@@ -19,15 +19,22 @@ class Cart extends Component {
     super(props, context);
 
     this.goToPaymentDetails = this.goToPaymentDetails.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
+    this.showPackages = this.showPackages.bind(this);
   }
 
   deleteItem(item) {
-    console.log(this);
-    console.log('eliminando', item);
+    this.props.deleteItem(item);
   }
 
   goToPaymentDetails() {
     const url = '/compra';
+    this.context.router.history.push(url);
+  }
+
+  showPackages(item) {
+    const url = `/detalle-producto/${item}/paquetes`;
+    this.props.closeCart();
     this.context.router.history.push(url);
   }
 
@@ -59,6 +66,7 @@ class Cart extends Component {
                   itemId={key}
                   info={item}
                   deleteItem={this.deleteItem}
+                  showPackages={this.showPackages}
                 />);
               }
 
@@ -99,6 +107,7 @@ Cart.propTypes = {
     total: PropTypes.number,
   }).isRequired,
   closeCart: PropTypes.func.isRequired,
+  deleteItem: PropTypes.func.isRequired,
 };
 
 

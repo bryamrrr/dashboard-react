@@ -16,7 +16,9 @@ function CartPackage(props) {
         >
           <i className="linearicon-cross" />
         </button>
-        {props.info.get('products').valueSeq().map((product) => {
+        {props.info.get('products').valueSeq().map((product, index) => {
+          const key = `${product.get('id')}-${index}`;
+
           let category = product.get('category');
           let icon = '';
           let color = '';
@@ -37,7 +39,7 @@ function CartPackage(props) {
               category = 'Producto';
           }
           return (
-            <div key={product.get('id')} className={styles.item}>
+            <div key={key} className={styles.item}>
               <Hexagon color={color}>
                 <i className={icon} />
               </Hexagon>

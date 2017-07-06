@@ -28,7 +28,11 @@ function CartProduct(props) {
   }
 
   return (
-    <div className={`${styles.container} ${styles[className]}`}>
+    <div
+      className={`${styles.container} ${styles[className]}`}
+      onClick={() => props.showPackages(props.itemId)}
+      aria-hidden
+    >
       <Hexagon color={className}>
         <i className={iconName} />
       </Hexagon>
@@ -65,6 +69,7 @@ CartProduct.propTypes = {
     PropTypes.object,
   ])).isRequired,
   deleteItem: PropTypes.func.isRequired,
+  showPackages: PropTypes.func.isRequired,
   itemId: PropTypes.string.isRequired,
 };
 

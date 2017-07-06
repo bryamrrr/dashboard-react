@@ -131,29 +131,33 @@ class ProductDetails extends Component {
           ||
           (!this.state.fetchingPackages && <div className={styles.packages}>
             <h2>Complementa tu compra:</h2>
-            {product.get('packages').valueSeq().map(packageData =>
-              <section key={packageData.id} className={styles.packageContainer}>
-                <article className={styles.item}>
-                  <div className={styles.amount}>+ S/ 80.00</div>
-                  <div className={styles.itemInfo}>
-                    <i className="linearicon-papers" />
-                    <div className={styles.packageDetail}>
-                      <p>Por la compra de este {category} llévate:</p>
-                      {packageData.remainingProducts.map(productData =>
-                        <a key={productData.id}>
-                          <span>{productData.name}</span>
-                        </a>,
-                      )}
+            {product.get('packages').valueSeq().map((packageData) => {
+              const remainingPrice = packageData.total - product.get('selected').price;
+
+              return (
+                <section key={packageData.id} className={styles.packageContainer}>
+                  <article className={styles.item}>
+                    <div className={styles.amount}>{`+ ${packageData.currencySymbol} ${remainingPrice}.00`}</div>
+                    <div className={styles.itemInfo}>
+                      <i className="linearicon-papers" />
+                      <div className={styles.packageDetail}>
+                        <p>Por la compra de este paquete llévate:</p>
+                        {packageData.remainingProducts.map(productData =>
+                          <a key={productData.id}>
+                            <span>{productData.name}</span>
+                          </a>,
+                        )}
+                      </div>
                     </div>
-                  </div>
-                  <FormButton
-                    callToAction="Agregar al carrito"
-                    includeIcon="linearicon-cart"
-                    onClick={() => this.addToCart(packageData)}
-                  />
-                </article>
-              </section>,
-            )}
+                    <FormButton
+                      callToAction="Agregar al carrito"
+                      includeIcon="linearicon-cart"
+                      onClick={() => this.addToCart(packageData)}
+                    />
+                  </article>
+                </section>
+              );
+            })}
           </div>)
         )}
       </div>
