@@ -12,6 +12,7 @@ import {
   ADD_PRODUCT,
   ADD_PACKAGE,
   DELETE_ITEM,
+  SELECT_PERIOD,
   toggleCart,
   closeCart,
   addProduct,
@@ -19,6 +20,7 @@ import {
   fetchPackages,
   setPackages,
   deleteItem,
+  selectPeriod,
 } from './actions';
 
 const middlewares = [thunk];
@@ -105,6 +107,21 @@ describe('Cart - Actions', () => {
     test('has the correct payload', () => {
       const action = deleteItem('item1');
       expect(action.payload).toEqual('item1');
+    });
+  });
+
+  describe('SELECT_PERIOD', () => {
+    test('has the correct type', () => {
+      const action = selectPeriod();
+      expect(action.type).toEqual(SELECT_PERIOD);
+    });
+
+    test('has the correct payload', () => {
+      const action = selectPeriod('item1', { period: '1 año' });
+      expect(action.payload).toEqual({
+        item: 'item1',
+        selected: { period: '1 año' },
+      });
     });
   });
 });

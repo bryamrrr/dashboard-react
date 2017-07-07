@@ -13,6 +13,7 @@ import {
   SET_PACKAGES,
   ADD_PACKAGE,
   DELETE_ITEM,
+  SELECT_PERIOD,
 } from './actions';
 
 const CartRecord = Record({
@@ -28,13 +29,7 @@ export const initialState = new CartRecord();
 function calcTotal(items) {
   const values = [];
 
-  items.forEach((item) => {
-    const value = (item.get('type') === 'product')
-      ? item.get('prices')[item.get('selected').period].price
-      : item.get('total');
-
-    values.push(parseInt(value, 10));
-  });
+  items.forEach(item => values.push(parseInt(item.get('selected').price, 10)));
 
   return values.reduce((accumulation, current) => accumulation + current, 0);
 }
@@ -86,8 +81,8 @@ function reducer(state = initialState, action) {
 
       const data = map({
         period: action.payload.packageData.period,
-        currencySymbol: action.payload.packageData.currencySymbol,
-        total: action.payload.packageData.total,
+        prices: action.payload.packageData.prices,
+        selected: action.payload.packageData.prices[0],
         name: action.payload.packageData.name,
         type: 'package',
         products: products.merge(product),
@@ -99,6 +94,10 @@ function reducer(state = initialState, action) {
 
       const newState = state.set('items', items);
 
+      return newState.set('total', calcTotal(newState.get('items')));
+    }
+    case SELECT_PERIOD: {
+      const newState = state.setIn(['items', action.payload.item, 'selected'], action.payload.selected);
       return newState.set('total', calcTotal(newState.get('items')));
     }
     case DELETE_ITEM: {

@@ -7,6 +7,7 @@ export const ADD_PRODUCT = 'ADD_PRODUCT';
 export const SET_PACKAGES = 'SET_PACKAGES';
 export const ADD_PACKAGE = 'ADD_PACKAGE';
 export const DELETE_ITEM = 'DELETE_ITEM';
+export const SELECT_PERIOD = 'SELECT_PERIOD';
 
 export function toggleCart() {
   return { type: TOGGLE_CART };
@@ -47,6 +48,16 @@ export function deleteItem(item) {
   return {
     type: DELETE_ITEM,
     payload: item,
+  };
+}
+
+export function selectPeriod(item, selected) {
+  return {
+    type: SELECT_PERIOD,
+    payload: {
+      item,
+      selected,
+    },
   };
 }
 

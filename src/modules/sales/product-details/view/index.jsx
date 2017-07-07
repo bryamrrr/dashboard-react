@@ -12,6 +12,7 @@ import { setRoute } from '../../../../reducers/routes/actions';
 import {
   addPackage,
   fetchPackages,
+  selectPeriod,
 } from '../../../../reducers/cart/actions';
 
 import styles from './styles.css';
@@ -26,6 +27,8 @@ class ProductDetails extends Component {
       product: this.props.items.get(productId),
       itemId: this.context.router.route.match.params.productId,
     };
+
+    this.changeSelected = this.changeSelected.bind(this);
   }
 
   async componentWillMount() {
@@ -56,12 +59,7 @@ class ProductDetails extends Component {
   }
 
   changeSelected(period) {
-    console.log('algo cambió en el combo', period);
-    console.log(this);
-    // const newDomainData = _.extend({}, this.state.domains);
-    // newDomainData[trackItem].selected = period;
-
-    // this.setState({ domains: newDomainData });
+    this.props.selectPeriod(this.state.itemId, period);
   }
 
   render() {
@@ -130,18 +128,18 @@ class ProductDetails extends Component {
           (this.state.fetchingPackages && <LoadingSpin />)
           ||
           (!this.state.fetchingPackages && <div className={styles.packages}>
-            <h2>Complementa tu compra:</h2>
+            <h2>Te puede interesar:</h2>
             {product.get('packages').valueSeq().map((packageData) => {
-              const remainingPrice = packageData.total - product.get('selected').price;
-
+              const price = packageData.prices[0].price;
+              const currencySymbol = packageData.prices[0].currencySymbol;
               return (
                 <section key={packageData.id} className={styles.packageContainer}>
                   <article className={styles.item}>
-                    <div className={styles.amount}>{`+ ${packageData.currencySymbol} ${remainingPrice}.00`}</div>
+                    <div className={styles.amount}>{`${currencySymbol} ${price}.00`}</div>
                     <div className={styles.itemInfo}>
                       <i className="linearicon-papers" />
                       <div className={styles.packageDetail}>
-                        <p>Por la compra de este paquete llévate:</p>
+                        <p>Llévate tu producto junto con:</p>
                         {packageData.remainingProducts.map(productData =>
                           <a key={productData.id}>
                             <span>{productData.name}</span>
@@ -173,6 +171,7 @@ ProductDetails.propTypes = {
   ])).isRequired,
   fetchPackages: PropTypes.func.isRequired,
   addPackage: PropTypes.func.isRequired,
+  selectPeriod: PropTypes.func.isRequired,
   setRoute: PropTypes.func.isRequired,
 };
 
@@ -190,4 +189,5 @@ export default connect(mapStateToProps, {
   setRoute,
   addPackage,
   fetchPackages,
+  selectPeriod,
 })(ProductDetails);

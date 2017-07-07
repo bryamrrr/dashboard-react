@@ -54,7 +54,10 @@ function CartProduct(props) {
       </div>
       <button
         className={styles.close}
-        onClick={() => props.deleteItem(props.itemId)}
+        onClick={(e) => {
+          e.stopPropagation();
+          props.deleteItem(props.itemId);
+        }}
       >
         <i className="linearicon-cross" />
       </button>

@@ -11,6 +11,7 @@ import {
   SET_PACKAGES,
   ADD_PACKAGE,
   DELETE_ITEM,
+  SELECT_PERIOD,
 } from './actions';
 
 describe('Cart - Reducer', () => {
@@ -61,10 +62,7 @@ describe('Cart - Reducer', () => {
           item: {
             productId: '1',
             domain: 'miempresa.pe',
-            prices: {
-              Anual: { price: '100' }
-            },
-            selected: { period: 'Anual' },
+            selected: { period: 'Anual', price: 100 },
           },
           category: 'domain',
         },
@@ -79,10 +77,7 @@ describe('Cart - Reducer', () => {
         item: {
           productId: '2',
           domain: 'miempresa.com',
-          prices: {
-            Anual: { price: '100' }
-          },
-          selected: { period: 'Anual' },
+          selected: { period: 'Anual', price: 100 },
         },
         category: 'domain',
       };
@@ -105,10 +100,7 @@ describe('Cart - Reducer', () => {
         item: {
           productId: '2',
           domain: 'miempresa.com',
-          prices: {
-            Anual: { price: '150' },
-          },
-          selected: { period: 'Anual' },
+          selected: { period: 'Anual', price: 150 },
         },
         category: 'domain',
       };
@@ -158,10 +150,7 @@ describe('Cart - Reducer', () => {
         item: {
           productId: '1',
           domain: 'miempresa.pe',
-          prices: {
-            Anual: { price: '100' }
-          },
-          selected: { period: 'Anual' },
+          selected: { period: 'Anual', price: 100 },
         },
         category: 'domain',
       },
@@ -182,6 +171,7 @@ describe('Cart - Reducer', () => {
               productId: '2',
               domain: 'HOSTI 100',
             }],
+            prices: [{ period: 'Anual', price: 100 }],
           },
         },
       };
@@ -224,6 +214,49 @@ describe('Cart - Reducer', () => {
       expect(newState.count).toEqual(1); // Doesnt change
       expect(newState.items.get('item1')).toBeUndefined();
       expect(newState.items.size).toEqual(0);
+    });
+  });
+
+  describe('SELECT_PERIOD', () => {
+    const action = {
+      type: ADD_PRODUCT,
+      payload: {
+        item: {
+          productId: '1',
+          domain: 'miempresa.pe',
+          selected: { period: 'Anual', price: 100 },
+        },
+        category: 'domain',
+      },
+    };
+
+    test('delete an item from cart', () => {
+      const state = reducer(undefined, action);
+      expect(state.total).toEqual(100);
+
+      const selectAction = {
+        type: SELECT_PERIOD,
+        payload: {
+          item: 'item1',
+          selected: {
+            currencySymbol: 'S/',
+            period: '2 Años',
+            periodId: 'c181f276-09cc-41d6-a6d9-52dc357a2689',
+            price: 193,
+          },
+        },
+      };
+
+      const newState = reducer(state, selectAction);
+      expect(newState.count).toEqual(1); // Doesnt change
+      expect(newState.items.get('item1')).not.toBeUndefined();
+      expect(newState.items.get('item1').get('selected')).toEqual({
+        currencySymbol: 'S/',
+        period: '2 Años',
+        periodId: 'c181f276-09cc-41d6-a6d9-52dc357a2689',
+        price: 193,
+      });
+      expect(newState.total).toEqual(193);
     });
   });
 });

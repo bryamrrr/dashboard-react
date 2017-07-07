@@ -48,10 +48,10 @@ function CartPackage(props) {
           );
         })}
         <div className={styles.footer}>
-          <div className={styles.period}>{props.info.get('period')}</div>
+          <div className={styles.period}>{props.info.get('selected').period}</div>
           <div>
-            <span className={styles.currency}>{props.info.get('currencySymbol')}</span>
-            <span className={styles.price}>{`${props.info.get('total')}.00`}</span>
+            <span className={styles.currency}>{props.info.get('selected').currencySymbol}</span>
+            <span className={styles.price}>{`${props.info.get('selected').price}.00`}</span>
           </div>
         </div>
       </div>
