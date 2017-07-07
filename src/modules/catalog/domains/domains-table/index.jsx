@@ -37,9 +37,9 @@ class DomainsTable extends Component {
   }
 
   addToCart(domain) {
-    this.props.addProduct(domain, 'domain');
+    this.props.addProduct(domain, 'Dominio');
 
-    const url = `/detalle-producto/${domain.productId}/paquetes`;
+    const url = `/detalle-producto/item${this.props.cart.count + 1}/paquetes`;
     this.context.router.history.push(url);
   }
 
@@ -114,6 +114,7 @@ class DomainsTable extends Component {
 DomainsTable.propTypes = {
   addProduct: PropTypes.func.isRequired,
   domains: PropTypes.arrayOf(PropTypes.object).isRequired,
+  cart: PropTypes.shape({ count: PropTypes.number }).isRequired,
   prices: PropTypes.objectOf(PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.bool,
@@ -125,4 +126,8 @@ DomainsTable.contextTypes = {
   router: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
-export default connect(null, { addProduct })(DomainsTable);
+function mapStateToProps(state) {
+  return { cart: state.get('cart') };
+}
+
+export default connect(mapStateToProps, { addProduct })(DomainsTable);
