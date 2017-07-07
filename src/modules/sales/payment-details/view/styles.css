@@ -100,3 +100,15 @@
 }
 
 .link:hover { border-color: transparent; }
+
+.cartContainer {
+  padding-left: 30px;
+  flex: 1;
+}
+
+.cartContainer > div {
+  display: block;
+  width: 100%;
+  height: 250px;
+  background-color: blue;
+}

@@ -14,7 +14,7 @@ function PaymentContactForm() {
       />
       <FormInput
         name="ruc"
-        includeIcon="linearicon-user"
+        includeIcon="linearicon-profile"
         placeholder="RUC"
       />
       <FormInput

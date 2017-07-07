@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { setRoute } from '../../../../reducers/routes/actions';
 
 import PaymentContactForm from '../payment-contact-form';
+import PaymentCartDetail from '../payment-cart-detail';
 
 import CheckBox from '../../../../components/checkbox';
 import FormButton from '../../../../components/form-button';
@@ -80,7 +81,10 @@ class PaymentDetails extends Component {
             callToAction="Finalizar compra"
           />
         </div>
-        <div>CARRITO</div>
+        <div className={styles.cartContainer}>
+          <h2>Carrito de compras</h2>
+          <PaymentCartDetail />
+        </div>
       </div>
     );
   }
