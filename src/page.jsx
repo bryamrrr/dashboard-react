@@ -26,6 +26,10 @@ import UserData from './modules/user/data/view';
 import UserPassword from './modules/user/password/view';
 import UserContact from './modules/user/contact/view';
 import UserContactNew from './modules/user/contact-new/view';
+import UserAddress from './modules/user/address/view';
+import UserAddressNew from './modules/user/address-new/view';
+import UserPurchases from './modules/user/purchases/view';
+import UserBills from './modules/user/bills/view';
 
 export default function () {
   return (
@@ -53,6 +57,10 @@ export default function () {
         <PrivateRoute path="/usuario/cambio-contraseña" exact><UserPassword /></PrivateRoute>
         <PrivateRoute path="/usuario/contactos" exact><UserContact /></PrivateRoute>
         <PrivateRoute path="/usuario/nuevo-contacto" exact><UserContactNew /></PrivateRoute>
+        <PrivateRoute path="/usuario/direcciones" exact><UserAddress /></PrivateRoute>
+        <PrivateRoute path="/usuario/nueva-direccion" exact><UserAddressNew /></PrivateRoute>
+        <PrivateRoute path="/usuario/compras" exact><UserPurchases /></PrivateRoute>
+        <PrivateRoute path="/usuario/comprobantes" exact><UserBills /></PrivateRoute>
       </Switch>
     </main>
   );

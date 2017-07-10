@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 
-import NewContactForm from '../new-contact-form';
+import NewAddressForm from '../new-address-form';
 import Hexagon from '../../../../components/hexagon';
 
 import { setRoute } from '../../../../reducers/routes/actions';
 
 import styles from './styles.css';
 
-class UserContactNew extends Component {
+class UserAddressNew extends Component {
   componentWillMount() {
-    this.props.setRoute({ title: 'Mis datos' }, { title: 'Contactos' }, { title: 'Nuevo' });
+    this.props.setRoute({ title: 'Mis datos' }, { title: 'Direcciones' }, { title: 'Nueva' });
   }
 
   render() {
@@ -22,16 +22,16 @@ class UserContactNew extends Component {
           <Hexagon color="orange">
             <i className="linearicon-user" />
           </Hexagon>
-          <h2>Nuevo contacto</h2>
+          <h2>Nueva dirección</h2>
         </div>
-        <NewContactForm />
+        <NewAddressForm />
       </div>
     );
   }
 }
 
-UserContactNew.propTypes = {
+UserAddressNew.propTypes = {
   setRoute: PropTypes.func.isRequired,
 };
 
-export default connect(null, { setRoute })(UserContactNew);
+export default connect(null, { setRoute })(UserAddressNew);

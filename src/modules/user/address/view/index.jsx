@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 
-import ContactTable from '../contact-table';
+import AddressTable from '../address-table';
 
 import Hexagon from '../../../../components/hexagon';
 import FormButton from '../../../../components/form-button';
@@ -16,9 +16,9 @@ import { setRoute } from '../../../../reducers/routes/actions';
 
 import styles from './styles.css';
 
-class UserContact extends Component {
+class UserAddress extends Component {
   componentWillMount() {
-    this.props.setRoute({ title: 'Mis datos' }, { title: 'Contactos' });
+    this.props.setRoute({ title: 'Mis datos' }, { title: 'Direcciones' });
   }
 
   render() {
@@ -28,30 +28,30 @@ class UserContact extends Component {
           <Hexagon color="orange">
             <i className="linearicon-users2" />
           </Hexagon>
-          <h2>Mis contactos</h2>
+          <h2>Mis direcciones</h2>
         </div>
         <div className={styles.filterContainer}>
           <div className={styles.searchContainer}>
             <TableSearch />
           </div>
           <div className={styles.buttonContainer}>
-            <Link to="/usuario/nuevo-contacto">
+            <Link to="/usuario/nueva-direccion">
               <FormButton
-                callToAction="Nuevo contacto"
+                callToAction="Nueva dirección"
                 includeIcon="linearicon-user"
               />
             </Link>
           </div>
         </div>
-        <ContactTable />
+        <AddressTable />
         <TablePagination />
       </div>
     );
   }
 }
 
-UserContact.propTypes = {
+UserAddress.propTypes = {
   setRoute: PropTypes.func.isRequired,
 };
 
-export default connect(null, { setRoute })(UserContact);
+export default connect(null, { setRoute })(UserAddress);

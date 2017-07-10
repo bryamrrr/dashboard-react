@@ -1,0 +1,7 @@
+.tdButton {
+  display: flex;
+  padding: 15px 10px;
+  justify-content: center;
+}
+
+.tdButton > div { margin: 0 3px; }

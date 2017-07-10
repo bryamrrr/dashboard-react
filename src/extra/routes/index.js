@@ -97,20 +97,29 @@ export default [
         },
       },
       {
-        title: 'Mis pagos',
-        url: '/usuario/pagos',
+        title: 'Direcciones',
+        url: '/usuario/direcciones',
         route: {
           module: 'Mis datos',
-          view: 'Mis pagos',
+          view: 'Direcciones',
           method: '',
         },
       },
       {
-        title: 'Pendientes de renovación',
-        url: '/usuario/pendientes-renovacion',
+        title: 'Mis compras',
+        url: '/usuario/compras',
         route: {
           module: 'Mis datos',
-          view: 'Pendientes de renovación',
+          view: 'Compras',
+          method: '',
+        },
+      },
+      {
+        title: 'Mis comprobantes',
+        url: '/usuario/comprobantes',
+        route: {
+          module: 'Mis datos',
+          view: 'Comprobantes',
           method: '',
         },
       },

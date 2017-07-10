@@ -4,7 +4,7 @@ import ButtonIcon from '../../../../components/button-icon';
 
 import styles from './styles.css';
 
-function UserContactForm() {
+function ContactTable() {
   return (
     <div className="table-container">
       <table>
@@ -68,4 +68,4 @@ function UserContactForm() {
   );
 }
 
-export default UserContactForm;
+export default ContactTable;

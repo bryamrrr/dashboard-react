@@ -3,55 +3,63 @@ import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 
-import { Link } from 'react-router-dom';
-
-import ContactTable from '../contact-table';
+import PurchaseTable from '../purchase-table';
 
 import Hexagon from '../../../../components/hexagon';
-import FormButton from '../../../../components/form-button';
 import TableSearch from '../../../../components/table-search';
 import TablePagination from '../../../../components/table-pagination';
+import Combo from '../../../../components/combo';
 
 import { setRoute } from '../../../../reducers/routes/actions';
 
 import styles from './styles.css';
 
-class UserContact extends Component {
+class UserPurchases extends Component {
   componentWillMount() {
-    this.props.setRoute({ title: 'Mis datos' }, { title: 'Contactos' });
+    this.props.setRoute({ title: 'Mis datos' }, { title: 'Compras' });
   }
 
   render() {
+    const status = {
+      1: {
+        id: '1',
+        name: 'Pagado',
+      },
+      2: {
+        id: '2',
+        name: 'Pendiente',
+      },
+    };
+
     return (
       <div>
         <div className={styles.title}>
           <Hexagon color="orange">
-            <i className="linearicon-users2" />
+            <i className="linearicon-cart" />
           </Hexagon>
-          <h2>Mis contactos</h2>
+          <h2>Mis compras</h2>
         </div>
         <div className={styles.filterContainer}>
           <div className={styles.searchContainer}>
             <TableSearch />
           </div>
           <div className={styles.buttonContainer}>
-            <Link to="/usuario/nuevo-contacto">
-              <FormButton
-                callToAction="Nuevo contacto"
-                includeIcon="linearicon-user"
-              />
-            </Link>
+            <Combo
+              includeIcon="linearicon-register"
+              placeholder="Selecciona un estado"
+              options={status}
+            />
           </div>
         </div>
-        <ContactTable />
+        <PurchaseTable />
         <TablePagination />
       </div>
     );
   }
 }
 
-UserContact.propTypes = {
+UserPurchases.propTypes = {
   setRoute: PropTypes.func.isRequired,
 };
 
-export default connect(null, { setRoute })(UserContact);
+export default connect(null, { setRoute })(UserPurchases);

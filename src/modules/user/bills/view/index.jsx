@@ -3,22 +3,19 @@ import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 
-import { Link } from 'react-router-dom';
-
-import ContactTable from '../contact-table';
-
 import Hexagon from '../../../../components/hexagon';
-import FormButton from '../../../../components/form-button';
 import TableSearch from '../../../../components/table-search';
 import TablePagination from '../../../../components/table-pagination';
+
+import BillTable from '../bill-table';
 
 import { setRoute } from '../../../../reducers/routes/actions';
 
 import styles from './styles.css';
 
-class UserContact extends Component {
+class UserBill extends Component {
   componentWillMount() {
-    this.props.setRoute({ title: 'Mis datos' }, { title: 'Contactos' });
+    this.props.setRoute({ title: 'Mis datos' }, { title: 'Comprobantes' });
   }
 
   render() {
@@ -26,32 +23,25 @@ class UserContact extends Component {
       <div>
         <div className={styles.title}>
           <Hexagon color="orange">
-            <i className="linearicon-users2" />
+            <i className="linearicon-papers" />
           </Hexagon>
-          <h2>Mis contactos</h2>
+          <h2>Mis comprobantes</h2>
         </div>
         <div className={styles.filterContainer}>
           <div className={styles.searchContainer}>
             <TableSearch />
           </div>
-          <div className={styles.buttonContainer}>
-            <Link to="/usuario/nuevo-contacto">
-              <FormButton
-                callToAction="Nuevo contacto"
-                includeIcon="linearicon-user"
-              />
-            </Link>
-          </div>
+          <div className={styles.buttonContainer} />
         </div>
-        <ContactTable />
+        <BillTable />
         <TablePagination />
       </div>
     );
   }
 }
 
-UserContact.propTypes = {
+UserBill.propTypes = {
   setRoute: PropTypes.func.isRequired,
 };
 
-export default connect(null, { setRoute })(UserContact);
+export default connect(null, { setRoute })(UserBill);

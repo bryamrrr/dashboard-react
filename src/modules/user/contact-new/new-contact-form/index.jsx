@@ -6,7 +6,7 @@ import FormButton from '../../../../components/form-button';
 
 import styles from './styles.css';
 
-function UserNewContactForm() {
+function NewContactForm() {
   const countries = {
     1: {
       id: '1',
@@ -159,4 +159,4 @@ function UserNewContactForm() {
   );
 }
 
-export default UserNewContactForm;
+export default NewContactForm;
