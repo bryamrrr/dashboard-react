@@ -10,8 +10,6 @@ function CartProduct(props) {
   let iconName = '';
   let name = '';
 
-  console.log('cartItem', props.info.get('selected'));
-
   switch (props.info.get('category')) {
     case 'Hosting':
       className = 'red';

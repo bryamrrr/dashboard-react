@@ -64,7 +64,6 @@ HostingCatalog.propTypes = {
     PropTypes.object,
   ])).isRequired,
   addProduct: PropTypes.func.isRequired,
-  fetchHostings: PropTypes.func.isRequired,
   fetchHostingPrices: PropTypes.func.isRequired,
 };
 
@@ -76,5 +75,5 @@ export default connect(mapStateToProps, {
   setRoute,
   addProduct,
   fetchHostings,
-  fetchHostingPrices
+  fetchHostingPrices,
 })(HostingCatalog);

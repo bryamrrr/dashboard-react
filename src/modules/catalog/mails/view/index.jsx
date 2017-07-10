@@ -8,7 +8,10 @@ import LoadingSpin from '../../../../components/loading-spin';
 
 import { setRoute } from '../../../../reducers/routes/actions';
 import { addProduct } from '../../../../reducers/cart/actions';
-import { fetchMails } from '../../../../reducers/mails/actions';
+import {
+  fetchMails,
+  fetchMailPrices,
+} from '../../../../reducers/mails/actions';
 
 import styles from './styles.css';
 
@@ -24,9 +27,10 @@ class MailsCatalog extends Component {
   async componentWillMount() {
     this.props.setRoute({ title: 'Catálogo' }, { title: 'Correos' });
 
-    if (this.props.mails.products.size > 0) return this.setState({ fetchingMails: false });
+    if (this.props.mails.size > 0) return this.setState({ fetchingMails: false });
 
     await this.props.fetchMails();
+    await this.props.fetchMailPrices();
     return this.setState({ fetchingMails: false });
   }
 
@@ -40,7 +44,7 @@ class MailsCatalog extends Component {
         {(
           (this.state.fetchingMails && <LoadingSpin />)
           ||
-          (!this.state.fetchingMails && this.props.mails.get('products').valueSeq().map(product =>
+          (!this.state.fetchingMails && this.props.mails.valueSeq().map(product =>
             <CatalogCard
               key={product.id}
               addToCart={this.addToCart}
@@ -55,18 +59,21 @@ class MailsCatalog extends Component {
 
 MailsCatalog.propTypes = {
   mails: PropTypes.objectOf(PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.bool,
     PropTypes.object,
   ])).isRequired,
   addProduct: PropTypes.func.isRequired,
-  fetchMails: PropTypes.func.isRequired,
+  fetchMailPrices: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
-  return { mails: state.get('mails') };
+  return { mails: state.get('prices').get('mails') };
 }
 
 export default connect(mapStateToProps, {
   setRoute,
   addProduct,
   fetchMails,
+  fetchMailPrices,
 })(MailsCatalog);

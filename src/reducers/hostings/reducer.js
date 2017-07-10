@@ -1,7 +1,4 @@
-import {
-  Record,
-  Map as map,
-} from 'immutable';
+import { Map as map } from 'immutable';
 
 import _ from 'lodash';
 
@@ -18,10 +15,11 @@ function reducer(state = initialState, action) {
       return map(_.mapKeys(action.payload, 'id'));
     case SET_HOSTING_PRICES: {
       const prices = _.mapKeys(action.payload, 'id');
-      return state.map(product => {
-        product.prices = prices[product.id].prices;
-        return product;
-      });
+      return state.map(product =>
+        Object.assign({}, product, {
+          prices: prices[product.id].prices,
+        }),
+      );
     }
     default:
       return state;
