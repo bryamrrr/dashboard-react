@@ -43,6 +43,10 @@ class Cart extends Component {
       ? `${styles.container} ${styles.isOpen}`
       : styles.container;
 
+    const buttonClass = (this.props.cartInfo.items.size > 0)
+      ? styles.pay
+      : `${styles.pay} ${styles.disabled}`;
+
     return (
       <aside className={className}>
         <div className={styles.header}>
@@ -87,10 +91,11 @@ class Cart extends Component {
               <span className={styles.amount}>{`${this.props.cartInfo.total}.00`}</span>
             </div>
           </div>
-          <div className={styles.pay}>
+          <div className={buttonClass}>
             <FormButton
               callToAction="Pagar"
               onClick={this.goToPaymentDetails}
+              disabled={this.props.cartInfo.items.size === 0}
             />
           </div>
         </div>
