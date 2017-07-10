@@ -18,6 +18,7 @@ import MailsCatalog from './modules/catalog/mails/view';
 import ProductDetails from './modules/sales/product-details/view';
 import CartDetails from './modules/sales/cart-details/view';
 import PaymentDetails from './modules/sales/payment-details/view';
+import Order from './modules/sales/order/view';
 
 import DomainsService from './modules/service/domains/view';
 
@@ -44,6 +45,7 @@ export default function () {
         <PrivateRoute path="/detalle-producto/:productId/paquetes" exact><ProductDetails /></PrivateRoute>
         <PrivateRoute path="/detalle-compra" exact><CartDetails /></PrivateRoute>
         <PrivateRoute path="/compra" exact><PaymentDetails /></PrivateRoute>
+        <PrivateRoute path="/orden" exact><Order /></PrivateRoute>
 
         <PrivateRoute path="/servicios/dominios" exact><DomainsService /></PrivateRoute>
 

@@ -14,11 +14,20 @@ import FormButton from '../../../../components/form-button';
 import styles from './styles.css';
 
 class PaymentDetails extends Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.sendPayment = this.sendPayment.bind(this);
+  }
 
   componentDidMount() {
     this.props.setRoute({ title: 'Compra' });
   }
 
+  sendPayment() {
+    const url = '/orden';
+    this.context.router.history.push(url);
+  }
 
   render() {
     return (
@@ -79,6 +88,7 @@ class PaymentDetails extends Component {
           </section>
           <FormButton
             callToAction="Finalizar compra"
+            onClick={this.sendPayment}
           />
         </div>
         <div className={styles.cartContainer}>
@@ -93,6 +103,10 @@ class PaymentDetails extends Component {
 PaymentDetails.propTypes = {
   setRoute: PropTypes.func.isRequired,
   context: PropTypes.string.isRequired,
+};
+
+PaymentDetails.contextTypes = {
+  router: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 function mapStateToProps(state) {
