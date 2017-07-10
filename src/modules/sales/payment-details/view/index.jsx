@@ -32,7 +32,7 @@ class PaymentDetails extends Component {
   render() {
     return (
       <div className={styles.container}>
-        <div>
+        <div className={styles.detail}>
           <h2>Datos de facturación</h2>
           <PaymentContactForm />
           <section>
