@@ -24,6 +24,7 @@ function CartProduct(props) {
     default:
       className = 'blue';
       iconName = 'linearicon-envelope';
+      name = props.info.get('name');
       break;
   }
 
