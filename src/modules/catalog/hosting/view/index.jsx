@@ -27,15 +27,11 @@ class HostingCatalog extends Component {
   async componentWillMount() {
     this.props.setRoute({ title: 'Catálogo' }, { title: 'Hosting' });
 
-    if (this.props.hostings.products.size > 0) return this.setState({ fetchingHostings: false });
+    if (this.props.hostings.size > 0) return this.setState({ fetchingHostings: false });
 
     await this.props.fetchHostings();
+    await this.props.fetchHostingPrices();
     return this.setState({ fetchingHostings: false });
-  }
-
-  componentDidMount() {
-    // If store hasn't domain prices, then we make a request
-    if (this.props.hostings.prices.size === 0) this.props.fetchHostingPrices();
   }
 
   addToCart(item) {
@@ -48,7 +44,7 @@ class HostingCatalog extends Component {
         {(
           (this.state.fetchingHostings && <LoadingSpin />)
           ||
-          (!this.state.fetchingHostings && this.props.hostings.get('products').valueSeq().map(product =>
+          (!this.state.fetchingHostings && this.props.hostings.valueSeq().map(product =>
             <CatalogCard
               key={product.id}
               addToCart={this.addToCart}
@@ -73,12 +69,12 @@ HostingCatalog.propTypes = {
 };
 
 function mapStateToProps(state) {
-  return { hostings: state.get('hostings') };
+  return { hostings: state.get('prices').get('hostings') };
 }
 
 export default connect(mapStateToProps, {
   setRoute,
   addProduct,
   fetchHostings,
-  fetchHostingPrices,
+  fetchHostingPrices
 })(HostingCatalog);

@@ -28,6 +28,10 @@ describe('Domains - Actions', () => {
         .get('/products/hosting')
         .reply(200, products);
 
+      nock(constants.urls.API_MOCKS)
+        .get('/prices?type=hosting')
+        .reply(200, prices);
+
       const store = mockStore(initialState);
 
       return store.dispatch(fetchHostings()).then(() => {
@@ -44,7 +48,7 @@ describe('Domains - Actions', () => {
 
     test('creates setPrices action when fetching prices has been done', () => {
       nock(constants.urls.API_MOCKS)
-        .get('/hostings/prices')
+        .get('/prices?type=hosting')
         .reply(200, prices);
 
       const store = mockStore(initialState);

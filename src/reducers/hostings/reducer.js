@@ -10,19 +10,19 @@ import {
   SET_HOSTING_PRICES,
 } from './actions';
 
-const HostingsRecord = Record({
-  products: map(),
-  prices: map(),
-});
-
-export const initialState = new HostingsRecord();
+export const initialState = map({});
 
 function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_HOSTINGS:
-      return state.set('products', map(_.mapKeys(action.payload, 'id')));
-    case SET_HOSTING_PRICES:
-      return state.set('prices', _.mapKeys(action.payload, 'id'));
+      return map(_.mapKeys(action.payload, 'id'));
+    case SET_HOSTING_PRICES: {
+      const prices = _.mapKeys(action.payload, 'id');
+      return state.map(product => {
+        product.prices = prices[product.id].prices;
+        return product;
+      });
+    }
     default:
       return state;
   }

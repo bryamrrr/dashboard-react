@@ -10,6 +10,8 @@ function CartProduct(props) {
   let iconName = '';
   let name = '';
 
+  console.log('cartItem', props.info.get('selected'));
+
   switch (props.info.get('category')) {
     case 'Hosting':
       className = 'red';
@@ -45,10 +47,10 @@ function CartProduct(props) {
         </div>
         <div>
           <span className={styles.currency}>
-            {props.info.get('prices')[props.info.get('selected').period].currencySymbol}
+            {props.info.get('selected').currencySymbol}
           </span>
           <span className={styles.price}>
-            {`${props.info.get('prices')[props.info.get('selected').period].price}.00`}
+            {`${props.info.get('selected').price}.00`}
           </span>
         </div>
       </div>

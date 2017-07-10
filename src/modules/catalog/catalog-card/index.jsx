@@ -9,13 +9,6 @@ import FormButton from '../../../components/form-button';
 import styles from './styles.css';
 
 function CatalogCard(props) {
-  const dataToSend = map(props.info)
-    .set('selected', { period: 'Anual' })
-    .set('prices', { Anual: {
-      price: props.info.integerPrice,
-      currencySymbol: props.info.currencySymbol,
-    } });
-
   return (
     <Card includeBorder>
       <div className={styles.container}>
@@ -37,7 +30,8 @@ function CatalogCard(props) {
           <FormButton
             callToAction="Agregar al carrito"
             includeIcon="linearicon-cart"
-            onClick={() => props.addToCart(dataToSend)}
+            onClick={() => props.addToCart(map(props.info)
+    .set('selected', props.info.prices.buy[0]))}
           />
         </div>
       </div>
