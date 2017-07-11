@@ -7,6 +7,8 @@ import httpRequest from '../../extra/http-request';
 import ComboSearch from '../combo-search';
 import LoadingSpin from '../loading-spin';
 
+import constants from '../../extra/constants';
+
 import styles from './styles.css';
 
 class DomainSearch extends Component {
@@ -36,7 +38,7 @@ class DomainSearch extends Component {
     // const domain = `${name}.${selected.name}`;
     this.setState({ loading: true });
 
-    const url = 'http://staging-backoffice.rcp.pe:8100/dashboard/api/v1/domains/search';
+    const url = `${constants.urls.API_MOCKS}/domains/search`;
     const { data: { results } } = await httpRequest('GET', url);
 
     this.props.getDomains(results);
