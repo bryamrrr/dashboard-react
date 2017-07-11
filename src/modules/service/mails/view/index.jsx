@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 
-import DomainsTable from '../domains-table';
+import MailsTable from '../mails-table';
 
 import Hexagon from '../../../../components/hexagon';
 import TablePagination from '../../../../components/table-pagination';
@@ -14,7 +14,7 @@ import styles from './styles.css';
 
 class UserAddress extends Component {
   componentWillMount() {
-    this.props.setRoute({ title: 'Mis servicios' }, { title: 'Dominios' });
+    this.props.setRoute({ title: 'Mis servicios' }, { title: 'Correos' });
   }
 
   render() {
@@ -22,14 +22,14 @@ class UserAddress extends Component {
       <div>
         <div className={styles.titleContainer}>
           <div className={styles.title}>
-            <Hexagon color="orange">
-              <i className="linearicon-earth" />
+            <Hexagon color="blue">
+              <i className="linearicon-envelope" />
             </Hexagon>
-            <h2>Dominios</h2>
+            <h2>Correos</h2>
           </div>
-          <p>Un dominio es el nombre que identifica tu sitio web en internet.</p>
+          <p>{'El servicio de correo te permite personalizar la comunicación de tu empresa.'}</p>
         </div>
-        <DomainsTable />
+        <MailsTable />
         <TablePagination />
       </div>
     );

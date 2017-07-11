@@ -68,6 +68,7 @@ table {
   font-size: 14px;
   font-weight: 300;
   width: 100%;
+  margin-bottom: 30px;
 }
 
 thead th {
@@ -80,10 +81,9 @@ thead th {
   text-transform: uppercase;
 }
 
-th, td {
-  border-bottom: 1px solid #eef0f3;
-  padding: 15px 10px;
-}
+tr { border-bottom: 1px solid #eef0f3; }
+
+th, td { padding: 15px 10px; }
 
 @font-face {
   font-family: 'Linearicons';

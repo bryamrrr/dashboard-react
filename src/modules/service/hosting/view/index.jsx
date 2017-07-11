@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 
-import DomainsTable from '../domains-table';
+import HostingTable from '../hosting-table';
 
 import Hexagon from '../../../../components/hexagon';
 import TablePagination from '../../../../components/table-pagination';
@@ -14,7 +14,7 @@ import styles from './styles.css';
 
 class UserAddress extends Component {
   componentWillMount() {
-    this.props.setRoute({ title: 'Mis servicios' }, { title: 'Dominios' });
+    this.props.setRoute({ title: 'Mis servicios' }, { title: 'Hosting' });
   }
 
   render() {
@@ -22,14 +22,14 @@ class UserAddress extends Component {
       <div>
         <div className={styles.titleContainer}>
           <div className={styles.title}>
-            <Hexagon color="orange">
-              <i className="linearicon-earth" />
+            <Hexagon color="red">
+              <i className="linearicon-drawer2" />
             </Hexagon>
-            <h2>Dominios</h2>
+            <h2>Hosting</h2>
           </div>
-          <p>Un dominio es el nombre que identifica tu sitio web en internet.</p>
+          <p>{'El servicio de hosting te permite almacenar tu página web en un servidor de internet.'}</p>
         </div>
-        <DomainsTable />
+        <HostingTable />
         <TablePagination />
       </div>
     );

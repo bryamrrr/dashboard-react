@@ -21,6 +21,8 @@ import PaymentDetails from './modules/sales/payment-details/view';
 import Order from './modules/sales/order/view';
 
 import DomainsService from './modules/service/domains/view';
+import HostingService from './modules/service/hosting/view';
+import MailsService from './modules/service/mails/view';
 
 import UserData from './modules/user/data/view';
 import UserPassword from './modules/user/password/view';
@@ -52,6 +54,8 @@ export default function () {
         <PrivateRoute path="/orden" exact><Order /></PrivateRoute>
 
         <PrivateRoute path="/servicios/dominios" exact><DomainsService /></PrivateRoute>
+        <PrivateRoute path="/servicios/hosting" exact><HostingService /></PrivateRoute>
+        <PrivateRoute path="/servicios/correos" exact><MailsService /></PrivateRoute>
 
         <PrivateRoute path="/usuario/datos" exact><UserData /></PrivateRoute>
         <PrivateRoute path="/usuario/cambio-contraseña" exact><UserPassword /></PrivateRoute>
