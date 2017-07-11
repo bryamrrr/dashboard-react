@@ -29,7 +29,11 @@ function DomainsTable() {
             <td>Activo</td>
             <td className={styles.tdButton}>
               <div className={styles.tdButton}>
-                <ButtonIcon icon="linearicon-users2" tooltip="Contactos" />
+                <ButtonIcon
+                  icon="linearicon-users2"
+                  tooltip="Contactos"
+                  url="/servicios/dominios/contactos"
+                />
                 <ButtonIcon icon="linearicon-register" tooltip="Registros" />
                 <ButtonIcon icon="linearicon-papers" tooltip="DNS" />
                 <ButtonIcon icon="linearicon-license" tooltip="Renovar" />

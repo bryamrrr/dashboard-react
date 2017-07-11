@@ -1,14 +1,9 @@
 .container { position: relative; }
 
 .button {
-  align-items: center;
-  cursor: pointer;
   display: flex;
-  height: 30px;
-  justify-content: center;
   margin: 0 auto;
   transition: color .35s;
-  width: 30px;
 }
 
 .button:before {
@@ -27,7 +22,15 @@
   z-index: 1;
 }
 
-.button .iconContainer { transition: color .35s; }
+.button .iconContainer {
+  transition: color .35s;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
 
 .button:hover:before {
   opacity: 1;

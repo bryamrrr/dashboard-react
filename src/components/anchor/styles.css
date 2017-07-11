@@ -1,10 +1,10 @@
 .link {
   border-bottom: 1px solid #ffceb3;
-  color: #f7a80d;
+  color: #ff5a00;
   font-size: 13px;
   font-weight: 300;
   text-decoration: none;
-  transition: border-color .2s;
+  transition: border-color .3s;
 }
 
 .link:hover {
