@@ -6,7 +6,11 @@ import styles from './styles.css';
 
 function ButtonIcon(props) {
   return (
-    <div className={styles.container}>
+    <div
+      className={styles.container}
+      onClick={() => props.onClick()}
+      aria-hidden
+    >
       <div className={styles.button}>
         {(props.url !== '' &&
           <Link to={props.url} className={styles.iconContainer}>
@@ -30,11 +34,13 @@ ButtonIcon.propTypes = {
   icon: PropTypes.string.isRequired,
   tooltip: PropTypes.string,
   url: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 ButtonIcon.defaultProps = {
   tooltip: '',
   url: '',
+  onClick: null,
 };
 
 export default ButtonIcon;
