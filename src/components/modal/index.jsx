@@ -11,7 +11,7 @@ import styles from './styles.css';
 class Modal extends Component {
   componentDidMount() {
     this.modalTarget = document.createElement('div');
-    this.modalTarget.className = styles.modal;
+    // this.modalTarget.className = styles.modal;
 
     document.body.appendChild(this.modalTarget);
     this.renderModal();
@@ -29,14 +29,27 @@ class Modal extends Component {
   renderModal() {
     ReactDOM.render(
       <Provider store={store}>
-        <div>
+        <div
+          className={styles.modalContainer}
+          onClick={() => this.props.onClose()}
+          aria-hidden
+        >
           <div
-            onClick={() => this.props.onClose()}
+            className={styles.modal}
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
             aria-hidden
           >
-            Cerrar
+            <div
+              onClick={() => this.props.onClose()}
+              aria-hidden
+              className={styles.close}
+            >
+              <i className="linearicon-cross" />
+            </div>
+            {this.props.children}
           </div>
-          {this.props.children}
         </div>
       </Provider>,
       this.modalTarget,
