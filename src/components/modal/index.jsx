@@ -11,7 +11,6 @@ import styles from './styles.css';
 class Modal extends Component {
   componentDidMount() {
     this.modalTarget = document.createElement('div');
-    // this.modalTarget.className = styles.modal;
 
     document.body.appendChild(this.modalTarget);
     this.renderModal();

@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import ButtonIcon from '../../../../components/button-icon';
 import Modal from '../../../../components/modal';
 
+import ActivateForm from '../activate-form';
+
 import styles from './styles.css';
 
 class HostingTable extends Component {
@@ -88,9 +90,9 @@ class HostingTable extends Component {
           </table>
         </div>
         {(this.state.modalActivate &&
-          <Modal onClose={this.hideModalActivate}>
-            <h1>Hola mundo</h1>
-            <p>Holis</p>
+          <Modal onClose={this.hideModalActivate} >
+            <h2 className={styles.titleModal}>Activar Hosting</h2>
+            <ActivateForm />
           </Modal>
         )}
       </div>
