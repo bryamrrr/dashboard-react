@@ -63,6 +63,17 @@ function UserDataForm() {
     },
   };
 
+  const languages = {
+    1: {
+      id: 1,
+      name: 'Español',
+    },
+    2: {
+      id: 2,
+      name: 'Inglés',
+    },
+  };
+
   return (
     <div className={styles.container}>
       <article>
@@ -119,6 +130,14 @@ function UserDataForm() {
           includeIcon="linearicon-library"
           placeholder="Selecciona un Rubro"
           options={businessareas}
+        />
+      </article>
+      <article>
+        <Combo
+          includeIcon="linearicon-earth"
+          placeholder="Selecciona un idioma"
+          options={languages}
+          selected={languages['1']}
         />
       </article>
       <FormButton
