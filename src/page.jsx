@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import { Switch } from 'react-router-dom';
 
 import { connect } from 'react-redux';
@@ -36,9 +38,11 @@ import UserAddressNew from './modules/user/address-new/view';
 import UserPurchases from './modules/user/purchases/view';
 import UserBills from './modules/user/bills/view';
 
+import { fetchCart } from './reducers/cart/actions';
+
 class Page extends Component {
   componentWillMount() {
-
+    this.props.fetchCart();
   }
 
   render() {
@@ -80,4 +84,8 @@ class Page extends Component {
   }
 }
 
-export default connect(null)(Page);
+Page.propTypes = {
+  fetchCart: PropTypes.func.isRequired,
+};
+
+export default connect(null, { fetchCart })(Page);
