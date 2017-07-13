@@ -86,8 +86,6 @@ export function fetchCart() {
 }
 
 export function sendItem(item) {
-  return async () => {
-    const url = `${constants.urls.API_CART}/carts/${constants.urls.API_CART_ID}/items`;
-    httpRequest('POST', url, item);
-  };
+  const url = `${constants.urls.API_CART}/carts/${constants.urls.API_CART_ID}/items`;
+  httpRequest('POST', url, item);
 }

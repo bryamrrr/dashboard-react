@@ -45,6 +45,7 @@ function reducer(state = initialState, action) {
       const productData = Object.assign({}, action.payload.item, {
         type: 'product',
         category: action.payload.category,
+        fk_item_id: action.payload.item.id || action.payload.item.productId,
       });
 
       sendItem(productData); // Send product to API

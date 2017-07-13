@@ -1,0 +1,139 @@
+{
+  "menu": {
+    "title": "Bienvenido a Yachay",
+    "catalog": {
+      "title": "Catálogo",
+      "domains": "Dominios",
+      "hosting": "Hosting",
+      "mails": "Correos"
+    },
+    "services": {
+      "title": "Mis servicios",
+      "domains": "Dominios",
+      "hosting": "Hosting",
+      "mails": "Correos"
+    },
+    "data": {
+      "title": "Mis datos",
+      "user": "Datos personales",
+      "password": "Cambiar contraseña",
+      "contacts": "Contactos",
+      "addresses": "Direcciones"
+    }
+  },
+  "settings": {
+    "data": "Mis datos",
+    "password": "Cambiar contraseña",
+    "logout": "Salir"
+  },
+  "home": {
+    "description": "Te damos la bienvenida al catálogo de productos y servicios de Yachay.pe.<br />Aquí podrás adquirir y gestionar tus productos con total seguridad.<br />Ingresa a nuestra sección catálogo y <strong>empieza a crecer.</strong>",
+    "domains": {
+      "title": "Dominios",
+      "description": "Comienza tu negocio de internet con un dominio"
+    },
+    "hosting": {
+      "title": "Hosting",
+      "description": "Seguridad, rapidez y<br />flexibilidad"
+    },
+    "mails": {
+      "title": "Correos",
+      "description": "Personaliza la comunicación de tu empresa"
+    }
+  },
+  "domainsCatalog": {
+    "title": "Encuentra aquí el dominio que buscas",
+    "infoSuccess": "El dominio se encuentra disponible.",
+    "infoError": "El dominio no se encuentra disponible.",
+    "period": "Periodo",
+    "notAvailable": "No disponible"
+  },
+  "domainsService": {
+    "title": "Dominios",
+    "description": "Un dominio es el nombre que identifica tu sitio web en internet."
+  },
+  "hostingService": {
+    "title": "Hosting",
+    "description": "El servicio de hosting te permite almacenar tu página web en un servidor de internet."
+  },
+  "mailsService": {
+    "title": "Correos",
+    "description": "El servicio de correo te permite personalizar la comunicación de tu empresa."
+  },
+  "userData": {
+    "title": "Actualizar mis datos",
+  },
+  "changePassword": {
+    "title": "Cambiar contraseña",
+  },
+  "userContacts": {
+    "title": "Mis contactos",
+    "newContact": "Nuevo contacto",
+    "createContact": "Crear contacto"
+  },
+  "UserAddresses": {
+    "title": "Mis direcciones",
+    "newAddress": "Nueva dirección",
+    "createAddress": "Crear dirección"
+  },
+  "UserPurchases": {
+    "title": "Mis compras",
+    "state": "Selecciona un estado"
+  },
+  "UserBills": {
+    "title": "Mis comprobantes"
+  },
+  "tables": {
+    "codService": "Cod. servicio",
+    "service": "Servicio",
+    "detail": "Detalle",
+    "activationDate": "Fecha activación",
+    "expirationDate": "Fecha venc.",
+    "state": "Estado",
+    "actions": "Acciones",
+    "package": "Paquete",
+    "domainRel": "Dominio relacionado",
+    "cpanelUser": "Usuario CPANEL",
+    "name/reason": "Nombre/Razón social",
+    "country": "País",
+    "documentType": "Tipo doc.",
+    "numDocument": "Num doc.",
+    "email": "Correo electrónico",
+    "phone": "Teléfono",
+    "address": "Dirección",
+    "type": "Tipo",
+    "order": "Órden",
+    "date": "Fecha",
+    "value": "Monto",
+    "orderCode": "Código de órden",
+    "bill": "Comprobante",
+    "numBill": "Nº de comprobante",
+    "creationDate": "Fecha de creación"
+  },
+  "forms": {
+    "user": "Usuario",
+    "name": "Nombres",
+    "lastName": "Apellidos",
+    "email": "Correo",
+    "country": "Selecciona un pais",
+    "location": "Ubigeo",
+    "phone": "Teléfono",
+    "address": "Dirección",
+    "reference": "Referencía",
+    "documentType": "Selecciona un tipo de documento",
+    "postalCode": "Código postal",
+    "document": "Número de documento",
+    "personType": "Tipo de persona",
+    "field": "Selecciona un rubro",
+    "language": "Selecciona un idioma",
+    "currentPassword": "Contraseña actual",
+    "newPassword": "Nueva contraseña",
+    "repeatNewPassword": "Repetir nueva contraseña",
+    "notificationType": "Selecciona un tipo de notificación",
+    "type": "Selecciona un tipo"
+  },
+  "others": {
+    "addToCart": "Agregar al carrito",
+    "search": "Buscar",
+  }
+}
