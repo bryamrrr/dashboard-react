@@ -1,5 +1,4 @@
 .container {
-  border-left: 1px solid #e7eaec;
   cursor: pointer;
   float: right;
   padding-left: 24px;
@@ -42,7 +41,7 @@
   top: -100%;
   transform: scale(0);
   transition: all .2s;
-  width: 200px;
+  width: 220px;
 }
 
 .optionsContainer.isOpen {
@@ -58,7 +57,7 @@
 }
 
 .list a {
-  color: black;
+  color: #4d6171;
   display: block;
   font-size: 14px;
   font-weight: 300;
@@ -66,7 +65,7 @@
 }
 
 .list a:hover {
-  background-color: #daedfb;
+  background-color: #d9f2fd;
 }
 
 .list li:last-of-type {
@@ -77,4 +76,14 @@
 .logoutIcon {
   float: right;
   font-size: 18px;
+}
+
+@media screen and (max-width: 768px) {
+  .title { display: none; }
+
+  .image { margin-right: 8px; }
+}
+
+@media screen and (max-width: 480px) {
+  .container { padding-left: 0; }
 }

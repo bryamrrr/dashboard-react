@@ -1,17 +1,21 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from 'redux-immutable';
 
 import { reducer as form } from 'redux-form';
 import auth from './auth/reducer';
-import catalog from './catalog/reducer';
+import cart from './cart/reducer';
 import context from './context/reducer';
-import state from './state/reducer';
+import prices from './prices/reducer';
+import routes from './routes/reducer';
+import zones from './zones/reducer';
 
 const rootReducer = combineReducers({
-  form,
   auth,
-  catalog,
+  cart,
   context,
-  state,
+  form,
+  prices,
+  routes,
+  zones,
 });
 
 export default rootReducer;

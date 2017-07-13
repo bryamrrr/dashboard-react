@@ -1,5 +1,5 @@
 .button {
-  background-color: #ff5a00;
+  background-color: #f39c12;
   border-radius: 23px;
   border: 0;
   color: #fff;
@@ -17,7 +17,7 @@
   width: 100%;
 }
 
-.button:hover { background-color: #ff8745; }
+.button:hover { background-color: #f3ae40; }
 
 .button.isLoading {
   background-color: rgba(0,0,0,0.26);

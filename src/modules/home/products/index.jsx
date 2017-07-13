@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Card from '../../../components/card';
+import Hexagon from '../../../components/hexagon';
 
 import styles from './styles.css';
 
@@ -12,9 +13,9 @@ function Products() {
           color="#f7a80d"
           includeBorder
         >
-          <div className={`${styles.hexagon} ${styles.orange}`}>
+          <Hexagon color="orange">
             <i className="linearicon-earth" />
-          </div>
+          </Hexagon>
           <h3>Dominios</h3>
           <p>
             Comienza tu negocio de internet con un dominio
@@ -26,9 +27,9 @@ function Products() {
           color="#f44336"
           includeBorder
         >
-          <div className={`${styles.hexagon} ${styles.red}`}>
+          <Hexagon color="red">
             <i className="linearicon-drawer2" />
-          </div>
+          </Hexagon>
           <h3>Hosting</h3>
           <p>
             Seguridad, rapidez y <br />flexibilidad
@@ -40,9 +41,9 @@ function Products() {
           color="#1e88e5"
           includeBorder
         >
-          <div className={`${styles.hexagon} ${styles.blue}`}>
+          <Hexagon color="blue">
             <i className="linearicon-envelope" />
-          </div>
+          </Hexagon>
           <h3>Correos</h3>
           <p>
             Personaliza la comunicación de tu empresa

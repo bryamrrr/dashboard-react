@@ -4,6 +4,7 @@
       "targets": {
         "browsers": ["Safari >= 7", "Firefox >= 47", "Chrome >= 52", "not ie <= 8"]
       }
-    }]
+    }],
+    "react"
   ]
 }

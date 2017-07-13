@@ -4,7 +4,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import httpRequest from '../../extra/http-request';
-import Combo from '../combo';
+import ComboSearch from '../combo-search';
+import LoadingSpin from '../loading-spin';
+
+import constants from '../../extra/constants';
 
 import styles from './styles.css';
 
@@ -13,6 +16,7 @@ class DomainSearch extends Component {
     super(props);
 
     this.state = {
+      loading: false,
       name: '',
       selected: {},
     };
@@ -32,46 +36,59 @@ class DomainSearch extends Component {
   async search() {
     // const { name, selected } = this.state;
     // const domain = `${name}.${selected.name}`;
+    this.setState({ loading: true });
 
-    const url = 'http://staging-backoffice.rcp.pe:8100/dashboard/api/v1/domains/search';
+    const url = `${constants.urls.API_MOCKS}/domains/search`;
     const { data: { results } } = await httpRequest('GET', url);
 
-    console.log(results);
     this.props.getDomains(results);
+    this.setState({ loading: false });
   }
 
   render() {
     const options = {
       1: {
-        id: 1,
-        name: 'pe',
+        id: '1',
+        name: '.com.pe',
       },
       2: {
-        id: 2,
-        name: 'com',
+        id: '2',
+        name: '.org.pe',
       },
       3: {
-        id: 3,
-        name: 'net',
+        id: '3',
+        name: '.net.pe',
       },
     };
 
+    const className = (this.state.loading)
+    ? `${styles.button} ${styles.isLoading}`
+    : styles.button;
+
     return (
       <div className={styles.container}>
-        <input
-          type="text"
-          placeholder="Busca tu dominio"
-          value={this.state.name}
-          onChange={event => this.onInputChange(event.target.value)}
-        />
-        <Combo
+        <div className={styles.searchBar}>
+          <i className={`linearicon-magnifier ${styles.searchIcon}`} />
+          <input
+            type="text"
+            placeholder="Busca tu dominio"
+            value={this.state.name}
+            onChange={event => this.onInputChange(event.target.value)}
+            className={styles.input}
+          />
+        </div>
+        <ComboSearch
           options={options}
           changeSelected={this.changeSelected}
+          selected={options['1']}
         />
         <button
           onClick={this.search}
+          className={className}
+          disabled={this.state.loading}
         >
-          Buscar
+          <span>BUSCAR</span>
+          { this.state.loading && <LoadingSpin size={23} /> }
         </button>
       </div>
     );
@@ -82,8 +99,8 @@ DomainSearch.propTypes = {
   getDomains: PropTypes.func.isRequired,
 };
 
-function mapStateToProps({ catalog }) {
-  return { zones: catalog.zones };
+function mapStateToProps(state) {
+  return { zones: state.get('zones') };
 }
 
 export default connect(mapStateToProps)(DomainSearch);

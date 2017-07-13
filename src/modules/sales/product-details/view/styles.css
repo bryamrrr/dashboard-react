@@ -1,0 +1,160 @@
+.productInfo {
+  align-items: center;
+  display: flex;
+  margin-bottom: 50px;
+}
+
+.product {
+  align-items: center;
+  border-radius: 3px;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  max-width: 100%;
+  padding: 30px 20px;
+  text-align: center;
+}
+
+.productName {
+  margin-left: 20px;
+  text-align: left;
+}
+
+.productName span {
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.productName span.orange { color: #f7a80d; }
+.productName span.red { color: #f44336; }
+.productName span.blue { color: #1e88e5; }
+
+.productName h3 {
+  font-size: 30px;
+  font-weight: 500;
+  margin-bottom: 0;
+  margin-top: 8px;
+  max-width: 400px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.productDetail {
+  flex: 1;
+  margin-left: 50px;
+}
+
+.productHeader {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.productHeader h3 { margin-left: 10px; }
+
+.title {
+  color: #ff5a00;
+  margin-bottom: 30px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.productBody { padding: .75em; }
+
+.link {
+  cursor: pointer;
+  font-size: 15px;
+  margin-left: 5px;
+}
+
+.link:hover { text-decoration: underline; }
+.packages { border-top: 1px dashed #e9e9e9; }
+.packages h2 { font-size: 18px; }
+
+.packageContainer {
+  display: flex;
+  margin: 20px 0;
+  overflow-x: auto;
+  padding-bottom: 15px;
+  width: 100%;
+}
+
+.packageContainer .item {
+  border-radius: 4px;
+  border: 1px solid #e7eaec;
+  box-shadow: 0 2px 4px #e9e9e9;
+  box-sizing: border-box;
+  margin-right: 20px;
+  max-width: 100%;
+  min-width: 350px;
+  padding: 10px;
+}
+
+
+.packageContainer .item:nth-child(3n) { border-top-color: #1e7f35; }
+.packageContainer .item:nth-child(3n+1) { border-top-color: #4054a1; }
+.packageContainer .item:nth-child(3n+2) { border-top-color: #e9570d; }
+.packageContainer .item:last-child { margin-right: 0; }
+
+.amount {
+  color: #ff5a00;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: right;
+}
+
+.itemInfo {
+  align-items: center;
+  border-bottom: 1px solid #e4eef1;
+  display: flex;
+  justify-content: center;
+  padding: 25px 15px;
+}
+
+.itemInfo i {
+  font-size: 35px;
+  padding-right: 20px;
+}
+
+.itemInfo a {
+  font-size: 19px;
+  font-weight: bold;
+}
+
+.itemInfo a span {
+  border-bottom: 1px solid #4d6171;
+  cursor: pointer;
+  transition: .3s all;
+}
+
+.itemInfo a span:hover { border-color: transparent; }
+
+.itemInfo a:after {
+  color: #ff5a00;
+  content: '+';
+  margin: 0 10px;
+}
+
+.itemInfo a:last-child:after {
+  content: '';
+  margin: 0;
+}
+
+.packageDetail { text-align: center; }
+
+.packageDetail p {
+  font-size: 14px;
+  margin-bottom: 5px;
+  margin-top: 0;
+}
+
+.item button {
+  float: right;
+  font-size: 12px;
+  margin-top: 10px;
+  padding: 6px;
+  width: 200px;
+}
+
+.item button i { line-height: 18px; }

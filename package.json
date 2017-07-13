@@ -11,7 +11,11 @@
     "watch": "webpack -w",
     "sfs": "node ./dist/server/statics.js --cache 0",
     "bff": "node ./dist/server/server.js",
-    "start": "concurrently --kill-others \"npm run sfs\" \"npm run bff\" \"npm run watch\""
+    "start": "concurrently --kill-others \"npm run sfs\" \"npm run bff\" \"npm run watch\"",
+    "test": "jest",
+    "test:fix": "jest -u",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
   "author": "",
   "license": "ISC",
@@ -25,6 +29,7 @@
     "concurrently": "^3.4.0",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.1",
+    "enzyme": "^2.8.2",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-loader": "^1.7.1",
@@ -32,9 +37,12 @@
     "eslint-plugin-jsx-a11y": "^3.0.2 || ^4.0.0",
     "eslint-plugin-react": "^6.9.0",
     "extract-text-webpack-plugin": "^2.1.0",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "20.0.0",
     "jsdom": "^10.1.0",
+    "nock": "^9.0.13",
     "react-test-renderer": "^15.5.4",
+    "redux-mock-store": "^1.2.3",
     "rimraf": "^2.6.1",
     "serve": "^5.1.5",
     "style-loader": "^0.17.0",
@@ -44,7 +52,10 @@
   "dependencies": {
     "babel-polyfill": "^6.23.0",
     "cors": "^2.8.3",
+    "crypto": "0.0.3",
     "express": "^4.15.2",
+    "immutable": "4.0.0-rc.2",
+    "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.4",
     "prop-types": "^15.5.9",
     "react": "^15.5.4",
@@ -53,7 +64,16 @@
     "react-redux": "^5.0.4",
     "react-router-dom": "^4.1.1",
     "redux": "^3.6.0",
+    "redux-devtools-extension": "^2.13.2",
     "redux-form": "^6.7.0",
+    "redux-immutable": "^4.0.0",
     "redux-thunk": "^2.2.0"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "identity-obj-proxy"
+    },
+    "setupTestFrameworkScriptFile": "<rootDir>/__mocks__/localStorageMock.js"
   }
 }

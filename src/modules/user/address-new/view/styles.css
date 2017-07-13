@@ -1,0 +1,21 @@
+.title {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+.title h2 {
+  font-weight: 500;
+  margin-left: 20px;
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 480px) {
+  .title { flex-wrap: wrap; }
+
+  .title h2 {
+    text-align: center;
+    margin-left: 0;
+  }
+}

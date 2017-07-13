@@ -1,3 +1,5 @@
+import fetch from 'isomorphic-fetch';
+
 export default async (method, url, data = {}) => {
   const token = (typeof localStorage !== 'undefined')
     ? localStorage.getItem('token')
@@ -29,7 +31,6 @@ export default async (method, url, data = {}) => {
         localStorage.removeItem('userData');
         localStorage.removeItem('token');
       }
-      console.log('Response with status code 401, redirecting to Login');
     } else if (response.meta.status === 403) {
       console.log('Response with status code 403, redirecting to Home');
     } else if (response.meta.status === 500) {

@@ -1,0 +1,12 @@
+.tdButton { display: flex; }
+
+.tdButton > div { margin: 0 5px; }
+
+.titleModal {
+  color: #f39c12;
+  font-weight: 500;
+  margin-bottom: 40px;
+  margin-top: 0;
+  text-align: center;
+  text-transform: uppercase;
+}

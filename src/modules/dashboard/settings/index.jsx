@@ -66,7 +66,7 @@ class Settings extends Component {
               <Link to="/usuario/datos">Mis datos</Link>
             </li>
             <li>
-              <Link to="/usuario/contrasena">Cambiar contraseña</Link>
+              <Link to="/usuario/cambio-contraseña">Cambiar contraseña</Link>
             </li>
             <li>
               <a
@@ -92,8 +92,8 @@ Settings.propTypes = {
   logoutUser: PropTypes.func.isRequired,
 };
 
-function mapStateToProps({ auth }) {
-  return { auth };
+function mapStateToProps(state) {
+  return { auth: state.get('auth') };
 }
 
 function mapDispatchToProps(dispatch) {

@@ -1,0 +1,56 @@
+.container {
+  float: right;
+  margin-top: 9px;
+  margin-right: 9px;
+  position: relative;
+}
+
+.container:hover { cursor: pointer; }
+
+.cart {
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  background-size: 560px 40px;
+}
+
+.cart.addItem {
+  animation-name: addItem;
+  animation-duration: .6s;
+  animation-timing-function: steps(13);
+  animation-fill-mode: forwards;
+}
+
+@keyframes addItem {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: right;
+  }
+}
+
+.counter {
+  align-items: center;
+  background-color: #ff5a00;
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  font-size: .75em;
+  height: 18px;
+  justify-content: center;
+  overflow: hidden;
+  position: absolute;
+  right: -7px;
+  top: -1px;
+  user-select: none;
+  width: 18px;
+}
+
+.counter span { font-size: 11px; }
+
+@media screen and (max-width: 480px) {
+  .container {
+    margin-right: 12px;
+  }
+}

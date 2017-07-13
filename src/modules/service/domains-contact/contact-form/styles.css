@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.container article {
+  margin-right: 5%;
+  flex-basis: 47.5%;
+}
+
+.container article:nth-child(2n+2) { margin-right: 0; }
+
+.itemContact h3 {
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+.selectWrapper { padding: 30px 0; }
+
+.selectWrapper > div { margin: 0; }
+
+.selectWrapper a {
+  display: block;
+  text-align: right;
+  margin-top: 7px;
+  padding-right: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .container article {
+    flex-basis: 100%;
+    width: 100%;
+    margin-right: 0;
+  }
+}

@@ -1,0 +1,5 @@
+.container > div {
+  margin-bottom: 40px;
+  width: 300px;
+  max-width: 100%;
+}

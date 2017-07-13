@@ -13,7 +13,7 @@
 }
 
 .list i {
-  color: #000;
+  color: #4d6171;
   transition: color .2s;
 }
 
@@ -32,4 +32,10 @@
 .item span {
   color: #e7eaec;
   margin-right: 12px;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    display: none;
+  }
 }

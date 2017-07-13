@@ -1,0 +1,22 @@
+.hexagon {
+  display: inline-block;
+  height: 85px;
+  position: relative;
+  width: 74px;
+}
+
+.hexagon i {
+  font-size: 28px;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.hexagon.orange svg polygon { stroke: #f7a80d; }
+.hexagon.red svg polygon { stroke: #f44336; }
+.hexagon.blue svg polygon { stroke: #1e88e5; }
+
+.hexagon.orange i { color: #f7a80d; }
+.hexagon.red i { color: #f44336; }
+.hexagon.blue i { color: #1e88e5; }

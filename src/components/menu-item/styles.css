@@ -28,6 +28,7 @@
 .title h4 {
   display: inline-block;
   font-size: 15px;
+  font-weight: 500;
   margin: 0;
   margin-left: .7em;
 }
@@ -49,6 +50,7 @@
 
 .items {
   display: none;
+  list-style-type: none;
   margin: 0;
   padding: 0;
   padding: 0 20px 15px;
@@ -65,14 +67,15 @@
   width: 100%;
 }
 
-.items a:hover { color: rgba(255, 255, 255, 1);; }
+.items a:hover,
+.items .active a { color: rgba(255, 255, 255, 1); }
 
 .isOpen .items {
   display: block;
 }
 
 .bar {
-  background-color: #ff5a00;
+  background-color: #f39c12;
   left: 0;
   height: 0;
   position: absolute;

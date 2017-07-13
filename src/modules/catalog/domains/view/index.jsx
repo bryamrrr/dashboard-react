@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
+import _ from 'lodash';
 
 import { connect } from 'react-redux';
 
@@ -6,29 +9,45 @@ import DomainSearch from '../../../../components/domain-search';
 import Info from '../../../../components/info';
 import DomainsTable from '../domains-table';
 
-class DomainsCatalog extends Component {
-  constructor(props) {
-    super(props);
+import { addProduct } from '../../../../reducers/cart/actions';
+import { fetchPrices } from '../../../../reducers/domains/actions';
+import { setRoute } from '../../../../reducers/routes/actions';
 
-    this.state = {
-      domains: null,
-    };
+import styles from './styles.css';
+
+class DomainsCatalog extends Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = { domains: null };
 
     this.addToCart = this.addToCart.bind(this);
     this.getDomains = this.getDomains.bind(this);
+  }
+
+  componentWillMount() {
+    this.props.setRoute({ title: 'Catálogo' }, { title: 'Dominios' });
+  }
+
+  componentDidMount() {
+    // If store hasn't domain prices, then we make a request
+    if (this.props.prices.size === 0) this.props.fetchPrices();
   }
 
   getDomains(domains) {
     this.setState({ domains });
   }
 
-  addToCart(item) {
-    const domain = item || this.state.domains[0];
+  addToCart() {
+    const domain = this.state.domains[0];
+    const pricesData = this.props.prices.get(domain.productId);
 
-    // TODO: Send domain to Redux Cart
-    console.log(domain);
+    domain.prices = _.mapKeys(pricesData.prices.buy, 'period');
+    domain.selected = domain.prices['1 Año'];
+    this.props.addProduct(domain, 'Dominio');
 
-    // TODO: Send to order details view
+    const url = `/detalle-producto/item${this.props.cart.count + 1}/paquetes`;
+    this.context.router.history.push(url);
   }
 
   render() {
@@ -48,6 +67,7 @@ class DomainsCatalog extends Component {
 
     return (
       <div>
+        <h2 className={styles.title}>Encuentra aquí el dominio que buscas</h2>
         <DomainSearch
           getDomains={this.getDomains}
         />
@@ -60,7 +80,8 @@ class DomainsCatalog extends Component {
         )}
         {(domains && domains.length > 1 &&
           <DomainsTable
-            domains={{}}
+            domains={domains}
+            prices={this.props.prices}
           />
         )}
       </div>
@@ -68,8 +89,32 @@ class DomainsCatalog extends Component {
   }
 }
 
-function mapStateToProps({ catalog }) {
-  return { zones: catalog.zones };
+DomainsCatalog.propTypes = {
+  prices: PropTypes.objectOf(PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.bool,
+    PropTypes.object,
+  ])).isRequired,
+  addProduct: PropTypes.func.isRequired,
+  cart: PropTypes.shape({ count: PropTypes.number }).isRequired,
+  fetchPrices: PropTypes.func.isRequired,
+  setRoute: PropTypes.func.isRequired,
+};
+
+DomainsCatalog.contextTypes = {
+  router: PropTypes.objectOf(PropTypes.object).isRequired,
+};
+
+function mapStateToProps(state) {
+  return {
+    prices: state.get('prices').get('domains'),
+    zones: state.get('zones'),
+    cart: state.get('cart'),
+  };
 }
 
-export default connect(mapStateToProps)(DomainsCatalog);
+export default connect(mapStateToProps, {
+  addProduct,
+  fetchPrices,
+  setRoute,
+})(DomainsCatalog);

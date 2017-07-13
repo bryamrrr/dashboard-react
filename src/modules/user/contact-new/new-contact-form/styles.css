@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.container article {
+  margin-right: 3%;
+  flex-basis: 48.5%;
+}
+
+.container article:nth-child(2n+2) {
+  margin-right: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .container article {
+    flex-basis: 100%;
+    width: 100%;
+    margin-right: 0;
+  }
+}
