@@ -62,6 +62,8 @@ function CartPackage(props) {
 CartPackage.propTypes = {
   info: PropTypes.objectOf(PropTypes.oneOfType([
     PropTypes.number,
+    PropTypes.string,
+    PropTypes.array,
     PropTypes.bool,
     PropTypes.object,
   ])).isRequired,

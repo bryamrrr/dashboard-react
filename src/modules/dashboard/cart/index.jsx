@@ -64,7 +64,7 @@ class Cart extends Component {
             this.props.cartInfo.items.entrySeq().map((data) => {
               const key = data[0];
               const item = data[1];
-              if (item.get('type') === 'product') {
+              if (item.type === 'product') {
                 return (<CartProduct
                   key={key}
                   itemId={key}

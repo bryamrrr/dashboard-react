@@ -5,6 +5,7 @@ import thunk from 'redux-thunk';
 import { initialState } from './reducer';
 import constants from '../../extra/constants';
 import packages from './packages';
+import cart from './cart';
 
 import {
   TOGGLE_CART,
@@ -21,6 +22,8 @@ import {
   setPackages,
   deleteItem,
   selectPeriod,
+  fetchCart,
+  setCart,
 } from './actions';
 
 const middlewares = [thunk];
@@ -66,7 +69,7 @@ describe('Cart - Actions', () => {
 
   describe('fetchPackages', () => {
     afterEach(() => {
-      nock.cleanAll()
+      nock.cleanAll();
     })
 
     test('creates setPackages action when fetching packages has been done', () => {
@@ -122,6 +125,27 @@ describe('Cart - Actions', () => {
         item: 'item1',
         selected: { period: '1 año' },
       });
+    });
+  });
+});
+
+describe('Cart - API interactions', () => {
+  describe('fetchCart', () => {
+    afterEach(() => {
+      nock.cleanAll();
+    })
+
+    test('creates setPackages action when fetching packages has been done', () => {
+      nock(constants.urls.API_CART)
+        .get(`/carts/${constants.urls.API_CART_ID}`)
+        .reply(200, cart);
+
+      const store = mockStore(initialState);
+
+      return store.dispatch(fetchCart()).then(() => {
+        // return of async actions
+        expect(store.getActions()).toEqual([setCart(cart)]);
+      })
     });
   });
 });

@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Switch } from 'react-router-dom';
+
+import { connect } from 'react-redux';
 
 import PublicRoute from './extra/public-route';
 import PrivateRoute from './extra/private-route';
@@ -34,40 +36,48 @@ import UserAddressNew from './modules/user/address-new/view';
 import UserPurchases from './modules/user/purchases/view';
 import UserBills from './modules/user/bills/view';
 
-export default function () {
-  return (
-    <main role="application">
-      <Switch>
-        <PublicRoute path="/login" exact><Login /></PublicRoute>
-        <PublicRoute path="/registro" exact><Signup /></PublicRoute>
-        <PublicRoute path="/reset" exact><Reset /></PublicRoute>
-        <PublicRoute path="/users/:email/forgotpassword/:hash" exact><Retrieve /></PublicRoute>
+class Page extends Component {
+  componentWillMount() {
 
-        <PrivateRoute path="/inicio" exact><Home /></PrivateRoute>
+  }
 
-        <PrivateRoute path="/catalogo/dominios" exact><DomainsCatalog /></PrivateRoute>
-        <PrivateRoute path="/catalogo/hosting" exact><HostingCatalog /></PrivateRoute>
-        <PrivateRoute path="/catalogo/correos" exact><MailsCatalog /></PrivateRoute>
+  render() {
+    return (
+      <main role="application">
+        <Switch>
+          <PublicRoute path="/login" exact><Login /></PublicRoute>
+          <PublicRoute path="/registro" exact><Signup /></PublicRoute>
+          <PublicRoute path="/reset" exact><Reset /></PublicRoute>
+          <PublicRoute path="/users/:email/forgotpassword/:hash" exact><Retrieve /></PublicRoute>
 
-        <PrivateRoute path="/detalle-producto/:productId/paquetes" exact><ProductDetails /></PrivateRoute>
-        <PrivateRoute path="/detalle-compra" exact><CartDetails /></PrivateRoute>
-        <PrivateRoute path="/compra" exact><PaymentDetails /></PrivateRoute>
-        <PrivateRoute path="/orden" exact><Order /></PrivateRoute>
+          <PrivateRoute path="/inicio" exact><Home /></PrivateRoute>
 
-        <PrivateRoute path="/servicios/dominios" exact><DomainsService /></PrivateRoute>
-        <PrivateRoute path="/servicios/dominios/contactos" exact><DomainContactList /></PrivateRoute>
-        <PrivateRoute path="/servicios/hosting" exact><HostingService /></PrivateRoute>
-        <PrivateRoute path="/servicios/correos" exact><MailsService /></PrivateRoute>
+          <PrivateRoute path="/catalogo/dominios" exact><DomainsCatalog /></PrivateRoute>
+          <PrivateRoute path="/catalogo/hosting" exact><HostingCatalog /></PrivateRoute>
+          <PrivateRoute path="/catalogo/correos" exact><MailsCatalog /></PrivateRoute>
 
-        <PrivateRoute path="/usuario/datos" exact><UserData /></PrivateRoute>
-        <PrivateRoute path="/usuario/cambio-contraseña" exact><UserPassword /></PrivateRoute>
-        <PrivateRoute path="/usuario/contactos" exact><UserContact /></PrivateRoute>
-        <PrivateRoute path="/usuario/nuevo-contacto" exact><UserContactNew /></PrivateRoute>
-        <PrivateRoute path="/usuario/direcciones" exact><UserAddress /></PrivateRoute>
-        <PrivateRoute path="/usuario/nueva-direccion" exact><UserAddressNew /></PrivateRoute>
-        <PrivateRoute path="/usuario/compras" exact><UserPurchases /></PrivateRoute>
-        <PrivateRoute path="/usuario/comprobantes" exact><UserBills /></PrivateRoute>
-      </Switch>
-    </main>
-  );
+          <PrivateRoute path="/detalle-producto/:productId/paquetes" exact><ProductDetails /></PrivateRoute>
+          <PrivateRoute path="/detalle-compra" exact><CartDetails /></PrivateRoute>
+          <PrivateRoute path="/compra" exact><PaymentDetails /></PrivateRoute>
+          <PrivateRoute path="/orden" exact><Order /></PrivateRoute>
+
+          <PrivateRoute path="/servicios/dominios" exact><DomainsService /></PrivateRoute>
+          <PrivateRoute path="/servicios/dominios/contactos" exact><DomainContactList /></PrivateRoute>
+          <PrivateRoute path="/servicios/hosting" exact><HostingService /></PrivateRoute>
+          <PrivateRoute path="/servicios/correos" exact><MailsService /></PrivateRoute>
+
+          <PrivateRoute path="/usuario/datos" exact><UserData /></PrivateRoute>
+          <PrivateRoute path="/usuario/cambio-contraseña" exact><UserPassword /></PrivateRoute>
+          <PrivateRoute path="/usuario/contactos" exact><UserContact /></PrivateRoute>
+          <PrivateRoute path="/usuario/nuevo-contacto" exact><UserContactNew /></PrivateRoute>
+          <PrivateRoute path="/usuario/direcciones" exact><UserAddress /></PrivateRoute>
+          <PrivateRoute path="/usuario/nueva-direccion" exact><UserAddressNew /></PrivateRoute>
+          <PrivateRoute path="/usuario/compras" exact><UserPurchases /></PrivateRoute>
+          <PrivateRoute path="/usuario/comprobantes" exact><UserBills /></PrivateRoute>
+        </Switch>
+      </main>
+    );
+  }
 }
+
+export default connect(null)(Page);

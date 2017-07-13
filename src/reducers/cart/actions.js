@@ -8,6 +8,7 @@ export const SET_PACKAGES = 'SET_PACKAGES';
 export const ADD_PACKAGE = 'ADD_PACKAGE';
 export const DELETE_ITEM = 'DELETE_ITEM';
 export const SELECT_PERIOD = 'SELECT_PERIOD';
+export const SET_CART = 'SET_CART';
 
 export function toggleCart() {
   return { type: TOGGLE_CART };
@@ -61,10 +62,25 @@ export function selectPeriod(item, selected) {
   };
 }
 
+export function setCart(data) {
+  return {
+    type: SET_CART,
+    payload: data,
+  };
+}
+
 export function fetchPackages(itemId, productId) {
   return async (dispatch) => {
     const url = `${constants.urls.API_MOCKS}/packages/${productId}`;
     const { data: { results } } = await httpRequest('GET', url);
     dispatch(setPackages(itemId, results));
+  };
+}
+
+export function fetchCart() {
+  return async (dispatch) => {
+    const url = `${constants.urls.API_CART}/carts/${constants.urls.API_CART_ID}`;
+    const { data } = await httpRequest('GET', url);
+    dispatch(setCart(data));
   };
 }

@@ -12,6 +12,7 @@ import {
   ADD_PACKAGE,
   DELETE_ITEM,
   SELECT_PERIOD,
+  SET_CART,
 } from './actions';
 
 describe('Cart - Reducer', () => {
@@ -85,13 +86,13 @@ describe('Cart - Reducer', () => {
       const newState = reducer(state, action);
       expect(newState.count).toEqual(2);
       expect(newState.items.get('item1')).not.toBeUndefined();
-      expect(newState.items.get('item1').get('type')).toEqual('product');
-      expect(newState.items.get('item1').get('category')).toEqual('domain');
+      expect(newState.items.get('item1').type).toEqual('product');
+      expect(newState.items.get('item1').category).toEqual('domain');
       expect(newState.items.get('item2')).not.toBeUndefined();
-      expect(newState.items.get('item2').get('category')).toEqual('domain');
+      expect(newState.items.get('item2').category).toEqual('domain');
     })
 
-    test('add new product to cart', () => {
+    test('add another product to cart', () => {
       const state = reducer(undefined, action);
       expect(state.items.get('item1')).not.toBeUndefined();
       expect(state.total).toEqual(100);
@@ -108,10 +109,10 @@ describe('Cart - Reducer', () => {
       const newState = reducer(state, action);
       expect(newState.count).toEqual(2);
       expect(newState.items.get('item1')).not.toBeUndefined();
-      expect(newState.items.get('item1').get('type')).toEqual('product');
-      expect(newState.items.get('item1').get('category')).toEqual('domain');
+      expect(newState.items.get('item1').type).toEqual('product');
+      expect(newState.items.get('item1').category).toEqual('domain');
       expect(newState.items.get('item2')).not.toBeUndefined();
-      expect(newState.items.get('item2').get('category')).toEqual('domain');
+      expect(newState.items.get('item2').category).toEqual('domain');
       expect(newState.total).toEqual(250);
     })
   });
@@ -139,7 +140,7 @@ describe('Cart - Reducer', () => {
 
     test('sets packages with the correct payload', () => {
       const newState = reducer(state, action);
-      expect(newState.items.get('1').get('packages')).not.toBeUndefined();
+      expect(newState.items.get('1').packages).not.toBeUndefined();
     });
   });
 
@@ -178,8 +179,8 @@ describe('Cart - Reducer', () => {
 
       const newState = reducer(state, newAction);
       expect(newState.count).toEqual(1);
-      expect(newState.items.get('package1').get('type')).toEqual('package');
-      expect(newState.items.get('package1').get('products').size).toEqual(2);
+      expect(newState.items.get('package1').type).toEqual('package');
+      expect(Object.keys(newState.items.get('package1').products).length).toEqual(2);
       expect(newState.items.size).toEqual(1);
     });
   });
@@ -250,7 +251,7 @@ describe('Cart - Reducer', () => {
       const newState = reducer(state, selectAction);
       expect(newState.count).toEqual(1); // Doesnt change
       expect(newState.items.get('item1')).not.toBeUndefined();
-      expect(newState.items.get('item1').get('selected')).toEqual({
+      expect(newState.items.get('item1').selected).toEqual({
         currencySymbol: 'S/',
         period: '2 Años',
         periodId: 'c181f276-09cc-41d6-a6d9-52dc357a2689',
@@ -261,4 +262,32 @@ describe('Cart - Reducer', () => {
   });
 });
 
+describe('Cart - API interactions', () => {
+  describe('setCart', () => {
+    const action = {
+      type: SET_CART,
+      payload: {
+        owner: {
+          fk_user_id: '430b132e-a0b8-4348-bea2-a3c8e883d407',
+          email: 'cyacarini@rcp.pe',
+          uname: 'cyacarini',
+        },
+        items: [{
+          fk_item_id: '123',
+          type: 'product',
+          selected: { period: 'Anual', price: 100 },
+          id: 'item1',
+        }],
+        currencySymbol: '$',
+      }
+    };
 
+    test('adds cart with the correct form', () => {
+      const state = reducer(undefined, action);
+      expect(state.items.get('item1')).not.toBeUndefined();
+      expect(state.items.get('item1').type).toEqual('product');
+      expect(state.items.size).toEqual(1);
+      expect(state.currencySymbol).toEqual('$');
+    });
+  });
+});

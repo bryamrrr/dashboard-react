@@ -1,7 +1,6 @@
 import {
   Record,
   Map as map,
-  isImmutable,
 } from 'immutable';
 
 import _ from 'lodash';
@@ -14,6 +13,7 @@ import {
   ADD_PACKAGE,
   DELETE_ITEM,
   SELECT_PERIOD,
+  SET_CART,
 } from './actions';
 
 const CartRecord = Record({
@@ -29,7 +29,7 @@ export const initialState = new CartRecord();
 function calcTotal(items) {
   const values = [];
 
-  items.forEach(item => values.push(parseInt(item.get('selected').price, 10)));
+  items.forEach(item => values.push(parseInt(item.selected.price, 10)));
 
   return values.reduce((accumulation, current) => accumulation + current, 0);
 }
@@ -41,17 +41,10 @@ function reducer(state = initialState, action) {
     case CLOSE_CART:
       return state.set('isOpen', false);
     case ADD_PRODUCT: {
-      let productData;
-      if (isImmutable(action.payload.item)) {
-        productData = action.payload.item
-          .set('type', 'product')
-          .set('category', action.payload.category);
-      } else {
-        productData = map(Object.assign({}, action.payload.item, {
-          type: 'product',
-          category: action.payload.category,
-        }));
-      }
+      const productData = Object.assign({}, action.payload.item, {
+        type: 'product',
+        category: action.payload.category,
+      });
 
       const newState = state
         .setIn(['items', `item${state.count + 1}`], productData)
@@ -59,34 +52,38 @@ function reducer(state = initialState, action) {
 
       return newState.set('total', calcTotal(newState.get('items')));
     }
-    case SET_PACKAGES:
+    case SET_PACKAGES: {
+      const item = Object.assign({}, state.get('items').get(action.payload.productId), {
+        packages: _.mapKeys(action.payload.packages, 'id'),
+      });
       return state
         .setIn([
           'items',
           action.payload.productId,
-          'packages',
-        ], map(_.mapKeys(action.payload.packages, 'id')));
+        ], item);
+    }
     case ADD_PACKAGE: {
-      const products = map(Object.assign({},
+      const products = Object.assign({},
         _.mapKeys(action.payload.packageData.remainingProducts, (key) => {
           if (key.productId) return key.productId;
           return key.id;
         }),
-      )).map(product => map(product));
+      );
 
-      const productId = state.items.get(action.payload.item).get('productId') || state.items.get(action.payload.item).get('id');
-      const product = map({
+      const productId = state.items.get(action.payload.item).productId
+        || state.items.get(action.payload.item).id;
+      const product = {
         [productId]: state.items.get(action.payload.item),
-      });
+      };
 
-      const data = map({
+      const data = {
         period: action.payload.packageData.period,
         prices: action.payload.packageData.prices,
         selected: action.payload.packageData.prices[0],
         name: action.payload.packageData.name,
         type: 'package',
-        products: products.merge(product),
-      });
+        products: Object.assign({}, products, product),
+      };
 
       const items = state.get('items')
         .delete(action.payload.item)
@@ -97,7 +94,10 @@ function reducer(state = initialState, action) {
       return newState.set('total', calcTotal(newState.get('items')));
     }
     case SELECT_PERIOD: {
-      const newState = state.setIn(['items', action.payload.item, 'selected'], action.payload.selected);
+      const item = Object.assign({}, state.items.get('action.payload.item'), {
+        selected: action.payload.selected,
+      });
+      const newState = state.setIn(['items', action.payload.item], item);
       return newState.set('total', calcTotal(newState.get('items')));
     }
     case DELETE_ITEM: {
@@ -105,6 +105,21 @@ function reducer(state = initialState, action) {
 
       const newState = state.set('items', items);
       return newState.set('total', calcTotal(newState.get('items')));
+    }
+    case SET_CART: {
+      const items = (action.payload.items.length > 0)
+        ? _.mapKeys(action.payload.items, 'id')
+        : {};
+
+      const cart = new CartRecord({
+        isOpen: false,
+        items: map(items),
+        count: 0,
+        currencySymbol: action.payload.currencySymbol || 'S/',
+        total: 0,
+      });
+
+      return cart.set('total', calcTotal(cart.items));
     }
     default:
       return state;
