@@ -57,10 +57,10 @@ class DomainsCatalog extends Component {
 
     if (domains && domains[0]) {
       if (domains[0].available) {
-        text = `El dominio se encuentra disponible.`;
+        text = 'El dominio se encuentra disponible.';
         type = 'success';
       } else {
-        text = `El dominio no se encuentra disponible.`;
+        text = 'El dominio no se encuentra disponible.';
         type = 'warning';
       }
     }
