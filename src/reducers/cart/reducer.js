@@ -14,6 +14,7 @@ import {
   DELETE_ITEM,
   SELECT_PERIOD,
   SET_CART,
+  sendItem,
 } from './actions';
 
 const CartRecord = Record({
@@ -45,6 +46,8 @@ function reducer(state = initialState, action) {
         type: 'product',
         category: action.payload.category,
       });
+
+      sendItem(productData); // Send product to API
 
       const newState = state
         .setIn(['items', `item${state.count + 1}`], productData)
@@ -84,6 +87,8 @@ function reducer(state = initialState, action) {
         type: 'package',
         products: Object.assign({}, products, product),
       };
+
+      sendItem(data); // Send package to API
 
       const items = state.get('items')
         .delete(action.payload.item)

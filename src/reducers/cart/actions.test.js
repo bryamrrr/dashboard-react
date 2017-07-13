@@ -24,6 +24,7 @@ import {
   selectPeriod,
   fetchCart,
   setCart,
+  sendItem,
 } from './actions';
 
 const middlewares = [thunk];
@@ -145,6 +146,25 @@ describe('Cart - API interactions', () => {
       return store.dispatch(fetchCart()).then(() => {
         // return of async actions
         expect(store.getActions()).toEqual([setCart(cart)]);
+      })
+    });
+  });
+
+  describe('sendItem', () => {
+    afterEach(() => {
+      nock.cleanAll();
+    })
+
+    test('creates setPackages action when fetching packages has been done', () => {
+      nock(`${constants.urls.API_CART}/carts/${constants.urls.API_CART_ID}/items`)
+        .post('')
+        .reply(200, {});
+
+      const store = mockStore(initialState);
+
+      return store.dispatch(sendItem()).then(() => {
+        // return of async actions
+        expect(store.getActions()).toEqual([]);
       })
     });
   });

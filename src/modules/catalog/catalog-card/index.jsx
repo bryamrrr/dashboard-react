@@ -11,8 +11,6 @@ function CatalogCard(props) {
     selected: props.info.prices.buy[0],
   });
 
-  console.log(item);
-
   return (
     <Card includeBorder>
       <div className={styles.container}>

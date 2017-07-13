@@ -84,3 +84,10 @@ export function fetchCart() {
     dispatch(setCart(data));
   };
 }
+
+export function sendItem(item) {
+  return async () => {
+    const url = `${constants.urls.API_CART}/carts/${constants.urls.API_CART_ID}/items`;
+    httpRequest('POST', url, item);
+  };
+}
