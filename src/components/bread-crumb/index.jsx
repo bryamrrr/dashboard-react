@@ -39,7 +39,7 @@ function BreadCrumb(props) {
 }
 
 function mapStateToProps(state) {
-  return { routes: state.get('routes') };
+  return { routes: state.get('translate').routes };
 }
 
 BreadCrumb.propTypes = {

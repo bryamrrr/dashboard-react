@@ -14,8 +14,10 @@ import {
   DELETE_ITEM,
   SELECT_PERIOD,
   SET_CART,
-  sendItem,
 } from './actions';
+
+import constants from '../../extra/constants';
+import httpRequest from '../../extra/http-request';
 
 const CartRecord = Record({
   isOpen: false,
@@ -48,7 +50,9 @@ function reducer(state = initialState, action) {
         fk_item_id: action.payload.item.id || action.payload.item.productId,
       });
 
-      sendItem(productData); // Send product to API
+      // Send product to API
+      const url = `${constants.urls.API_CART}/carts/${constants.urls.API_CART_ID}/items`;
+      httpRequest('POST', url, productData);
 
       const newState = state
         .setIn(['items', `item${state.count + 1}`], productData)
@@ -89,7 +93,9 @@ function reducer(state = initialState, action) {
         products: Object.assign({}, products, product),
       };
 
-      sendItem(data); // Send package to API
+      // Send product to API
+      const url = `${constants.urls.API_CART}/carts/${constants.urls.API_CART_ID}/items`;
+      httpRequest('POST', url, data);
 
       const items = state.get('items')
         .delete(action.payload.item)

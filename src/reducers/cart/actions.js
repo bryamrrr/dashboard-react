@@ -9,7 +9,7 @@ export const ADD_PACKAGE = 'ADD_PACKAGE';
 export const DELETE_ITEM = 'DELETE_ITEM';
 export const SELECT_PERIOD = 'SELECT_PERIOD';
 export const SET_CART = 'SET_CART';
-export const ITEM_SENDED = 'ITEM_SENDED';
+export const ITEM_DELETED = 'ITEM_DELETED';
 
 export function toggleCart() {
   return { type: TOGGLE_CART };
@@ -70,8 +70,8 @@ export function setCart(data) {
   };
 }
 
-export function itemSended() {
-  return { type: ITEM_SENDED };
+export function itemDeleted() {
+  return { type: ITEM_DELETED };
 }
 
 export function fetchPackages(itemId, productId) {
@@ -90,10 +90,10 @@ export function fetchCart() {
   };
 }
 
-export function sendItem(item) {
+export function deleteItemFromBackend(itemId) {
   return async (dispatch) => {
-    const url = `${constants.urls.API_CART}/carts/${constants.urls.API_CART_ID}/items`;
-    httpRequest('POST', url, item);
-    dispatch(itemSended());
-  }
+    const url = `${constants.urls.API_CART}/carts/${constants.urls.API_CART_ID}/items/${itemId}`;
+    httpRequest('DELETE', url);
+    dispatch(itemDeleted());
+  };
 }

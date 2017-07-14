@@ -16,7 +16,7 @@ import styles from './styles.css';
 
 class UserPurchases extends Component {
   componentWillMount() {
-    this.props.setRoute({ title: 'Mis datos' }, { title: 'Compras' });
+    this.props.setRoute({ title: 'Mis datos' }, { title: 'Mis compras' });
   }
 
   render() {

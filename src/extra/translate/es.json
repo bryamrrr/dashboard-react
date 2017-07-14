@@ -18,7 +18,9 @@
       "user": "Datos personales",
       "password": "Cambiar contraseña",
       "contacts": "Contactos",
-      "addresses": "Direcciones"
+      "addresses": "Direcciones",
+      "purchases": "Mis compras",
+      "bills": "Mis comprobantes"
     },
     "others": {
       "sales": "Compra"

@@ -24,8 +24,8 @@ import {
   selectPeriod,
   fetchCart,
   setCart,
-  sendItem,
-  itemSended,
+  deleteItemFromBackend,
+  itemDeleted,
 } from './actions';
 
 const middlewares = [thunk];
@@ -150,20 +150,20 @@ describe('Cart - API interactions', () => {
     });
   });
 
-  describe('sendItem', () => {
+  describe('deleteItem', () => {
     afterEach(() => {
       nock.cleanAll();
     })
 
-    test('sends item', () => {
-      nock(`${constants.urls.API_CART}/carts/${constants.urls.API_CART_ID}/items`)
-        .post('')
+    test('deletes item', () => {
+      nock(`${constants.urls.API_CART}/carts/${constants.urls.API_CART_ID}/items/123`)
+        .delete('')
         .reply(200, {});
 
       const store = mockStore(initialState);
 
-      return store.dispatch(sendItem()).then(() => {
-        expect(store.getActions()).toEqual([itemSended()]);
+      return store.dispatch(deleteItemFromBackend('123')).then(() => {
+        expect(store.getActions()).toEqual([itemDeleted()]);
       })
     });
   });

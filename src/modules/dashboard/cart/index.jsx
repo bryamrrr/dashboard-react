@@ -10,6 +10,7 @@ import CartPackage from '../cart-package';
 import {
   closeCart,
   deleteItem,
+  deleteItemFromBackend,
 } from '../../../reducers/cart/actions';
 
 import styles from './styles.css';
@@ -25,6 +26,7 @@ class Cart extends Component {
 
   deleteItem(item) {
     this.props.deleteItem(item);
+    this.props.deleteItemFromBackend(item);
   }
 
   goToPaymentDetails() {
@@ -113,6 +115,7 @@ Cart.propTypes = {
   }).isRequired,
   closeCart: PropTypes.func.isRequired,
   deleteItem: PropTypes.func.isRequired,
+  deleteItemFromBackend: PropTypes.func.isRequired,
 };
 
 
@@ -127,4 +130,5 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, {
   closeCart,
   deleteItem,
+  deleteItemFromBackend,
 })(Cart);

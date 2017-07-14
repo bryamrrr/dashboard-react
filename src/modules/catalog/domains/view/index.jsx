@@ -26,7 +26,7 @@ class DomainsCatalog extends Component {
   }
 
   componentWillMount() {
-    this.props.setRoute({ title: 'Catálogo' }, { title: 'Dominios' });
+    this.props.setRoute({ title: 'catalog' }, { title: 'domains' });
   }
 
   componentDidMount() {

@@ -1,125 +1,130 @@
+import store from '../../reducers/store';
+
+const { strings } = store.getState().get('translate');
+console.log(strings);
+
 export default [
   {
-    title: 'Catálogo',
+    title: strings.menu.catalog.title,
     icon: 'linearicon-briefcase',
     items: [
       {
-        title: 'Dominios',
+        title: strings.menu.catalog.domains,
         url: '/catalogo/dominios',
         route: {
-          module: 'Catálogo',
-          view: 'Dominios',
+          module: strings.menu.catalog.title,
+          view: strings.menu.catalog.domains,
           method: '',
         },
       },
       {
-        title: 'Hosting',
+        title: strings.menu.catalog.hosting,
         url: '/catalogo/hosting',
         route: {
-          module: 'Catálogo',
-          view: 'Hosting',
+          module: strings.menu.catalog.title,
+          view: strings.menu.catalog.hosting,
           method: '',
         },
       },
       {
-        title: 'Correos',
+        title: strings.menu.catalog.mails,
         url: '/catalogo/correos',
         route: {
-          module: 'Catálogo',
-          view: 'Correos',
+          module: strings.menu.catalog.title,
+          view: strings.menu.catalog.mails,
           method: '',
         },
       },
     ],
   },
   {
-    title: 'Mis servicios',
+    title: strings.menu.services.title,
     icon: 'linearicon-rocket',
     items: [
       {
-        title: 'Dominios',
+        title: strings.menu.services.domains,
         url: '/servicios/dominios',
         route: {
-          module: 'Mis servicios',
-          view: 'Dominios',
+          module: strings.menu.services.title,
+          view: strings.menu.services.domains,
           method: '',
         },
       },
       {
-        title: 'Hosting',
+        title: strings.menu.services.hosting,
         url: '/servicios/hosting',
         route: {
-          module: 'Mis servicios',
-          view: 'Hosting',
+          module: strings.menu.services.title,
+          view: strings.menu.services.hosting,
           method: '',
         },
       },
       {
-        title: 'Correos',
+        title: strings.menu.services.mails,
         url: '/servicios/correos',
         route: {
-          module: 'Mis servicios',
-          view: 'Correos',
+          module: strings.menu.services.title,
+          view: strings.menu.services.mails,
           method: '',
         },
       },
     ],
   },
   {
-    title: 'Mis datos',
+    title: strings.menu.data.title,
     icon: 'linearicon-user',
     items: [
       {
-        title: 'Datos personales',
+        title: strings.menu.data.user,
         url: '/usuario/datos',
         route: {
-          module: 'Mis datos',
-          view: 'Datos',
+          module: strings.menu.data.title,
+          view: strings.menu.data.user,
           method: '',
         },
       },
       {
-        title: 'Cambiar contraseña',
+        title: strings.menu.data.password,
         url: '/usuario/cambio-contraseña',
         route: {
-          module: 'Mis datos',
-          view: 'Cambiar contraseña',
+          module: strings.menu.data.title,
+          view: strings.menu.data.password,
           method: '',
         },
       },
       {
-        title: 'Contactos',
+        title: strings.menu.data.contacts,
         url: '/usuario/contactos',
         route: {
-          module: 'Mis datos',
-          view: 'Contactos',
+          module: strings.menu.data.title,
+          view: strings.menu.data.contacts,
           method: '',
         },
       },
       {
-        title: 'Direcciones',
+        title: strings.menu.data.addresses,
         url: '/usuario/direcciones',
         route: {
-          module: 'Mis datos',
-          view: 'Direcciones',
+          module: strings.menu.data.title,
+          view: strings.menu.data.addresses,
           method: '',
         },
       },
       {
-        title: 'Mis compras',
+        title: strings.menu.data.purchases,
         url: '/usuario/compras',
         route: {
-          module: 'Mis datos',
-          view: 'Compras',
+          module: strings.menu.data.title,
+          view: strings.menu.data.purchases,
           method: '',
         },
       },
       {
-        title: 'Mis comprobantes',
+        title: strings.menu.data.bills,
         url: '/usuario/comprobantes',
         route: {
-          module: 'Mis datos',
-          view: 'Comprobantes',
+          module: strings.menu.data.title,
+          view: strings.menu.data.bills,
           method: '',
         },
       },

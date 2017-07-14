@@ -18,7 +18,9 @@
       "user": "Profile data",
       "password": "Change password",
       "contacts": "Contacts",
-      "addresses": "Addresses"
+      "addresses": "Addresses",
+      "purchases": "My purchases",
+      "bills": "My bills"
     },
     "others": {
       "sales": "Purchase"

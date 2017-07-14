@@ -25,7 +25,7 @@ class MailsCatalog extends Component {
   }
 
   async componentWillMount() {
-    this.props.setRoute({ title: 'Catálogo' }, { title: 'Correos' });
+    this.props.setRoute({ title: 'catalog' }, { title: 'mails' });
 
     if (this.props.mails.size > 0) return this.setState({ fetchingMails: false });
 
