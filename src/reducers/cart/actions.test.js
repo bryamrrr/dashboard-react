@@ -25,6 +25,7 @@ import {
   fetchCart,
   setCart,
   sendItem,
+  itemSended,
 } from './actions';
 
 const middlewares = [thunk];
@@ -81,7 +82,6 @@ describe('Cart - Actions', () => {
       const store = mockStore(initialState);
 
       return store.dispatch(fetchPackages('123', 'abc')).then(() => {
-        // return of async actions
         expect(store.getActions()).toEqual([setPackages('123', packages.results)]);
       })
     });
@@ -136,7 +136,7 @@ describe('Cart - API interactions', () => {
       nock.cleanAll();
     })
 
-    test('creates setPackages action when fetching packages has been done', () => {
+    test('fetch cart', () => {
       nock(constants.urls.API_CART)
         .get(`/carts/${constants.urls.API_CART_ID}`)
         .reply(200, cart);
@@ -155,7 +155,7 @@ describe('Cart - API interactions', () => {
       nock.cleanAll();
     })
 
-    test('creates setPackages action when fetching packages has been done', () => {
+    test('sends item', () => {
       nock(`${constants.urls.API_CART}/carts/${constants.urls.API_CART_ID}/items`)
         .post('')
         .reply(200, {});
@@ -163,8 +163,7 @@ describe('Cart - API interactions', () => {
       const store = mockStore(initialState);
 
       return store.dispatch(sendItem()).then(() => {
-        // return of async actions
-        expect(store.getActions()).toEqual([]);
+        expect(store.getActions()).toEqual([itemSended()]);
       })
     });
   });

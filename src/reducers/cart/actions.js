@@ -9,6 +9,7 @@ export const ADD_PACKAGE = 'ADD_PACKAGE';
 export const DELETE_ITEM = 'DELETE_ITEM';
 export const SELECT_PERIOD = 'SELECT_PERIOD';
 export const SET_CART = 'SET_CART';
+export const ITEM_SENDED = 'ITEM_SENDED';
 
 export function toggleCart() {
   return { type: TOGGLE_CART };
@@ -69,6 +70,10 @@ export function setCart(data) {
   };
 }
 
+export function itemSended() {
+  return { type: ITEM_SENDED };
+}
+
 export function fetchPackages(itemId, productId) {
   return async (dispatch) => {
     const url = `${constants.urls.API_MOCKS}/packages/${productId}`;
@@ -86,6 +91,9 @@ export function fetchCart() {
 }
 
 export function sendItem(item) {
-  const url = `${constants.urls.API_CART}/carts/${constants.urls.API_CART_ID}/items`;
-  httpRequest('POST', url, item);
+  return async (dispatch) => {
+    const url = `${constants.urls.API_CART}/carts/${constants.urls.API_CART_ID}/items`;
+    httpRequest('POST', url, item);
+    dispatch(itemSended());
+  }
 }

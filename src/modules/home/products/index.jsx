@@ -19,9 +19,9 @@ function Products(props) {
           <Hexagon color="orange">
             <i className="linearicon-earth" />
           </Hexagon>
-          <h3>{props.strings.domains.title}</h3>
+          <h3>{props.strings.home.domains.title}</h3>
           <p>
-            {props.strings.domains.description}
+            {props.strings.home.domains.description}
           </p>
         </Card>
       </article>
@@ -33,10 +33,10 @@ function Products(props) {
           <Hexagon color="red">
             <i className="linearicon-drawer2" />
           </Hexagon>
-          <h3>{props.strings.hosting.title}</h3>
+          <h3>{props.strings.home.hosting.title}</h3>
           <p
             dangerouslySetInnerHTML={{
-              __html: props.strings.hosting.description,
+              __html: props.strings.home.hosting.description,
             }}
           />
         </Card>
@@ -49,9 +49,9 @@ function Products(props) {
           <Hexagon color="blue">
             <i className="linearicon-envelope" />
           </Hexagon>
-          <h3>{props.strings.mails.title}</h3>
+          <h3>{props.strings.home.mails.title}</h3>
           <p>
-            {props.strings.mails.description}
+            {props.strings.home.mails.description}
           </p>
         </Card>
       </article>

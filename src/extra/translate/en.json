@@ -1,0 +1,160 @@
+{
+  "menu": {
+    "title": "Welcome to Yachay",
+    "catalog": {
+      "title": "Catalog",
+      "domains": "Domains",
+      "hosting": "Hosting",
+      "mails": "Mails"
+    },
+    "services": {
+      "title": "My services",
+      "domains": "Domains",
+      "hosting": "Hosting",
+      "mails": "Mails"
+    },
+    "data": {
+      "title": "My profile",
+      "user": "Profile data",
+      "password": "Change password",
+      "contacts": "Contacts",
+      "addresses": "Addresses"
+    },
+    "others": {
+      "sales": "Purchase"
+    }
+  },
+  "settings": {
+    "data": "My profile",
+    "password": "Change password",
+    "logout": "Logout"
+  },
+  "cart": {
+    "title": "Shopping cart",
+    "pay": "Buy"
+  },
+  "home": {
+    "description": "We welcome to Yachay's catalog.<br />Here you will be able to acquire & manage your services securely.<br />Enter our catalog section and <strong>start growing.</strong>",
+    "domains": {
+      "title": "Dominios",
+      "description": "Comienza tu negocio de internet con un dominio"
+    },
+    "hosting": {
+      "title": "Hosting",
+      "description": "Seguridad, rapidez y<br />flexibilidad"
+    },
+    "mails": {
+      "title": "Correos",
+      "description": "Personaliza la comunicación de tu empresa"
+    }
+  },
+  "domainsCatalog": {
+    "title": "Encuentra aquí el dominio que buscas",
+    "infoSuccess": "El dominio se encuentra disponible.",
+    "infoError": "El dominio no se encuentra disponible.",
+    "period": "Periodo",
+    "notAvailable": "No disponible"
+  },
+  "domainsService": {
+    "title": "Dominios",
+    "description": "Un dominio es el nombre que identifica tu sitio web en internet."
+  },
+  "hostingService": {
+    "title": "Hosting",
+    "description": "El servicio de hosting te permite almacenar tu página web en un servidor de internet."
+  },
+  "mailsService": {
+    "title": "Correos",
+    "description": "El servicio de correo te permite personalizar la comunicación de tu empresa."
+  },
+  "userData": {
+    "title": "Actualizar mis datos"
+  },
+  "changePassword": {
+    "title": "Cambiar contraseña"
+  },
+  "userContacts": {
+    "title": "Mis contactos",
+    "newContact": "Nuevo contacto",
+    "createContact": "Crear contacto"
+  },
+  "UserAddresses": {
+    "title": "Mis direcciones",
+    "newAddress": "Nueva dirección",
+    "createAddress": "Crear dirección"
+  },
+  "UserPurchases": {
+    "title": "Mis compras",
+    "state": "Selecciona un estado"
+  },
+  "UserBills": {
+    "title": "Mis comprobantes"
+  },
+  "sales": {
+    "billingData": "Datos de facturación",
+    "reason": "Razón social",
+    "ruc": "RUC",
+    "choosePayment": "Elige tu método de pago",
+    "onlinePay": "Pago en línea",
+    "onlinePayDescription": "Paga de forma segura con tu tarjeta de crédito o débito. Aceptamos Visa, MasteCard, American Express y Diners Club.",
+    "officePay": "Pago en oficina Yachay CompuPalace",
+    "officePayDescription": "Elige pago en la Oficina Yachay y paga en efectivo o tarjeta en nuestra oficina ubicada en el centro comercial CompuPalace Av. Petit Thouars Nro. 5356, Tienda Nro. 3078, tercer piso - Miraflores, Lima - Perú",
+    "contract": "Contrato",
+    "check": "He revisado el",
+    "contractName": "Contrato de prestación de servicios",
+    "finish": "Finalizar compra"
+  },
+  "tables": {
+    "codService": "Cod. servicio",
+    "service": "Servicio",
+    "detail": "Detalle",
+    "activationDate": "Fecha activación",
+    "expirationDate": "Fecha venc.",
+    "state": "Estado",
+    "actions": "Acciones",
+    "package": "Paquete",
+    "domainRel": "Dominio relacionado",
+    "cpanelUser": "Usuario CPANEL",
+    "name/reason": "Nombre/Razón social",
+    "country": "País",
+    "documentType": "Tipo doc.",
+    "numDocument": "Num doc.",
+    "email": "Correo electrónico",
+    "phone": "Teléfono",
+    "address": "Dirección",
+    "type": "Tipo",
+    "order": "Órden",
+    "date": "Fecha",
+    "value": "Monto",
+    "orderCode": "Código de órden",
+    "bill": "Comprobante",
+    "numBill": "Nº de comprobante",
+    "creationDate": "Fecha de creación"
+  },
+  "forms": {
+    "user": "Usuario",
+    "name": "Nombres",
+    "lastName": "Apellidos",
+    "email": "Correo",
+    "country": "Selecciona un pais",
+    "location": "Ubigeo",
+    "phone": "Teléfono",
+    "address": "Dirección",
+    "reference": "Referencía",
+    "documentType": "Selecciona un tipo de documento",
+    "postalCode": "Código postal",
+    "document": "Número de documento",
+    "personType": "Tipo de persona",
+    "field": "Selecciona un rubro",
+    "language": "Selecciona un idioma",
+    "currentPassword": "Contraseña actual",
+    "newPassword": "Nueva contraseña",
+    "repeatNewPassword": "Repetir nueva contraseña",
+    "notificationType": "Selecciona un tipo de notificación",
+    "type": "Selecciona un tipo"
+  },
+  "others": {
+    "addToCart": "Agregar al carrito",
+    "search": "Buscar"
+  }
+}
