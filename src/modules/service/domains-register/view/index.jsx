@@ -5,16 +5,16 @@ import { connect } from 'react-redux';
 
 import Hexagon from '../../../../components/hexagon';
 
-import { setRoute } from '../../../../reducers/routes/actions';
+import RegisterForm from '../register-form';
 
-import ContactForm from '../contact-form';
+import { setRoute } from '../../../../reducers/routes/actions';
 
 import styles from './styles.css';
 
-class DomainContactList extends Component {
+class DomainRegisterList extends Component {
 
   componentWillMount() {
-    this.props.setRoute({ title: 'services' }, { title: 'domains' }, { title: 'contacts' });
+    this.props.setRoute({ title: 'services' }, { title: 'domains' }, { title: 'registers' });
   }
 
   render() {
@@ -23,19 +23,19 @@ class DomainContactList extends Component {
         <div className={styles.titleContainer}>
           <div className={styles.title}>
             <Hexagon color="orange">
-              <i className="linearicon-users2" />
+              <i className="linearicon-register" />
             </Hexagon>
-            <h2>qiqmapunku.pe</h2>
+            <h2>Registros de DNS</h2>
           </div>
         </div>
-        <ContactForm />
+        <RegisterForm />
       </div>
     );
   }
 }
 
-DomainContactList.propTypes = {
+DomainRegisterList.propTypes = {
   setRoute: PropTypes.func.isRequired,
 };
 
-export default connect(null, { setRoute })(DomainContactList);
+export default connect(null, { setRoute })(DomainRegisterList);

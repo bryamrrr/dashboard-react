@@ -34,8 +34,16 @@ function DomainsTable() {
                   tooltip="Contactos"
                   url="/servicios/dominios/contactos"
                 />
-                <ButtonIcon icon="linearicon-register" tooltip="Registros" />
-                <ButtonIcon icon="linearicon-papers" tooltip="DNS" />
+                <ButtonIcon
+                  icon="linearicon-register"
+                  tooltip="Registros"
+                  url="/servicios/dominios/registros"
+                />
+                <ButtonIcon
+                  icon="linearicon-papers"
+                  tooltip="DNS"
+                  url="/servicios/dominios/dns"
+                />
                 <ButtonIcon icon="linearicon-license" tooltip="Renovar" />
               </div>
             </td>

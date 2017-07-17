@@ -7,14 +7,12 @@ import Hexagon from '../../../../components/hexagon';
 
 import { setRoute } from '../../../../reducers/routes/actions';
 
-import ContactForm from '../contact-form';
-
 import styles from './styles.css';
 
-class DomainContactList extends Component {
+class DomainDnsList extends Component {
 
   componentWillMount() {
-    this.props.setRoute({ title: 'services' }, { title: 'domains' }, { title: 'contacts' });
+    this.props.setRoute({ title: 'services' }, { title: 'domains' }, { title: 'dns' });
   }
 
   render() {
@@ -28,14 +26,13 @@ class DomainContactList extends Component {
             <h2>qiqmapunku.pe</h2>
           </div>
         </div>
-        <ContactForm />
       </div>
     );
   }
 }
 
-DomainContactList.propTypes = {
+DomainDnsList.propTypes = {
   setRoute: PropTypes.func.isRequired,
 };
 
-export default connect(null, { setRoute })(DomainContactList);
+export default connect(null, { setRoute })(DomainDnsList);
