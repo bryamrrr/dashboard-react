@@ -30,14 +30,15 @@ function reducer(state = initialState, action) {
     case SET_LANGUAGE: {
       const newState = state.set('selected', action.payload);
       const anotherState = newState.set('strings', newState.options[newState.selected]);
+      console.log(anotherState.routes.module.from);
       return anotherState.set('routes', {
         module: {
-          title: state.strings.menu[action.payload.module.title].title || '',
-          from: action.payload.module,
+          title: anotherState.strings.menu[anotherState.routes.module.from].title || '',
+          from: anotherState.routes.module.from,
         },
         view: {
-          title: state.strings.menu[action.payload.module.title][action.payload.view.title] || '',
-          from: action.payload.view,
+          title: anotherState.strings.menu[anotherState.routes.module.from][anotherState.routes.view.from] || '',
+          from: anotherState.routes.view.from,
         },
         method: {},
       });
@@ -47,11 +48,11 @@ function reducer(state = initialState, action) {
         .set('routes', {
           module: {
             title: state.strings.menu[action.payload.module.title].title || '',
-            from: action.payload.module,
+            from: action.payload.module.title,
           },
           view: {
             title: state.strings.menu[action.payload.module.title][action.payload.view.title] || '',
-            from: action.payload.view,
+            from: action.payload.view.title,
           },
           method: {},
         });

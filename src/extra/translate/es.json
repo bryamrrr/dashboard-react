@@ -35,7 +35,8 @@
   },
   "cart": {
     "title": "Carrito de compras",
-    "pay": "Pagar"
+    "pay": "Pagar",
+    "empty": "El carrito está vacío"
   },
   "home": {
     "description": "Te damos la bienvenida al catálogo de productos y servicios de Yachay.pe.<br />Aquí podrás adquirir y gestionar tus productos con total seguridad.<br />Ingresa a nuestra sección catálogo y <strong>empieza a crecer.</strong>",

@@ -52,7 +52,7 @@ class Cart extends Component {
     return (
       <aside className={className}>
         <div className={styles.header}>
-          <span>Carrito de compras</span>
+          <span>{this.props.strings.cart.title}</span>
           <i
             className="linearicon-arrow-right5"
             onClick={() => this.props.closeCart()}
@@ -61,7 +61,7 @@ class Cart extends Component {
         </div>
         <div className={styles.body}>
           {(this.props.cartInfo.items.size === 0 &&
-            <div className={styles.info}>El carrito está vacío.</div>)}
+            <div className={styles.info}>{this.props.strings.cart.empty}</div>)}
           {(this.props.cartInfo.items.size > 0 &&
             this.props.cartInfo.items.entrySeq().map((data) => {
               const key = data[0];
@@ -95,7 +95,7 @@ class Cart extends Component {
           </div>
           <div className={buttonClass}>
             <FormButton
-              callToAction="Pagar"
+              callToAction={this.props.strings.cart.pay}
               onClick={this.goToPaymentDetails}
               disabled={this.props.cartInfo.items.size === 0}
             />
@@ -116,6 +116,7 @@ Cart.propTypes = {
   closeCart: PropTypes.func.isRequired,
   deleteItem: PropTypes.func.isRequired,
   deleteItemFromBackend: PropTypes.func.isRequired,
+  strings: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 
@@ -124,7 +125,10 @@ Cart.contextTypes = {
 };
 
 function mapStateToProps(state) {
-  return { cartInfo: state.get('cart') };
+  return {
+    cartInfo: state.get('cart'),
+    strings: state.get('translate').strings,
+  };
 }
 
 export default connect(mapStateToProps, {

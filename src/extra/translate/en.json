@@ -35,21 +35,22 @@
   },
   "cart": {
     "title": "Shopping cart",
-    "pay": "Buy"
+    "pay": "Buy",
+    "empty": "Cart's empty"
   },
   "home": {
     "description": "We welcome to Yachay's catalog.<br />Here you will be able to acquire & manage your services securely.<br />Enter our catalog section and <strong>start growing.</strong>",
     "domains": {
-      "title": "Dominios",
-      "description": "Comienza tu negocio de internet con un dominio"
+      "title": "Domains",
+      "description": "Start your internet business with a domain"
     },
     "hosting": {
       "title": "Hosting",
-      "description": "Seguridad, rapidez y<br />flexibilidad"
+      "description": "Security, fast and<br />flexible"
     },
     "mails": {
-      "title": "Correos",
-      "description": "Personaliza la comunicación de tu empresa"
+      "title": "Mails",
+      "description": "Customize the communication of your business"
     }
   },
   "domainsCatalog": {
