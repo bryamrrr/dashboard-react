@@ -21,7 +21,7 @@ class PaymentDetails extends Component {
   }
 
   componentDidMount() {
-    this.props.setRoute({ title: 'Compra' });
+    this.props.setRoute({ title: 'sale' });
   }
 
   sendPayment() {
@@ -33,12 +33,12 @@ class PaymentDetails extends Component {
     return (
       <div className={styles.container}>
         <div className={styles.detail}>
-          <h2>Datos de facturación</h2>
+          <h2>{this.props.strings.sales.billingData}</h2>
           <PaymentContactForm />
           <section>
-            <h2>Elige tu método de pago</h2>
+            <h2>{this.props.strings.sales.choosePayment}</h2>
             <article className={styles.item}>
-              <span className={styles.itemTitle}>Pago en línea</span>
+              <span className={styles.itemTitle}>{this.props.strings.sales.onlinePay}</span>
               <div className={styles.itemContainer}>
                 <div>
                   <input id="paymentOnline" type="radio" name="gender" value="paymentType" className={styles.radioButton} />
@@ -51,11 +51,11 @@ class PaymentDetails extends Component {
                     />
                   </label>
                 </div>
-                <p>{'Paga de forma segura con tu tarjeta de crédito o débito. Aceptamos Visa, MasteCard, American Express y Diners Club.'}</p>
+                <p>{this.props.strings.sales.onlinePayDescription}</p>
               </div>
             </article>
             <article className={styles.item}>
-              <span className={styles.itemTitle}>Pago en oficina Yachay CompuPalace</span>
+              <span className={styles.itemTitle}>{this.props.strings.sales.officePay}</span>
               <div className={styles.itemContainer}>
                 <div>
                   <input id="paymentOffice" type="radio" name="gender" value="paymentType" className={styles.radioButton} />
@@ -68,31 +68,31 @@ class PaymentDetails extends Component {
                     />
                   </label>
                 </div>
-                <p>{'Elige pago en la Oficina Yachay y paga en efectivo o tarjeta en nuestra oficina ubicada en el centro comercial CompuPalace Av. Petit Thouars Nro. 5356, Tienda Nro. 3078, tercer piso - Miraflores, Lima - Perú'}</p>
+                <p>{this.props.strings.sales.officePayDescription}</p>
               </div>
             </article>
           </section>
           <section className={styles.agreement}>
-            <h2>Contrato</h2>
+            <h2>{this.props.strings.sales.contract}</h2>
             <CheckBox>
               <p>
-                He revisado el <a
+                {this.props.strings.sales.check} <a
                   target="_blank"
                   rel="noopener noreferrer" href="https://dashboard.yachay.pe/assets/pdfs/Contrato_de_prestacion_de_servicios_2015.pdf"
                   className={styles.link}
                 >
-                  Contrato de prestación de servicios
+                  {this.props.strings.sales.contractName}
                 </a>
               </p>
             </CheckBox>
           </section>
           <FormButton
-            callToAction="Finalizar compra"
+            callToAction={this.props.strings.sales.finish}
             onClick={this.sendPayment}
           />
         </div>
         <div className={styles.cartContainer}>
-          <h2>Carrito de compras</h2>
+          <h2>{this.props.strings.cart.title}</h2>
           <PaymentCartDetail />
         </div>
       </div>
@@ -103,6 +103,7 @@ class PaymentDetails extends Component {
 PaymentDetails.propTypes = {
   setRoute: PropTypes.func.isRequired,
   context: PropTypes.string.isRequired,
+  strings: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 PaymentDetails.contextTypes = {
@@ -110,7 +111,10 @@ PaymentDetails.contextTypes = {
 };
 
 function mapStateToProps(state) {
-  return { context: state.get('context') };
+  return {
+    context: state.get('context'),
+    strings: state.get('translate').strings,
+  };
 }
 
 export default connect(mapStateToProps, { setRoute })(PaymentDetails);

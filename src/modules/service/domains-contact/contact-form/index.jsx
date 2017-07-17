@@ -1,4 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
+import { connect } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 
@@ -8,7 +11,7 @@ import FormButton from '../../../../components/form-button';
 
 import styles from './styles.css';
 
-function ContactForm() {
+function ContactForm(props) {
   const contacts = {
     1: {
       id: '1',
@@ -22,62 +25,70 @@ function ContactForm() {
   return (
     <div className={styles.container}>
       <article className={styles.itemContact}>
-        <h3>Contacto registrante</h3>
+        <h3>{props.strings.contactDomains.registrant}</h3>
         <div className={styles.selectWrapper}>
           <Combo
             includeIcon="linearicon-user"
-            placeholder="Selecciona un contacto"
+            placeholder={props.strings.contactDomains.chooseContact}
             options={contacts}
           />
           <Link to="#">
-            <Anchor text="o crea un nuevo contacto" />
+            <Anchor text={props.strings.contactDomains.orNewContact} />
           </Link>
         </div>
       </article>
       <article className={styles.itemContact}>
-        <h3>Contacto administrativo</h3>
+        <h3>{props.strings.contactDomains.admin}</h3>
         <div className={styles.selectWrapper}>
           <Combo
             includeIcon="linearicon-user"
-            placeholder="Selecciona un contacto"
+            placeholder={props.strings.contactDomains.chooseContact}
             options={contacts}
           />
           <Link to="#">
-            <Anchor text="o crea un nuevo contacto" />
+            <Anchor text={props.strings.contactDomains.orNewContact} />
           </Link>
         </div>
       </article>
       <article className={styles.itemContact}>
-        <h3>Contacto técnico</h3>
+        <h3>{props.strings.contactDomains.tech}</h3>
         <div className={styles.selectWrapper}>
           <Combo
             includeIcon="linearicon-user"
-            placeholder="Selecciona un contacto"
+            placeholder={props.strings.contactDomains.chooseContact}
             options={contacts}
           />
           <Link to="#">
-            <Anchor text="o crea un nuevo contacto" />
+            <Anchor text={props.strings.contactDomains.orNewContact} />
           </Link>
         </div>
       </article>
       <article className={styles.itemContact}>
-        <h3>Contacto de facturación</h3>
+        <h3>{props.strings.contactDomains.billing}</h3>
         <div className={styles.selectWrapper}>
           <Combo
             includeIcon="linearicon-user"
-            placeholder="Selecciona un contacto"
+            placeholder={props.strings.contactDomains.chooseContact}
             options={contacts}
           />
           <Link to="#">
-            <Anchor text="o crea un nuevo contacto" />
+            <Anchor text={props.strings.contactDomains.orNewContact} />
           </Link>
         </div>
       </article>
       <FormButton
-        callToAction="Guardar"
+        callToAction={props.strings.contactDomains.save}
       />
     </div>
   );
 }
 
-export default ContactForm;
+ContactForm.propTypes = {
+  strings: PropTypes.objectOf(PropTypes.object).isRequired,
+};
+
+function mapStateToProps(state) {
+  return { strings: state.get('translate').strings };
+}
+
+export default connect(mapStateToProps)(ContactForm);

@@ -17,7 +17,7 @@ function BillTable(props) {
             <th>{props.strings.tables.bill}</th>
             <th>{props.strings.tables.numBill}</th>
             <th>{props.strings.tables.creationDate}</th>
-            <th>{props.strings.tables.income}</th>
+            <th>{props.strings.tables.outcome}</th>
             <th>{props.strings.tables.actions}</th>
           </tr>
         </thead>

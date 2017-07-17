@@ -3,6 +3,9 @@
     "home": {
       "title": "Welcome to Yachay"
     },
+    "sale": {
+      "title": "Sale"
+    },
     "catalog": {
       "title": "Catalog",
       "domains": "Domains",
@@ -54,7 +57,7 @@
     }
   },
   "domainsCatalog": {
-    "title": "Find here the domain your looking for",
+    "title": "Find the domain your looking for",
     "infoSuccess": "Domain is available.",
     "infoError": "Domain is not available",
     "period": "period",
@@ -96,10 +99,20 @@
   "userBills": {
     "title": "My bills"
   },
+  "contactDomains": {
+    "registrant": "Registrant contact",
+    "admin": "Administrative contact",
+    "tech": "Technical contact",
+    "billing": "Billing contact",
+    "orNewContact": "or create a new contact",
+    "chooseContact": "Choose a contact",
+    "save": "Save"
+  },
   "sales": {
     "billingData": "Billing data",
     "reason": "Social Reason",
     "ruc": "RUC",
+    "address": "Address",
     "choosePayment": "Choose a payment method",
     "onlinePay": "Online payment",
     "onlinePayDescription": "Pay in a secure way with a credit or debit card. We accept Visam Mastercardm American Express and Diners Club.",
@@ -135,7 +148,7 @@
     "orderCode": "Order code",
     "bill": "Bill",
     "numBill": "Nº bill",
-    "income": "Income",
+    "outcome": "Outcome",
     "creationDate": "creation date"
   },
   "tooltips": {

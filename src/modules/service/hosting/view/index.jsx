@@ -12,7 +12,7 @@ import { setRoute } from '../../../../reducers/routes/actions';
 
 import styles from './styles.css';
 
-class UserAddress extends Component {
+class HostingService extends Component {
   componentWillMount() {
     this.props.setRoute({ title: 'services' }, { title: 'hosting' });
   }
@@ -36,7 +36,7 @@ class UserAddress extends Component {
   }
 }
 
-UserAddress.propTypes = {
+HostingService.propTypes = {
   setRoute: PropTypes.func.isRequired,
   strings: PropTypes.objectOf(PropTypes.object).isRequired,
 };
@@ -45,4 +45,4 @@ function mapStateToProps(state) {
   return { strings: state.get('translate').strings };
 }
 
-export default connect(mapStateToProps, { setRoute })(UserAddress);
+export default connect(mapStateToProps, { setRoute })(HostingService);

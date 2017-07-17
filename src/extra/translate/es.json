@@ -3,6 +3,9 @@
     "home": {
       "title": "Bienvenidos a Yachay"
     },
+    "sale": {
+      "title": "Compra"
+    },
     "catalog": {
       "title": "Catálogo",
       "domains": "Dominios",
@@ -96,10 +99,20 @@
   "userBills": {
     "title": "Mis comprobantes"
   },
+  "contactDomains": {
+    "registrant": "Contacto registrante",
+    "admin": "Contacto administrativo",
+    "tech": "Contacto técnico",
+    "billing": "Contacto de facturación",
+    "orNewContact": "o crea un nuevo contacto",
+    "chooseContact": "Selecciona un contacto",
+    "save": "Guardar"
+  },
   "sales": {
     "billingData": "Datos de facturación",
     "reason": "Razón social",
     "ruc": "RUC",
+    "address": "Dirección",
     "choosePayment": "Elige tu método de pago",
     "onlinePay": "Pago en línea",
     "onlinePayDescription": "Paga de forma segura con tu tarjeta de crédito o débito. Aceptamos Visa, MasteCard, American Express y Diners Club.",
@@ -135,7 +148,7 @@
     "orderCode": "Código de órden",
     "bill": "Comprobante",
     "numBill": "Nº de comprobante",
-    "income": "Importe",
+    "outcome": "Importe",
     "creationDate": "Fecha de creación"
   },
   "tooltips": {
