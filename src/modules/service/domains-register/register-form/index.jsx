@@ -44,7 +44,6 @@ function RegisterForm() {
       <Combo
         placeholder="Tipo"
         options={type}
-        includeIcon="linearicon-users2"
       />
       <FormInput
         name="content"
@@ -57,7 +56,6 @@ function RegisterForm() {
       <FormInput
         name="priority"
         placeholder="Prioridad"
-        includeIcon="linearicon-users2"
       />
       <FormButton
         callToAction="Agregar"
