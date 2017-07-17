@@ -1,5 +1,9 @@
 import fetch from 'isomorphic-fetch';
 
+import store from '../../reducers/store';
+
+import { showToaster } from '../../reducers/toaster/actions';
+
 export default async (method, url, data = {}) => {
   const token = (typeof localStorage !== 'undefined')
     ? localStorage.getItem('token')
@@ -30,13 +34,14 @@ export default async (method, url, data = {}) => {
       if (typeof localStorage !== 'undefined') {
         localStorage.removeItem('userData');
         localStorage.removeItem('token');
+        store.dispatch(showToaster('error', 'Acceso denegado.'));
       }
     } else if (response.meta.status === 403) {
-      console.log('Response with status code 403, redirecting to Home');
+      store.dispatch(showToaster('error', 'Redireccionando al home.'));
     } else if (response.meta.status === 500) {
-      console.log('Response with status code 500, dont know what to do');
+      store.dispatch(showToaster('error', 'Error del servidor.'));
     } else {
-      console.log(`Unhandled status ${response.status}`);
+      store.dispatch(showToaster('error'));
     }
   } catch (error) {
     console.log('Error unhandled', error);
