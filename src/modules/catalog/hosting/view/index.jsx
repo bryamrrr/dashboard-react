@@ -8,6 +8,7 @@ import LoadingSpin from '../../../../components/loading-spin';
 
 import { setRoute } from '../../../../reducers/routes/actions';
 import { addProduct } from '../../../../reducers/cart/actions';
+import { showToaster } from '../../../../reducers/toaster/actions';
 import {
   fetchHostings,
   fetchHostingPrices,
@@ -36,6 +37,7 @@ class HostingCatalog extends Component {
 
   addToCart(item) {
     this.props.addProduct(item, 'Hosting');
+    this.props.showToaster('success', this.props.strings.cart.addItem);
   }
 
   render() {
@@ -65,10 +67,15 @@ HostingCatalog.propTypes = {
   ])).isRequired,
   addProduct: PropTypes.func.isRequired,
   fetchHostingPrices: PropTypes.func.isRequired,
+  showToaster: PropTypes.func.isRequired,
+  strings: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 function mapStateToProps(state) {
-  return { hostings: state.get('prices').get('hostings') };
+  return {
+    hostings: state.get('prices').get('hostings'),
+    strings: state.get('translate').strings,
+  };
 }
 
 export default connect(mapStateToProps, {
@@ -76,4 +83,5 @@ export default connect(mapStateToProps, {
   addProduct,
   fetchHostings,
   fetchHostingPrices,
+  showToaster,
 })(HostingCatalog);

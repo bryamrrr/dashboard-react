@@ -10,6 +10,8 @@ import { connect } from 'react-redux';
 import PublicHeader from '../../components/public-header';
 import PublicFooter from '../../components/public-footer';
 
+import Toaster from '../../components/toaster';
+
 function PublicRoute(props) {
   return (
     <Route
@@ -17,6 +19,9 @@ function PublicRoute(props) {
       render={() => (
         (props.auth.token === '')
           ? (<div>
+            {props.items.valueSeq().map(item =>
+              <Toaster key={item.id} type={item.type} message={item.message} />,
+            )}
             <PublicHeader />
             {props.children}
             <PublicFooter />
@@ -36,6 +41,11 @@ PublicRoute.propTypes = {
     exact: PropTypes.bool,
     path: PropTypes.string,
   }),
+  items: PropTypes.objectOf(PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.bool,
+    PropTypes.object,
+  ])).isRequired,
 };
 
 PublicRoute.defaultProps = {
@@ -47,12 +57,13 @@ PublicRoute.defaultProps = {
 
 function mapStateToProps(state, ownProps) {
   return {
-    auth: state.auth,
+    auth: state.get('auth'),
     location: ownProps.path,
     routeProps: {
       exact: ownProps.exact,
       path: ownProps.path,
     },
+    items: state.get('toaster'),
   };
 }
 

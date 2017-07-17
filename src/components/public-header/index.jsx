@@ -29,12 +29,12 @@ function PublicHeader(props) {
   );
 }
 
-function mapStateToProps({ context }) {
-  return { context };
-}
-
 PublicHeader.propTypes = {
   context: PropTypes.string.isRequired,
 };
+
+function mapStateToProps(state) {
+  return { context: state.get('context') };
+}
 
 export default connect(mapStateToProps)(PublicHeader);

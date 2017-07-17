@@ -22,7 +22,7 @@
 }
 
 .container.show {
-  animation: open 5s;
+  animation: open 3s;
 }
 
 @keyframes open {

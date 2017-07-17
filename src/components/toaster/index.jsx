@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import styles from './styles.css';
 
-function Toastr(props) {
+function Toaster(props) {
   return (
     <div className={`${styles.container} ${styles[props.type]} ${styles.show}`}>
       <div>
@@ -15,13 +15,13 @@ function Toastr(props) {
 }
 
 
-Toastr.propTypes = {
+Toaster.propTypes = {
   message: PropTypes.string.isRequired,
   type: PropTypes.string,
 };
 
-Toastr.defaultProps = {
+Toaster.defaultProps = {
   type: 'sucess',
 };
 
-export default Toastr;
+export default Toaster;
