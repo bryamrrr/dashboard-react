@@ -32,30 +32,29 @@ function reducer(state = initialState, action) {
       const anotherState = newState.set('strings', newState.options[newState.selected]);
       return anotherState.set('routes', {
         module: {
-          title: anotherState.strings.menu[anotherState.routes.module.from].title || '',
-          from: anotherState.routes.module.from,
+          title: state.strings.menu[action.payload.module.title].title || '',
+          from: action.payload.module,
         },
         view: {
-          title: anotherState.strings.menu[anotherState.routes.module.from][anotherState.routes.view.from] || '',
-          from: anotherState.routes.view.from,
+          title: state.strings.menu[action.payload.module.title][action.payload.view.title] || '',
+          from: action.payload.view,
         },
         method: {},
       });
     }
-    case SET_ROUTE: {
+    case SET_ROUTE:
       return state
         .set('routes', {
           module: {
-            title: state.strings.menu[action.payload.module].title || '',
+            title: state.strings.menu[action.payload.module.title].title || '',
             from: action.payload.module,
           },
           view: {
-            title: state.strings.menu[action.payload.module][action.payload.view] || '',
+            title: state.strings.menu[action.payload.module.title][action.payload.view.title] || '',
             from: action.payload.view,
           },
           method: {},
         });
-    }
     default:
       return state;
   }

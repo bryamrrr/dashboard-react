@@ -18,7 +18,7 @@ import styles from './styles.css';
 
 class UserContact extends Component {
   componentWillMount() {
-    this.props.setRoute({ title: 'Mis datos' }, { title: 'Contactos' });
+    this.props.setRoute({ title: 'data' }, { title: 'contacts' });
   }
 
   render() {

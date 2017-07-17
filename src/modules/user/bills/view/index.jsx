@@ -15,7 +15,7 @@ import styles from './styles.css';
 
 class UserBill extends Component {
   componentWillMount() {
-    this.props.setRoute({ title: 'Mis datos' }, { title: 'Comprobantes' });
+    this.props.setRoute({ title: 'data' }, { title: 'bills' });
   }
 
   render() {

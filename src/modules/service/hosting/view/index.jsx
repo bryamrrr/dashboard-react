@@ -14,7 +14,7 @@ import styles from './styles.css';
 
 class UserAddress extends Component {
   componentWillMount() {
-    this.props.setRoute({ title: 'Mis servicios' }, { title: 'Hosting' });
+    this.props.setRoute({ title: 'services' }, { title: 'hosting' });
   }
 
   render() {

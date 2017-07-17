@@ -12,7 +12,7 @@ import styles from './styles.css';
 
 class UserData extends Component {
   componentWillMount() {
-    this.props.setRoute('data', 'user', '');
+    this.props.setRoute({ title: 'data' }, { title: 'user' });
   }
 
   render() {

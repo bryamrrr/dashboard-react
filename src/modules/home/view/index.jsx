@@ -11,7 +11,7 @@ import styles from './styles.css';
 
 class Home extends Component {
   componentWillMount() {
-    this.props.setRoute({ title: 'Bienvenido a Yachay' });
+    this.props.setRoute({ title: 'home' });
   }
 
   render() {

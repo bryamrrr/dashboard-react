@@ -12,7 +12,7 @@ import styles from './styles.css';
 
 class UserPassword extends Component {
   componentWillMount() {
-    this.props.setRoute({ title: 'Mis datos' }, { title: 'Cambiar contraseña' });
+    this.props.setRoute({ title: 'data' }, { title: 'password' });
   }
 
   render() {

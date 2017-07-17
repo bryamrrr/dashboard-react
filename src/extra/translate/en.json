@@ -1,6 +1,8 @@
 {
   "menu": {
-    "title": "Welcome to Yachay",
+    "home": {
+      "title": "Welcome to Yachay"
+    },
     "catalog": {
       "title": "Catalog",
       "domains": "Domains",
@@ -23,7 +25,7 @@
       "bills": "My bills"
     },
     "others": {
-      "sales": "Purchase"
+      "new": "New"
     }
   },
   "settings": {

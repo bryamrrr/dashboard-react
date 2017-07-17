@@ -12,7 +12,7 @@ import styles from './styles.css';
 
 class UserContactNew extends Component {
   componentWillMount() {
-    this.props.setRoute({ title: 'Mis datos' }, { title: 'Contactos' }, { title: 'Nuevo' });
+    this.props.setRoute({ title: 'data' }, { title: 'contacts' }, { title: 'new' });
   }
 
   render() {
