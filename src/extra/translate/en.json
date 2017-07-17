@@ -54,112 +54,126 @@
     }
   },
   "domainsCatalog": {
-    "title": "Encuentra aquí el dominio que buscas",
-    "infoSuccess": "El dominio se encuentra disponible.",
-    "infoError": "El dominio no se encuentra disponible.",
-    "period": "Periodo",
-    "notAvailable": "No disponible"
+    "title": "Find here the domain your looking for",
+    "infoSuccess": "Domain is available.",
+    "infoError": "Domain is not available",
+    "period": "period",
+    "notAvailable": "Not available",
+    "searchDomain": "Search your domain"
   },
   "domainsService": {
-    "title": "Dominios",
-    "description": "Un dominio es el nombre que identifica tu sitio web en internet."
+    "title": "Domains",
+    "description": "A Domain is the name that identifies your website in internet."
   },
   "hostingService": {
     "title": "Hosting",
-    "description": "El servicio de hosting te permite almacenar tu página web en un servidor de internet."
+    "description": "A Hosting service ables you to host your website on a server."
   },
   "mailsService": {
-    "title": "Correos",
-    "description": "El servicio de correo te permite personalizar la comunicación de tu empresa."
+    "title": "Mails",
+    "description": "A Mail service ables you to customize the communication of your business."
   },
   "userData": {
-    "title": "Actualizar mis datos"
+    "title": "Update profile"
   },
   "changePassword": {
-    "title": "Cambiar contraseña"
+    "title": "Change password"
   },
   "userContacts": {
-    "title": "Mis contactos",
-    "newContact": "Nuevo contacto",
-    "createContact": "Crear contacto"
+    "title": "My contacts",
+    "newContact": "New contact",
+    "createContact": "Create contact"
   },
-  "UserAddresses": {
-    "title": "Mis direcciones",
-    "newAddress": "Nueva dirección",
-    "createAddress": "Crear dirección"
+  "userAddresses": {
+    "title": "My addresses",
+    "newAddress": "New address",
+    "createAddress": "Create address"
   },
-  "UserPurchases": {
-    "title": "Mis compras",
-    "state": "Selecciona un estado"
+  "userPurchases": {
+    "title": "My purchases",
+    "state": "Choose a state"
   },
-  "UserBills": {
-    "title": "Mis comprobantes"
+  "userBills": {
+    "title": "My bills"
   },
   "sales": {
-    "billingData": "Datos de facturación",
-    "reason": "Razón social",
+    "billingData": "Billing data",
+    "reason": "Social Reason",
     "ruc": "RUC",
-    "choosePayment": "Elige tu método de pago",
-    "onlinePay": "Pago en línea",
-    "onlinePayDescription": "Paga de forma segura con tu tarjeta de crédito o débito. Aceptamos Visa, MasteCard, American Express y Diners Club.",
-    "officePay": "Pago en oficina Yachay CompuPalace",
-    "officePayDescription": "Elige pago en la Oficina Yachay y paga en efectivo o tarjeta en nuestra oficina ubicada en el centro comercial CompuPalace Av. Petit Thouars Nro. 5356, Tienda Nro. 3078, tercer piso - Miraflores, Lima - Perú",
-    "contract": "Contrato",
-    "check": "He revisado el",
-    "contractName": "Contrato de prestación de servicios",
-    "finish": "Finalizar compra"
+    "choosePayment": "Choose a payment method",
+    "onlinePay": "Online payment",
+    "onlinePayDescription": "Pay in a secure way with a credit or debit card. We accept Visam Mastercardm American Express and Diners Club.",
+    "officePay": "Pay in our Compupalace Yachay's offices",
+    "officePayDescription": "Choose to pay in Yachay's office and you will be able to pay in cash or using your credit or debit cart in our office located in centro comercial CompuPalace Av. Petit Thouars Nro. 5356, Tienda Nro. 3078, tercer piso - Miraflores, Lima - Peru",
+    "contract": "Contract",
+    "check": "I have check the",
+    "contractName": "Contract of services",
+    "finish": "Finish"
   },
   "tables": {
-    "codService": "Cod. servicio",
-    "service": "Servicio",
-    "detail": "Detalle",
-    "activationDate": "Fecha activación",
-    "expirationDate": "Fecha venc.",
-    "state": "Estado",
-    "actions": "Acciones",
-    "package": "Paquete",
-    "domainRel": "Dominio relacionado",
-    "cpanelUser": "Usuario CPANEL",
-    "name/reason": "Nombre/Razón social",
-    "country": "País",
-    "documentType": "Tipo doc.",
-    "numDocument": "Num doc.",
-    "email": "Correo electrónico",
-    "phone": "Teléfono",
-    "address": "Dirección",
-    "type": "Tipo",
-    "order": "Órden",
-    "date": "Fecha",
-    "value": "Monto",
-    "orderCode": "Código de órden",
-    "bill": "Comprobante",
-    "numBill": "Nº de comprobante",
-    "creationDate": "Fecha de creación"
+    "codService": "Service code",
+    "service": "Service",
+    "detail": "Detail",
+    "activationDate": "Activ. date",
+    "expirationDate": "Expir. date",
+    "state": "State",
+    "actions": "Actions",
+    "package": "Package",
+    "domainRel": "Rel. domain",
+    "cpanelUser": "User CPANEL",
+    "name/reason": "Name/Social reason",
+    "country": "Country",
+    "documentType": "Doc. type",
+    "numDocument": "Doc. num",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "type": "Type",
+    "order": "Order",
+    "date": "Date",
+    "amoun": "Amount",
+    "orderCode": "Order code",
+    "bill": "Bill",
+    "numBill": "Nº bill",
+    "income": "Income",
+    "creationDate": "creation date"
+  },
+  "tooltips": {
+    "contacts": "Contacts",
+    "registers": "Registers",
+    "renew": "Renew",
+    "activate": "Activate",
+    "restoreKey": "Restore key",
+    "manage": "Manage"
+  },
+  "modals": {
+    "activateHosting": "Activate hosting",
+    "activateMail": "Activate mail"
   },
   "forms": {
-    "user": "Usuario",
-    "name": "Nombres",
-    "lastName": "Apellidos",
-    "email": "Correo",
-    "country": "Selecciona un pais",
-    "location": "Ubigeo",
-    "phone": "Teléfono",
-    "address": "Dirección",
-    "reference": "Referencía",
-    "documentType": "Selecciona un tipo de documento",
-    "postalCode": "Código postal",
-    "document": "Número de documento",
-    "personType": "Tipo de persona",
-    "field": "Selecciona un rubro",
-    "language": "Selecciona un idioma",
-    "currentPassword": "Contraseña actual",
-    "newPassword": "Nueva contraseña",
-    "repeatNewPassword": "Repetir nueva contraseña",
-    "notificationType": "Selecciona un tipo de notificación",
-    "type": "Selecciona un tipo"
+    "user": "User",
+    "name": "Name",
+    "lastName": "Lastname",
+    "email": "Email",
+    "country": "Choose a country",
+    "location": "Location",
+    "phone": "Phone",
+    "address": "Address",
+    "reference": "Reference",
+    "documentType": "Choose a document type",
+    "postalCode": "Postal code",
+    "document": "Doc. number",
+    "personType": "Person type",
+    "field": "Choose a field",
+    "language": "Choose a language",
+    "currentPassword": "Current password",
+    "newPassword": "New password",
+    "repeatNewPassword": "Repeat new password",
+    "notificationType": "CHoose a notification type",
+    "type": "Choose a type"
   },
   "others": {
-    "addToCart": "Agregar al carrito",
-    "search": "Buscar"
+    "addToCart": "Add to cart",
+    "search": "Search"
   }
 }

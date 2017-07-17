@@ -1,20 +1,23 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
+import { connect } from 'react-redux';
 
 import ButtonIcon from '../../../../components/button-icon';
 
 import styles from './styles.css';
 
-function PurchaseTable() {
+function PurchaseTable(props) {
   return (
     <div className="table-container">
       <table>
         <thead>
           <tr>
-            <th>Orden</th>
-            <th>Fecha</th>
-            <th>Estado</th>
-            <th>Monto</th>
-            <th>Acciones</th>
+            <th>{props.strings.tables.order}</th>
+            <th>{props.strings.tables.date}</th>
+            <th>{props.strings.tables.state}</th>
+            <th>{props.strings.tables.amoun}</th>
+            <th>{props.strings.tables.actions}</th>
           </tr>
         </thead>
         <tbody>
@@ -45,4 +48,12 @@ function PurchaseTable() {
   );
 }
 
-export default PurchaseTable;
+PurchaseTable.propTypes = {
+  strings: PropTypes.objectOf(PropTypes.object).isRequired,
+};
+
+function mapStateToProps(state) {
+  return { strings: state.get('translate').strings };
+}
+
+export default connect(mapStateToProps)(PurchaseTable);

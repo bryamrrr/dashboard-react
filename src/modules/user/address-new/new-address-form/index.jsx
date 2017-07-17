@@ -1,4 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
+import { connect } from 'react-redux';
 
 import FormInput from '../../../../components/form-input';
 import Combo from '../../../../components/combo';
@@ -6,7 +9,7 @@ import FormButton from '../../../../components/form-button';
 
 import styles from './styles.css';
 
-function NewAddressForm() {
+function NewAddressForm(props) {
   const countries = {
     1: {
       id: '1',
@@ -38,7 +41,7 @@ function NewAddressForm() {
       <article>
         <Combo
           includeIcon="linearicon-earth"
-          placeholder="Selecciona un país"
+          placeholder={props.strings.forms.country}
           options={countries}
         />
       </article>
@@ -46,42 +49,50 @@ function NewAddressForm() {
         <FormInput
           name="address"
           includeIcon="linearicon-map-marker"
-          placeholder="Dirección"
+          placeholder={props.strings.forms.address}
         />
       </article>
       <article>
         <FormInput
           name="reference"
           includeIcon="linearicon-road-sign"
-          placeholder="Referencia"
+          placeholder={props.strings.forms.reference}
         />
       </article>
       <article>
         <FormInput
           name="ubigeo"
           includeIcon="linearicon-location"
-          placeholder="Ubigeo"
+          placeholder={props.strings.forms.location}
         />
       </article>
       <article>
         <FormInput
           name="postalcode"
           includeIcon="linearicon-map-marker"
-          placeholder="Codigo Postal"
+          placeholder={props.strings.forms.postalCode}
         />
       </article>
       <article>
         <Combo
           includeIcon="linearicon-register"
-          placeholder="Selecciona un tipo"
+          placeholder={props.strings.forms.type}
           options={types}
         />
       </article>
       <FormButton
-        callToAction="Crear dirección"
+        callToAction={props.strings.userAddresses.createAddress}
       />
     </div>
   );
 }
 
-export default NewAddressForm;
+NewAddressForm.propTypes = {
+  strings: PropTypes.objectOf(PropTypes.object).isRequired,
+};
+
+function mapStateToProps(state) {
+  return { strings: state.get('translate').strings };
+}
+
+export default connect(mapStateToProps)(NewAddressForm);

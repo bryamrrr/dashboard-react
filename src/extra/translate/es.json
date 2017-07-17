@@ -58,7 +58,8 @@
     "infoSuccess": "El dominio se encuentra disponible.",
     "infoError": "El dominio no se encuentra disponible.",
     "period": "Periodo",
-    "notAvailable": "No disponible"
+    "notAvailable": "No disponible",
+    "searchDomain": "Busca tu dominio"
   },
   "domainsService": {
     "title": "Dominios",
@@ -83,16 +84,16 @@
     "newContact": "Nuevo contacto",
     "createContact": "Crear contacto"
   },
-  "UserAddresses": {
+  "userAddresses": {
     "title": "Mis direcciones",
     "newAddress": "Nueva dirección",
     "createAddress": "Crear dirección"
   },
-  "UserPurchases": {
+  "userPurchases": {
     "title": "Mis compras",
     "state": "Selecciona un estado"
   },
-  "UserBills": {
+  "userBills": {
     "title": "Mis comprobantes"
   },
   "sales": {
@@ -130,11 +131,24 @@
     "type": "Tipo",
     "order": "Órden",
     "date": "Fecha",
-    "value": "Monto",
+    "amount": "Monto",
     "orderCode": "Código de órden",
     "bill": "Comprobante",
     "numBill": "Nº de comprobante",
+    "income": "Importe",
     "creationDate": "Fecha de creación"
+  },
+  "tooltips": {
+    "contacts": "Contactos",
+    "registers": "Registros",
+    "renew": "Renovar",
+    "activate": "Activar",
+    "restoreKey": "Restablecer clave",
+    "manage": "Administrar"
+  },
+  "modals": {
+    "activateHosting": "Activar hosting",
+    "activateMail": "Activar correo"
   },
   "forms": {
     "user": "Usuario",

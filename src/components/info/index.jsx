@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { connect } from 'react-redux';
+
 import styles from './styles.css';
 
 function Info(props) {
@@ -25,7 +27,7 @@ function Info(props) {
           onClick={() => props.addToCart()}
           aria-hidden
         >
-          Agregar al carrito
+          {props.strings.others.addToCart}
         </span>
       )}
     </div>
@@ -36,6 +38,7 @@ Info.propTypes = {
   addToCart: PropTypes.func,
   text: PropTypes.string.isRequired,
   type: PropTypes.oneOf(['info', 'warning', 'success', 'error']),
+  strings: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 Info.defaultProps = {
@@ -43,4 +46,8 @@ Info.defaultProps = {
   type: 'info',
 };
 
-export default Info;
+function mapStateToProps(state) {
+  return { strings: state.get('translate').strings };
+}
+
+export default connect(mapStateToProps)(Info);

@@ -18,7 +18,7 @@ class UserData extends Component {
   render() {
     return (
       <div>
-        <CoverPhoto title="Actualizar mis datos" />
+        <CoverPhoto title={this.props.strings.userData.title} />
         <div className={styles.form}>
           <UserDataForm />
         </div>
@@ -29,6 +29,11 @@ class UserData extends Component {
 
 UserData.propTypes = {
   setRoute: PropTypes.func.isRequired,
+  strings: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
-export default connect(null, { setRoute })(UserData);
+function mapStateToProps(state) {
+  return { strings: state.get('translate').strings };
+}
+
+export default connect(mapStateToProps, { setRoute })(UserData);

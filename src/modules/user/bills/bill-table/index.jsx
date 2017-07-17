@@ -1,21 +1,24 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
+import { connect } from 'react-redux';
 
 import ButtonIcon from '../../../../components/button-icon';
 
 import styles from './styles.css';
 
-function BillTable() {
+function BillTable(props) {
   return (
     <div className="table-container">
       <table>
         <thead>
           <tr>
-            <th>Código de órden</th>
-            <th>Comprobante</th>
-            <th>Nª de comprobante</th>
-            <th>Fecha de creación</th>
-            <th>Importe</th>
-            <th>Acciones</th>
+            <th>{props.strings.tables.orderCode}</th>
+            <th>{props.strings.tables.bill}</th>
+            <th>{props.strings.tables.numBill}</th>
+            <th>{props.strings.tables.creationDate}</th>
+            <th>{props.strings.tables.income}</th>
+            <th>{props.strings.tables.actions}</th>
           </tr>
         </thead>
         <tbody>
@@ -45,4 +48,12 @@ function BillTable() {
   );
 }
 
-export default BillTable;
+BillTable.propTypes = {
+  strings: PropTypes.objectOf(PropTypes.object).isRequired,
+};
+
+function mapStateToProps(state) {
+  return { strings: state.get('translate').strings };
+}
+
+export default connect(mapStateToProps)(BillTable);

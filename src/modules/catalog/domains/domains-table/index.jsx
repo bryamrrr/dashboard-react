@@ -96,9 +96,11 @@ class DomainsTable extends Component {
                           onClick={() => this.addToCart(domain)}
                           aria-hidden
                         >
-                          Agregar al carrito
+                          {this.props.strings.others.addToCart}
                         </span>)
-                      || (!domain.available && <span>No disponible</span>))
+                      || (!domain.available &&
+                        <span>{this.props.strings.domainsCatalog.notAvailable}</span>
+                      ))
                     }
                   </td>
                 </tr>
@@ -120,6 +122,7 @@ DomainsTable.propTypes = {
     PropTypes.bool,
     PropTypes.object,
   ])).isRequired,
+  strings: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 DomainsTable.contextTypes = {
@@ -127,7 +130,10 @@ DomainsTable.contextTypes = {
 };
 
 function mapStateToProps(state) {
-  return { cart: state.get('cart') };
+  return {
+    cart: state.get('cart'),
+    strings: state.get('translate').strings,
+  };
 }
 
 export default connect(mapStateToProps, { addProduct })(DomainsTable);

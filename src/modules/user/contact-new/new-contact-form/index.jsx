@@ -1,4 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
+import { connect } from 'react-redux';
 
 import FormInput from '../../../../components/form-input';
 import Combo from '../../../../components/combo';
@@ -6,7 +9,7 @@ import FormButton from '../../../../components/form-button';
 
 import styles from './styles.css';
 
-function NewContactForm() {
+function NewContactForm(props) {
   const countries = {
     1: {
       id: '1',
@@ -65,34 +68,34 @@ function NewContactForm() {
         <FormInput
           name="name"
           includeIcon="linearicon-user"
-          placeholder="Nombres"
+          placeholder={props.strings.forms.name}
         />
       </article>
       <article>
         <FormInput
           name="lastname"
           includeIcon="linearicon-user"
-          placeholder="Apellidos"
+          placeholder={props.strings.forms.lastName}
         />
       </article>
       <article>
         <FormInput
           name="email"
           includeIcon="linearicon-envelope"
-          placeholder="Correo electrónico"
+          placeholder={props.strings.forms.email}
         />
       </article>
       <article>
         <FormInput
           name="phone"
           includeIcon="linearicon-phone"
-          placeholder="Teléfono"
+          placeholder={props.strings.forms.phone}
         />
       </article>
       <article>
         <Combo
           includeIcon="linearicon-register"
-          placeholder="Selecciona un tipo de documento"
+          placeholder={props.strings.forms.documentType}
           options={documentTypes}
         />
       </article>
@@ -100,13 +103,13 @@ function NewContactForm() {
         <FormInput
           name="document"
           includeIcon="linearicon-profile"
-          placeholder="Número de documento"
+          placeholder={props.strings.forms.document}
         />
       </article>
       <article>
         <Combo
           includeIcon="linearicon-earth"
-          placeholder="Selecciona un país"
+          placeholder={props.strings.forms.country}
           options={countries}
         />
       </article>
@@ -114,27 +117,27 @@ function NewContactForm() {
         <FormInput
           name="ubigeo"
           includeIcon="linearicon-location"
-          placeholder="Ubigeo"
+          placeholder={props.strings.forms.location}
         />
       </article>
       <article>
         <FormInput
           name="address"
           includeIcon="linearicon-map-marker"
-          placeholder="Dirección"
+          placeholder={props.strings.forms.address}
         />
       </article>
       <article>
         <FormInput
           name="reference"
           includeIcon="linearicon-road-sign"
-          placeholder="Referencia"
+          placeholder={props.strings.forms.reference}
         />
       </article>
       <article>
         <Combo
           includeIcon="linearicon-users"
-          placeholder="Selecciona un tipo de persona"
+          placeholder={props.strings.forms.personType}
           options={customerTypes}
         />
       </article>
@@ -142,21 +145,29 @@ function NewContactForm() {
         <FormInput
           name="postalcode"
           includeIcon="linearicon-map-marker"
-          placeholder="Codigo Postal"
+          placeholder={props.strings.forms.postalCode}
         />
       </article>
       <article>
         <Combo
           includeIcon="linearicon-comments"
-          placeholder="Selecciona un tipo de notificación"
+          placeholder={props.strings.forms.notificationType}
           options={notificationTypes}
         />
       </article>
       <FormButton
-        callToAction="Crear contacto"
+        callToAction={props.strings.userContacts.createContact}
       />
     </div>
   );
 }
 
-export default NewContactForm;
+NewContactForm.propTypes = {
+  strings: PropTypes.objectOf(PropTypes.object).isRequired,
+};
+
+function mapStateToProps(state) {
+  return { strings: state.get('translate').strings };
+}
+
+export default connect(mapStateToProps)(NewContactForm);

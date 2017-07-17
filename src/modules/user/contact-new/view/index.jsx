@@ -22,7 +22,7 @@ class UserContactNew extends Component {
           <Hexagon color="orange">
             <i className="linearicon-user" />
           </Hexagon>
-          <h2>Nuevo contacto</h2>
+          <h2>{this.props.strings.userContacts.newContact}</h2>
         </div>
         <NewContactForm />
       </div>
@@ -32,6 +32,11 @@ class UserContactNew extends Component {
 
 UserContactNew.propTypes = {
   setRoute: PropTypes.func.isRequired,
+  strings: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
-export default connect(null, { setRoute })(UserContactNew);
+function mapStateToProps(state) {
+  return { strings: state.get('translate').strings };
+}
+
+export default connect(mapStateToProps, { setRoute })(UserContactNew);

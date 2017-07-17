@@ -37,7 +37,7 @@ class UserPurchases extends Component {
           <Hexagon color="orange">
             <i className="linearicon-cart" />
           </Hexagon>
-          <h2>Mis compras</h2>
+          <h2>{this.props.strings.userPurchases.title}</h2>
         </div>
         <div className={styles.filterContainer}>
           <div className={styles.searchContainer}>
@@ -46,7 +46,7 @@ class UserPurchases extends Component {
           <div className={styles.buttonContainer}>
             <Combo
               includeIcon="linearicon-register"
-              placeholder="Selecciona un estado"
+              placeholder={this.props.strings.userPurchases.state}
               options={status}
             />
           </div>
@@ -60,6 +60,11 @@ class UserPurchases extends Component {
 
 UserPurchases.propTypes = {
   setRoute: PropTypes.func.isRequired,
+  strings: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
-export default connect(null, { setRoute })(UserPurchases);
+function mapStateToProps(state) {
+  return { strings: state.get('translate').strings };
+}
+
+export default connect(mapStateToProps, { setRoute })(UserPurchases);

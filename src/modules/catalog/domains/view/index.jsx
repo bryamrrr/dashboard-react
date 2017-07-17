@@ -57,17 +57,17 @@ class DomainsCatalog extends Component {
 
     if (domains && domains[0]) {
       if (domains[0].available) {
-        text = 'El dominio se encuentra disponible.';
+        text = this.props.strings.domainsCatalog.infoSuccess;
         type = 'success';
       } else {
-        text = 'El dominio no se encuentra disponible.';
+        text = this.props.strings.domainsCatalog.infoError;
         type = 'warning';
       }
     }
 
     return (
       <div>
-        <h2 className={styles.title}>Encuentra aquí el dominio que buscas</h2>
+        <h2 className={styles.title}>{this.props.strings.domainsCatalog.title}</h2>
         <DomainSearch
           getDomains={this.getDomains}
         />
@@ -99,6 +99,7 @@ DomainsCatalog.propTypes = {
   cart: PropTypes.shape({ count: PropTypes.number }).isRequired,
   fetchPrices: PropTypes.func.isRequired,
   setRoute: PropTypes.func.isRequired,
+  strings: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 DomainsCatalog.contextTypes = {
@@ -110,6 +111,7 @@ function mapStateToProps(state) {
     prices: state.get('prices').get('domains'),
     zones: state.get('zones'),
     cart: state.get('cart'),
+    strings: state.get('translate').strings,
   };
 }
 

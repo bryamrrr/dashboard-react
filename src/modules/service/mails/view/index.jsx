@@ -25,9 +25,9 @@ class UserAddress extends Component {
             <Hexagon color="blue">
               <i className="linearicon-envelope" />
             </Hexagon>
-            <h2>Correos</h2>
+            <h2>{this.props.strings.mailsService.title}</h2>
           </div>
-          <p>{'El servicio de correo te permite personalizar la comunicación de tu empresa.'}</p>
+          <p>{this.props.strings.mailsService.description}</p>
         </div>
         <MailsTable />
         <TablePagination />
@@ -38,6 +38,11 @@ class UserAddress extends Component {
 
 UserAddress.propTypes = {
   setRoute: PropTypes.func.isRequired,
+  strings: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
-export default connect(null, { setRoute })(UserAddress);
+function mapStateToProps(state) {
+  return { strings: state.get('translate').strings };
+}
+
+export default connect(mapStateToProps, { setRoute })(UserAddress);

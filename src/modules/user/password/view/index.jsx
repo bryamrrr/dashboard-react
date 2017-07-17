@@ -18,7 +18,7 @@ class UserPassword extends Component {
   render() {
     return (
       <div className={styles.container}>
-        <CoverPhoto title="Cambiar contraseña" />
+        <CoverPhoto title={this.props.strings.changePassword.title} />
         <div className={styles.form}>
           <UserPasswordForm />
         </div>
@@ -29,6 +29,11 @@ class UserPassword extends Component {
 
 UserPassword.propTypes = {
   setRoute: PropTypes.func.isRequired,
+  strings: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
-export default connect(null, { setRoute })(UserPassword);
+function mapStateToProps(state) {
+  return { strings: state.get('translate').strings };
+}
+
+export default connect(mapStateToProps, { setRoute })(UserPassword);

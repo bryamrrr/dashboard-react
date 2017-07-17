@@ -12,7 +12,7 @@ const TranslateRecord = new Record({
   routes: {
     module: {
       title: 'Bienvenido a Yachay',
-      from: 'init',
+      from: 'home',
     },
     view: {
       title: '',
@@ -30,7 +30,6 @@ function reducer(state = initialState, action) {
     case SET_LANGUAGE: {
       const newState = state.set('selected', action.payload);
       const anotherState = newState.set('strings', newState.options[newState.selected]);
-      console.log(anotherState.routes.module.from);
       return anotherState.set('routes', {
         module: {
           title: anotherState.strings.menu[anotherState.routes.module.from].title || '',

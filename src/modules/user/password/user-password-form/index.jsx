@@ -1,46 +1,57 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
+import { connect } from 'react-redux';
 
 import FormInput from '../../../../components/form-input';
 import FormButton from '../../../../components/form-button';
 
 import styles from './styles.css';
 
-function UserPasswordForm() {
+function UserPasswordForm(props) {
   return (
     <div className={styles.container}>
       <article>
         <FormInput
           name="user"
           includeIcon="linearicon-user"
-          placeholder="Usuario"
+          placeholder={props.strings.forms.user}
         />
       </article>
       <article>
         <FormInput
           name="password"
           includeIcon="linearicon-key"
-          placeholder="Contraseña actual"
+          placeholder={props.strings.forms.currentPassword}
         />
       </article>
       <article>
         <FormInput
           name="newPassword"
           includeIcon="linearicon-key"
-          placeholder="Nueva contraseña"
+          placeholder={props.strings.forms.newPassword}
         />
       </article>
       <article>
         <FormInput
           name="repeatNewPassword"
           includeIcon="linearicon-key"
-          placeholder="Repetir nueva contraseña"
+          placeholder={props.strings.forms.repeatNewPassword}
         />
       </article>
       <FormButton
-        callToAction="Cambiar contraseña"
+        callToAction={props.strings.changePassword.title}
       />
     </div>
   );
 }
 
-export default UserPasswordForm;
+UserPasswordForm.propTypes = {
+  strings: PropTypes.objectOf(PropTypes.object).isRequired,
+};
+
+function mapStateToProps(state) {
+  return { strings: state.get('translate').strings };
+}
+
+export default connect(mapStateToProps)(UserPasswordForm);

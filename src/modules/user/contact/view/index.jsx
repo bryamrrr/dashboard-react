@@ -28,7 +28,7 @@ class UserContact extends Component {
           <Hexagon color="orange">
             <i className="linearicon-users2" />
           </Hexagon>
-          <h2>Mis contactos</h2>
+          <h2>{this.props.strings.userContacts.title}</h2>
         </div>
         <div className={styles.filterContainer}>
           <div className={styles.searchContainer}>
@@ -37,7 +37,7 @@ class UserContact extends Component {
           <div className={styles.buttonContainer}>
             <Link to="/usuario/nuevo-contacto">
               <FormButton
-                callToAction="Nuevo contacto"
+                callToAction={this.props.strings.userContacts.newContact}
                 includeIcon="linearicon-user"
               />
             </Link>
@@ -52,6 +52,11 @@ class UserContact extends Component {
 
 UserContact.propTypes = {
   setRoute: PropTypes.func.isRequired,
+  strings: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
-export default connect(null, { setRoute })(UserContact);
+function mapStateToProps(state) {
+  return { strings: state.get('translate').strings };
+}
+
+export default connect(mapStateToProps, { setRoute })(UserContact);

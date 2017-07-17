@@ -97,20 +97,20 @@ class UserDataForm extends Component {
           <FormInput
             name="user"
             includeIcon="linearicon-user"
-            placeholder="Usuario"
+            placeholder={this.props.strings.forms.user}
           />
         </article>
         <article>
           <FormInput
             name="email"
             includeIcon="linearicon-envelope"
-            placeholder="Correo"
+            placeholder={this.props.strings.forms.email}
           />
         </article>
         <article>
           <Combo
             includeIcon="linearicon-earth"
-            placeholder="Selecciona un país"
+            placeholder={this.props.strings.forms.country}
             options={countries}
           />
         </article>
@@ -118,13 +118,13 @@ class UserDataForm extends Component {
           <FormInput
             name="phone"
             includeIcon="linearicon-phone"
-            placeholder="Telefono"
+            placeholder={this.props.strings.forms.phone}
           />
         </article>
         <article>
           <Combo
             includeIcon="linearicon-register"
-            placeholder="Selecciona un tipo de documento"
+            placeholder={this.props.strings.forms.documentType}
             options={documentTypes}
           />
         </article>
@@ -132,34 +132,34 @@ class UserDataForm extends Component {
           <FormInput
             name="document"
             includeIcon="linearicon-profile"
-            placeholder="Número de documento"
+            placeholder={this.props.strings.forms.document}
           />
         </article>
         <article>
           <Combo
             includeIcon="linearicon-users"
-            placeholder="Selecciona un tipo de persona"
+            placeholder={this.props.strings.forms.personType}
             options={customerTypes}
           />
         </article>
         <article>
           <Combo
             includeIcon="linearicon-library"
-            placeholder="Selecciona un Rubro"
+            placeholder={this.props.strings.forms.field}
             options={businessareas}
           />
         </article>
         <article>
           <Combo
             includeIcon="linearicon-earth"
-            placeholder="Selecciona un idioma"
+            placeholder={this.props.strings.forms.language}
             options={languages}
             selected={languages['1']}
             changeSelected={this.changeLanguage}
           />
         </article>
         <FormButton
-          callToAction="Actualizar mis datos"
+          callToAction={this.props.strings.userData.title}
         />
       </div>
     );
@@ -168,6 +168,11 @@ class UserDataForm extends Component {
 
 UserDataForm.propTypes = {
   setLanguage: PropTypes.func.isRequired,
+  strings: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
-export default connect(null, { setLanguage })(UserDataForm);
+function mapStateToProps(state) {
+  return { strings: state.get('translate').strings };
+}
+
+export default connect(mapStateToProps, { setLanguage })(UserDataForm);
