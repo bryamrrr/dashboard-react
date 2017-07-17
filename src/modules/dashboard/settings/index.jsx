@@ -63,17 +63,17 @@ class Settings extends Component {
         <div className={className}>
           <ul className={styles.list}>
             <li>
-              <Link to="/usuario/datos">Mis datos</Link>
+              <Link to="/usuario/datos">{this.props.strings.settings.data}</Link>
             </li>
             <li>
-              <Link to="/usuario/cambio-contraseña">Cambiar contraseña</Link>
+              <Link to="/usuario/cambio-contraseña">{this.props.strings.settings.password}</Link>
             </li>
             <li>
               <a
                 onClick={this.logout}
                 aria-hidden
               >
-                Salir
+                {this.props.strings.settings.logout}
                 <i className={`${styles.logoutIcon} linearicon-exit`} />
               </a>
             </li>
@@ -90,10 +90,14 @@ Settings.propTypes = {
     user: PropTypes.object.isRequired,
   }).isRequired,
   logoutUser: PropTypes.func.isRequired,
+  strings: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 function mapStateToProps(state) {
-  return { auth: state.get('auth') };
+  return {
+    auth: state.get('auth'),
+    strings: state.get('translate').strings,
+  };
 }
 
 function mapDispatchToProps(dispatch) {

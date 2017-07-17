@@ -71,7 +71,7 @@ class DomainSearch extends Component {
           <i className={`linearicon-magnifier ${styles.searchIcon}`} />
           <input
             type="text"
-            placeholder="Busca tu dominio"
+            placeholder={this.props.strings.domainsCatalog.searchDomain}
             value={this.state.name}
             onChange={event => this.onInputChange(event.target.value)}
             className={styles.input}
@@ -87,7 +87,7 @@ class DomainSearch extends Component {
           className={className}
           disabled={this.state.loading}
         >
-          <span>BUSCAR</span>
+          <span>{this.props.strings.others.search}</span>
           { this.state.loading && <LoadingSpin size={23} /> }
         </button>
       </div>
@@ -97,10 +97,14 @@ class DomainSearch extends Component {
 
 DomainSearch.propTypes = {
   getDomains: PropTypes.func.isRequired,
+  strings: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 function mapStateToProps(state) {
-  return { zones: state.get('zones') };
+  return {
+    zones: state.get('zones'),
+    strings: state.get('translate').strings,
+  };
 }
 
 export default connect(mapStateToProps)(DomainSearch);

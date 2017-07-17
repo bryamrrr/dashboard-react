@@ -14,7 +14,7 @@ import styles from './styles.css';
 class DomainContactList extends Component {
 
   componentWillMount() {
-    this.props.setRoute({ title: 'Mis servicios' }, { title: 'Dominios' }, { title: 'Contactos' });
+    this.props.setRoute({ title: 'services' }, { title: 'domains' });
   }
 
   render() {

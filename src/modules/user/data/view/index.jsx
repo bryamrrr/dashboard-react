@@ -12,13 +12,13 @@ import styles from './styles.css';
 
 class UserData extends Component {
   componentWillMount() {
-    this.props.setRoute({ title: 'Mis datos' }, { title: 'Datos' });
+    this.props.setRoute({ title: 'data' }, { title: 'user' });
   }
 
   render() {
     return (
       <div>
-        <CoverPhoto title="Actualizar mis datos" />
+        <CoverPhoto title={this.props.strings.userData.title} />
         <div className={styles.form}>
           <UserDataForm />
         </div>
@@ -29,6 +29,11 @@ class UserData extends Component {
 
 UserData.propTypes = {
   setRoute: PropTypes.func.isRequired,
+  strings: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
-export default connect(null, { setRoute })(UserData);
+function mapStateToProps(state) {
+  return { strings: state.get('translate').strings };
+}
+
+export default connect(mapStateToProps, { setRoute })(UserData);

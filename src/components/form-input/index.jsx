@@ -22,10 +22,12 @@ class TextInput extends Component {
     const { includeIcon } = this.props;
     const { input, meta } = this.props.field;
 
-    const className = `${styles.container} \
+    let className = `${styles.container} \
       ${includeIcon !== '' ? styles.hasIcon : ''} \
       ${this.state.value !== '' ? styles.hasContent : ''} \
       ${meta.touched && meta.error ? styles.hasError : ''}`;
+
+    className += (includeIcon !== '') ? ` ${styles.iconPadding}` : '';
 
     return (
       <div className={className}>

@@ -1,14 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Map as map } from 'immutable';
-
 import Card from '../../../components/card';
 import FormButton from '../../../components/form-button';
 
 import styles from './styles.css';
 
 function CatalogCard(props) {
+  const item = Object.assign({}, props.info, {
+    selected: props.info.prices.buy[0],
+  });
+
   return (
     <Card includeBorder>
       <div className={styles.container}>
@@ -30,8 +32,7 @@ function CatalogCard(props) {
           <FormButton
             callToAction="Agregar al carrito"
             includeIcon="linearicon-cart"
-            onClick={() => props.addToCart(map(props.info)
-    .set('selected', props.info.prices.buy[0]))}
+            onClick={() => props.addToCart(item)}
           />
         </div>
       </div>

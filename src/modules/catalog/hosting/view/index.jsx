@@ -25,7 +25,7 @@ class HostingCatalog extends Component {
   }
 
   async componentWillMount() {
-    this.props.setRoute({ title: 'Catálogo' }, { title: 'Hosting' });
+    this.props.setRoute({ title: 'catalog' }, { title: 'hosting' });
 
     if (this.props.hostings.size > 0) return this.setState({ fetchingHostings: false });
 

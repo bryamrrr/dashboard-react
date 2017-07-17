@@ -12,7 +12,7 @@ import styles from './styles.css';
 
 class UserAddressNew extends Component {
   componentWillMount() {
-    this.props.setRoute({ title: 'Mis datos' }, { title: 'Direcciones' }, { title: 'Nueva' });
+    this.props.setRoute({ title: 'data' }, { title: 'addresses' }, { title: 'new' });
   }
 
   render() {
@@ -22,7 +22,7 @@ class UserAddressNew extends Component {
           <Hexagon color="orange">
             <i className="linearicon-user" />
           </Hexagon>
-          <h2>Nueva dirección</h2>
+          <h2>{this.props.strings.userAddresses.newAddress}</h2>
         </div>
         <NewAddressForm />
       </div>
@@ -32,6 +32,11 @@ class UserAddressNew extends Component {
 
 UserAddressNew.propTypes = {
   setRoute: PropTypes.func.isRequired,
+  strings: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
-export default connect(null, { setRoute })(UserAddressNew);
+function mapStateToProps(state) {
+  return { strings: state.get('translate').strings };
+}
+
+export default connect(mapStateToProps, { setRoute })(UserAddressNew);

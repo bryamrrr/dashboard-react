@@ -15,7 +15,7 @@ import styles from './styles.css';
 
 class UserBill extends Component {
   componentWillMount() {
-    this.props.setRoute({ title: 'Mis datos' }, { title: 'Comprobantes' });
+    this.props.setRoute({ title: 'data' }, { title: 'bills' });
   }
 
   render() {
@@ -25,7 +25,7 @@ class UserBill extends Component {
           <Hexagon color="orange">
             <i className="linearicon-papers" />
           </Hexagon>
-          <h2>Mis comprobantes</h2>
+          <h2>{this.props.strings.userBills.title}</h2>
         </div>
         <div className={styles.filterContainer}>
           <div className={styles.searchContainer}>
@@ -42,6 +42,11 @@ class UserBill extends Component {
 
 UserBill.propTypes = {
   setRoute: PropTypes.func.isRequired,
+  strings: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
-export default connect(null, { setRoute })(UserBill);
+function mapStateToProps(state) {
+  return { strings: state.get('translate').strings };
+}
+
+export default connect(mapStateToProps, { setRoute })(UserBill);

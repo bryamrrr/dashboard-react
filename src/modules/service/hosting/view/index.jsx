@@ -12,9 +12,9 @@ import { setRoute } from '../../../../reducers/routes/actions';
 
 import styles from './styles.css';
 
-class UserAddress extends Component {
+class HostingService extends Component {
   componentWillMount() {
-    this.props.setRoute({ title: 'Mis servicios' }, { title: 'Hosting' });
+    this.props.setRoute({ title: 'services' }, { title: 'hosting' });
   }
 
   render() {
@@ -25,9 +25,9 @@ class UserAddress extends Component {
             <Hexagon color="red">
               <i className="linearicon-drawer2" />
             </Hexagon>
-            <h2>Hosting</h2>
+            <h2>{this.props.strings.hostingService.title}</h2>
           </div>
-          <p>{'El servicio de hosting te permite almacenar tu página web en un servidor de internet.'}</p>
+          <p>{this.props.strings.hostingService.description}</p>
         </div>
         <HostingTable />
         <TablePagination />
@@ -36,8 +36,13 @@ class UserAddress extends Component {
   }
 }
 
-UserAddress.propTypes = {
+HostingService.propTypes = {
   setRoute: PropTypes.func.isRequired,
+  strings: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
-export default connect(null, { setRoute })(UserAddress);
+function mapStateToProps(state) {
+  return { strings: state.get('translate').strings };
+}
+
+export default connect(mapStateToProps, { setRoute })(HostingService);

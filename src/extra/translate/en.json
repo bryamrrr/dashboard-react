@@ -1,0 +1,192 @@
+{
+  "menu": {
+    "home": {
+      "title": "Welcome to Yachay"
+    },
+    "sale": {
+      "title": "Sale"
+    },
+    "catalog": {
+      "title": "Catalog",
+      "domains": "Domains",
+      "hosting": "Hosting",
+      "mails": "Mails"
+    },
+    "services": {
+      "title": "My services",
+      "domains": "Domains",
+      "hosting": "Hosting",
+      "mails": "Mails"
+    },
+    "data": {
+      "title": "My profile",
+      "user": "Profile data",
+      "password": "Change password",
+      "contacts": "Contacts",
+      "addresses": "Addresses",
+      "purchases": "My purchases",
+      "bills": "My bills"
+    },
+    "others": {
+      "new": "New"
+    }
+  },
+  "settings": {
+    "data": "My profile",
+    "password": "Change password",
+    "logout": "Logout"
+  },
+  "cart": {
+    "title": "Shopping cart",
+    "pay": "Buy",
+    "empty": "Cart's empty"
+  },
+  "home": {
+    "description": "We welcome to Yachay's catalog.<br />Here you will be able to acquire & manage your services securely.<br />Enter our catalog section and <strong>start growing.</strong>",
+    "domains": {
+      "title": "Domains",
+      "description": "Start your internet business with a domain"
+    },
+    "hosting": {
+      "title": "Hosting",
+      "description": "Security, fast and<br />flexible"
+    },
+    "mails": {
+      "title": "Mails",
+      "description": "Customize the communication of your business"
+    }
+  },
+  "domainsCatalog": {
+    "title": "Find the domain your looking for",
+    "infoSuccess": "Domain is available.",
+    "infoError": "Domain is not available",
+    "period": "period",
+    "notAvailable": "Not available",
+    "searchDomain": "Search your domain"
+  },
+  "domainsService": {
+    "title": "Domains",
+    "description": "A Domain is the name that identifies your website in internet."
+  },
+  "hostingService": {
+    "title": "Hosting",
+    "description": "A Hosting service ables you to host your website on a server."
+  },
+  "mailsService": {
+    "title": "Mails",
+    "description": "A Mail service ables you to customize the communication of your business."
+  },
+  "userData": {
+    "title": "Update profile"
+  },
+  "changePassword": {
+    "title": "Change password"
+  },
+  "userContacts": {
+    "title": "My contacts",
+    "newContact": "New contact",
+    "createContact": "Create contact"
+  },
+  "userAddresses": {
+    "title": "My addresses",
+    "newAddress": "New address",
+    "createAddress": "Create address"
+  },
+  "userPurchases": {
+    "title": "My purchases",
+    "state": "Choose a state"
+  },
+  "userBills": {
+    "title": "My bills"
+  },
+  "contactDomains": {
+    "registrant": "Registrant contact",
+    "admin": "Administrative contact",
+    "tech": "Technical contact",
+    "billing": "Billing contact",
+    "orNewContact": "or create a new contact",
+    "chooseContact": "Choose a contact",
+    "save": "Save"
+  },
+  "sales": {
+    "billingData": "Billing data",
+    "reason": "Social Reason",
+    "ruc": "RUC",
+    "address": "Address",
+    "choosePayment": "Choose a payment method",
+    "onlinePay": "Online payment",
+    "onlinePayDescription": "Pay in a secure way with a credit or debit card. We accept Visam Mastercardm American Express and Diners Club.",
+    "officePay": "Pay in our Compupalace Yachay's offices",
+    "officePayDescription": "Choose to pay in Yachay's office and you will be able to pay in cash or using your credit or debit cart in our office located in centro comercial CompuPalace Av. Petit Thouars Nro. 5356, Tienda Nro. 3078, tercer piso - Miraflores, Lima - Peru",
+    "contract": "Contract",
+    "check": "I have check the",
+    "contractName": "Contract of services",
+    "finish": "Finish"
+  },
+  "tables": {
+    "codService": "Service code",
+    "service": "Service",
+    "detail": "Detail",
+    "activationDate": "Activ. date",
+    "expirationDate": "Expir. date",
+    "state": "State",
+    "actions": "Actions",
+    "package": "Package",
+    "domainRel": "Rel. domain",
+    "cpanelUser": "User CPANEL",
+    "name/reason": "Name/Social reason",
+    "country": "Country",
+    "documentType": "Doc. type",
+    "numDocument": "Doc. num",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "type": "Type",
+    "order": "Order",
+    "date": "Date",
+    "amoun": "Amount",
+    "orderCode": "Order code",
+    "bill": "Bill",
+    "numBill": "Nº bill",
+    "outcome": "Outcome",
+    "creationDate": "creation date"
+  },
+  "tooltips": {
+    "contacts": "Contacts",
+    "registers": "Registers",
+    "renew": "Renew",
+    "activate": "Activate",
+    "restoreKey": "Restore key",
+    "manage": "Manage"
+  },
+  "modals": {
+    "activateHosting": "Activate hosting",
+    "activateMail": "Activate mail"
+  },
+  "forms": {
+    "user": "User",
+    "name": "Name",
+    "lastName": "Lastname",
+    "email": "Email",
+    "country": "Choose a country",
+    "location": "Location",
+    "phone": "Phone",
+    "address": "Address",
+    "reference": "Reference",
+    "documentType": "Choose a document type",
+    "postalCode": "Postal code",
+    "document": "Doc. number",
+    "personType": "Person type",
+    "field": "Choose a field",
+    "language": "Choose a language",
+    "currentPassword": "Current password",
+    "newPassword": "New password",
+    "repeatNewPassword": "Repeat new password",
+    "notificationType": "CHoose a notification type",
+    "type": "Choose a type"
+  },
+  "others": {
+    "addToCart": "Add to cart",
+    "search": "Search"
+  }
+}

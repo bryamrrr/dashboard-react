@@ -12,9 +12,9 @@ import { setRoute } from '../../../../reducers/routes/actions';
 
 import styles from './styles.css';
 
-class UserAddress extends Component {
+class DomainService extends Component {
   componentWillMount() {
-    this.props.setRoute({ title: 'Mis servicios' }, { title: 'Dominios' });
+    this.props.setRoute({ title: 'services' }, { title: 'domains' });
   }
 
   render() {
@@ -25,9 +25,9 @@ class UserAddress extends Component {
             <Hexagon color="orange">
               <i className="linearicon-earth" />
             </Hexagon>
-            <h2>Dominios</h2>
+            <h2>{this.props.strings.domainsService.title}</h2>
           </div>
-          <p>Un dominio es el nombre que identifica tu sitio web en internet.</p>
+          <p>{this.props.strings.domainsService.description}</p>
         </div>
         <DomainsTable />
         <TablePagination />
@@ -36,8 +36,13 @@ class UserAddress extends Component {
   }
 }
 
-UserAddress.propTypes = {
+DomainService.propTypes = {
   setRoute: PropTypes.func.isRequired,
+  strings: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
-export default connect(null, { setRoute })(UserAddress);
+function mapStateToProps(state) {
+  return { strings: state.get('translate').strings };
+}
+
+export default connect(mapStateToProps, { setRoute })(DomainService);

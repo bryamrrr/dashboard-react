@@ -5,6 +5,7 @@ import thunk from 'redux-thunk';
 import { initialState } from './reducer';
 import constants from '../../extra/constants';
 import packages from './packages';
+import cart from './cart';
 
 import {
   TOGGLE_CART,
@@ -21,6 +22,10 @@ import {
   setPackages,
   deleteItem,
   selectPeriod,
+  fetchCart,
+  setCart,
+  deleteItemFromBackend,
+  itemDeleted,
 } from './actions';
 
 const middlewares = [thunk];
@@ -66,7 +71,7 @@ describe('Cart - Actions', () => {
 
   describe('fetchPackages', () => {
     afterEach(() => {
-      nock.cleanAll()
+      nock.cleanAll();
     })
 
     test('creates setPackages action when fetching packages has been done', () => {
@@ -77,7 +82,6 @@ describe('Cart - Actions', () => {
       const store = mockStore(initialState);
 
       return store.dispatch(fetchPackages('123', 'abc')).then(() => {
-        // return of async actions
         expect(store.getActions()).toEqual([setPackages('123', packages.results)]);
       })
     });
@@ -122,6 +126,45 @@ describe('Cart - Actions', () => {
         item: 'item1',
         selected: { period: '1 año' },
       });
+    });
+  });
+});
+
+describe('Cart - API interactions', () => {
+  describe('fetchCart', () => {
+    afterEach(() => {
+      nock.cleanAll();
+    })
+
+    test('fetch cart', () => {
+      nock(constants.urls.API_CART)
+        .get(`/carts/${constants.urls.API_CART_ID}`)
+        .reply(200, cart);
+
+      const store = mockStore(initialState);
+
+      return store.dispatch(fetchCart()).then(() => {
+        // return of async actions
+        expect(store.getActions()).toEqual([setCart(cart)]);
+      })
+    });
+  });
+
+  describe('deleteItem', () => {
+    afterEach(() => {
+      nock.cleanAll();
+    })
+
+    test('deletes item', () => {
+      nock(`${constants.urls.API_CART}/carts/${constants.urls.API_CART_ID}/items/123`)
+        .delete('')
+        .reply(200, {});
+
+      const store = mockStore(initialState);
+
+      return store.dispatch(deleteItemFromBackend('123')).then(() => {
+        expect(store.getActions()).toEqual([itemDeleted()]);
+      })
     });
   });
 });

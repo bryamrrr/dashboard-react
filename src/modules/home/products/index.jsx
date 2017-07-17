@@ -1,11 +1,14 @@
 import React from 'react';
+import PropType from 'prop-types';
+
+import { connect } from 'react-redux';
 
 import Card from '../../../components/card';
 import Hexagon from '../../../components/hexagon';
 
 import styles from './styles.css';
 
-function Products() {
+function Products(props) {
   return (
     <section className={styles.container}>
       <article>
@@ -16,9 +19,9 @@ function Products() {
           <Hexagon color="orange">
             <i className="linearicon-earth" />
           </Hexagon>
-          <h3>Dominios</h3>
+          <h3>{props.strings.home.domains.title}</h3>
           <p>
-            Comienza tu negocio de internet con un dominio
+            {props.strings.home.domains.description}
           </p>
         </Card>
       </article>
@@ -30,10 +33,12 @@ function Products() {
           <Hexagon color="red">
             <i className="linearicon-drawer2" />
           </Hexagon>
-          <h3>Hosting</h3>
-          <p>
-            Seguridad, rapidez y <br />flexibilidad
-          </p>
+          <h3>{props.strings.home.hosting.title}</h3>
+          <p
+            dangerouslySetInnerHTML={{
+              __html: props.strings.home.hosting.description,
+            }}
+          />
         </Card>
       </article>
       <article>
@@ -44,9 +49,9 @@ function Products() {
           <Hexagon color="blue">
             <i className="linearicon-envelope" />
           </Hexagon>
-          <h3>Correos</h3>
+          <h3>{props.strings.home.mails.title}</h3>
           <p>
-            Personaliza la comunicación de tu empresa
+            {props.strings.home.mails.description}
           </p>
         </Card>
       </article>
@@ -54,4 +59,12 @@ function Products() {
   );
 }
 
-export default Products;
+Products.propTypes = {
+  strings: PropType.objectOf(PropType.object).isRequired,
+};
+
+function mapStateToProps(state) {
+  return { strings: state.get('translate').strings };
+}
+
+export default connect(mapStateToProps)(Products);

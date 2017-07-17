@@ -105,7 +105,12 @@ MenuItem.propTypes = {
   icon: PropTypes.string.isRequired,
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
   title: PropTypes.string.isRequired,
-  routes: PropTypes.objectOf(PropTypes.object).isRequired,
+  routes: PropTypes.objectOf(PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.bool,
+    PropTypes.object,
+  ])).isRequired,
 };
 
 function mapStateToProps(state) {

@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
+import { connect } from 'react-redux';
 
 import ButtonIcon from '../../../../components/button-icon';
 import Modal from '../../../../components/modal';
@@ -30,13 +33,13 @@ class MailsTable extends Component {
         <table>
           <thead>
             <tr>
-              <th>Cod. Servicio</th>
-              <th>Paquete</th>
-              <th>Dominio relacionado</th>
-              <th>Usuario cPanel</th>
-              <th>Fecha venc.</th>
-              <th>Estado</th>
-              <th>Acciones</th>
+              <th>{this.props.strings.tables.codService}</th>
+              <th>{this.props.strings.tables.package}</th>
+              <th>{this.props.strings.tables.domainRel}</th>
+              <th>{this.props.strings.tables.cpanelUser}</th>
+              <th>{this.props.strings.tables.expirationDate}</th>
+              <th>{this.props.strings.tables.state}</th>
+              <th>{this.props.strings.tables.actions}</th>
             </tr>
           </thead>
           <tbody>
@@ -51,7 +54,7 @@ class MailsTable extends Component {
                 <div className={styles.tdButton}>
                   <ButtonIcon
                     icon="linearicon-circle-checkmark"
-                    tooltip="Activar"
+                    tooltip={this.props.strings.tooltips.activate}
                     onClick={this.showModalActivate}
                   />
                 </div>
@@ -66,9 +69,9 @@ class MailsTable extends Component {
               <td>Activo</td>
               <td className={styles.tdButton}>
                 <div className={styles.tdButton}>
-                  <ButtonIcon icon="linearicon-key" tooltip="Restablecer clave" />
-                  <ButtonIcon icon="linearicon-gear" tooltip="Administrar" />
-                  <ButtonIcon icon="linearicon-license2" tooltip="Renovar" />
+                  <ButtonIcon icon="linearicon-key" tooltip={this.props.strings.tooltips.restoreKey} />
+                  <ButtonIcon icon="linearicon-gear" tooltip={this.props.strings.tooltips.manage} />
+                  <ButtonIcon icon="linearicon-license2" tooltip={this.props.strings.tooltips.renew} />
                 </div>
               </td>
             </tr>
@@ -81,7 +84,7 @@ class MailsTable extends Component {
               <td>Suspendido</td>
               <td className={styles.tdButton}>
                 <div className={styles.tdButton}>
-                  <ButtonIcon icon="linearicon-license2" tooltip="Renovar" />
+                  <ButtonIcon icon="linearicon-license2" tooltip={this.props.strings.tooltips.renew} />
                 </div>
               </td>
             </tr>
@@ -98,4 +101,12 @@ class MailsTable extends Component {
   }
 }
 
-export default MailsTable;
+MailsTable.propTypes = {
+  strings: PropTypes.objectOf(PropTypes.object).isRequired,
+};
+
+function mapStateToProps(state) {
+  return { strings: state.get('translate').strings };
+}
+
+export default connect(mapStateToProps)(MailsTable);

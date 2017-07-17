@@ -6,6 +6,7 @@ import cart from './cart/reducer';
 import context from './context/reducer';
 import prices from './prices/reducer';
 import routes from './routes/reducer';
+import translate from './translate/reducer';
 import zones from './zones/reducer';
 
 const rootReducer = combineReducers({
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   form,
   prices,
   routes,
+  translate,
   zones,
 });
 

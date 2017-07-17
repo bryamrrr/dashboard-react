@@ -18,7 +18,7 @@ import styles from './styles.css';
 
 class UserAddress extends Component {
   componentWillMount() {
-    this.props.setRoute({ title: 'Mis datos' }, { title: 'Direcciones' });
+    this.props.setRoute({ title: 'data' }, { title: 'addresses' });
   }
 
   render() {
@@ -28,7 +28,7 @@ class UserAddress extends Component {
           <Hexagon color="orange">
             <i className="linearicon-users2" />
           </Hexagon>
-          <h2>Mis direcciones</h2>
+          <h2>{this.props.strings.userAddresses.title}</h2>
         </div>
         <div className={styles.filterContainer}>
           <div className={styles.searchContainer}>
@@ -37,7 +37,7 @@ class UserAddress extends Component {
           <div className={styles.buttonContainer}>
             <Link to="/usuario/nueva-direccion">
               <FormButton
-                callToAction="Nueva dirección"
+                callToAction={this.props.strings.userAddresses.newAddress}
                 includeIcon="linearicon-user"
               />
             </Link>
@@ -52,6 +52,11 @@ class UserAddress extends Component {
 
 UserAddress.propTypes = {
   setRoute: PropTypes.func.isRequired,
+  strings: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
-export default connect(null, { setRoute })(UserAddress);
+function mapStateToProps(state) {
+  return { strings: state.get('translate').strings };
+}
+
+export default connect(mapStateToProps, { setRoute })(UserAddress);

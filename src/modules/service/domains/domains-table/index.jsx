@@ -1,22 +1,25 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
+import { connect } from 'react-redux';
 
 import ButtonIcon from '../../../../components/button-icon';
 
 import styles from './styles.css';
 
-function DomainsTable() {
+function DomainsTable(props) {
   return (
     <div className="table-container">
       <table>
         <thead>
           <tr>
-            <th>Cod. Servicio</th>
-            <th>Servicio</th>
-            <th>Detalle</th>
-            <th>Fecha activación</th>
-            <th>Fecha venc.</th>
-            <th>Estado</th>
-            <th>Acciones</th>
+            <th>{props.strings.tables.codService}</th>
+            <th>{props.strings.tables.service}</th>
+            <th>{props.strings.tables.detail}</th>
+            <th>{props.strings.tables.activationDate}</th>
+            <th>{props.strings.tables.expirationDate}</th>
+            <th>{props.strings.tables.state}</th>
+            <th>{props.strings.tables.actions}</th>
           </tr>
         </thead>
         <tbody>
@@ -31,12 +34,20 @@ function DomainsTable() {
               <div className={styles.tdButton}>
                 <ButtonIcon
                   icon="linearicon-users2"
-                  tooltip="Contactos"
+                  tooltip={props.strings.tooltips.contacts}
                   url="/servicios/dominios/contactos"
                 />
-                <ButtonIcon icon="linearicon-register" tooltip="Registros" />
-                <ButtonIcon icon="linearicon-papers" tooltip="DNS" />
-                <ButtonIcon icon="linearicon-license" tooltip="Renovar" />
+                <ButtonIcon
+                  icon="linearicon-register"
+                  tooltip={props.strings.tooltips.registers}
+                  url="/servicios/dominios/registros"
+                />
+                <ButtonIcon
+                  icon="linearicon-papers"
+                  tooltip="DNS"
+                  url="/servicios/dominios/dns"
+                />
+                <ButtonIcon icon="linearicon-license" tooltip={props.strings.tooltips.renew} />
               </div>
             </td>
           </tr>
@@ -49,7 +60,7 @@ function DomainsTable() {
             <td>Suspendido</td>
             <td>
               <div className={styles.tdButton}>
-                <ButtonIcon icon="linearicon-users2" tooltip="Contactos" />
+                <ButtonIcon icon="linearicon-users2" tooltip={props.strings.tooltips.contacts} />
               </div>
             </td>
           </tr>
@@ -71,10 +82,10 @@ function DomainsTable() {
             <td>Activado</td>
             <td>
               <div className={styles.tdButton}>
-                <ButtonIcon icon="linearicon-users2" tooltip="Contactos" />
-                <ButtonIcon icon="linearicon-register" tooltip="Registros" />
+                <ButtonIcon icon="linearicon-users2" tooltip={props.strings.tooltips.contacts} />
+                <ButtonIcon icon="linearicon-register" tooltip={props.strings.tooltips.registers} />
                 <ButtonIcon icon="linearicon-papers" tooltip="DNS" />
-                <ButtonIcon icon="linearicon-license" tooltip="Renovar" />
+                <ButtonIcon icon="linearicon-license" tooltip={props.strings.tooltips.renew} />
               </div>
             </td>
           </tr>
@@ -84,4 +95,12 @@ function DomainsTable() {
   );
 }
 
-export default DomainsTable;
+DomainsTable.propTypes = {
+  strings: PropTypes.objectOf(PropTypes.object).isRequired,
+};
+
+function mapStateToProps(state) {
+  return { strings: state.get('translate').strings };
+}
+
+export default connect(mapStateToProps)(DomainsTable);

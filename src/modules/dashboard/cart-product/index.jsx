@@ -10,21 +10,21 @@ function CartProduct(props) {
   let iconName = '';
   let name = '';
 
-  switch (props.info.get('category')) {
+  switch (props.info.category) {
     case 'Hosting':
       className = 'red';
       iconName = 'linearicon-drawer2';
-      name = props.info.get('name');
+      name = props.info.name;
       break;
     case 'Dominio':
       className = 'orange';
       iconName = 'linearicon-earth';
-      name = props.info.get('domain');
+      name = props.info.domain;
       break;
     default:
       className = 'blue';
       iconName = 'linearicon-envelope';
-      name = props.info.get('name');
+      name = props.info.name;
       break;
   }
 
@@ -41,15 +41,15 @@ function CartProduct(props) {
         <div className={styles.product}>
           <span className={styles.title}>{name}</span>
           <span className={styles.period}>
-            {props.info.get('selected').period}
+            {props.info.selected.period}
           </span>
         </div>
         <div>
           <span className={styles.currency}>
-            {props.info.get('selected').currencySymbol}
+            {props.info.selected.currencySymbol}
           </span>
           <span className={styles.price}>
-            {`${props.info.get('selected').price}.00`}
+            {`${props.info.selected.price}.00`}
           </span>
         </div>
       </div>
@@ -69,6 +69,8 @@ function CartProduct(props) {
 CartProduct.propTypes = {
   info: PropTypes.objectOf(PropTypes.oneOfType([
     PropTypes.number,
+    PropTypes.string,
+    PropTypes.array,
     PropTypes.bool,
     PropTypes.object,
   ])).isRequired,
