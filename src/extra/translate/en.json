@@ -39,7 +39,8 @@
   "cart": {
     "title": "Shopping cart",
     "pay": "Buy",
-    "empty": "Cart's empty"
+    "empty": "Cart's empty",
+    "addItem": "Item added to cart"
   },
   "home": {
     "description": "We welcome to Yachay's catalog.<br />Here you will be able to acquire & manage your services securely.<br />Enter our catalog section and <strong>start growing.</strong>",

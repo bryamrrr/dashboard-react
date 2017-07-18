@@ -12,6 +12,7 @@ import DomainsTable from '../domains-table';
 import { addProduct } from '../../../../reducers/cart/actions';
 import { fetchPrices } from '../../../../reducers/domains/actions';
 import { setRoute } from '../../../../reducers/routes/actions';
+import { showToaster } from '../../../../reducers/toaster/actions';
 
 import styles from './styles.css';
 
@@ -45,6 +46,7 @@ class DomainsCatalog extends Component {
     domain.prices = _.mapKeys(pricesData.prices.buy, 'period');
     domain.selected = domain.prices['1 Año'];
     this.props.addProduct(domain, 'Dominio');
+    this.props.showToaster('success', this.props.strings.cart.addItem);
 
     const url = `/detalle-producto/item${this.props.cart.count + 1}/paquetes`;
     this.context.router.history.push(url);
@@ -99,6 +101,7 @@ DomainsCatalog.propTypes = {
   cart: PropTypes.shape({ count: PropTypes.number }).isRequired,
   fetchPrices: PropTypes.func.isRequired,
   setRoute: PropTypes.func.isRequired,
+  showToaster: PropTypes.func.isRequired,
   strings: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
@@ -119,4 +122,5 @@ export default connect(mapStateToProps, {
   addProduct,
   fetchPrices,
   setRoute,
+  showToaster,
 })(DomainsCatalog);
