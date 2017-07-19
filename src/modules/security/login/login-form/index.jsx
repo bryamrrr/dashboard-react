@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm } from 'redux-form/immutable';
 
 import FormInput from '../../../../components/form-input';
 import FormButton from '../../../../components/form-button';

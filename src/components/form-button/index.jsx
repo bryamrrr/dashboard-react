@@ -10,6 +10,22 @@ function FormButton(props) {
     ? `${styles.button} ${styles.isLoading}`
     : styles.button;
 
+  if (props.type === 'submit') {
+    return (
+      <button
+        className={className}
+        disabled={props.loading || props.disabled}
+        type={props.type}
+      >
+        { (props.includeIcon !== '') &&
+          <i className={`${styles.icon} ${props.includeIcon}`} />
+        }
+        <span>{props.callToAction}</span>
+        { props.loading && <LoadingSpin size={19} /> }
+      </button>
+    );
+  }
+
   return (
     <button
       className={className}

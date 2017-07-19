@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { Link } from 'react-router-dom';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm } from 'redux-form/immutable';
 
 import FormInput from '../../../../components/form-input';
 import FormButton from '../../../../components/form-button';

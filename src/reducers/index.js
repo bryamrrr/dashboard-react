@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux-immutable';
 
-import { reducer as form } from 'redux-form';
+import { reducer as form } from 'redux-form/immutable';
 import auth from './auth/reducer';
 import cart from './cart/reducer';
 import context from './context/reducer';
