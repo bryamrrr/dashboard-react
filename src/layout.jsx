@@ -13,12 +13,7 @@ function Layout(props) {
         <link rel="stylesheet" href={`${props.domain}/styles.css`} />
       </head>
       <body>
-        <div
-          id="render-target"
-          dangerouslySetInnerHTML={{
-            __html: props.content,
-          }}
-        />
+        <div id="render-target" />
         <script src={`${props.domain}/bundle.js`} />
         { props.env !== 'production' && (
           <script src="http://localhost:35729/livereload.js" />
@@ -30,7 +25,6 @@ function Layout(props) {
 
 Layout.propTypes = {
   title: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired,
   domain: PropTypes.string.isRequired,
   env: PropTypes.string,
 };
