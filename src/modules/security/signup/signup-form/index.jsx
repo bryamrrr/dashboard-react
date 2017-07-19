@@ -104,27 +104,25 @@ class SignupForm extends Component {
 function validate(values) {
   const errors = {};
 
-  if (!values.username) errors.username = 'Ingresa un nombre de usuario';
+  if (!values.get('username')) errors.username = 'Ingresa un nombre de usuario';
 
-  if (!values.email) {
+  if (!values.get('email') ){
     errors.email = 'Ingresa tu correo';
-  } else if (!regex.validate.email.test(values.email)) {
+  } else if (!regex.validate.email.test(values.get('email'))) {
     errors.email = regex.message.email;
   }
 
-  if (!values.password) {
+  if (!values.get('password')) {
     errors.password = 'Ingresa una contraseña';
-  } else if (!regex.validate.password.test(values.password)) {
+  } else if (!regex.validate.password.test(values.get('password'))) {
     errors.password = regex.message.password;
   }
 
-  if (!values.repeatPassword) {
+  if (!values.get('repeatPassword')) {
     errors.repeatPassword = 'Ingresa una contraseña';
-  } else if (values.repeatPassword !== values.password) {
+  } else if (values.get('repeatPassword') !== values.get('password')) {
     errors.repeatPassword = 'Las contraseñas no coinciden';
   }
-
-  console.log(errors);
 
   // If errors is empty, the form is fine to submit
   // If errors has any properties, redux form assumes form is invalid

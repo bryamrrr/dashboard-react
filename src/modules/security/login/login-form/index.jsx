@@ -86,9 +86,9 @@ class LoginForm extends Component {
 function validate(values) {
   const errors = {};
 
-  if (!values.username) errors.username = 'Ingresa tu usuario';
+  if (!values.get('username')) errors.username = 'Ingresa tu usuario';
 
-  if (!values.password) errors.password = 'Ingresa tu contraseña';
+  if (!values.get('password')) errors.password = 'Ingresa tu contraseña';
 
   // If errors is empty, the form is fine to submit
   // If errors has any properties, redux form assumes form is invalid
