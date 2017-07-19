@@ -27,6 +27,7 @@ class UserDataForm extends Component {
   }
 
   onSubmit(values) {
+    console.log(this);
     console.log(values);
   }
 
