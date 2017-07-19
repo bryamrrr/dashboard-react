@@ -106,7 +106,7 @@ function validate(values) {
 
   if (!values.get('username')) errors.username = 'Ingresa un nombre de usuario';
 
-  if (!values.get('email') ){
+  if (!values.get('email')) {
     errors.email = 'Ingresa tu correo';
   } else if (!regex.validate.email.test(values.get('email'))) {
     errors.email = regex.message.email;
