@@ -177,14 +177,16 @@
     "documentType": "Selecciona un tipo de documento",
     "postalCode": "Código postal",
     "document": "Número de documento",
-    "personType": "Tipo de persona",
-    "field": "Selecciona un rubro",
+    "personType": "Tipo de cliente",
+    "bussinessarea": "Actividad económica",
     "language": "Selecciona un idioma",
     "currentPassword": "Contraseña actual",
     "newPassword": "Nueva contraseña",
     "repeatNewPassword": "Repetir nueva contraseña",
     "notificationType": "Selecciona un tipo de notificación",
-    "type": "Selecciona un tipo"
+    "type": "Selecciona un tipo",
+    "name": "Nombre",
+    "lastname": "Apellidos"
   },
   "others": {
     "addToCart": "Agregar al carrito",

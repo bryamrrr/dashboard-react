@@ -177,14 +177,16 @@
     "documentType": "Choose a document type",
     "postalCode": "Postal code",
     "document": "Doc. number",
-    "personType": "Person type",
-    "field": "Choose a field",
+    "personType": "Customer type",
+    "bussinessarea": "Bussiness Area",
     "language": "Choose a language",
     "currentPassword": "Current password",
     "newPassword": "New password",
     "repeatNewPassword": "Repeat new password",
-    "notificationType": "CHoose a notification type",
-    "type": "Choose a type"
+    "notificationType": "Choose a notification type",
+    "type": "Choose a type",
+    "name": "Name",
+    "lastname": "Lastname"
   },
   "others": {
     "addToCart": "Add to cart",
