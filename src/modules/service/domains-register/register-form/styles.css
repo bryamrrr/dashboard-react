@@ -1,0 +1,14 @@
+.container article { display: flex; }
+.container article > div {
+  width: 100%;
+}
+
+.name,
+.duration {
+  display: flex;
+  align-items: center;
+}
+
+.duration > div:first-child { margin-right: 20px; }
+
+.container button { margin-top: 20px; }

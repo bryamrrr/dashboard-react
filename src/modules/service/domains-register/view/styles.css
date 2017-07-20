@@ -1,5 +1,5 @@
 .titleContainer {
-  margin-bottom: 50px;
+  margin-bottom: 10px;
   text-align: center;
 }
 
@@ -16,6 +16,29 @@
 }
 
 .title i { margin-left: 2px; }
+
+.titleModal {
+  color: #f39c12;
+  font-weight: 500;
+  margin-bottom: 40px;
+  margin-top: 0;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.buttonContainer {
+  width: 25%;
+  float: right;
+  margin-bottom: 20px;
+}
+
+@media screen and (max-width: 1024px) {
+  .buttonContainer { width: 40%; }
+}
+
+@media screen and (max-width: 768px) {
+  .buttonContainer { width: 100%; }
+}
 
 @media screen and (max-width: 480px) {
   .title { flex-wrap: wrap; }

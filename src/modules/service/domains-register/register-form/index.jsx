@@ -36,27 +36,39 @@ function RegisterForm() {
   };
   return (
     <div className={styles.container}>
-      <FormInput
-        name="nombre"
-        placeholder="Nombre"
-      />
-      <div>.qiqmapunku.org</div>
-      <Combo
-        placeholder="Tipo"
-        options={type}
-      />
-      <FormInput
-        name="content"
-        placeholder="Contenido"
-      />
-      <FormInput
-        name="duration"
-        placeholder="Duración"
-      />
-      <FormInput
-        name="priority"
-        placeholder="Prioridad"
-      />
+      <article className={styles.name}>
+        <FormInput
+          name="nombre"
+          placeholder="Nombre"
+        />
+        <div>.qiqmapunku.org</div>
+      </article>
+      <article>
+        <Combo
+          placeholder="Tipo"
+          options={type}
+          includeIcon="linearicon-gear"
+        />
+      </article>
+      <article>
+        <FormInput
+          name="content"
+          placeholder="Contenido"
+          includeIcon="linearicon-register"
+        />
+      </article>
+      <article className={styles.duration}>
+        <FormInput
+          name="duration"
+          placeholder="Duración"
+          includeIcon="linearicon-clock"
+        />
+        <FormInput
+          name="priority"
+          placeholder="Prioridad"
+          includeIcon="linearicon-circle-exclamation"
+        />
+      </article>
       <FormButton
         callToAction="Agregar"
       />

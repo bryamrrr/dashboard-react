@@ -150,7 +150,12 @@
     "bill": "Comprobante",
     "numBill": "Nº de comprobante",
     "outcome": "Importe",
-    "creationDate": "Fecha de creación"
+    "creationDate": "Fecha de creación",
+    "name": "Nombre",
+    "type": "Tipo",
+    "content": "Contenido",
+    "duration": "Duración",
+    "priority": "Prioridad"
   },
   "tooltips": {
     "contacts": "Contactos",
@@ -158,7 +163,8 @@
     "renew": "Renovar",
     "activate": "Activar",
     "restoreKey": "Restablecer clave",
-    "manage": "Administrar"
+    "manage": "Administrar",
+    "delete": "Eliminar"
   },
   "modals": {
     "activateHosting": "Activar hosting",
