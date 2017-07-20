@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import DomainsTable from '../domains-table';
 
 import Hexagon from '../../../../components/hexagon';
 import TablePagination from '../../../../components/table-pagination';
+import Anchor from '../../../../components/anchor';
 
 import { setRoute } from '../../../../reducers/routes/actions';
 
@@ -30,7 +32,12 @@ class DomainService extends Component {
           <p>{this.props.strings.domainsService.description}</p>
         </div>
         <DomainsTable />
-        <TablePagination />
+        <div className={styles.footer}>
+          <Link to="/servicios/dominios/dnssubordinados" className={styles.iconContainer}>
+            <Anchor text="Administrar DNS Subornidados" />
+          </Link>
+          <TablePagination />
+        </div>
       </div>
     );
   }

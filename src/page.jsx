@@ -25,6 +25,7 @@ import DomainsService from './modules/service/domains/view';
 import DomainContactList from './modules/service/domains-contact/view';
 import DomainRegisterList from './modules/service/domains-register/view';
 import DomainDnsList from './modules/service/domains-dns/view';
+import DomainDnsSubordinateList from './modules/service/domains-dns-subordinate/view';
 import HostingService from './modules/service/hosting/view';
 import MailsService from './modules/service/mails/view';
 
@@ -59,6 +60,7 @@ export default function () {
 
         <PrivateRoute path="/servicios/dominios" exact><DomainsService /></PrivateRoute>
         <PrivateRoute path="/servicios/dominios/contactos" exact><DomainContactList /></PrivateRoute>
+        <PrivateRoute path="/servicios/dominios/dnssubordinados" exact><DomainDnsSubordinateList /></PrivateRoute>
         <PrivateRoute path="/servicios/dominios/registros" exact><DomainRegisterList /></PrivateRoute>
         <PrivateRoute path="/servicios/dominios/dns" exact><DomainDnsList /></PrivateRoute>
         <PrivateRoute path="/servicios/hosting" exact><HostingService /></PrivateRoute>

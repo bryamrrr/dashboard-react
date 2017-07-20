@@ -5,10 +5,8 @@ import { connect } from 'react-redux';
 
 import Hexagon from '../../../../components/hexagon';
 import FormButton from '../../../../components/form-button';
-import Modal from '../../../../components/modal';
 
-import DnsForm from '../dns-form';
-import DnsTable from '../dns-table';
+import DnsSubordinateTable from '../dns-subordinate-table';
 
 import { setRoute } from '../../../../reducers/routes/actions';
 
@@ -25,7 +23,7 @@ class DomainRegisterList extends Component {
   }
 
   componentWillMount() {
-    this.props.setRoute({ title: 'services' }, { title: 'domains' }, { title: 'registers' });
+    this.props.setRoute({ title: 'services' }, { title: 'domains' }, { title: 'dns-subordinate' });
   }
 
   showModalDNS() {
@@ -44,22 +42,15 @@ class DomainRegisterList extends Component {
             <Hexagon color="orange">
               <i className="linearicon-register" />
             </Hexagon>
-            <h2>DNS Asociados</h2>
+            <h2>Administrar DNS subordinados</h2>
           </div>
         </div>
         <div className={styles.buttonContainer}>
           <FormButton
-            callToAction="Agregar DNS"
-            onClick={this.showModalDNS}
+            callToAction="Nueva DNS Subordinada"
           />
         </div>
-        <DnsTable />
-        {(this.state.modalRegister &&
-          <Modal onClose={this.hideModalDNS} >
-            <h2 className={styles.titleModal}>Agregar DNS</h2>
-            <DnsForm />
-          </Modal>
-        )}
+        <DnsSubordinateTable />
       </div>
     );
   }

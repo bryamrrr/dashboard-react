@@ -15,6 +15,20 @@
   justify-content: center;
 }
 
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 900px) {
+  .footer { flex-direction: column; }
+  .footer > a {
+    order: 2;
+    margin-top: 20px;
+  }
+}
+
 @media screen and (max-width: 480px) {
   .title { flex-wrap: wrap; }
 

@@ -150,12 +150,13 @@
     "bill": "Bill",
     "numBill": "Nº bill",
     "outcome": "Outcome",
-    "creationDate": "creation date",
+    "creationDate": "Creation date",
     "name": "Name",
     "type": "Type",
     "content": "Content",
     "duration": "Duration",
-    "priority": "Priority"
+    "priority": "Priority",
+    "registrationDate": "Registration date"
   },
   "tooltips": {
     "contacts": "Contacts",
@@ -164,7 +165,8 @@
     "activate": "Activate",
     "restoreKey": "Restore key",
     "manage": "Manage",
-    "delete": "Delete"
+    "delete": "Delete",
+    "edit": "Edit"
   },
   "modals": {
     "activateHosting": "Activate hosting",

@@ -1,0 +1,3 @@
+.tdButton { display: flex; }
+
+.tdButton > div { margin: 0 5px; }

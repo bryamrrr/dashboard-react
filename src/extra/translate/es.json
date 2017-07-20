@@ -155,7 +155,8 @@
     "type": "Tipo",
     "content": "Contenido",
     "duration": "Duración",
-    "priority": "Prioridad"
+    "priority": "Prioridad",
+    "registrationDate": "Fecha de registro"
   },
   "tooltips": {
     "contacts": "Contactos",
@@ -164,7 +165,8 @@
     "activate": "Activar",
     "restoreKey": "Restablecer clave",
     "manage": "Administrar",
-    "delete": "Eliminar"
+    "delete": "Eliminar",
+    "edit": "Editar"
   },
   "modals": {
     "activateHosting": "Activar hosting",
