@@ -9,7 +9,6 @@ function Toaster(props) {
       <div>
         {props.message}
       </div>
-      <a className={styles.close}><i className="linearicon-cross" /></a>
     </div>
   );
 }

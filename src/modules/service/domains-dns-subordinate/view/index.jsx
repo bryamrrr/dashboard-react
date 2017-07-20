@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import Hexagon from '../../../../components/hexagon';
 import FormButton from '../../../../components/form-button';
@@ -23,7 +24,7 @@ class DomainRegisterList extends Component {
   }
 
   componentWillMount() {
-    this.props.setRoute({ title: 'services' }, { title: 'domains' }, { title: 'dns-subordinate' });
+    this.props.setRoute({ title: 'services' }, { title: 'domains' }, { title: 'dnsSubordinate' });
   }
 
   showModalDNS() {
@@ -45,11 +46,11 @@ class DomainRegisterList extends Component {
             <h2>Administrar DNS subordinados</h2>
           </div>
         </div>
-        <div className={styles.buttonContainer}>
+        <Link to="/servicios/dominios/nuevo-dnssubordinado" className={styles.buttonContainer}>
           <FormButton
             callToAction="Nueva DNS Subordinada"
           />
-        </div>
+        </Link>
         <DnsSubordinateTable />
       </div>
     );

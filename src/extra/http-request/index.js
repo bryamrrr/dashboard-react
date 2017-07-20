@@ -38,6 +38,8 @@ export default async (method, url, data = {}) => {
       }
     } else if (response.meta.status === 403) {
       store.dispatch(showToaster('error', 'Redireccionando al home.'));
+    } else if (response.meta.status === 404) {
+      store.dispatch(showToaster('error', 'Recurso no encontrado.'));
     } else if (response.meta.status === 500) {
       store.dispatch(showToaster('error', 'Error del servidor.'));
     } else {

@@ -10,7 +10,7 @@ function FormButton(props) {
     ? `${styles.button} ${styles.isLoading}`
     : styles.button;
 
-  if (props.type === 'submit') {
+  if (props.onClick === null) {
     return (
       <button
         className={className}
