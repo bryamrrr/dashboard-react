@@ -26,7 +26,7 @@ class UserAddress extends Component {
       <div>
         <div className={styles.title}>
           <Hexagon color="orange">
-            <i className="linearicon-users2" />
+            <i className="linearicon-map-marker" />
           </Hexagon>
           <h2>{this.props.strings.userAddresses.title}</h2>
         </div>
@@ -38,7 +38,6 @@ class UserAddress extends Component {
             <Link to="/usuario/nueva-direccion">
               <FormButton
                 callToAction={this.props.strings.userAddresses.newAddress}
-                includeIcon="linearicon-user"
               />
             </Link>
           </div>

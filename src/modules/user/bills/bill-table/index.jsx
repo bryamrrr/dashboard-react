@@ -22,26 +22,18 @@ function BillTable(props) {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>0101031298</td>
-            <td>Factura electrónica</td>
-            <td>F 001- 00034411</td>
-            <td>29/05/2017</td>
-            <td>S/ 257</td>
-            <td className={styles.tdButton}>
-              <ButtonIcon icon="linearicon-eye" />
-            </td>
-          </tr>
-          <tr>
-            <td>0101031299</td>
-            <td>Nota crédito electrónica</td>
-            <td>NC 001- 00034411</td>
-            <td>30/05/2017</td>
-            <td>S/ 257</td>
-            <td className={styles.tdButton}>
-              <ButtonIcon icon="linearicon-eye" />
-            </td>
-          </tr>
+          {props.data.map(item =>
+            <tr key={item.id}>
+              <td>{item.order.code}</td>
+              <td>{item.paymentDocType.name}</td>
+              <td>{item.voucher}</td>
+              <td>{item.created.substr(0, 10)}</td>
+              <td>{`${item.currency.symbol} ${item.total}`}</td>
+              <td className={styles.tdButton}>
+                <ButtonIcon icon="linearicon-eye" />
+              </td>
+            </tr>,
+          )}
         </tbody>
       </table>
     </div>
@@ -50,6 +42,7 @@ function BillTable(props) {
 
 BillTable.propTypes = {
   strings: PropTypes.objectOf(PropTypes.object).isRequired,
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 function mapStateToProps(state) {
