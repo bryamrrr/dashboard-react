@@ -17,7 +17,7 @@ import {
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
-describe('Domains - Actions', () => {
+describe('Hosting - Actions', () => {
   describe('fetchHostings', () => {
     afterEach(() => {
       nock.cleanAll()

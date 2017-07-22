@@ -92,47 +92,6 @@ class UserDataForm extends Component {
   }
 
   render() {
-    const countries = {
-      1: {
-        id: 1,
-        name: 'Perú',
-      },
-      2: {
-        id: 2,
-        name: 'Estados Unidos',
-      },
-      3: {
-        id: 3,
-        name: 'Argentina',
-      },
-    };
-
-    const documentTypes = {
-      1: {
-        id: 1,
-        name: 'DNI',
-      },
-      2: {
-        id: 2,
-        name: 'RUC',
-      },
-      3: {
-        id: 3,
-        name: 'OTROS',
-      },
-    };
-
-    const customerTypes = {
-      1: {
-        id: 1,
-        name: 'Persona',
-      },
-      2: {
-        id: 2,
-        name: 'Empresa',
-      },
-    };
-
     const businessareas = {
       1: {
         id: 1,
@@ -191,7 +150,7 @@ class UserDataForm extends Component {
             <Combo
               includeIcon="linearicon-earth"
               placeholder={this.props.strings.forms.country}
-              options={countries}
+              options={this.props.countries}
             />
           </article>
           <article>
@@ -204,7 +163,7 @@ class UserDataForm extends Component {
             <Combo
               includeIcon="linearicon-register"
               placeholder={this.props.strings.forms.documentType}
-              options={documentTypes}
+              options={this.props.documentTypes}
             />
           </article>
           <article>
@@ -217,7 +176,7 @@ class UserDataForm extends Component {
             <Combo
               includeIcon="linearicon-users"
               placeholder={this.props.strings.forms.personType}
-              options={customerTypes}
+              options={this.props.customerTypes}
             />
           </article>
           <article>
@@ -266,9 +225,12 @@ function validate(values) {
 }
 
 UserDataForm.propTypes = {
+  countries: PropTypes.arrayOf(PropTypes.object).isRequired,
+  customerTypes: PropTypes.arrayOf(PropTypes.object).isRequired,
+  documentTypes: PropTypes.arrayOf(PropTypes.object).isRequired,
+  handleSubmit: PropTypes.func.isRequired,
   setLanguage: PropTypes.func.isRequired,
   strings: PropTypes.objectOf(PropTypes.object).isRequired,
-  handleSubmit: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {

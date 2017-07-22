@@ -8,6 +8,7 @@ import prices from './prices/reducer';
 import routes from './routes/reducer';
 import toaster from './toaster/reducer';
 import translate from './translate/reducer';
+import user from './user/reducer';
 import zones from './zones/reducer';
 
 const rootReducer = combineReducers({
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   routes,
   toaster,
   translate,
+  user,
   zones,
 });
 
