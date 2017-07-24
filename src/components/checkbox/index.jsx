@@ -9,9 +9,10 @@ function CheckBox(props) {
       <div className={styles.checkbox}>
         <input
           type="checkbox"
-          value="none"
+          checked={props.checked}
           id="checkbox"
           name="checkbox"
+          onChange={() => props.changeValue(!props.checked)}
         />
         <label
           htmlFor="checkbox"
@@ -33,6 +34,12 @@ CheckBox.propTypes = {
     PropTypes.arrayOf(PropTypes.element).isRequired,
     PropTypes.element.isRequired,
   ]).isRequired,
+  changeValue: PropTypes.func.isRequired,
+  checked: PropTypes.bool,
+};
+
+CheckBox.defaultProps = {
+  checked: false,
 };
 
 export default CheckBox;

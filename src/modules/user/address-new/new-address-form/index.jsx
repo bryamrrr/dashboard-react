@@ -4,19 +4,23 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
+import { Field, reduxForm } from 'redux-form/immutable';
 
 import constants from '../../../../extra/constants';
 import httpRequest from '../../../../extra/http-request';
 
+import CheckBox from '../../../../components/checkbox';
 import FormInput from '../../../../components/form-input';
 import Combo from '../../../../components/combo';
 import FormButton from '../../../../components/form-button';
 
+import { showToaster } from '../../../../reducers/toaster/actions';
+
 import styles from './styles.css';
 
 class NewAddressForm extends Component {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
 
     const { countries, addressTypes, departments } = this.props;
 
@@ -32,6 +36,7 @@ class NewAddressForm extends Component {
       district: {},
       addressType: {},
       peru: false,
+      checked: false,
     };
 
     this.changeCountry = this.changeCountry.bind(this);
@@ -39,6 +44,32 @@ class NewAddressForm extends Component {
     this.changeDepartment = this.changeDepartment.bind(this);
     this.changeCity = this.changeCity.bind(this);
     this.changeDistrict = this.changeDistrict.bind(this);
+
+    this.onSubmit = this.onSubmit.bind(this);
+
+    this.renderField = this.renderField.bind(this);
+    this.changeCheckbox = this.changeCheckbox.bind(this);
+  }
+
+  async onSubmit(values) {
+    const data = {
+      countryId: this.state.country.id,
+      address: values.get('address'),
+      postalCode: values.get('postalCode'),
+      addressTypeId: this.state.addressType.id,
+      main: this.state.checked,
+    };
+
+    if (values.get('stateCity')) data.stateCity = values.get('stateCity');
+    if (values.get('reference')) data.reference = values.get('reference');
+    if (values.get('ubigeoId')) data.ubigeoId = values.get('ubigeoId');
+
+    const url = `${constants.urls.API_SONQO}/addresses`;
+    await httpRequest('POST', url, data);
+    this.props.showToaster('success', 'Se creo la dirección');
+
+    const urlRedirect = '/usuario/direcciones';
+    this.context.router.history.push(urlRedirect);
   }
 
   changeCountry(country) {
@@ -79,6 +110,41 @@ class NewAddressForm extends Component {
     this.setState({ addressType });
   }
 
+  changeCheckbox(checked) {
+    this.setState({ checked });
+  }
+
+  renderField(field) {
+    const { name } = field.input;
+
+    let icon = '';
+    switch (name) {
+      case 'stateCity':
+        icon = 'linearicon-flag2';
+        break;
+      case 'address':
+        icon = 'linearicon-map-marker';
+        break;
+      case 'reference':
+        icon = 'linearicon-road-sign';
+        break;
+      case 'postalCode':
+        icon = 'linearicon-map-marker';
+        break;
+      default:
+        icon = 'linearicon-edit';
+    }
+
+    return (
+      <FormInput
+        field={field}
+        name={name}
+        includeIcon={icon}
+        placeholder={this.props.strings.forms[name]}
+      />
+    );
+  }
+
   render() {
     const style = (this.state.peru)
       ? { display: 'block' }
@@ -89,7 +155,7 @@ class NewAddressForm extends Component {
       : { display: 'none' };
 
     return (
-      <div className={styles.container}>
+      <form onSubmit={this.props.handleSubmit(this.onSubmit)} className={styles.container}>
         <article>
           <Combo
             includeIcon="linearicon-earth"
@@ -127,31 +193,27 @@ class NewAddressForm extends Component {
           />
         </article>
         <article style={noPeru}>
-          <FormInput
+          <Field
             name="stateCity"
-            includeIcon="linearicon-flag2"
-            placeholder={this.props.strings.forms.stateCity}
+            component={this.renderField}
           />
         </article>
         <article>
-          <FormInput
+          <Field
             name="address"
-            includeIcon="linearicon-map-marker"
-            placeholder={this.props.strings.forms.address}
+            component={this.renderField}
           />
         </article>
         <article>
-          <FormInput
+          <Field
             name="reference"
-            includeIcon="linearicon-road-sign"
-            placeholder={this.props.strings.forms.reference}
+            component={this.renderField}
           />
         </article>
         <article>
-          <FormInput
-            name="postalcode"
-            includeIcon="linearicon-map-marker"
-            placeholder={this.props.strings.forms.postalCode}
+          <Field
+            name="postalCode"
+            component={this.renderField}
           />
         </article>
         <article>
@@ -163,12 +225,30 @@ class NewAddressForm extends Component {
             selected={this.state.addressType}
           />
         </article>
+        <article>
+          <CheckBox
+            changeValue={this.changeCheckbox}
+            checked={this.state.checked}
+          >
+            <span>Dirección principal</span>
+          </CheckBox>
+        </article>
         <FormButton
           callToAction={this.props.strings.userAddresses.createAddress}
+          type="submit"
         />
-      </div>
+      </form>
     );
   }
+}
+
+function validate(values) {
+  const errors = {};
+
+  if (!values.get('address')) errors.address = 'Ingresa una dirección';
+  if (!values.get('postalCode')) errors.postalCode = 'Ingresa un código postal';
+
+  return errors;
 }
 
 NewAddressForm.propTypes = {
@@ -176,10 +256,20 @@ NewAddressForm.propTypes = {
   countries: PropTypes.arrayOf(PropTypes.object).isRequired,
   addressTypes: PropTypes.arrayOf(PropTypes.object).isRequired,
   departments: PropTypes.arrayOf(PropTypes.object).isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+};
+
+NewAddressForm.contextTypes = {
+  router: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 function mapStateToProps(state) {
   return { strings: state.get('translate').strings };
 }
 
-export default connect(mapStateToProps)(NewAddressForm);
+const NewAddressReduxForm = reduxForm({
+  form: 'NewAddressForm',
+  validate,
+})(NewAddressForm);
+
+export default connect(mapStateToProps, { showToaster })(NewAddressReduxForm);
