@@ -5,6 +5,9 @@ import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 
+import constants from '../../../../extra/constants';
+import httpRequest from '../../../../extra/http-request';
+
 import FormInput from '../../../../components/form-input';
 import Combo from '../../../../components/combo';
 import FormButton from '../../../../components/form-button';
@@ -21,14 +24,17 @@ class NewAddressForm extends Component {
       countries,
       addressTypes,
       departments,
+      cities: [],
       country: {},
       department: {},
+      city: {},
       peru: false,
     };
 
     this.changeCountry = this.changeCountry.bind(this);
     this.changeAddressTypes = this.changeAddressTypes.bind(this);
     this.changeDepartment = this.changeDepartment.bind(this);
+    this.changeCity = this.changeCity.bind(this);
   }
 
   changeCountry(country) {
@@ -38,9 +44,19 @@ class NewAddressForm extends Component {
     });
   }
 
-  changeDepartment(department) {
+  async changeDepartment(department) {
+    const url = `${constants.urls.API_SONQO}/ubigeos?sort=name&limit=all&parentCode=${department.locationCode}`;
+    const { data: { results } } = await httpRequest('GET', url);
+
     this.setState({
       department,
+      cities: results,
+    });
+  }
+
+  changeCity(city) {
+    this.setState({
+      city,
     });
   }
 
@@ -74,8 +90,8 @@ class NewAddressForm extends Component {
             <Combo
               includeIcon="linearicon-flag2"
               placeholder={this.props.strings.forms.city}
-              options={_.mapKeys(this.state.addressTypes, 'id')}
-              changeSelected={this.changeAddressTypes}
+              options={_.mapKeys(this.state.cities, 'id')}
+              changeSelected={this.changeCity}
             />
           </article>
         )}
