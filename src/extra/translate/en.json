@@ -198,7 +198,8 @@
     "department": "Department",
     "city": "City",
     "district": "District",
-    "stateCity": "State/City"
+    "stateCity": "State/City",
+    "reason": "Razón social"
   },
   "others": {
     "addToCart": "Add to cart",

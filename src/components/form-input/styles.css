@@ -74,6 +74,10 @@
   top: 42px;
 }
 
+.disabled .input {
+  background-color: #EFEFEF;
+}
+
 /* COLORS
   #e1e1e1 = Gray color for input border-bottom
   #ddd = label color

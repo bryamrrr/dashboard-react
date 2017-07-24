@@ -19,7 +19,7 @@ class TextInput extends Component {
   }
 
   render() {
-    const { includeIcon } = this.props;
+    const { includeIcon, disabled } = this.props;
     const { input, meta } = this.props.field;
 
     let className = `${styles.container} \
@@ -28,6 +28,7 @@ class TextInput extends Component {
       ${meta.touched && meta.error ? styles.hasError : ''}`;
 
     className += (includeIcon !== '') ? ` ${styles.iconPadding}` : '';
+    className += (disabled) ? ` ${styles.disabled}` : '';
 
     return (
       <div className={className}>
@@ -44,6 +45,7 @@ class TextInput extends Component {
             this.onInputChange(event.target.value);
           }}
           type={this.props.type}
+          disabled={disabled}
         />
         <label
           htmlFor={this.props.name}
@@ -72,6 +74,7 @@ TextInput.propTypes = {
   ]).isRequired,
   placeholder: PropTypes.string,
   includeIcon: PropTypes.string,
+  disabled: PropTypes.bool,
 };
 
 TextInput.defaultProps = {
@@ -82,6 +85,7 @@ TextInput.defaultProps = {
   type: 'text',
   placeholder: '',
   includeIcon: '',
+  disabled: false,
 };
 
 export default TextInput;

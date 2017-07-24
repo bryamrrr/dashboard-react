@@ -103,12 +103,15 @@ class UserDataForm extends Component {
     const newField = Object.assign({}, field, { input: newInput });
 
     let icon = '';
+    let disabled = false;
     switch (name) {
       case 'username':
         icon = 'linearicon-user';
+        disabled = true;
         break;
       case 'email':
         icon = 'linearicon-envelope';
+        disabled = true;
         break;
       case 'documentId':
         icon = 'linearicon-profile';
@@ -126,6 +129,7 @@ class UserDataForm extends Component {
         name={name}
         includeIcon={icon}
         placeholder={this.props.strings.forms[name]}
+        disabled={disabled}
       />
     );
   }
