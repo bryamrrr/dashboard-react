@@ -30,6 +30,7 @@ class NewAddressForm extends Component {
       department: {},
       city: {},
       district: {},
+      addressType: {},
       peru: false,
     };
 
@@ -74,12 +75,16 @@ class NewAddressForm extends Component {
     this.setState({ district });
   }
 
-  changeAddressTypes(addressTypes) {
-    this.setState({ addressTypes });
+  changeAddressTypes(addressType) {
+    this.setState({ addressType });
   }
 
   render() {
     const style = (this.state.peru)
+      ? { display: 'block' }
+      : { display: 'none' };
+
+    const noPeru = (!this.state.peru)
       ? { display: 'block' }
       : { display: 'none' };
 
@@ -121,7 +126,7 @@ class NewAddressForm extends Component {
             selected={this.state.district}
           />
         </article>
-        <article style={style}>
+        <article style={noPeru}>
           <FormInput
             name="stateCity"
             includeIcon="linearicon-flag2"
@@ -155,6 +160,7 @@ class NewAddressForm extends Component {
             placeholder={this.props.strings.forms.type}
             options={_.mapKeys(this.state.addressTypes, 'id')}
             changeSelected={this.changeAddressTypes}
+            selected={this.state.addressType}
           />
         </article>
         <FormButton
