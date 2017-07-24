@@ -22,7 +22,7 @@ describe('User - Actions', () => {
 
     test('creates setProfile whenn fetch user data', () => {
       nock(constants.urls.API_SONQO)
-        .get('/profile')
+        .get('/profile?includes=country,businessArea,documentType,customerType')
         .reply(200, profile);
 
       const store = mockStore(initialState);

@@ -12,7 +12,7 @@ export function setProfile(data) {
 
 export function fetchProfile() {
   return async (dispatch) => {
-    const url = `${constants.urls.API_SONQO}/profile`;
+    const url = `${constants.urls.API_SONQO}/profile?includes=country,businessArea,documentType,customerType`;
     const { data } = await httpRequest('GET', url);
     dispatch(setProfile(data));
   };
