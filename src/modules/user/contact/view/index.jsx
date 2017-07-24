@@ -38,7 +38,6 @@ class UserContact extends Component {
             <Link to="/usuario/nuevo-contacto">
               <FormButton
                 callToAction={this.props.strings.userContacts.newContact}
-                includeIcon="linearicon-user"
               />
             </Link>
           </div>

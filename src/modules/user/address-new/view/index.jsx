@@ -20,7 +20,7 @@ class UserAddressNew extends Component {
       <div>
         <div className={styles.title}>
           <Hexagon color="orange">
-            <i className="linearicon-user" />
+            <i className="linearicon-map-marker" />
           </Hexagon>
           <h2>{this.props.strings.userAddresses.newAddress}</h2>
         </div>

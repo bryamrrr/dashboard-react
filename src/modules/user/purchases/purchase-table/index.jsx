@@ -13,35 +13,28 @@ function PurchaseTable(props) {
       <table>
         <thead>
           <tr>
-            <th>{props.strings.tables.order}</th>
+            <th>{props.strings.tables.orderCode}</th>
             <th>{props.strings.tables.date}</th>
             <th>{props.strings.tables.state}</th>
-            <th>{props.strings.tables.amoun}</th>
+            <th>{props.strings.tables.amount}</th>
             <th>{props.strings.tables.actions}</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>0101031298</td>
-            <td>29/05/2017</td>
-            <td>Pagado</td>
-            <td>S/ 288</td>
-            <td className={styles.tdButton}>
-              <ButtonIcon icon="linearicon-eye" />
-              <ButtonIcon icon="linearicon-papers" />
-            </td>
-          </tr>
-          <tr>
-            <td>0101031299</td>
-            <td>29/05/2017</td>
-            <td>Pendiente</td>
-            <td>S/ 158</td>
-            <td className={styles.tdButton}>
-              <ButtonIcon icon="linearicon-eye" />
-              <ButtonIcon icon="linearicon-cart-full" />
-              <ButtonIcon icon="linearicon-circle-cross" />
-            </td>
-          </tr>
+          {props.data.map(item =>
+            <tr key={item.id}>
+              <td>{item.order.code}</td>
+              <td>{item.created.substr(0, 10)}</td>
+              <td>{item.paymentDocStatus.name}</td>
+              <td>{`${item.currency.symbol} ${parseFloat(item.total).toFixed(2)}`}</td>
+              <td className={styles.tdButton}>
+                <ButtonIcon icon="linearicon-eye" tooltip="Ver detalle" />
+                <ButtonIcon icon="linearicon-papers" tooltip="Ver documento" />
+                <ButtonIcon icon="linearicon-cart-full" tooltip="Paga en línea" />
+                <ButtonIcon icon="linearicon-circle-cross" tooltip="Anular" />
+              </td>
+            </tr>,
+          )}
         </tbody>
       </table>
     </div>
@@ -50,6 +43,7 @@ function PurchaseTable(props) {
 
 PurchaseTable.propTypes = {
   strings: PropTypes.objectOf(PropTypes.object).isRequired,
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 function mapStateToProps(state) {

@@ -11,6 +11,8 @@
   text-transform: uppercase;
 }
 
+.title i { margin-top: -1px; }
+
 @media screen and (max-width: 480px) {
   .title { flex-wrap: wrap; }
 
