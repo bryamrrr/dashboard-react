@@ -198,7 +198,8 @@
     "department": "Departamento",
     "city": "Provincia",
     "district": "Distrito",
-    "stateCity": "Ciudad/Estado"
+    "stateCity": "Ciudad/Estado",
+    "reason": "Razón social"
   },
   "others": {
     "addToCart": "Agregar al carrito",

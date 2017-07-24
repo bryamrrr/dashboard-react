@@ -162,6 +162,24 @@ class UserDataForm extends Component {
             />
           </article>
           <article>
+            <Combo
+              includeIcon="linearicon-earth"
+              placeholder={this.props.strings.forms.country}
+              options={_.mapKeys(this.props.countries, 'id')}
+              changeSelected={this.changeCountry}
+              selected={this.state.profile.country}
+            />
+          </article>
+          <article>
+            <Combo
+              includeIcon="linearicon-users"
+              placeholder={this.props.strings.forms.personType}
+              options={_.mapKeys(this.props.customerTypes, 'id')}
+              changeSelected={this.changeCustomerType}
+              selected={this.state.profile.customerType}
+            />
+          </article>
+          <article>
             <Field
               name="name"
               component={this.renderField}
@@ -171,15 +189,6 @@ class UserDataForm extends Component {
             <Field
               name="lastname"
               component={this.renderField}
-            />
-          </article>
-          <article>
-            <Combo
-              includeIcon="linearicon-earth"
-              placeholder={this.props.strings.forms.country}
-              options={_.mapKeys(this.props.countries, 'id')}
-              changeSelected={this.changeCountry}
-              selected={this.state.profile.country}
             />
           </article>
           <article>
@@ -205,18 +214,9 @@ class UserDataForm extends Component {
           </article>
           <article>
             <Combo
-              includeIcon="linearicon-users"
-              placeholder={this.props.strings.forms.personType}
-              options={_.mapKeys(this.props.customerTypes, 'id')}
-              changeSelected={this.changeCustomerType}
-              selected={this.state.profile.customerType}
-            />
-          </article>
-          <article>
-            <Combo
               includeIcon="linearicon-library"
               placeholder={this.props.strings.forms.bussinessarea}
-              options={_.mapKeys(this.props.businessareas, 'id')}
+              options={_.mapKeys(this.props.businessAreas, 'id')}
               changeSelected={this.changeBusinessArea}
               selected={this.state.profile.businessArea}
             />
@@ -263,7 +263,7 @@ UserDataForm.propTypes = {
   countries: PropTypes.arrayOf(PropTypes.object).isRequired,
   customerTypes: PropTypes.arrayOf(PropTypes.object).isRequired,
   documentTypes: PropTypes.arrayOf(PropTypes.object).isRequired,
-  businessareas: PropTypes.arrayOf(PropTypes.object).isRequired,
+  businessAreas: PropTypes.arrayOf(PropTypes.object).isRequired,
   handleSubmit: PropTypes.func.isRequired,
   setLanguage: PropTypes.func.isRequired,
   strings: PropTypes.objectOf(PropTypes.object).isRequired,
