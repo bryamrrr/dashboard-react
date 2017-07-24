@@ -32,6 +32,7 @@ class UserDataForm extends Component {
       phone,
       documentId,
     } = this.props.data;
+
     this.state = {
       profile: {
         country,
@@ -87,9 +88,15 @@ class UserDataForm extends Component {
     this.forceUpdate();
   }
 
+  changeBusinessArea(businessArea) {
+    const profile = this.state.profile;
+    profile.businessArea = businessArea;
+
+    this.forceUpdate();
+  }
+
   renderField(field) {
     const { name } = field.input;
-    console.log(this.props.strings.forms[name]);
 
     const newInput = Object.assign({}, field.input, { value: this.state.profile[name] });
 
@@ -124,21 +131,6 @@ class UserDataForm extends Component {
   }
 
   render() {
-    const businessareas = {
-      1: {
-        id: 1,
-        name: 'Agricultura, ganadería, silvicultura y pesca',
-      },
-      2: {
-        id: 2,
-        name: 'Explotación de minas y canteras',
-      },
-      3: {
-        id: 3,
-        name: 'Industrias manufactureras',
-      },
-    };
-
     const languages = {
       1: {
         id: 1,
@@ -149,6 +141,10 @@ class UserDataForm extends Component {
         name: 'Inglés',
       },
     };
+
+    const style = (this.state.profile.customerType.name === 'Persona')
+      ? { display: 'block' }
+      : { display: 'none' };
 
     return (
       <div>
@@ -171,7 +167,7 @@ class UserDataForm extends Component {
               component={this.renderField}
             />
           </article>
-          <article>
+          <article style={style}>
             <Field
               name="lastname"
               component={this.renderField}
@@ -220,7 +216,9 @@ class UserDataForm extends Component {
             <Combo
               includeIcon="linearicon-library"
               placeholder={this.props.strings.forms.bussinessarea}
-              options={businessareas}
+              options={_.mapKeys(this.props.businessareas, 'id')}
+              changeSelected={this.changeBusinessArea}
+              selected={this.state.profile.businessArea}
             />
           </article>
           <article>
@@ -265,6 +263,7 @@ UserDataForm.propTypes = {
   countries: PropTypes.arrayOf(PropTypes.object).isRequired,
   customerTypes: PropTypes.arrayOf(PropTypes.object).isRequired,
   documentTypes: PropTypes.arrayOf(PropTypes.object).isRequired,
+  businessareas: PropTypes.arrayOf(PropTypes.object).isRequired,
   handleSubmit: PropTypes.func.isRequired,
   setLanguage: PropTypes.func.isRequired,
   strings: PropTypes.objectOf(PropTypes.object).isRequired,

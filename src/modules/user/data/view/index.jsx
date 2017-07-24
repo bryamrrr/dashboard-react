@@ -26,6 +26,7 @@ class UserData extends Component {
       countries: [],
       documentTypes: [],
       customerTypes: [],
+      businessAreas: [],
     };
   }
 
@@ -41,7 +42,15 @@ class UserData extends Component {
     const urlCustomerTypes = `${constants.urls.API_SONQO}/customertypes`;
     const promiseCustomerTypes = httpRequest('GET', urlCustomerTypes);
 
-    const allPromise = Promise.all([promiseCountries, promiseCustomerTypes, promiseDocumentTypes]);
+    const urlBusinessAreas = `${constants.urls.API_SONQO}/businessareas`;
+    const promiseBusinessAreas = httpRequest('GET', urlBusinessAreas);
+
+    const allPromise = Promise.all([
+      promiseCountries,
+      promiseCustomerTypes,
+      promiseDocumentTypes,
+      promiseBusinessAreas,
+    ]);
 
     allPromise.then(async (response) => {
       if (_.isEmpty(this.props.profile)) await this.props.fetchProfile();
@@ -51,6 +60,7 @@ class UserData extends Component {
         countries: response[0].data.results,
         customerTypes: response[1].data.results,
         documentTypes: response[2].data.results,
+        businessAreas: response[3].data.results,
       });
     });
   }
@@ -69,6 +79,7 @@ class UserData extends Component {
                 countries={this.state.countries}
                 documentTypes={this.state.documentTypes}
                 customerTypes={this.state.customerTypes}
+                businessAreas={this.state.businessAreas}
               />
             </div>
           </div>
