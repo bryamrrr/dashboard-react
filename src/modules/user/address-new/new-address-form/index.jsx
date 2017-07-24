@@ -66,7 +66,7 @@ class NewAddressForm extends Component {
 
     const url = `${constants.urls.API_SONQO}/addresses`;
     await httpRequest('POST', url, data);
-    this.props.showToaster('success', 'Se creo la dirección');
+    this.props.showToaster('success', 'Se agregó una nueva dirección');
 
     const urlRedirect = '/usuario/direcciones';
     this.context.router.history.push(urlRedirect);
