@@ -31,6 +31,7 @@ class UserAddress extends Component {
     };
 
     this.onChangePage = this.onChangePage.bind(this);
+    this.onSearch = this.onSearch.bind(this);
   }
 
   async componentWillMount() {
@@ -51,7 +52,7 @@ class UserAddress extends Component {
 
     const offset = (page - 1) * 10;
 
-    const url = `${constants.urls.API_SONQO}/addresses?includes=country,addressType&offset=${offset}`;
+    const url = `${constants.urls.API_SONQO}/addresses?includes=country,addressType&offset=${offset}&name__like=${this.state.term}`;
     const { data: { results, metadata } } = await httpRequest('GET', url);
 
     this.setState({
@@ -59,6 +60,21 @@ class UserAddress extends Component {
       addresses: results,
       metadata,
       initialPage: page,
+    });
+  }
+
+  async onSearch(term) {
+    this.setState({ fetchingAddresses: true });
+
+    const url = `${constants.urls.API_SONQO}/addresses?includes=country,addressType&address__like=${term}`;
+    const { data: { results, metadata } } = await httpRequest('GET', url);
+
+    this.setState({
+      fetchingAddresses: false,
+      addresses: results,
+      metadata,
+      initialPage: 1,
+      term,
     });
   }
 
@@ -80,7 +96,9 @@ class UserAddress extends Component {
             </div>
             <div className={styles.filterContainer}>
               <div className={styles.searchContainer}>
-                <TableSearch />
+                <TableSearch
+                  onSearch={this.onSearch}
+                />
               </div>
               <div className={styles.buttonContainer}>
                 <Link to="/usuario/nueva-direccion">
