@@ -116,10 +116,12 @@ Combo.propTypes = {
     PropTypes.array,
   ]).isRequired,
   placeholder: PropTypes.string,
-  selected: PropTypes.shape({
-    id: PropTypes.string,
-    name: PropTypes.string,
-  }),
+  selected: PropTypes.objectOf(PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.bool,
+    PropTypes.object,
+  ])),
   trackItem: PropTypes.string,
 };
 

@@ -173,7 +173,7 @@
     "activateMail": "Activar correo"
   },
   "forms": {
-    "user": "Usuario",
+    "username": "Usuario",
     "name": "Nombres",
     "lastName": "Apellidos",
     "email": "Correo",
@@ -184,7 +184,7 @@
     "reference": "Referencía",
     "documentType": "Selecciona un tipo de documento",
     "postalCode": "Código postal",
-    "document": "Número de documento",
+    "documentId": "Número de documento",
     "personType": "Tipo de cliente",
     "bussinessarea": "Actividad económica",
     "language": "Selecciona un idioma",
