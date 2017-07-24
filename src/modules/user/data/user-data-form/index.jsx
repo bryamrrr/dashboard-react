@@ -11,8 +11,12 @@ import Combo from '../../../../components/combo';
 import FormButton from '../../../../components/form-button';
 
 import { setLanguage } from '../../../../reducers/translate/actions';
+import { setProfile } from '../../../../reducers/user/actions';
+import { showToaster } from '../../../../reducers/toaster/actions';
 
-import regex from '../../../../regex';
+import regex from '../../../../extra/regex';
+import httpRequest from '../../../../extra/http-request';
+import constants from '../../../../extra/constants';
 
 import styles from './styles.css';
 
@@ -71,7 +75,7 @@ class UserDataForm extends Component {
     });
   }
 
-  onSubmit(values) {
+  async onSubmit(values) {
     const profileToSend = {
       username: values.get('username'),
       email: values.get('email'),
@@ -85,7 +89,10 @@ class UserDataForm extends Component {
       businessAreaId: this.state.profile.businessArea.id,
     };
 
-    console.log(profileToSend);
+    const url = `${constants.urls.API_SONQO}/profile`;
+    await httpRequest('PUT', url, profileToSend);
+    this.props.showToaster('success', 'Los datos han sido actualizados');
+    this.props.setProfile(profileToSend);
   }
 
   changeLanguage(data) {
@@ -294,6 +301,7 @@ UserDataForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   initialize: PropTypes.func.isRequired,
   setLanguage: PropTypes.func.isRequired,
+  setProfile: PropTypes.func.isRequired,
   strings: PropTypes.objectOf(PropTypes.object).isRequired,
   data: PropTypes.objectOf(PropTypes.oneOfType([
     PropTypes.string,
@@ -312,4 +320,8 @@ const UserDataReduxForm = reduxForm({
   validate,
 })(UserDataForm);
 
-export default connect(mapStateToProps, { setLanguage })(UserDataReduxForm);
+export default connect(mapStateToProps, {
+  setLanguage,
+  setProfile,
+  showToaster,
+})(UserDataReduxForm);
