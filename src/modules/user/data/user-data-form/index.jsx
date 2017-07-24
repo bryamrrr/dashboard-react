@@ -53,13 +53,39 @@ class UserDataForm extends Component {
     this.changeCountry = this.changeCountry.bind(this);
     this.changeDocumentType = this.changeDocumentType.bind(this);
     this.changeCustomerType = this.changeCustomerType.bind(this);
+    this.changeBusinessArea = this.changeBusinessArea.bind(this);
 
     this.renderField = this.renderField.bind(this);
+
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  componentWillMount() {
+    this.props.initialize({
+      username: this.state.profile.username,
+      email: this.state.profile.email,
+      name: this.state.profile.name,
+      lastname: this.state.profile.lastname,
+      phone: this.state.profile.phone,
+      documentId: this.state.profile.documentId,
+    });
   }
 
   onSubmit(values) {
-    console.log(this);
-    console.log(values);
+    const profileToSend = {
+      username: values.get('username'),
+      email: values.get('email'),
+      name: values.get('name'),
+      lastname: values.get('lastname'),
+      phone: values.get('phone'),
+      documentId: values.get('documentId'),
+      countryId: this.state.profile.country.id,
+      documentTypeId: this.state.profile.documentType.id,
+      customerTypeId: this.state.profile.customerType.id,
+      businessAreaId: this.state.profile.businessArea.id,
+    };
+
+    console.log(profileToSend);
   }
 
   changeLanguage(data) {
@@ -98,10 +124,6 @@ class UserDataForm extends Component {
   renderField(field) {
     const { name } = field.input;
 
-    const newInput = Object.assign({}, field.input, { value: this.state.profile[name] });
-
-    const newField = Object.assign({}, field, { input: newInput });
-
     let icon = '';
     let disabled = false;
     switch (name) {
@@ -125,7 +147,7 @@ class UserDataForm extends Component {
 
     return (
       <FormInput
-        field={newField}
+        field={field}
         name={name}
         includeIcon={icon}
         placeholder={this.props.strings.forms[name]}
@@ -157,6 +179,7 @@ class UserDataForm extends Component {
             <Field
               name="username"
               component={this.renderField}
+              value={this.state.profile.username}
             />
           </article>
           <article>
@@ -247,7 +270,7 @@ class UserDataForm extends Component {
 function validate(values) {
   const errors = {};
 
-  if (!values.get('user')) errors.user = 'Ingresa un usuario';
+  if (!values.get('username')) errors.user = 'Ingresa un usuario';
   if (!values.get('email')) errors.email = 'Ingresa un email';
 
   if (!values.get('email')) {
@@ -257,7 +280,7 @@ function validate(values) {
   }
 
   if (!values.get('name')) errors.name = 'Ingresa un nombre';
-  if (!values.get('document')) errors.document = 'Ingresa un número de documento';
+  if (!values.get('documentId')) errors.document = 'Ingresa un número de documento';
   if (!values.get('phone')) errors.phone = 'Ingresa un número de teléfono';
 
   return errors;
@@ -269,6 +292,7 @@ UserDataForm.propTypes = {
   documentTypes: PropTypes.arrayOf(PropTypes.object).isRequired,
   businessAreas: PropTypes.arrayOf(PropTypes.object).isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  initialize: PropTypes.func.isRequired,
   setLanguage: PropTypes.func.isRequired,
   strings: PropTypes.objectOf(PropTypes.object).isRequired,
   data: PropTypes.objectOf(PropTypes.oneOfType([
@@ -287,4 +311,5 @@ const UserDataReduxForm = reduxForm({
   form: 'UserDataForm',
   validate,
 })(UserDataForm);
+
 export default connect(mapStateToProps, { setLanguage })(UserDataReduxForm);

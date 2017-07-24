@@ -41,7 +41,10 @@ class TextInput extends Component {
           id={this.props.name}
           value={this.state.value}
           onChange={(event) => {
-            if (this.props.field !== {}) input.onChange(event);
+            if (this.props.field !== {}) {
+              input.onChange(event);
+              // console.log(event.target.value);
+            }
             this.onInputChange(event.target.value);
           }}
           type={this.props.type}
