@@ -28,7 +28,10 @@ class Combo extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({ options: nextProps.options });
+    this.setState({
+      options: nextProps.options,
+      selected: nextProps.selected,
+    });
   }
 
   onBlur() {

@@ -25,9 +25,11 @@ class NewAddressForm extends Component {
       addressTypes,
       departments,
       cities: [],
+      districts: [],
       country: {},
       department: {},
       city: {},
+      district: {},
       peru: false,
     };
 
@@ -35,6 +37,7 @@ class NewAddressForm extends Component {
     this.changeAddressTypes = this.changeAddressTypes.bind(this);
     this.changeDepartment = this.changeDepartment.bind(this);
     this.changeCity = this.changeCity.bind(this);
+    this.changeDistrict = this.changeDistrict.bind(this);
   }
 
   changeCountry(country) {
@@ -50,14 +53,25 @@ class NewAddressForm extends Component {
 
     this.setState({
       department,
+      city: {},
+      district: {},
       cities: results,
     });
   }
 
-  changeCity(city) {
+  async changeCity(city) {
+    const url = `${constants.urls.API_SONQO}/ubigeos?sort=name&limit=all&parentCode=${city.locationCode}`;
+    const { data: { results } } = await httpRequest('GET', url);
+
     this.setState({
       city,
+      district: {},
+      districts: results,
     });
+  }
+
+  changeDistrict(district) {
+    this.setState({ district });
   }
 
   changeAddressTypes(addressTypes) {
@@ -77,6 +91,7 @@ class NewAddressForm extends Component {
             placeholder={this.props.strings.forms.country}
             options={_.mapKeys(this.state.countries, 'id')}
             changeSelected={this.changeCountry}
+            selected={this.state.country}
           />
         </article>
         <article style={style}>
@@ -85,6 +100,7 @@ class NewAddressForm extends Component {
             placeholder={this.props.strings.forms.department}
             options={_.mapKeys(this.state.departments, 'id')}
             changeSelected={this.changeDepartment}
+            selected={this.state.department}
           />
         </article>
         <article style={style}>
@@ -93,28 +109,25 @@ class NewAddressForm extends Component {
             placeholder={this.props.strings.forms.city}
             options={_.mapKeys(this.state.cities, 'id')}
             changeSelected={this.changeCity}
-            trackItem="city"
+            selected={this.state.city}
           />
         </article>
-        {(this.state.peru &&
-          <article>
-            <Combo
-              includeIcon="linearicon-flag2"
-              placeholder={this.props.strings.forms.district}
-              options={_.mapKeys(this.state.addressTypes, 'id')}
-              changeSelected={this.changeAddressTypes}
-            />
-          </article>
-        )}
-        {(!this.state.peru &&
-          <article>
-            <FormInput
-              name="stateCity"
-              includeIcon="linearicon-flag2"
-              placeholder={this.props.strings.forms.stateCity}
-            />
-          </article>
-        )}
+        <article style={style}>
+          <Combo
+            includeIcon="linearicon-flag2"
+            placeholder={this.props.strings.forms.district}
+            options={_.mapKeys(this.state.districts, 'id')}
+            changeSelected={this.changeDistrict}
+            selected={this.state.district}
+          />
+        </article>
+        <article style={style}>
+          <FormInput
+            name="stateCity"
+            includeIcon="linearicon-flag2"
+            placeholder={this.props.strings.forms.stateCity}
+          />
+        </article>
         <article>
           <FormInput
             name="address"
