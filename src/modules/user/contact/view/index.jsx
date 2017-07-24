@@ -5,52 +5,105 @@ import { connect } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 
+import constants from '../../../../extra/constants';
+import httpRequest from '../../../../extra/http-request';
 import ContactTable from '../contact-table';
 
 import Hexagon from '../../../../components/hexagon';
 import FormButton from '../../../../components/form-button';
 import TableSearch from '../../../../components/table-search';
 import TablePagination from '../../../../components/table-pagination';
+import LoadingSpin from '../../../../components/loading-spin';
 
 import { setRoute } from '../../../../reducers/routes/actions';
 
 import styles from './styles.css';
 
 class UserContact extends Component {
-  componentWillMount() {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      fetchingData: true,
+      contacts: [],
+      metadata: {},
+      initialPage: 1,
+    };
+
+    this.onChangePage = this.onChangePage.bind(this);
+  }
+
+  async componentWillMount() {
     this.props.setRoute({ title: 'data' }, { title: 'contacts' });
+
+    const url = `${constants.urls.API_SONQO}/contacts?includes=country,documentType&sort=name`;
+    const { data: { results, metadata } } = await httpRequest('GET', url);
+
+    this.setState({
+      fetchingData: false,
+      contacts: results,
+      metadata,
+    });
+  }
+
+  async onChangePage(page) {
+    this.setState({ fetchingData: true });
+
+    const offset = (page - 1) * 10;
+
+    const url = `${constants.urls.API_SONQO}/contacts?includes=country,documentType&sort=name&offset=${offset}`;
+    const { data: { results, metadata } } = await httpRequest('GET', url);
+
+    this.setState({
+      fetchingData: false,
+      contacts: results,
+      metadata,
+      initialPage: page,
+    });
   }
 
   render() {
     return (
       <div>
-        <div className={styles.title}>
-          <Hexagon color="orange">
-            <i className="linearicon-users2" />
-          </Hexagon>
-          <h2>{this.props.strings.userContacts.title}</h2>
-        </div>
-        <div className={styles.filterContainer}>
-          <div className={styles.searchContainer}>
-            <TableSearch />
+        {(this.state.fetchingData &&
+          <LoadingSpin />
+        )}
+        {(!this.state.fetchingData &&
+          <div>
+            <div className={styles.title}>
+              <Hexagon color="orange">
+                <i className="linearicon-users2" />
+              </Hexagon>
+              <h2>{this.props.strings.userContacts.title}</h2>
+            </div>
+            <div className={styles.filterContainer}>
+              <div className={styles.searchContainer}>
+                <TableSearch />
+              </div>
+              <div className={styles.buttonContainer}>
+                <Link to="/usuario/nuevo-contacto">
+                  <FormButton
+                    callToAction={this.props.strings.userContacts.newContact}
+                  />
+                </Link>
+              </div>
+            </div>
+            <ContactTable
+              data={this.state.contacts}
+            />
+            <TablePagination
+              count={this.state.metadata.count}
+              onChangePage={this.onChangePage}
+              initialPage={this.state.initialPage}
+            />
           </div>
-          <div className={styles.buttonContainer}>
-            <Link to="/usuario/nuevo-contacto">
-              <FormButton
-                callToAction={this.props.strings.userContacts.newContact}
-              />
-            </Link>
-          </div>
-        </div>
-        <ContactTable />
-        <TablePagination />
+        )}
       </div>
     );
   }
 }
 
 UserContact.propTypes = {
-  setRoute: PropTypes.func.isRequired,
   strings: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
