@@ -65,6 +65,10 @@ class NewAddressForm extends Component {
   }
 
   render() {
+    const style = (this.state.peru)
+      ? { display: 'block' }
+      : { display: 'none' };
+
     return (
       <div className={styles.container}>
         <article>
@@ -75,26 +79,23 @@ class NewAddressForm extends Component {
             changeSelected={this.changeCountry}
           />
         </article>
-        {(this.state.peru &&
-          <article>
-            <Combo
-              includeIcon="linearicon-flag2"
-              placeholder={this.props.strings.forms.department}
-              options={_.mapKeys(this.state.departments, 'id')}
-              changeSelected={this.changeDepartment}
-            />
-          </article>
-        )}
-        {(this.state.peru &&
-          <article>
-            <Combo
-              includeIcon="linearicon-flag2"
-              placeholder={this.props.strings.forms.city}
-              options={_.mapKeys(this.state.cities, 'id')}
-              changeSelected={this.changeCity}
-            />
-          </article>
-        )}
+        <article style={style}>
+          <Combo
+            includeIcon="linearicon-flag2"
+            placeholder={this.props.strings.forms.department}
+            options={_.mapKeys(this.state.departments, 'id')}
+            changeSelected={this.changeDepartment}
+          />
+        </article>
+        <article style={style}>
+          <Combo
+            includeIcon="linearicon-flag2"
+            placeholder={this.props.strings.forms.city}
+            options={_.mapKeys(this.state.cities, 'id')}
+            changeSelected={this.changeCity}
+            trackItem="city"
+          />
+        </article>
         {(this.state.peru &&
           <article>
             <Combo

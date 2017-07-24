@@ -27,6 +27,10 @@ class Combo extends Component {
     this.select = this.select.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({ options: nextProps.options });
+  }
+
   onBlur() {
     this.setState({ open: false });
   }
@@ -46,7 +50,6 @@ class Combo extends Component {
   render() {
     const { selected } = this.state;
     const { includeIcon, config } = this.props;
-
 
     const options = (selected.period)
       ? _.filter(this.state.options, option => option.id !== selected.period)
