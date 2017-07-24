@@ -1,7 +1,12 @@
-import React from 'react';
+import _ from 'lodash';
+
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
+
+import constants from '../../../../extra/constants';
+import httpRequest from '../../../../extra/http-request';
 
 import FormInput from '../../../../components/form-input';
 import Combo from '../../../../components/combo';
@@ -9,86 +14,135 @@ import FormButton from '../../../../components/form-button';
 
 import styles from './styles.css';
 
-function NewAddressForm(props) {
-  const countries = {
-    1: {
-      id: '1',
-      name: 'Perú',
-    },
-    2: {
-      id: '2',
-      name: 'Estados Unidos',
-    },
-    3: {
-      id: '3',
-      name: 'Argentina',
-    },
-  };
+class NewAddressForm extends Component {
+  constructor(props) {
+    super(props);
 
-  const types = {
-    1: {
-      id: '1',
-      name: 'Fiscal',
-    },
-    2: {
-      id: '2',
-      name: 'Envío',
-    },
-  };
+    const { countries, addressTypes, departments } = this.props;
 
-  return (
-    <div className={styles.container}>
-      <article>
-        <Combo
-          includeIcon="linearicon-earth"
-          placeholder={props.strings.forms.country}
-          options={countries}
+    this.state = {
+      countries,
+      addressTypes,
+      departments,
+      country: {},
+      department: {},
+      peru: false,
+    };
+
+    this.changeCountry = this.changeCountry.bind(this);
+    this.changeAddressTypes = this.changeAddressTypes.bind(this);
+    this.changeDepartment = this.changeDepartment.bind(this);
+  }
+
+  changeCountry(country) {
+    this.setState({
+      country,
+      peru: country.code === 'PE',
+    });
+  }
+
+  changeDepartment(department) {
+    this.setState({
+      department,
+    });
+  }
+
+  changeAddressTypes(addressTypes) {
+    this.setState({ addressTypes });
+  }
+
+  render() {
+    return (
+      <div className={styles.container}>
+        <article>
+          <Combo
+            includeIcon="linearicon-earth"
+            placeholder={this.props.strings.forms.country}
+            options={_.mapKeys(this.state.countries, 'id')}
+            changeSelected={this.changeCountry}
+          />
+        </article>
+        {(this.state.peru &&
+          <article>
+            <Combo
+              includeIcon="linearicon-flag2"
+              placeholder={this.props.strings.forms.department}
+              options={_.mapKeys(this.state.departments, 'id')}
+              changeSelected={this.changeDepartment}
+            />
+          </article>
+        )}
+        {(this.state.peru &&
+          <article>
+            <Combo
+              includeIcon="linearicon-flag2"
+              placeholder={this.props.strings.forms.city}
+              options={_.mapKeys(this.state.addressTypes, 'id')}
+              changeSelected={this.changeAddressTypes}
+            />
+          </article>
+        )}
+        {(this.state.peru &&
+          <article>
+            <Combo
+              includeIcon="linearicon-flag2"
+              placeholder={this.props.strings.forms.district}
+              options={_.mapKeys(this.state.addressTypes, 'id')}
+              changeSelected={this.changeAddressTypes}
+            />
+          </article>
+        )}
+        {(!this.state.peru &&
+          <article>
+            <FormInput
+              name="stateCity"
+              includeIcon="linearicon-flag2"
+              placeholder={this.props.strings.forms.stateCity}
+            />
+          </article>
+        )}
+        <article>
+          <FormInput
+            name="address"
+            includeIcon="linearicon-map-marker"
+            placeholder={this.props.strings.forms.address}
+          />
+        </article>
+        <article>
+          <FormInput
+            name="reference"
+            includeIcon="linearicon-road-sign"
+            placeholder={this.props.strings.forms.reference}
+          />
+        </article>
+        <article>
+          <FormInput
+            name="postalcode"
+            includeIcon="linearicon-map-marker"
+            placeholder={this.props.strings.forms.postalCode}
+          />
+        </article>
+        <article>
+          <Combo
+            includeIcon="linearicon-register"
+            placeholder={this.props.strings.forms.type}
+            options={_.mapKeys(this.state.addressTypes, 'id')}
+            changeSelected={this.changeAddressTypes}
+          />
+        </article>
+        <FormButton
+          callToAction={this.props.strings.userAddresses.createAddress}
         />
-      </article>
-      <article>
-        <FormInput
-          name="address"
-          includeIcon="linearicon-map-marker"
-          placeholder={props.strings.forms.address}
-        />
-      </article>
-      <article>
-        <FormInput
-          name="reference"
-          includeIcon="linearicon-road-sign"
-          placeholder={props.strings.forms.reference}
-        />
-      </article>
-      <article>
-        <FormInput
-          name="ubigeo"
-          includeIcon="linearicon-location"
-          placeholder={props.strings.forms.location}
-        />
-      </article>
-      <article>
-        <FormInput
-          name="postalcode"
-          includeIcon="linearicon-map-marker"
-          placeholder={props.strings.forms.postalCode}
-        />
-      </article>
-      <article>
-        <Combo
-          includeIcon="linearicon-register"
-          placeholder={props.strings.forms.type}
-          options={types}
-        />
-      </article>
-      <FormButton
-        callToAction={props.strings.userAddresses.createAddress}
-      />
-    </div>
-  );
+      </div>
+    );
+  }
 }
 
 NewAddressForm.propTypes = {
   strings: PropTypes.objectOf(PropTypes.object).isRequired,
+  countries: PropTypes.arrayOf(PropTypes.object).isRequired,
+  addressTypes: PropTypes.arrayOf(PropTypes.object).isRequired,
+  departments: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 function mapStateToProps(state) {

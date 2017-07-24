@@ -194,7 +194,11 @@
     "notificationType": "Choose a notification type",
     "type": "Choose a type",
     "name": "Name",
-    "lastname": "Lastname"
+    "lastname": "Lastname",
+    "department": "Department",
+    "city": "City",
+    "district": "District",
+    "stateCity": "State/City"
   },
   "others": {
     "addToCart": "Add to cart",

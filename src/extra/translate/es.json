@@ -194,7 +194,11 @@
     "notificationType": "Selecciona un tipo de notificación",
     "type": "Selecciona un tipo",
     "name": "Nombre",
-    "lastname": "Apellidos"
+    "lastname": "Apellidos",
+    "department": "Departamento",
+    "city": "Provincia",
+    "district": "Distrito",
+    "stateCity": "Ciudad/Estado"
   },
   "others": {
     "addToCart": "Agregar al carrito",
