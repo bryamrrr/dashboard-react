@@ -5,9 +5,6 @@ import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 
-import constants from '../../../../extra/constants';
-import httpRequest from '../../../../extra/http-request';
-
 import FormInput from '../../../../components/form-input';
 import Combo from '../../../../components/combo';
 import FormButton from '../../../../components/form-button';
