@@ -10,58 +10,6 @@ import FormButton from '../../../../components/form-button';
 import styles from './styles.css';
 
 function NewContactForm(props) {
-  const countries = {
-    1: {
-      id: '1',
-      name: 'Perú',
-    },
-    2: {
-      id: '2',
-      name: 'Estados Unidos',
-    },
-    3: {
-      id: '3',
-      name: 'Argentina',
-    },
-  };
-
-  const documentTypes = {
-    1: {
-      id: '1',
-      name: 'DNI',
-    },
-    2: {
-      id: '2',
-      name: 'RUC',
-    },
-    3: {
-      id: '3',
-      name: 'OTROS',
-    },
-  };
-
-  const customerTypes = {
-    1: {
-      id: '1',
-      name: 'Persona',
-    },
-    2: {
-      id: '2',
-      name: 'Empresa',
-    },
-  };
-
-  const notificationTypes = {
-    1: {
-      id: '1',
-      name: 'Administración',
-    },
-    2: {
-      id: '2',
-      name: 'Cobranza',
-    },
-  };
-
   return (
     <div className={styles.container}>
       <article>
@@ -96,7 +44,7 @@ function NewContactForm(props) {
         <Combo
           includeIcon="linearicon-register"
           placeholder={props.strings.forms.documentType}
-          options={documentTypes}
+          options={props.documentTypes}
         />
       </article>
       <article>
@@ -110,7 +58,7 @@ function NewContactForm(props) {
         <Combo
           includeIcon="linearicon-earth"
           placeholder={props.strings.forms.country}
-          options={countries}
+          options={props.countries}
         />
       </article>
       <article>
@@ -138,7 +86,7 @@ function NewContactForm(props) {
         <Combo
           includeIcon="linearicon-users"
           placeholder={props.strings.forms.personType}
-          options={customerTypes}
+          options={props.customerTypes}
         />
       </article>
       <article>
@@ -152,7 +100,7 @@ function NewContactForm(props) {
         <Combo
           includeIcon="linearicon-comments"
           placeholder={props.strings.forms.notificationType}
-          options={notificationTypes}
+          options={props.notificationTypes}
         />
       </article>
       <FormButton
@@ -163,6 +111,10 @@ function NewContactForm(props) {
 }
 
 NewContactForm.propTypes = {
+  countries: PropTypes.arrayOf(PropTypes.object).isRequired,
+  customerTypes: PropTypes.arrayOf(PropTypes.object).isRequired,
+  documentTypes: PropTypes.arrayOf(PropTypes.object).isRequired,
+  notificationTypes: PropTypes.arrayOf(PropTypes.object).isRequired,
   strings: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
