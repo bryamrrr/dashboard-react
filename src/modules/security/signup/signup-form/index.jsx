@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import { connect } from 'react-redux';
+
 import { Field, reduxForm } from 'redux-form/immutable';
+
+import httpRequest from '../../../../extra/http-request';
+import constants from '../../../../extra/constants';
 
 import FormInput from '../../../../components/form-input';
 import FormButton from '../../../../components/form-button';
+
+import { showToaster } from '../../../../reducers/toaster/actions';
 
 import regex from '../../../../regex';
 
@@ -55,21 +62,28 @@ function renderRepeatPassword(field) {
 }
 
 class SignupForm extends Component {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
 
     this.state = { loading: false };
 
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  onSubmit(values) {
-    console.log(values);
-
+  async onSubmit(values) {
     this.setState({ loading: true });
-    setTimeout(() => {
-      this.setState({ loading: false });
-    }, 3000);
+
+    const url = `${constants.urls.API_SECURITY}/users`;
+    const data = {
+      username: values.get('username'),
+      email: values.get('email'),
+      password: values.get('password'),
+    };
+
+    await httpRequest('POST', url, data);
+
+    this.props.showToaster('success', 'Usuario creado exitosamente');
+    this.context.router.history.push('/login');
   }
 
   render() {
@@ -131,9 +145,16 @@ function validate(values) {
 
 SignupForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
+  showToaster: PropTypes.func.isRequired,
 };
 
-export default reduxForm({
+SignupForm.contextTypes = {
+  router: PropTypes.objectOf(PropTypes.object).isRequired,
+};
+
+const SignupReduxForm = reduxForm({
   validate,
   form: 'UserSignup',
 })(SignupForm);
+
+export default connect(null, { showToaster })(SignupReduxForm);
