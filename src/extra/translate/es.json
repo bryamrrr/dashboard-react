@@ -200,7 +200,8 @@
     "city": "Provincia",
     "district": "Distrito",
     "stateCity": "Ciudad/Estado",
-    "reason": "Razón social"
+    "reason": "Razón social",
+    "contactType": "Tipo de contacto"
   },
   "others": {
     "addToCart": "Agregar al carrito",

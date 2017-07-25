@@ -200,7 +200,8 @@
     "city": "City",
     "district": "District",
     "stateCity": "State/City",
-    "reason": "Razón social"
+    "reason": "Razón social",
+    "contactType": "Contact type"
   },
   "others": {
     "addToCart": "Add to cart",

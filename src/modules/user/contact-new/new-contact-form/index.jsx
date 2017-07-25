@@ -15,17 +15,19 @@ import FormButton from '../../../../components/form-button';
 
 import regex from '../../../../regex';
 
+import { showToaster } from '../../../../reducers/toaster/actions';
+
 import styles from './styles.css';
 
 class NewContactForm extends Component {
-  constructor(props) {
-    super(props);
-    const { countries, documentTypes, customerTypes, notificationTypes, departments } = this.props;
+  constructor(props, context) {
+    super(props, context);
+    const { countries, documentTypes, contactTypes, notificationTypes, departments } = this.props;
 
     this.state = {
       countries,
       documentTypes,
-      customerTypes,
+      contactTypes,
       notificationTypes,
       departments,
       cities: [],
@@ -35,7 +37,8 @@ class NewContactForm extends Component {
       city: {},
       district: {},
       peru: false,
-      customerType: {},
+      contactType: {},
+      notificationType: {},
       sending: false,
     };
 
@@ -44,7 +47,7 @@ class NewContactForm extends Component {
     this.changeDepartment = this.changeDepartment.bind(this);
     this.changeCity = this.changeCity.bind(this);
     this.changeDistrict = this.changeDistrict.bind(this);
-    this.changeCustomerType = this.changeCustomerType.bind(this);
+    this.changeContactType = this.changeContactType.bind(this);
     this.changeNotificationType = this.changeNotificationType.bind(this);
 
     this.renderField = this.renderField.bind(this);
@@ -52,9 +55,35 @@ class NewContactForm extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  onSubmit(values) {
+  async onSubmit(values) {
     this.setState({ sending: true });
-    console.log(values);
+
+    const data = {
+      name: values.get('name'),
+      lastname: values.get('lastname'),
+      contactTypeId: this.state.contactType.id,
+      documentTypeId: this.state.documentType.id,
+      documentId: values.get('document'),
+      email: values.get('email'),
+      countryId: this.state.country.id,
+      phone: values.get('phone'),
+      address: values.get('address'),
+      notificationTypesId: [this.state.notificationType.id],
+    };
+
+    if (values.get('stateCity')) data.stateCity = values.get('stateCity');
+    if (values.get('reference')) data.reference = values.get('reference');
+    if (values.get('postcalCode')) data.reference = values.get('postcalCode');
+    if (!_.isEmpty(this.state.district)) data.ubigeoId = this.state.district.id;
+
+    const url = `${constants.urls.API_SONQO}/contacts`;
+    await httpRequest('POST', url, data);
+
+    this.setState({ sending: false });
+    this.props.showToaster('success', 'Se agregó un nuevo contacto');
+
+    const urlRedirect = '/usuario/contactos';
+    this.context.router.history.push(urlRedirect);
   }
 
   changeDocumentType(documentType) {
@@ -95,8 +124,8 @@ class NewContactForm extends Component {
     this.setState({ district });
   }
 
-  changeCustomerType(customerType) {
-    this.setState({ customerType });
+  changeContactType(contactType) {
+    this.setState({ contactType });
   }
 
   changeNotificationType(notificationType) {
@@ -248,18 +277,18 @@ class NewContactForm extends Component {
           />
         </article>
         <article>
-          <Combo
-            includeIcon="linearicon-users"
-            placeholder={this.props.strings.forms.personType}
-            options={_.mapKeys(this.state.customerTypes, 'id')}
-            changeSelected={this.changeCustomerType}
-            selected={this.state.customerType}
-          />
-        </article>
-        <article>
           <Field
             name="postalCode"
             component={this.renderField}
+          />
+        </article>
+        <article>
+          <Combo
+            includeIcon="linearicon-users"
+            placeholder={this.props.strings.forms.contactType}
+            options={_.mapKeys(this.state.contactTypes, 'id')}
+            changeSelected={this.changeContactType}
+            selected={this.state.contactType}
           />
         </article>
         <article>
@@ -302,11 +331,15 @@ function validate(values) {
 NewContactForm.propTypes = {
   countries: PropTypes.arrayOf(PropTypes.object).isRequired,
   documentTypes: PropTypes.arrayOf(PropTypes.object).isRequired,
-  customerTypes: PropTypes.arrayOf(PropTypes.object).isRequired,
+  contactTypes: PropTypes.arrayOf(PropTypes.object).isRequired,
   notificationTypes: PropTypes.arrayOf(PropTypes.object).isRequired,
   departments: PropTypes.arrayOf(PropTypes.object).isRequired,
   strings: PropTypes.objectOf(PropTypes.object).isRequired,
   handleSubmit: PropTypes.func.isRequired,
+};
+
+NewContactForm.contextTypes = {
+  router: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 function mapStateToProps(state) {
@@ -318,4 +351,4 @@ const NewContactReduxForm = reduxForm({
   validate,
 })(NewContactForm);
 
-export default connect(mapStateToProps)(NewContactReduxForm);
+export default connect(mapStateToProps, { showToaster })(NewContactReduxForm);

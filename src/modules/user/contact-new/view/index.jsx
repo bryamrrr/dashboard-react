@@ -22,7 +22,7 @@ class UserContactNew extends Component {
       fetchingData: true,
       countries: [],
       documentTypes: [],
-      customerTypes: [],
+      contactTypes: [],
       notificationTypes: [],
       departments: [],
     };
@@ -37,8 +37,8 @@ class UserContactNew extends Component {
     const urlDocumentTypes = `${constants.urls.API_SONQO}/documenttypes`;
     const promiseDocumentTypes = httpRequest('GET', urlDocumentTypes);
 
-    const urlCustomerTypes = `${constants.urls.API_SONQO}/customertypes`;
-    const promiseCustomerTypes = httpRequest('GET', urlCustomerTypes);
+    const urlContactTypes = `${constants.urls.API_SONQO}/contacttypes`;
+    const promiseContactTypes = httpRequest('GET', urlContactTypes);
 
     const urlNotificationTypes = `${constants.urls.API_SONQO}/notificationtypes`;
     const promiseNotificationTypes = httpRequest('GET', urlNotificationTypes);
@@ -49,7 +49,7 @@ class UserContactNew extends Component {
     const allPromise = Promise.all([
       promiseCountries,
       promiseDocumentTypes,
-      promiseCustomerTypes,
+      promiseContactTypes,
       promiseNotificationTypes,
       promiseDepartments,
     ]);
@@ -59,7 +59,7 @@ class UserContactNew extends Component {
         fetchingData: false,
         countries: response[0].data.results,
         documentTypes: response[1].data.results,
-        customerTypes: response[2].data.results,
+        contactTypes: response[2].data.results,
         notificationTypes: response[3].data.results,
         departments: response[4].data.results,
       }),
@@ -81,7 +81,7 @@ class UserContactNew extends Component {
             <NewContactForm
               countries={this.state.countries}
               documentTypes={this.state.documentTypes}
-              customerTypes={this.state.customerTypes}
+              contactTypes={this.state.contactTypes}
               notificationTypes={this.state.notificationTypes}
               departments={this.state.departments}
             />
