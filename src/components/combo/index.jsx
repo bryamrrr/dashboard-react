@@ -27,6 +27,13 @@ class Combo extends Component {
     this.select = this.select.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      options: nextProps.options,
+      selected: nextProps.selected,
+    });
+  }
+
   onBlur() {
     this.setState({ open: false });
   }
@@ -46,7 +53,6 @@ class Combo extends Component {
   render() {
     const { selected } = this.state;
     const { includeIcon, config } = this.props;
-
 
     const options = (selected.period)
       ? _.filter(this.state.options, option => option.id !== selected.period)
@@ -116,10 +122,12 @@ Combo.propTypes = {
     PropTypes.array,
   ]).isRequired,
   placeholder: PropTypes.string,
-  selected: PropTypes.shape({
-    id: PropTypes.string,
-    name: PropTypes.string,
-  }),
+  selected: PropTypes.objectOf(PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.bool,
+    PropTypes.object,
+  ])),
   trackItem: PropTypes.string,
 };
 

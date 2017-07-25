@@ -91,7 +91,8 @@
   "userAddresses": {
     "title": "My addresses",
     "newAddress": "New address",
-    "createAddress": "Create address"
+    "createAddress": "Create address",
+    "editAddress": "Edit address"
   },
   "userPurchases": {
     "title": "My purchases",
@@ -173,7 +174,7 @@
     "activateMail": "Activate mail"
   },
   "forms": {
-    "user": "User",
+    "username": "User",
     "name": "Name",
     "lastName": "Lastname",
     "email": "Email",
@@ -184,7 +185,7 @@
     "reference": "Reference",
     "documentType": "Choose a document type",
     "postalCode": "Postal code",
-    "document": "Doc. number",
+    "documentId": "Doc. number",
     "personType": "Customer type",
     "bussinessarea": "Bussiness Area",
     "language": "Choose a language",
@@ -194,7 +195,13 @@
     "notificationType": "Choose a notification type",
     "type": "Choose a type",
     "name": "Name",
-    "lastname": "Lastname"
+    "lastname": "Lastname",
+    "department": "Department",
+    "city": "City",
+    "district": "District",
+    "stateCity": "State/City",
+    "reason": "Razón social",
+    "contactType": "Contact type"
   },
   "others": {
     "addToCart": "Add to cart",

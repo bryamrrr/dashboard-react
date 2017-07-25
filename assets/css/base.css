@@ -1621,3 +1621,35 @@ th, td { padding: 15px 10px; }
 
 .linearicon-copyright:before {
   content: "\a9"; }
+
+/* Modal */
+.titleModal { margin: 20px 0 30px; }
+.optionsButton {
+  display: flex;
+  justify-content: space-around;
+}
+.confirmButton,
+.cancelButton {
+  flex-basis: 42.5%;
+}
+.confirmButton button { margin-top: 0; }
+.cancelButton button {
+  background-color: #ddd;
+  box-sizing: border-box;
+  color: #4d6171;
+  margin-top: 0;
+}
+
+.cancelButton button:hover { background-color: #ccc; }
+.iconWarning {
+  color: #f8bb86;
+  display: block;
+  font-size: 80px;
+  text-align: center;
+  animation: pulseWarning .75s infinite alternate;
+}
+
+@keyframes pulseWarning {
+  0% { color: #f8d486; }
+  100% { border-color: #f8bb86; }
+}

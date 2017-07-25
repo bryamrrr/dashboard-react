@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
@@ -9,8 +11,12 @@ import Combo from '../../../../components/combo';
 import FormButton from '../../../../components/form-button';
 
 import { setLanguage } from '../../../../reducers/translate/actions';
+import { setProfile } from '../../../../reducers/user/actions';
+import { showToaster } from '../../../../reducers/toaster/actions';
 
-import regex from '../../../../regex';
+import regex from '../../../../extra/regex';
+import httpRequest from '../../../../extra/http-request';
+import constants from '../../../../extra/constants';
 
 import styles from './styles.css';
 
@@ -18,17 +24,75 @@ class UserDataForm extends Component {
   constructor(props) {
     super(props);
 
+    const {
+      country,
+      documentType,
+      customerType,
+      businessArea,
+      username,
+      email,
+      name,
+      lastname,
+      phone,
+      documentId,
+    } = this.props.data;
+
+    this.state = {
+      profile: {
+        country,
+        documentType,
+        customerType,
+        businessArea,
+        username,
+        email,
+        name,
+        lastname,
+        phone,
+        documentId,
+      },
+      sending: false,
+    };
+
     this.changeLanguage = this.changeLanguage.bind(this);
-    this.renderUserField = this.renderUserField.bind(this);
-    this.renderEmailField = this.renderEmailField.bind(this);
-    this.renderNameField = this.renderNameField.bind(this);
-    this.renderDocumentField = this.renderDocumentField.bind(this);
-    this.renderPhoneField = this.renderPhoneField.bind(this);
+    this.changeCountry = this.changeCountry.bind(this);
+    this.changeDocumentType = this.changeDocumentType.bind(this);
+    this.changeCustomerType = this.changeCustomerType.bind(this);
+    this.changeBusinessArea = this.changeBusinessArea.bind(this);
+
+    this.renderField = this.renderField.bind(this);
+
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
-  onSubmit(values) {
-    console.log(this);
-    console.log(values);
+  componentWillMount() {
+    this.props.initialize({
+      username: this.state.profile.username,
+      email: this.state.profile.email,
+      name: this.state.profile.name,
+      lastname: this.state.profile.lastname,
+      phone: this.state.profile.phone,
+      documentId: this.state.profile.documentId,
+    });
+  }
+
+  async onSubmit(values) {
+    const profileToSend = {
+      username: values.get('username'),
+      email: values.get('email'),
+      name: values.get('name'),
+      lastname: values.get('lastname'),
+      phone: values.get('phone'),
+      documentId: values.get('documentId'),
+      countryId: this.state.profile.country.id,
+      documentTypeId: this.state.profile.documentType.id,
+      customerTypeId: this.state.profile.customerType.id,
+      businessAreaId: this.state.profile.businessArea.id,
+    };
+
+    const url = `${constants.urls.API_SONQO}/profile`;
+    await httpRequest('PUT', url, profileToSend);
+    this.props.showToaster('success', 'Los datos han sido actualizados');
+    this.props.setProfile(profileToSend);
   }
 
   changeLanguage(data) {
@@ -36,118 +100,70 @@ class UserDataForm extends Component {
     this.props.setLanguage(language);
   }
 
-  renderUserField(field) {
-    return (
-      <FormInput
-        field={field}
-        name="user"
-        includeIcon="linearicon-user"
-        placeholder={this.props.strings.forms.user}
-      />
-    );
+  changeCountry(country) {
+    const profile = this.state.profile;
+    profile.country = country;
+
+    this.forceUpdate();
   }
 
-  renderEmailField(field) {
-    return (
-      <FormInput
-        field={field}
-        name="email"
-        includeIcon="linearicon-envelope"
-        placeholder={this.props.strings.forms.email}
-      />
-    );
+  changeDocumentType(documentType) {
+    const profile = this.state.profile;
+    profile.documentType = documentType;
+
+    this.forceUpdate();
   }
 
-  renderNameField(field) {
-    return (
-      <FormInput
-        field={field}
-        name="name"
-        includeIcon="linearicon-edit"
-        placeholder={this.props.strings.forms.name}
-      />
-    );
+  changeCustomerType(customerType) {
+    const profile = this.state.profile;
+    profile.customerType = customerType;
+
+    this.forceUpdate();
   }
 
-  renderDocumentField(field) {
-    return (
-      <FormInput
-        field={field}
-        name="document"
-        includeIcon="linearicon-profile"
-        placeholder={this.props.strings.forms.document}
-      />
-    );
+  changeBusinessArea(businessArea) {
+    const profile = this.state.profile;
+    profile.businessArea = businessArea;
+
+    this.forceUpdate();
   }
 
-  renderPhoneField(field) {
+  renderField(field) {
+    const { name } = field.input;
+
+    let icon = '';
+    let disabled = false;
+    switch (name) {
+      case 'username':
+        icon = 'linearicon-user';
+        disabled = true;
+        break;
+      case 'email':
+        icon = 'linearicon-envelope';
+        disabled = true;
+        break;
+      case 'documentId':
+        icon = 'linearicon-profile';
+        break;
+      case 'phone':
+        icon = 'linearicon-phone';
+        break;
+      default:
+        icon = 'linearicon-edit';
+    }
+
     return (
       <FormInput
         field={field}
-        name="phone"
-        includeIcon="linearicon-phone"
-        placeholder={this.props.strings.forms.phone}
+        name={name}
+        includeIcon={icon}
+        placeholder={this.props.strings.forms[name]}
+        disabled={disabled}
       />
     );
   }
 
   render() {
-    const countries = {
-      1: {
-        id: 1,
-        name: 'Perú',
-      },
-      2: {
-        id: 2,
-        name: 'Estados Unidos',
-      },
-      3: {
-        id: 3,
-        name: 'Argentina',
-      },
-    };
-
-    const documentTypes = {
-      1: {
-        id: 1,
-        name: 'DNI',
-      },
-      2: {
-        id: 2,
-        name: 'RUC',
-      },
-      3: {
-        id: 3,
-        name: 'OTROS',
-      },
-    };
-
-    const customerTypes = {
-      1: {
-        id: 1,
-        name: 'Persona',
-      },
-      2: {
-        id: 2,
-        name: 'Empresa',
-      },
-    };
-
-    const businessareas = {
-      1: {
-        id: 1,
-        name: 'Agricultura, ganadería, silvicultura y pesca',
-      },
-      2: {
-        id: 2,
-        name: 'Explotación de minas y canteras',
-      },
-      3: {
-        id: 3,
-        name: 'Industrias manufactureras',
-      },
-    };
-
     const languages = {
       1: {
         id: 1,
@@ -159,72 +175,84 @@ class UserDataForm extends Component {
       },
     };
 
+    const style = (this.state.profile.customerType.name === 'Persona')
+      ? { display: 'block' }
+      : { display: 'none' };
+
     return (
       <div>
         <form onSubmit={this.props.handleSubmit(this.onSubmit)} className={styles.container}>
           <article>
             <Field
-              name="user"
-              component={this.renderUserField}
+              name="username"
+              component={this.renderField}
+              value={this.state.profile.username}
             />
           </article>
           <article>
             <Field
               name="email"
-              component={this.renderEmailField}
-            />
-          </article>
-          <article>
-            <Field
-              name="name"
-              component={this.renderNameField}
-            />
-          </article>
-          <article>
-            <FormInput
-              name="lastname"
-              includeIcon="linearicon-edit"
-              placeholder={this.props.strings.forms.lastname}
+              component={this.renderField}
             />
           </article>
           <article>
             <Combo
               includeIcon="linearicon-earth"
               placeholder={this.props.strings.forms.country}
-              options={countries}
-            />
-          </article>
-          <article>
-            <Field
-              name="phone"
-              component={this.renderPhoneField}
-            />
-          </article>
-          <article>
-            <Combo
-              includeIcon="linearicon-register"
-              placeholder={this.props.strings.forms.documentType}
-              options={documentTypes}
-            />
-          </article>
-          <article>
-            <Field
-              name="document"
-              component={this.renderDocumentField}
+              options={_.mapKeys(this.props.countries, 'id')}
+              changeSelected={this.changeCountry}
+              selected={this.state.profile.country}
             />
           </article>
           <article>
             <Combo
               includeIcon="linearicon-users"
               placeholder={this.props.strings.forms.personType}
-              options={customerTypes}
+              options={_.mapKeys(this.props.customerTypes, 'id')}
+              changeSelected={this.changeCustomerType}
+              selected={this.state.profile.customerType}
+            />
+          </article>
+          <article>
+            <Field
+              name="name"
+              component={this.renderField}
+            />
+          </article>
+          <article style={style}>
+            <Field
+              name="lastname"
+              component={this.renderField}
+            />
+          </article>
+          <article>
+            <Field
+              name="phone"
+              component={this.renderField}
+            />
+          </article>
+          <article>
+            <Combo
+              includeIcon="linearicon-register"
+              placeholder={this.props.strings.forms.documentType}
+              options={_.mapKeys(this.props.documentTypes, 'id')}
+              changeSelected={this.changeDocumentType}
+              selected={this.state.profile.documentType}
+            />
+          </article>
+          <article>
+            <Field
+              name="documentId"
+              component={this.renderField}
             />
           </article>
           <article>
             <Combo
               includeIcon="linearicon-library"
               placeholder={this.props.strings.forms.bussinessarea}
-              options={businessareas}
+              options={_.mapKeys(this.props.businessAreas, 'id')}
+              changeSelected={this.changeBusinessArea}
+              selected={this.state.profile.businessArea}
             />
           </article>
           <article>
@@ -249,7 +277,7 @@ class UserDataForm extends Component {
 function validate(values) {
   const errors = {};
 
-  if (!values.get('user')) errors.user = 'Ingresa un usuario';
+  if (!values.get('username')) errors.user = 'Ingresa un usuario';
   if (!values.get('email')) errors.email = 'Ingresa un email';
 
   if (!values.get('email')) {
@@ -259,16 +287,28 @@ function validate(values) {
   }
 
   if (!values.get('name')) errors.name = 'Ingresa un nombre';
-  if (!values.get('document')) errors.document = 'Ingresa un número de documento';
+  if (!values.get('documentId')) errors.document = 'Ingresa un número de documento';
   if (!values.get('phone')) errors.phone = 'Ingresa un número de teléfono';
 
   return errors;
 }
 
 UserDataForm.propTypes = {
-  setLanguage: PropTypes.func.isRequired,
-  strings: PropTypes.objectOf(PropTypes.object).isRequired,
+  countries: PropTypes.arrayOf(PropTypes.object).isRequired,
+  customerTypes: PropTypes.arrayOf(PropTypes.object).isRequired,
+  documentTypes: PropTypes.arrayOf(PropTypes.object).isRequired,
+  businessAreas: PropTypes.arrayOf(PropTypes.object).isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  initialize: PropTypes.func.isRequired,
+  setLanguage: PropTypes.func.isRequired,
+  setProfile: PropTypes.func.isRequired,
+  strings: PropTypes.objectOf(PropTypes.object).isRequired,
+  data: PropTypes.objectOf(PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.bool,
+    PropTypes.object,
+  ])).isRequired,
 };
 
 function mapStateToProps(state) {
@@ -279,4 +319,9 @@ const UserDataReduxForm = reduxForm({
   form: 'UserDataForm',
   validate,
 })(UserDataForm);
-export default connect(mapStateToProps, { setLanguage })(UserDataReduxForm);
+
+export default connect(mapStateToProps, {
+  setLanguage,
+  setProfile,
+  showToaster,
+})(UserDataReduxForm);

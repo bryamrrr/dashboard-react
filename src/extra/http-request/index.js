@@ -1,8 +1,8 @@
 import fetch from 'isomorphic-fetch';
 
-import store from '../../reducers/store';
+// import store from '../../reducers/store';
 
-import { showToaster } from '../../reducers/toaster/actions';
+// import { showToaster } from '../../reducers/toaster/actions';
 
 export default async (method, url, data = {}) => {
   const token = (typeof localStorage !== 'undefined')
@@ -34,16 +34,16 @@ export default async (method, url, data = {}) => {
       if (typeof localStorage !== 'undefined') {
         localStorage.removeItem('userData');
         localStorage.removeItem('token');
-        store.dispatch(showToaster('error', 'Acceso denegado.'));
+        // store.dispatch(showToaster('error', 'Acceso denegado.'));
       }
     } else if (response.meta.status === 403) {
-      store.dispatch(showToaster('error', 'Redireccionando al home.'));
+      // store.dispatch(showToaster('error', 'Redireccionando al home.'));
     } else if (response.meta.status === 404) {
-      store.dispatch(showToaster('error', 'Recurso no encontrado.'));
+      // store.dispatch(showToaster('error', 'Recurso no encontrado.'));
     } else if (response.meta.status === 500) {
-      store.dispatch(showToaster('error', 'Error del servidor.'));
+      // store.dispatch(showToaster('error', 'Error del servidor.'));
     } else {
-      store.dispatch(showToaster('error'));
+      // store.dispatch(showToaster('error'));
     }
   } catch (error) {
     console.log('Error unhandled', error);

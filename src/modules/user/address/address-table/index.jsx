@@ -1,10 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
+import { connect } from 'react-redux';
 
 import ButtonIcon from '../../../../components/button-icon';
 
 import styles from './styles.css';
 
-function AddressTable() {
+function AddressTable(props) {
   return (
     <div className="table-container">
       <table>
@@ -17,32 +20,41 @@ function AddressTable() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Calle La Begonias 567 - Corpac San Isidro</td>
-            <td>PE</td>
-            <td>Fiscal</td>
-            <td className={styles.tdButton}>
-              <ButtonIcon icon="linearicon-pencil" />
-            </td>
-            <td className={styles.tdButton}>
-              <ButtonIcon icon="linearicon-trash2" />
-            </td>
-          </tr>
-          <tr>
-            <td>Calle Tubino 101 San Miguel - Lima</td>
-            <td>PE</td>
-            <td>Envío</td>
-            <td className={styles.tdButton}>
-              <ButtonIcon icon="linearicon-pencil" />
-            </td>
-            <td className={styles.tdButton}>
-              <ButtonIcon icon="linearicon-trash2" />
-            </td>
-          </tr>
+          {props.data.map(item =>
+            <tr key={item.id}>
+              <td>{item.address}</td>
+              <td>{item.country.code}</td>
+              <td>{item.addressType.name}</td>
+              <td className={styles.tdButton}>
+                <ButtonIcon
+                  icon="linearicon-pencil"
+                  tooltip={props.strings.tooltips.edit}
+                  url={`/usuario/editar-direccion/${item.id}`}
+                />
+              </td>
+              <td className={styles.tdButton}>
+                <ButtonIcon
+                  icon="linearicon-trash2"
+                  tooltip={props.strings.tooltips.delete}
+                  onClick={props.showDelete}
+                  meta={{ item }}
+                />
+              </td>
+            </tr>,
+          )}
         </tbody>
       </table>
     </div>
   );
 }
 
-export default AddressTable;
+AddressTable.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  showDelete: PropTypes.func.isRequired,
+};
+
+function mapStateToProps(state) {
+  return { strings: state.get('translate').strings };
+}
+
+export default connect(mapStateToProps)(AddressTable);
