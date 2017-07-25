@@ -15,8 +15,8 @@ import { setRoute } from '../../../../reducers/routes/actions';
 import styles from './styles.css';
 
 class UserContactNew extends Component {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
 
     this.state = {
       fetchingData: true,
@@ -25,6 +25,7 @@ class UserContactNew extends Component {
       contactTypes: [],
       notificationTypes: [],
       departments: [],
+      data: {},
     };
   }
 
@@ -54,16 +55,26 @@ class UserContactNew extends Component {
       promiseDepartments,
     ]);
 
-    allPromise.then(async response =>
-      this.setState({
+    allPromise.then(async (response) => {
+      let data = {};
+      const id = this.context.router.route.match.params.id;
+      if (id) {
+        const url = `${constants.urls.API_SONQO}/contacts/${id}?includes=ubigeo`;
+        const dataAddress = await httpRequest('GET', url);
+
+        data = dataAddress.data;
+      }
+
+      return this.setState({
         fetchingData: false,
         countries: response[0].data.results,
         documentTypes: response[1].data.results,
         contactTypes: response[2].data.results,
         notificationTypes: response[3].data.results,
         departments: response[4].data.results,
-      }),
-    );
+        data,
+      });
+    });
   }
 
   render() {
@@ -84,6 +95,7 @@ class UserContactNew extends Component {
               contactTypes={this.state.contactTypes}
               notificationTypes={this.state.notificationTypes}
               departments={this.state.departments}
+              data={this.state.data}
             />
           </div>
         )}
@@ -95,6 +107,10 @@ class UserContactNew extends Component {
 UserContactNew.propTypes = {
   setRoute: PropTypes.func.isRequired,
   strings: PropTypes.objectOf(PropTypes.object).isRequired,
+};
+
+UserContactNew.contextTypes = {
+  router: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 function mapStateToProps(state) {

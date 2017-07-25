@@ -22,23 +22,23 @@ import styles from './styles.css';
 class NewContactForm extends Component {
   constructor(props, context) {
     super(props, context);
-    const { countries, documentTypes, contactTypes, notificationTypes, departments } = this.props;
 
     this.state = {
-      countries,
-      documentTypes,
-      contactTypes,
-      notificationTypes,
-      departments,
+      countries: _.mapKeys(this.props.countries, 'id'),
+      documentTypes: _.mapKeys(this.props.documentTypes, 'id'),
+      contactTypes: _.mapKeys(this.props.contactTypes, 'id'),
+      notificationTypes: _.mapKeys(this.props.notificationTypes, 'id'),
+      departments: _.mapKeys(this.props.departments, 'id'),
       cities: [],
       districts: [],
       country: {},
       department: {},
       city: {},
       district: {},
-      peru: false,
       contactType: {},
       notificationType: {},
+      documentType: {},
+      peru: false,
       sending: false,
     };
 
@@ -53,6 +53,60 @@ class NewContactForm extends Component {
     this.renderField = this.renderField.bind(this);
 
     this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  async componentWillMount() {
+    if (!_.isEmpty(this.props.data)) {
+      this.props.initialize({
+        name: this.props.data.name,
+        lastname: this.props.data.lastname,
+        email: this.props.data.email,
+        phone: this.props.data.phone,
+        document: this.props.data.documentId,
+        stateCity: this.props.data.stateCity,
+        address: this.props.data.address,
+        reference: this.props.data.reference,
+        postalCode: this.props.data.postalCode,
+      });
+
+      let department = {};
+      let city = {};
+      let district = {};
+
+      let cities = [];
+      let districts = [];
+
+      if (this.props.data.ubigeo) {
+        const departmentCode = `${this.props.data.ubigeo.locationCode.substr(0, 2)}0000`;
+        department = _.find(this.state.departments, { locationCode: departmentCode });
+
+        const urlProvinces = `${constants.urls.API_SONQO}/ubigeos?parentCode=${departmentCode}&limit=all`;
+        cities = await httpRequest('GET', urlProvinces);
+        cities = cities.data.results;
+
+        const provinceCode = `${this.props.data.ubigeo.locationCode.substr(0, 4)}00`;
+        city = _.find(cities, { locationCode: provinceCode });
+
+        const urlDistricts = `${constants.urls.API_SONQO}/ubigeos?parentCode=${provinceCode}&limit=all`;
+        districts = await httpRequest('GET', urlDistricts);
+        districts = districts.data.results;
+        const districtCode = this.props.data.ubigeo.locationCode;
+        district = _.find(districts, { locationCode: districtCode });
+      }
+
+      this.setState({
+        documentType: this.state.documentTypes[this.props.data.documentTypeId],
+        peru: this.state.countries[this.props.data.countryId].code === 'PE',
+        country: this.state.countries[this.props.data.countryId],
+        contactType: this.state.contactTypes[this.props.data.contactTypeId],
+        notificationType: this.state.notificationTypes[this.props.data.notificationTypeId[0]],
+        department,
+        cities,
+        city,
+        districts,
+        district,
+      });
+    }
   }
 
   async onSubmit(values) {
@@ -211,7 +265,7 @@ class NewContactForm extends Component {
           <Combo
             includeIcon="linearicon-register"
             placeholder={this.props.strings.forms.documentType}
-            options={_.mapKeys(this.state.documentTypes, 'id')}
+            options={this.state.documentTypes}
             changeSelected={this.changeDocumentType}
             selected={this.state.documentType}
           />
@@ -226,7 +280,7 @@ class NewContactForm extends Component {
           <Combo
             includeIcon="linearicon-earth"
             placeholder={this.props.strings.forms.country}
-            options={_.mapKeys(this.state.countries, 'id')}
+            options={this.state.countries}
             changeSelected={this.changeCountry}
             selected={this.state.country}
           />
@@ -235,7 +289,7 @@ class NewContactForm extends Component {
           <Combo
             includeIcon="linearicon-flag2"
             placeholder={this.props.strings.forms.department}
-            options={_.mapKeys(this.state.departments, 'id')}
+            options={this.state.departments}
             changeSelected={this.changeDepartment}
             selected={this.state.department}
           />
@@ -286,7 +340,7 @@ class NewContactForm extends Component {
           <Combo
             includeIcon="linearicon-users"
             placeholder={this.props.strings.forms.contactType}
-            options={_.mapKeys(this.state.contactTypes, 'id')}
+            options={this.state.contactTypes}
             changeSelected={this.changeContactType}
             selected={this.state.contactType}
           />

@@ -72,15 +72,16 @@ class NewAddressForm extends Component {
 
         const urlProvinces = `${constants.urls.API_SONQO}/ubigeos?parentCode=${departmentCode}&limit=all`;
         cities = await httpRequest('GET', urlProvinces);
+        cities = cities.data.results;
+
         const provinceCode = `${this.props.data.ubigeo.locationCode.substr(0, 4)}00`;
-        city = _.find(cities.data.results, { locationCode: provinceCode });
+        city = _.find(cities, { locationCode: provinceCode });
 
         const urlDistricts = `${constants.urls.API_SONQO}/ubigeos?parentCode=${provinceCode}&limit=all`;
         districts = await httpRequest('GET', urlDistricts);
+        districts = districts.data.results;
         const districtCode = this.props.data.ubigeo.locationCode;
-        console.log(districts.data.results, districtCode);
-        district = _.find(districts.data.results, { locationCode: districtCode });
-        console.log(district);
+        district = _.find(districts, { locationCode: districtCode });
       }
 
       this.setState({
@@ -89,9 +90,9 @@ class NewAddressForm extends Component {
         addressType: this.state.addressTypes[this.props.data.addressTypeId],
         peru: this.state.countries[this.props.data.countryId].code === 'PE',
         department,
-        cities: cities.data.results,
+        cities,
         city,
-        districts: districts.data.results,
+        districts,
         district,
       });
     }

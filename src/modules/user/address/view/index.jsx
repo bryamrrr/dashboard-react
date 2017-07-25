@@ -150,15 +150,22 @@ class UserAddress extends Component {
         )}
         {(this.state.showDelete &&
           <Modal onClose={this.hideModal} >
-            <h2 className={styles.titleModal}>¿Estás seguro de eliminar esta dirección?</h2>
-            <FormButton
-              callToAction="No"
-              onClick={this.hideModal}
-            />
-            <FormButton
-              callToAction="Si"
-              onClick={this.deleteAddress}
-            />
+            <i className="linearicon-circle-exclamation iconWarning" />
+            <h2 className="titleModal">¿Estás seguro de eliminar este dirección?</h2>
+            <div className="optionsButton">
+              <div className="cancelButton">
+                <FormButton
+                  callToAction="No"
+                  onClick={this.hideModal}
+                />
+              </div>
+              <div className="confirmButton">
+                <FormButton
+                  callToAction="Si"
+                  onClick={this.deleteAddress}
+                />
+              </div>
+            </div>
           </Modal>
         )}
       </div>
