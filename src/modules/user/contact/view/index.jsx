@@ -28,9 +28,11 @@ class UserContact extends Component {
       contacts: [],
       metadata: {},
       initialPage: 1,
+      term: '',
     };
 
     this.onChangePage = this.onChangePage.bind(this);
+    this.onSearch = this.onSearch.bind(this);
   }
 
   async componentWillMount() {
@@ -51,7 +53,7 @@ class UserContact extends Component {
 
     const offset = (page - 1) * 10;
 
-    const url = `${constants.urls.API_SONQO}/contacts?includes=country,documentType&sort=name&offset=${offset}`;
+    const url = `${constants.urls.API_SONQO}/contacts?includes=country,documentType&sort=name&offset=${offset}&name__like=${this.state.term}`;
     const { data: { results, metadata } } = await httpRequest('GET', url);
 
     this.setState({
@@ -59,6 +61,21 @@ class UserContact extends Component {
       contacts: results,
       metadata,
       initialPage: page,
+    });
+  }
+
+  async onSearch(term) {
+    this.setState({ fetchingData: true });
+
+    const url = `${constants.urls.API_SONQO}/contacts?includes=country,documentType&sort=name&name__like=${term}`;
+    const { data: { results, metadata } } = await httpRequest('GET', url);
+
+    this.setState({
+      fetchingData: false,
+      contacts: results,
+      metadata,
+      initialPage: 1,
+      term,
     });
   }
 
@@ -78,7 +95,10 @@ class UserContact extends Component {
             </div>
             <div className={styles.filterContainer}>
               <div className={styles.searchContainer}>
-                <TableSearch />
+                <TableSearch
+                  onSearch={this.onSearch}
+                  term={this.state.term}
+                />
               </div>
               <div className={styles.buttonContainer}>
                 <Link to="/usuario/nuevo-contacto">
