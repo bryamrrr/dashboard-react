@@ -72,6 +72,7 @@ export default function () {
         <PrivateRoute path="/usuario/cambio-contraseña" exact><UserPassword /></PrivateRoute>
         <PrivateRoute path="/usuario/contactos" exact><UserContact /></PrivateRoute>
         <PrivateRoute path="/usuario/nuevo-contacto" exact><UserContactNew /></PrivateRoute>
+        <PrivateRoute path="/usuario/editar-contacto/:id" exact><UserContactNew /></PrivateRoute>
         <PrivateRoute path="/usuario/direcciones" exact><UserAddress /></PrivateRoute>
         <PrivateRoute path="/usuario/nueva-direccion" exact><UserAddressNew /></PrivateRoute>
         <PrivateRoute path="/usuario/editar-direccion/:id" exact><UserAddressNew /></PrivateRoute>

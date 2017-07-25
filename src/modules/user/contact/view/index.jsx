@@ -14,8 +14,10 @@ import FormButton from '../../../../components/form-button';
 import TableSearch from '../../../../components/table-search';
 import TablePagination from '../../../../components/table-pagination';
 import LoadingSpin from '../../../../components/loading-spin';
+import Modal from '../../../../components/modal';
 
 import { setRoute } from '../../../../reducers/routes/actions';
+import { showToaster } from '../../../../reducers/toaster/actions';
 
 import styles from './styles.css';
 
@@ -29,10 +31,15 @@ class UserContact extends Component {
       metadata: {},
       initialPage: 1,
       term: '',
+      showDelete: false,
+      deleteId: '',
     };
 
     this.onChangePage = this.onChangePage.bind(this);
     this.onSearch = this.onSearch.bind(this);
+    this.showDeleteModal = this.showDeleteModal.bind(this);
+    this.hideModal = this.hideModal.bind(this);
+    this.deleteContact = this.deleteContact.bind(this);
   }
 
   async componentWillMount() {
@@ -79,6 +86,26 @@ class UserContact extends Component {
     });
   }
 
+  showDeleteModal(meta) {
+    this.setState({
+      showDelete: true,
+      deleteId: meta.item.id,
+    });
+  }
+
+  hideModal() {
+    this.setState({ showDelete: false });
+  }
+
+  async deleteContact() {
+    const url = `${constants.urls.API_SONQO}/contacts/${this.state.deleteId}`;
+    await httpRequest('DELETE', url);
+    this.setState({ showDelete: false });
+    this.props.showToaster('success', 'Eliminado correctamente');
+
+    this.onChangePage(1);
+  }
+
   render() {
     return (
       <div>
@@ -110,6 +137,7 @@ class UserContact extends Component {
             </div>
             <ContactTable
               data={this.state.contacts}
+              showDelete={this.showDeleteModal}
             />
             <TablePagination
               count={this.state.metadata.count}
@@ -118,6 +146,19 @@ class UserContact extends Component {
             />
           </div>
         )}
+        {(this.state.showDelete &&
+          <Modal onClose={this.hideModal} >
+            <h2 className={styles.titleModal}>¿Estás seguro de eliminar este contacto?</h2>
+            <FormButton
+              callToAction="No"
+              onClick={this.hideModal}
+            />
+            <FormButton
+              callToAction="Si"
+              onClick={this.deleteContact}
+            />
+          </Modal>
+        )}
       </div>
     );
   }
@@ -125,10 +166,14 @@ class UserContact extends Component {
 
 UserContact.propTypes = {
   strings: PropTypes.objectOf(PropTypes.object).isRequired,
+  showToaster: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
   return { strings: state.get('translate').strings };
 }
 
-export default connect(mapStateToProps, { setRoute })(UserContact);
+export default connect(mapStateToProps, {
+  setRoute,
+  showToaster,
+})(UserContact);

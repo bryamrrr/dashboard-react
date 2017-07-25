@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { connect } from 'react-redux';
+
 import ButtonIcon from '../../../../components/button-icon';
 
 import styles from './styles.css';
@@ -30,10 +32,19 @@ function ContactTable(props) {
               <td>{item.email}</td>
               <td>{item.phone}</td>
               <td className={styles.tdButton}>
-                <ButtonIcon icon="linearicon-pencil" />
+                <ButtonIcon
+                  icon="linearicon-pencil"
+                  tooltip={props.strings.tooltips.edit}
+                  url={`/usuario/editar-contacto/${item.id}`}
+                />
               </td>
               <td className={styles.tdButton}>
-                <ButtonIcon icon="linearicon-trash2" />
+                <ButtonIcon
+                  icon="linearicon-trash2"
+                  tooltip={props.strings.tooltips.delete}
+                  onClick={props.showDelete}
+                  meta={{ item }}
+                />
               </td>
             </tr>,
           )}
@@ -45,6 +56,11 @@ function ContactTable(props) {
 
 ContactTable.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  showDelete: PropTypes.func.isRequired,
 };
 
-export default ContactTable;
+function mapStateToProps(state) {
+  return { strings: state.get('translate').strings };
+}
+
+export default connect(mapStateToProps)(ContactTable);
