@@ -91,7 +91,8 @@
   "userAddresses": {
     "title": "My addresses",
     "newAddress": "New address",
-    "createAddress": "Create address"
+    "createAddress": "Create address",
+    "editAddress": "Edit address"
   },
   "userPurchases": {
     "title": "My purchases",

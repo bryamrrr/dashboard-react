@@ -22,12 +22,10 @@ class NewAddressForm extends Component {
   constructor(props, context) {
     super(props, context);
 
-    const { countries, addressTypes, departments } = this.props;
-
     this.state = {
-      countries,
-      addressTypes,
-      departments,
+      countries: _.mapKeys(this.props.countries, 'id'),
+      addressTypes: _.mapKeys(this.props.addressTypes, 'id'),
+      departments: _.mapKeys(this.props.departments, 'id'),
       cities: [],
       districts: [],
       country: {},
@@ -52,6 +50,53 @@ class NewAddressForm extends Component {
     this.changeCheckbox = this.changeCheckbox.bind(this);
   }
 
+  async componentWillMount() {
+    if (!_.isEmpty(this.props.data)) {
+      this.props.initialize({
+        stateCity: this.props.data.stateCity,
+        address: this.props.data.address,
+        reference: this.props.data.reference,
+        postalCode: this.props.data.postalCode,
+      });
+
+      let department = {};
+      let city = {};
+      let district = {};
+
+      let cities = [];
+      let districts = [];
+
+      if (this.props.data.ubigeo) {
+        const departmentCode = `${this.props.data.ubigeo.locationCode.substr(0, 2)}0000`;
+        department = _.find(this.state.departments, { locationCode: departmentCode });
+
+        const urlProvinces = `${constants.urls.API_SONQO}/ubigeos?parentCode=${departmentCode}&limit=all`;
+        cities = await httpRequest('GET', urlProvinces);
+        const provinceCode = `${this.props.data.ubigeo.locationCode.substr(0, 4)}00`;
+        city = _.find(cities.data.results, { locationCode: provinceCode });
+
+        const urlDistricts = `${constants.urls.API_SONQO}/ubigeos?parentCode=${provinceCode}&limit=all`;
+        districts = await httpRequest('GET', urlDistricts);
+        const districtCode = this.props.data.ubigeo.locationCode;
+        console.log(districts.data.results, districtCode);
+        district = _.find(districts.data.results, { locationCode: districtCode });
+        console.log(district);
+      }
+
+      this.setState({
+        checked: this.props.data.main,
+        country: this.state.countries[this.props.data.countryId],
+        addressType: this.state.addressTypes[this.props.data.addressTypeId],
+        peru: this.state.countries[this.props.data.countryId].code === 'PE',
+        department,
+        cities: cities.data.results,
+        city,
+        districts: districts.data.results,
+        district,
+      });
+    }
+  }
+
   async onSubmit(values) {
     this.setState({ sending: true });
 
@@ -65,13 +110,22 @@ class NewAddressForm extends Component {
 
     if (values.get('stateCity')) data.stateCity = values.get('stateCity');
     if (values.get('reference')) data.reference = values.get('reference');
-    if (values.get('ubigeoId')) data.ubigeoId = values.get('ubigeoId');
 
-    const url = `${constants.urls.API_SONQO}/addresses`;
-    await httpRequest('POST', url, data);
+    if (!_.isEmpty(this.state.district)) data.ubigeoId = this.state.district.id;
 
-    this.setState({ sending: false });
-    this.props.showToaster('success', 'Se agregó una nueva dirección');
+    if (!_.isEmpty(this.props.data)) {
+      const url = `${constants.urls.API_SONQO}/addresses/${this.context.router.route.match.params.id}`;
+      await httpRequest('PUT', url, data);
+
+      this.setState({ sending: false });
+      this.props.showToaster('success', 'Actualizado correctamente');
+    } else {
+      const url = `${constants.urls.API_SONQO}/addresses`;
+      await httpRequest('POST', url, data);
+
+      this.setState({ sending: false });
+      this.props.showToaster('success', 'Se agregó una nueva dirección');
+    }
 
     const urlRedirect = '/usuario/direcciones';
     this.context.router.history.push(urlRedirect);
@@ -151,6 +205,10 @@ class NewAddressForm extends Component {
   }
 
   render() {
+    const title = (_.isEmpty(this.props.data))
+      ? this.props.strings.userAddresses.newAddress
+      : this.props.strings.userAddresses.editAddress;
+
     const style = (this.state.peru)
       ? { display: 'block' }
       : { display: 'none' };
@@ -165,7 +223,7 @@ class NewAddressForm extends Component {
           <Combo
             includeIcon="linearicon-earth"
             placeholder={this.props.strings.forms.country}
-            options={_.mapKeys(this.state.countries, 'id')}
+            options={this.state.countries}
             changeSelected={this.changeCountry}
             selected={this.state.country}
           />
@@ -174,7 +232,7 @@ class NewAddressForm extends Component {
           <Combo
             includeIcon="linearicon-flag2"
             placeholder={this.props.strings.forms.department}
-            options={_.mapKeys(this.state.departments, 'id')}
+            options={this.state.departments}
             changeSelected={this.changeDepartment}
             selected={this.state.department}
           />
@@ -225,7 +283,7 @@ class NewAddressForm extends Component {
           <Combo
             includeIcon="linearicon-register"
             placeholder={this.props.strings.forms.type}
-            options={_.mapKeys(this.state.addressTypes, 'id')}
+            options={this.state.addressTypes}
             changeSelected={this.changeAddressTypes}
             selected={this.state.addressType}
           />
@@ -239,7 +297,7 @@ class NewAddressForm extends Component {
           </CheckBox>
         </article>
         <FormButton
-          callToAction={this.props.strings.userAddresses.createAddress}
+          callToAction={title}
           loading={this.state.sending}
           type="submit"
         />
@@ -263,6 +321,13 @@ NewAddressForm.propTypes = {
   addressTypes: PropTypes.arrayOf(PropTypes.object).isRequired,
   departments: PropTypes.arrayOf(PropTypes.object).isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  initialize: PropTypes.func.isRequired,
+  data: PropTypes.objectOf(PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.bool,
+    PropTypes.object,
+  ])).isRequired,
 };
 
 NewAddressForm.contextTypes = {

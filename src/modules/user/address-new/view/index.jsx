@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
@@ -15,14 +17,15 @@ import { setRoute } from '../../../../reducers/routes/actions';
 import styles from './styles.css';
 
 class UserAddressNew extends Component {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
 
     this.state = {
       fetchingData: true,
       countries: [],
       addressTypes: [],
       departments: [],
+      data: {},
     };
   }
 
@@ -40,17 +43,31 @@ class UserAddressNew extends Component {
 
     const allPromise = Promise.all([promiseCountries, promiseDocumentTypes, promiseDepartments]);
 
-    allPromise.then(response =>
-      this.setState({
+    allPromise.then(async (response) => {
+      let data = {};
+      const id = this.context.router.route.match.params.id;
+      if (id) {
+        const url = `${constants.urls.API_SONQO}/addresses/${id}?includes=ubigeo`;
+        const dataAddress = await httpRequest('GET', url);
+
+        data = dataAddress.data;
+      }
+
+      return this.setState({
         fetchingData: false,
         countries: response[0].data.results,
         addressTypes: response[1].data.results,
         departments: response[2].data.results,
-      }),
-    );
+        data,
+      });
+    });
   }
 
   render() {
+    const title = (_.isEmpty(this.state.data))
+      ? this.props.strings.userAddresses.newAddress
+      : this.props.strings.userAddresses.editAddress;
+
     return (
       <div>
         {(this.state.fetchingData && <LoadingSpin />)}
@@ -60,12 +77,13 @@ class UserAddressNew extends Component {
               <Hexagon color="orange">
                 <i className="linearicon-map-marker" />
               </Hexagon>
-              <h2>{this.props.strings.userAddresses.newAddress}</h2>
+              <h2>{title}</h2>
             </div>
             <NewAddressForm
               countries={this.state.countries}
               addressTypes={this.state.addressTypes}
               departments={this.state.departments}
+              data={this.state.data}
             />
           </div>
         )}
@@ -78,6 +96,11 @@ UserAddressNew.propTypes = {
   setRoute: PropTypes.func.isRequired,
   strings: PropTypes.objectOf(PropTypes.object).isRequired,
 };
+
+UserAddressNew.contextTypes = {
+  router: PropTypes.objectOf(PropTypes.object).isRequired,
+};
+
 
 function mapStateToProps(state) {
   return { strings: state.get('translate').strings };

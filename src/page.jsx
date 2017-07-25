@@ -74,6 +74,7 @@ export default function () {
         <PrivateRoute path="/usuario/nuevo-contacto" exact><UserContactNew /></PrivateRoute>
         <PrivateRoute path="/usuario/direcciones" exact><UserAddress /></PrivateRoute>
         <PrivateRoute path="/usuario/nueva-direccion" exact><UserAddressNew /></PrivateRoute>
+        <PrivateRoute path="/usuario/editar-direccion/:id" exact><UserAddressNew /></PrivateRoute>
         <PrivateRoute path="/usuario/compras" exact><UserPurchases /></PrivateRoute>
         <PrivateRoute path="/usuario/comprobantes" exact><UserBills /></PrivateRoute>
       </Switch>

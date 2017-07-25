@@ -8,7 +8,11 @@ function ButtonIcon(props) {
   return (
     <div
       className={styles.container}
-      onClick={() => props.onClick(props.meta)}
+      onClick={() => {
+        if (props.onClick !== null) {
+          props.onClick(props.meta);
+        }
+      }}
       aria-hidden
     >
       <div className={styles.button}>

@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { connect } from 'react-redux';
+
 import ButtonIcon from '../../../../components/button-icon';
 
 import styles from './styles.css';
@@ -24,11 +26,16 @@ function AddressTable(props) {
               <td>{item.country.code}</td>
               <td>{item.addressType.name}</td>
               <td className={styles.tdButton}>
-                <ButtonIcon icon="linearicon-pencil" />
+                <ButtonIcon
+                  icon="linearicon-pencil"
+                  tooltip={props.strings.tooltips.edit}
+                  url={`/usuario/editar-direccion/${item.id}`}
+                />
               </td>
               <td className={styles.tdButton}>
                 <ButtonIcon
                   icon="linearicon-trash2"
+                  tooltip={props.strings.tooltips.delete}
                   onClick={props.showDelete}
                   meta={{ item }}
                 />
@@ -46,4 +53,8 @@ AddressTable.propTypes = {
   showDelete: PropTypes.func.isRequired,
 };
 
-export default AddressTable;
+function mapStateToProps(state) {
+  return { strings: state.get('translate').strings };
+}
+
+export default connect(mapStateToProps)(AddressTable);
