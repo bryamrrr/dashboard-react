@@ -37,6 +37,7 @@ class NewAddressForm extends Component {
       addressType: {},
       peru: false,
       checked: false,
+      sending: false,
     };
 
     this.changeCountry = this.changeCountry.bind(this);
@@ -52,6 +53,8 @@ class NewAddressForm extends Component {
   }
 
   async onSubmit(values) {
+    this.setState({ sending: true });
+
     const data = {
       countryId: this.state.country.id,
       address: values.get('address'),
@@ -66,6 +69,8 @@ class NewAddressForm extends Component {
 
     const url = `${constants.urls.API_SONQO}/addresses`;
     await httpRequest('POST', url, data);
+
+    this.setState({ sending: false });
     this.props.showToaster('success', 'Se agregó una nueva dirección');
 
     const urlRedirect = '/usuario/direcciones';
@@ -235,6 +240,7 @@ class NewAddressForm extends Component {
         </article>
         <FormButton
           callToAction={this.props.strings.userAddresses.createAddress}
+          loading={this.state.sending}
           type="submit"
         />
       </form>

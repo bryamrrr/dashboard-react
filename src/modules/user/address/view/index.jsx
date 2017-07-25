@@ -28,6 +28,7 @@ class UserAddress extends Component {
       addresses: [],
       metadata: {},
       initialPage: 1,
+      term: '',
     };
 
     this.onChangePage = this.onChangePage.bind(this);
@@ -52,7 +53,7 @@ class UserAddress extends Component {
 
     const offset = (page - 1) * 10;
 
-    const url = `${constants.urls.API_SONQO}/addresses?includes=country,addressType&offset=${offset}&name__like=${this.state.term}`;
+    const url = `${constants.urls.API_SONQO}/addresses?includes=country,addressType&offset=${offset}&address__like=${this.state.term}`;
     const { data: { results, metadata } } = await httpRequest('GET', url);
 
     this.setState({
@@ -98,6 +99,7 @@ class UserAddress extends Component {
               <div className={styles.searchContainer}>
                 <TableSearch
                   onSearch={this.onSearch}
+                  term={this.state.term}
                 />
               </div>
               <div className={styles.buttonContainer}>
