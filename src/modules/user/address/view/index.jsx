@@ -14,8 +14,10 @@ import FormButton from '../../../../components/form-button';
 import TableSearch from '../../../../components/table-search';
 import TablePagination from '../../../../components/table-pagination';
 import LoadingSpin from '../../../../components/loading-spin';
+import Modal from '../../../../components/modal';
 
 import { setRoute } from '../../../../reducers/routes/actions';
+import { showToaster } from '../../../../reducers/toaster/actions';
 
 import styles from './styles.css';
 
@@ -29,10 +31,15 @@ class UserAddress extends Component {
       metadata: {},
       initialPage: 1,
       term: '',
+      showDelete: false,
+      deleteId: '',
     };
 
     this.onChangePage = this.onChangePage.bind(this);
     this.onSearch = this.onSearch.bind(this);
+    this.showDeleteModal = this.showDeleteModal.bind(this);
+    this.hideModal = this.hideModal.bind(this);
+    this.deleteAddress = this.deleteAddress.bind(this);
   }
 
   async componentWillMount() {
@@ -79,6 +86,26 @@ class UserAddress extends Component {
     });
   }
 
+  showDeleteModal(meta) {
+    this.setState({
+      showDelete: true,
+      deleteId: meta.item.id,
+    });
+  }
+
+  hideModal() {
+    this.setState({ showDelete: false });
+  }
+
+  async deleteAddress() {
+    const url = `${constants.urls.API_SONQO}/addresses/${this.state.deleteId}`;
+    await httpRequest('DELETE', url);
+    this.setState({ showDelete: false });
+    this.props.showToaster('success', 'Eliminado correctamente');
+
+    this.onChangePage(1);
+  }
+
   render() {
     return (
       <div>
@@ -110,13 +137,29 @@ class UserAddress extends Component {
                 </Link>
               </div>
             </div>
-            <AddressTable data={this.state.addresses} />
+            <AddressTable
+              data={this.state.addresses}
+              showDelete={this.showDeleteModal}
+            />
             <TablePagination
               count={this.state.metadata.count}
               onChangePage={this.onChangePage}
               initialPage={this.state.initialPage}
             />
           </div>
+        )}
+        {(this.state.showDelete &&
+          <Modal onClose={this.hideModal} >
+            <h2 className={styles.titleModal}>¿Estás seguro de eliminar esta dirección?</h2>
+            <FormButton
+              callToAction="No"
+              onClick={this.hideModal}
+            />
+            <FormButton
+              callToAction="Si"
+              onClick={this.deleteAddress}
+            />
+          </Modal>
         )}
       </div>
     );
@@ -125,10 +168,14 @@ class UserAddress extends Component {
 
 UserAddress.propTypes = {
   strings: PropTypes.objectOf(PropTypes.object).isRequired,
+  showToaster: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
   return { strings: state.get('translate').strings };
 }
 
-export default connect(mapStateToProps, { setRoute })(UserAddress);
+export default connect(mapStateToProps, {
+  setRoute,
+  showToaster,
+})(UserAddress);

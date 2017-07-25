@@ -27,7 +27,11 @@ function AddressTable(props) {
                 <ButtonIcon icon="linearicon-pencil" />
               </td>
               <td className={styles.tdButton}>
-                <ButtonIcon icon="linearicon-trash2" />
+                <ButtonIcon
+                  icon="linearicon-trash2"
+                  onClick={props.showDelete}
+                  meta={{ item }}
+                />
               </td>
             </tr>,
           )}
@@ -39,6 +43,7 @@ function AddressTable(props) {
 
 AddressTable.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  showDelete: PropTypes.func.isRequired,
 };
 
 export default AddressTable;

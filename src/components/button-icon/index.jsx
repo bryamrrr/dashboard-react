@@ -8,7 +8,7 @@ function ButtonIcon(props) {
   return (
     <div
       className={styles.container}
-      onClick={() => props.onClick()}
+      onClick={() => props.onClick(props.meta)}
       aria-hidden
     >
       <div className={styles.button}>
@@ -35,12 +35,18 @@ ButtonIcon.propTypes = {
   tooltip: PropTypes.string,
   url: PropTypes.string,
   onClick: PropTypes.func,
+  meta: PropTypes.objectOf(PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.object,
+  ])),
 };
 
 ButtonIcon.defaultProps = {
   tooltip: '',
   url: '',
   onClick: null,
+  meta: {},
 };
 
 export default ButtonIcon;
