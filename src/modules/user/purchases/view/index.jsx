@@ -12,7 +12,7 @@ import Hexagon from '../../../../components/hexagon';
 import TableSearch from '../../../../components/table-search';
 import TablePagination from '../../../../components/table-pagination';
 import Combo from '../../../../components/combo';
-import LoadingSpin from '../../../../components/loading-spin';
+import LoadingIcon from '../../../../components/loading-icon';
 
 import { setRoute } from '../../../../reducers/routes/actions';
 
@@ -54,11 +54,7 @@ class UserPurchases extends Component {
 
     return (
       <div>
-        {(this.state.fetchingPurchases &&
-          <div>
-            <LoadingSpin />
-          </div>
-        )}
+        {(this.state.fetchingPurchases && <LoadingIcon />)}
         {(!this.state.fetchingPurchases &&
           <div>
             <div className={styles.title}>

@@ -63,11 +63,7 @@ class UserBill extends Component {
   render() {
     return (
       <div>
-        {(this.state.fetchingBills &&
-          <div>
-            <LoadingIcon />
-          </div>
-        )}
+        {(this.state.fetchingBills && <LoadingIcon />)}
         {(!this.state.fetchingBills &&
           <div>
             <div className={styles.title}>

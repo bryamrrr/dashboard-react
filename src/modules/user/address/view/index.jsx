@@ -13,7 +13,7 @@ import Hexagon from '../../../../components/hexagon';
 import FormButton from '../../../../components/form-button';
 import TableSearch from '../../../../components/table-search';
 import TablePagination from '../../../../components/table-pagination';
-import LoadingSpin from '../../../../components/loading-spin';
+import LoadingIcon from '../../../../components/loading-icon';
 import Modal from '../../../../components/modal';
 
 import { setRoute } from '../../../../reducers/routes/actions';
@@ -111,7 +111,7 @@ class UserAddress extends Component {
       <div>
         {(this.state.fetchingAddresses &&
           <div>
-            <LoadingSpin />
+            <LoadingIcon />
           </div>
         )}
         {(!this.state.fetchingAddresses &&

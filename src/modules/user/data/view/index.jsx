@@ -10,7 +10,7 @@ import constants from '../../../../extra/constants';
 
 import UserDataForm from '../user-data-form';
 import CoverPhoto from '../../coverphoto';
-import LoadingSpin from '../../../../components/loading-spin';
+import LoadingIcon from '../../../../components/loading-icon';
 
 import { setRoute } from '../../../../reducers/routes/actions';
 import { fetchProfile } from '../../../../reducers/user/actions';
@@ -68,7 +68,7 @@ class UserData extends Component {
   render() {
     return (
       <div>
-        {(this.state.fetchingData && <LoadingSpin />)}
+        {(this.state.fetchingData && <LoadingIcon />)}
 
         {(!this.state.fetchingData &&
           <div>
