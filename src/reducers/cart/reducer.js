@@ -25,6 +25,7 @@ const CartRecord = Record({
   count: 0,
   currencySymbol: 'S/',
   total: 0,
+  id: '',
 });
 
 export const initialState = new CartRecord();
@@ -51,7 +52,7 @@ function reducer(state = initialState, action) {
       });
 
       // Send product to API
-      const url = `${constants.urls.API_CART}/carts/${constants.urls.API_CART_ID}/items`;
+      const url = `${constants.urls.API_CART}/carts/${state.id}/items`;
       httpRequest('POST', url, productData);
 
       const newState = state
@@ -93,8 +94,8 @@ function reducer(state = initialState, action) {
         products: Object.assign({}, products, product),
       };
 
-      // Send product to API
-      const url = `${constants.urls.API_CART}/carts/${constants.urls.API_CART_ID}/items`;
+      // Send package (product) to API
+      const url = `${constants.urls.API_CART}/carts/${state.id}/items`;
       httpRequest('POST', url, data);
 
       const items = state.get('items')
@@ -129,6 +130,7 @@ function reducer(state = initialState, action) {
         count: 0,
         currencySymbol: action.payload.currencySymbol || 'S/',
         total: 0,
+        id: action.payload.id,
       });
 
       return cart.set('total', calcTotal(cart.items));

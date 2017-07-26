@@ -1,6 +1,8 @@
 import constants from '../../extra/constants';
 import httpRequest from '../../extra/http-request';
 
+import store from '../store';
+
 export const TOGGLE_CART = 'TOGGLE_CART';
 export const CLOSE_CART = 'CLOSE_CART';
 export const ADD_PRODUCT = 'ADD_PRODUCT';
@@ -82,17 +84,18 @@ export function fetchPackages(itemId, productId) {
   };
 }
 
-export function fetchCart() {
+export function fetchCart(email) {
   return async (dispatch) => {
-    const url = `${constants.urls.API_CART}/carts/${constants.urls.API_CART_ID}`;
-    const { data } = await httpRequest('GET', url);
-    dispatch(setCart(data));
+    const url = `${constants.urls.API_CART}/carts?ownerEmail=${email}`;
+    const { data, meta } = await httpRequest('GET', url);
+    if (meta.ok) dispatch(setCart(data.results[0]));
   };
 }
 
 export function deleteItemFromBackend(itemId) {
   return async (dispatch) => {
-    const url = `${constants.urls.API_CART}/carts/${constants.urls.API_CART_ID}/items/${itemId}`;
+    const cartId = store.getState().get('cart').id;
+    const url = `${constants.urls.API_CART}/carts/${cartId}/items/${itemId}`;
     httpRequest('DELETE', url);
     dispatch(itemDeleted());
   };
