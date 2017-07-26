@@ -61,12 +61,12 @@ export function logoutUser() {
     try {
       dispatch(receiveLogout());
 
+      localStorage.removeItem('user');
+      localStorage.removeItem('token');
+
       const url = `${constants.urls.API_SECURITY}/logout`;
       const data = { email: JSON.parse(localStorage.getItem('user')).email };
       await httpRequest('POST', url, data);
-
-      localStorage.removeItem('user');
-      localStorage.removeItem('token');
     } catch (error) {
       console.error(error);
     }
