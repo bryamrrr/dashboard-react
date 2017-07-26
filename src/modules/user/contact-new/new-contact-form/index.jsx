@@ -27,7 +27,7 @@ class NewContactForm extends Component {
       countries: _.mapKeys(this.props.countries, 'id'),
       documentTypes: _.mapKeys(this.props.documentTypes, 'id'),
       contactTypes: _.mapKeys(this.props.contactTypes, 'id'),
-      notificationTypes: _.mapKeys(this.props.notificationTypes, 'id'),
+      notificationTypesId: _.mapKeys(this.props.notificationTypesId, 'id'),
       departments: _.mapKeys(this.props.departments, 'id'),
       cities: [],
       districts: [],
@@ -99,7 +99,7 @@ class NewContactForm extends Component {
         peru: this.state.countries[this.props.data.countryId].code === 'PE',
         country: this.state.countries[this.props.data.countryId],
         contactType: this.state.contactTypes[this.props.data.contactTypeId],
-        notificationType: this.state.notificationTypes[this.props.data.notificationTypeId[0]],
+        notificationType: this.state.notificationTypesId[this.props.data.notificationTypesId[0]],
         department,
         cities,
         city,
@@ -130,11 +130,19 @@ class NewContactForm extends Component {
     if (values.get('postcalCode')) data.reference = values.get('postcalCode');
     if (!_.isEmpty(this.state.district)) data.ubigeoId = this.state.district.id;
 
-    const url = `${constants.urls.API_SONQO}/contacts`;
-    await httpRequest('POST', url, data);
+    if (!_.isEmpty(this.props.data)) {
+      const url = `${constants.urls.API_SONQO}/contacts/${this.context.router.route.match.params.id}`;
+      await httpRequest('PUT', url, data);
 
-    this.setState({ sending: false });
-    this.props.showToaster('success', 'Se agregó un nuevo contacto');
+      this.setState({ sending: false });
+      this.props.showToaster('success', 'Contacto actualizado correctamente');
+    } else {
+      const url = `${constants.urls.API_SONQO}/contacts`;
+      await httpRequest('POST', url, data);
+
+      this.setState({ sending: false });
+      this.props.showToaster('success', 'Se agregó un nuevo contacto');
+    }
 
     const urlRedirect = '/usuario/contactos';
     this.context.router.history.push(urlRedirect);
@@ -227,6 +235,10 @@ class NewContactForm extends Component {
   }
 
   render() {
+    const title = (_.isEmpty(this.props.data))
+      ? this.props.strings.userContacts.newContact
+      : this.props.strings.userContacts.editContact;
+
     const style = (this.state.peru)
       ? { display: 'block' }
       : { display: 'none' };
@@ -355,7 +367,7 @@ class NewContactForm extends Component {
           />
         </article>
         <FormButton
-          callToAction={this.props.strings.userContacts.createContact}
+          callToAction={title}
           loading={this.state.sending}
           type="submit"
         />
@@ -386,10 +398,17 @@ NewContactForm.propTypes = {
   countries: PropTypes.arrayOf(PropTypes.object).isRequired,
   documentTypes: PropTypes.arrayOf(PropTypes.object).isRequired,
   contactTypes: PropTypes.arrayOf(PropTypes.object).isRequired,
-  notificationTypes: PropTypes.arrayOf(PropTypes.object).isRequired,
+  notificationTypesId: PropTypes.arrayOf(PropTypes.object).isRequired,
   departments: PropTypes.arrayOf(PropTypes.object).isRequired,
   strings: PropTypes.objectOf(PropTypes.object).isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  data: PropTypes.objectOf(PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.bool,
+    PropTypes.object,
+    PropTypes.array,
+  ])).isRequired,
 };
 
 NewContactForm.contextTypes = {

@@ -86,6 +86,7 @@
   "userContacts": {
     "title": "Mis contactos",
     "newContact": "Nuevo contacto",
+    "editContact": "Editar contacto",
     "createContact": "Crear contacto"
   },
   "userAddresses": {

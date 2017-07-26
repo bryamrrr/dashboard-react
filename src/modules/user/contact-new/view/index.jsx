@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
@@ -8,7 +10,7 @@ import constants from '../../../../extra/constants';
 
 import NewContactForm from '../new-contact-form';
 import Hexagon from '../../../../components/hexagon';
-import LoadingSpin from '../../../../components/loading-spin';
+import LoadingIcon from '../../../../components/loading-icon';
 
 import { setRoute } from '../../../../reducers/routes/actions';
 
@@ -70,7 +72,7 @@ class UserContactNew extends Component {
         countries: response[0].data.results,
         documentTypes: response[1].data.results,
         contactTypes: response[2].data.results,
-        notificationTypes: response[3].data.results,
+        notificationTypesId: response[3].data.results,
         departments: response[4].data.results,
         data,
       });
@@ -78,22 +80,26 @@ class UserContactNew extends Component {
   }
 
   render() {
+    const title = (_.isEmpty(this.state.data))
+      ? this.props.strings.userContacts.newContact
+      : this.props.strings.userContacts.editContact;
+
     return (
       <div>
-        {(this.state.fetchingData && <LoadingSpin />)}
+        {(this.state.fetchingData && <LoadingIcon />)}
         {(!this.state.fetchingData &&
           <div>
             <div className={styles.title}>
               <Hexagon color="orange">
                 <i className="linearicon-user" />
               </Hexagon>
-              <h2>{this.props.strings.userContacts.newContact}</h2>
+              <h2>{title}</h2>
             </div>
             <NewContactForm
               countries={this.state.countries}
               documentTypes={this.state.documentTypes}
               contactTypes={this.state.contactTypes}
-              notificationTypes={this.state.notificationTypes}
+              notificationTypesId={this.state.notificationTypesId}
               departments={this.state.departments}
               data={this.state.data}
             />
