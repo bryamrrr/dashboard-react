@@ -62,7 +62,7 @@ class NewContactForm extends Component {
         lastname: this.props.data.lastname,
         email: this.props.data.email,
         phone: this.props.data.phone,
-        document: this.props.data.documentId,
+        documentId: this.props.data.documentId,
         stateCity: this.props.data.stateCity,
         address: this.props.data.address,
         reference: this.props.data.reference,
@@ -127,7 +127,7 @@ class NewContactForm extends Component {
 
     if (values.get('stateCity')) data.stateCity = values.get('stateCity');
     if (values.get('reference')) data.reference = values.get('reference');
-    if (values.get('postcalCode')) data.reference = values.get('postcalCode');
+    if (values.get('postalCode')) data.postalCode = values.get('postalCode');
     if (!_.isEmpty(this.state.district)) data.ubigeoId = this.state.district.id;
 
     if (!_.isEmpty(this.props.data)) {
@@ -367,7 +367,7 @@ class NewContactForm extends Component {
           <Combo
             includeIcon="linearicon-comments"
             placeholder={this.props.strings.forms.notificationType}
-            options={_.mapKeys(this.state.notificationTypes, 'id')}
+            options={_.mapKeys(this.state.notificationTypesId, 'id')}
             changeSelected={this.changeNotificationType}
             selected={this.state.notificationType}
           />

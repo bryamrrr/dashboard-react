@@ -25,7 +25,7 @@ class UserContactNew extends Component {
       countries: [],
       documentTypes: [],
       contactTypes: [],
-      notificationTypes: [],
+      notificationTypesId: [],
       departments: [],
       data: {},
     };
