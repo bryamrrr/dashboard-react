@@ -4,7 +4,6 @@ import {
 } from 'immutable';
 
 import {
-  LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGOUT_SUCCESS,
   // LOGIN_FAILURE,
@@ -24,24 +23,18 @@ const UserRecord = Record({
   id: '',
 });
 
-const isNode = typeof localStorage === 'undefined';
 let token = '';
 let user = map();
 
-if (!isNode) {
-  token = localStorage.getItem('token') || '';
-
+if (localStorage.getItem('token')) {
+  token = localStorage.getItem('token');
   if (localStorage.getItem('user')) user = new UserRecord(JSON.parse(localStorage.getItem('user')));
-} else {
-  token = 'servertoken';
 }
 
 export const initialState = new AuthRecord({ token, user });
 
 function reducer(state = initialState, action) {
   switch (action.type) {
-    case LOGIN_REQUEST:
-      return state.setIn(['user', 'username'], action.payload.username);
     case LOGIN_SUCCESS:
       return state
         .set('user', new UserRecord(action.payload.user))

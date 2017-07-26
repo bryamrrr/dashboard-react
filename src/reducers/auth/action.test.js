@@ -1,3 +1,5 @@
+import { Map as map } from 'immutable';
+
 import configureStore from 'redux-mock-store';
 import nock from 'nock';
 import thunk from 'redux-thunk';
@@ -6,11 +8,9 @@ import { initialState } from './reducer';
 import constants from '../../extra/constants';
 
 import {
-  LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   LOGOUT_SUCCESS,
-  requestLogin,
   receiveLogin,
   loginError,
   receiveLogout,
@@ -28,17 +28,11 @@ describe('Cart - Actions', () => {
     })
 
     test('creates requestLogin and receiveLogin actions when login a user succesfully', () => {
-      const creds = {
-        username: 'admin',
+      const creds = map({
+        email: 'admin@rcp.pe',
         password: '123',
-      };
-      const data = {
-        access_token: 'abcdefg',
-        user: {
-          username: 'admin',
-          firstName: 'Bryam',
-        }
-      };
+      });
+      const data = { token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJkYXNoYm9hcmQiLCJzY29wZXMiOnt9LCJ1c2VyIjp7InVzZXJuYW1lIjoiYnJ5YW1yciIsInN0YXR1cyI6ImludmFsaWRhdGVkIiwiZmlyc3ROYW1lIjpudWxsLCJsYXN0TmFtZSI6bnVsbCwiZW1haWwiOiJicm9kcmlndWV6YXliYXJAZ21haWwuY29tIiwiaWQiOiI2NGFhNjQ5Ni1mNmE5LTRjYzktODY3Ny03YjJkYTEzMjcyZWQifSwiZXhwIjoxNTAxMTc3MjI1LCJpYXQiOjE1MDEwOTA4MjV9.Q_w8jlX0QsoNuNDLqK6L0KHt39_3UJKdPK5_3wJEna8' };
 
       nock(constants.urls.API_SECURITY)
         .post('/access_token')
@@ -46,16 +40,27 @@ describe('Cart - Actions', () => {
 
       const store = mockStore(initialState);
 
+
       return store.dispatch(loginUser(creds)).then(() => {
-        expect(store.getActions()).toEqual([requestLogin(creds), receiveLogin(data)]);
+        expect(store.getActions()).toEqual([receiveLogin({
+          user: {
+            username: 'bryamrr',
+            status: 'invalidated',
+            firstName: null,
+            lastName: null,
+            email: 'brodriguezaybar@gmail.com',
+            id: '64aa6496-f6a9-4cc9-8677-7b2da13272ed',
+          },
+          token: data.token,
+        })]);
       })
     });
 
     test('creates requestLogin and loginError actions when login a user wrong', () => {
-      const creds = {
-        username: 'admin',
+      const creds = map({
+        email: 'admin',
         password: '123',
-      };
+      });
       const error = { message: 'Hubo un error' };
 
       nock(constants.urls.API_SECURITY)
@@ -65,8 +70,7 @@ describe('Cart - Actions', () => {
       const store = mockStore(initialState);
 
       return store.dispatch(loginUser(creds)).then(() => {
-        expect(store.getActions()[0].type).toEqual(LOGIN_REQUEST);
-        expect(store.getActions()[1].type).toEqual(LOGIN_FAILURE);
+        expect(store.getActions()[0].type).toEqual(LOGIN_FAILURE);
       })
     });
   });

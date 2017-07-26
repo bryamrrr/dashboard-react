@@ -3,18 +3,10 @@ import jwtDecode from 'jwt-decode';
 import httpRequest from '../../extra/http-request';
 import constants from '../../extra/constants';
 
-export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
-
-export function requestLogin(creds) {
-  return {
-    type: LOGIN_REQUEST,
-    payload: creds,
-  };
-}
 
 export function receiveLogin(data) {
   return {
@@ -36,8 +28,6 @@ export function receiveLogout() {
 
 export function loginUser(creds) {
   return async (dispatch) => {
-    dispatch(requestLogin(creds));
-
     const toSend = { // FIXME
       email: creds.get('email'),
       password: creds.get('password'),
