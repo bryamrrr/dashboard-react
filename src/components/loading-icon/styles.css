@@ -1,8 +1,36 @@
 .container {
   width: 100%;
   display: flex;
+  margin: auto;
+  height: 80%;
 }
 
-.container svg {
-  padding-right: 1px;
+.container svg { padding-right: 5px; }
+
+.letter svg {
+  animation-name: bounce_letter;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-direction: normal;
+  transform: scale(.9);
+  opacity: .5;
+  transition: opacity .2s;
+}
+
+.letter_1 svg { animation-delay: .22s; }
+.letter_2 svg { animation-delay: .34s; }
+.letter_3 svg { animation-delay: .46s; }
+.letter_4 svg { animation-delay: .58s; }
+.letter_5 svg { animation-delay: .7s; }
+.letter_6 svg { animation-delay: .82s; }
+
+@keyframes bounce_letter {
+  0%{
+    transform: scale(1.05);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(.9);
+    opacity: .5;
+  }
 }
