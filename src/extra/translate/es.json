@@ -124,7 +124,8 @@
     "contract": "Contrato",
     "check": "He revisado el",
     "contractName": "Contrato de prestación de servicios",
-    "finish": "Finalizar compra"
+    "finish": "Finalizar compra",
+    "dataPrivacy": "Políticas de protección de datos personales"
   },
   "tables": {
     "codService": "Cod. servicio",

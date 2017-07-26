@@ -1,5 +1,7 @@
 .container { display: flex; }
 
+.detail { flex: 1; }
+
 .paymentCard {
   align-items: center;
   background-color: #f9f9f9;
@@ -80,9 +82,7 @@
   width: 365px;
 }
 
-.checkboxContainer {
-  margin: 30px 0;
-}
+.checkboxContainer { margin: 30px 0; }
 
 .agreement h2 { padding: 15px 0; }
 
@@ -124,9 +124,7 @@
     margin-bottom: 30px;
   }
 
-  .detail {
-    order: 2;
-  }
+  .detail { order: 2; }
 }
 
 @media screen and (max-width: 768px) {

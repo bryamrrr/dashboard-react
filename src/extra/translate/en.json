@@ -124,7 +124,8 @@
     "contract": "Contract",
     "check": "I have check the",
     "contractName": "Contract of services",
-    "finish": "Finish"
+    "finish": "Finish",
+    "dataPrivacy": "Data Privacy"
   },
   "tables": {
     "codService": "Service code",

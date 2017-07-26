@@ -5,6 +5,9 @@ import { connect } from 'react-redux';
 
 import { setRoute } from '../../../../reducers/routes/actions';
 
+import constants from '../../../../extra/constants';
+import httpRequest from '../../../../extra/http-request';
+
 import PaymentContactForm from '../payment-contact-form';
 import PaymentCartDetail from '../payment-cart-detail';
 
@@ -17,7 +20,19 @@ class PaymentDetails extends Component {
   constructor(props, context) {
     super(props, context);
 
+    this.state = {
+      puadeUrl: '',
+    };
+
     this.sendPayment = this.sendPayment.bind(this);
+  }
+
+  async componentWillMount() {
+    const url = `${constants.urls.API_QUILCA}/documents/7a00049b-2187-4072-af91-b3a2d9f75563/contents/current`;
+    const { data } = await httpRequest('GET', url);
+    const puadeUrl = `${constants.urls.API_QUILCA}/documents/versions/${data.id}/${data.filename}`;
+    console.log(puadeUrl);
+    this.setState({ puadeUrl });
   }
 
   componentDidMount() {
@@ -82,6 +97,18 @@ class PaymentDetails extends Component {
                   className={styles.link}
                 >
                   {this.props.strings.sales.contractName}
+                </a>, <a
+                  target="_blank"
+                  rel="noopener noreferrer" href={this.state.puadeUrl}
+                  className={styles.link}
+                >
+                  PUADE
+                </a> y <a
+                  target="_blank"
+                  rel="noopener noreferrer" href="https://dashboard.yachay.pe/assets/pdfs/Contrato_de_prestacion_de_servicios_2015.pdf"
+                  className={styles.link}
+                >
+                  {this.props.strings.sales.dataPrivacy}
                 </a>
               </p>
             </CheckBox>
