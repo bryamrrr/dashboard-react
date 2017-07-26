@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import { connect } from 'react-redux';
+
 import { Link } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form/immutable';
+
+import constants from '../../../../extra/constants';
+import httpRequest from '../../../../extra/http-request';
 
 import FormInput from '../../../../components/form-input';
 import FormButton from '../../../../components/form-button';
 import BackLogin from '../../../../components/back-login';
 
 import regex from '../../../../regex';
+
+import { showToaster } from '../../../../reducers/toaster/actions';
 
 import styles from './styles.css';
 
@@ -25,21 +32,24 @@ function renderEmail(field) {
 }
 
 class ResetForm extends Component {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
 
     this.state = { loading: false };
 
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  onSubmit(values) {
-    console.log('values', values);
-
+  async onSubmit(values) {
     this.setState({ loading: true });
-    setTimeout(() => {
-      this.setState({ loading: false });
-    }, 3000);
+
+    const url = `${constants.urls.API_SECURITY}/send_password_email`;
+    const data = { email: values.get('email') };
+
+    await httpRequest('POST', url, data);
+
+    this.props.showToaster('success', 'Las instrucciones han sido enviadas a su correo electrónico');
+    this.context.router.history.push('/login');
   }
 
   render() {
@@ -68,9 +78,9 @@ class ResetForm extends Component {
 function validate(values) {
   const errors = {};
 
-  if (!values.email) {
+  if (!values.get('email')) {
     errors.email = 'Ingresa tu correo electrónico';
-  } else if (!regex.validate.email.test(values.email)) {
+  } else if (!regex.validate.email.test(values.get('email'))) {
     errors.email = regex.message.email;
   }
 
@@ -79,9 +89,16 @@ function validate(values) {
 
 ResetForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
+  showToaster: PropTypes.func.isRequired,
 };
 
-export default reduxForm({
+ResetForm.contextTypes = {
+  router: PropTypes.objectOf(PropTypes.object).isRequired,
+};
+
+const ResetReduxForm = reduxForm({
   validate,
   form: 'UserReset',
 })(ResetForm);
+
+export default connect(null, { showToaster })(ResetReduxForm);
