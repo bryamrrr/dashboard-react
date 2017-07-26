@@ -71,15 +71,9 @@ export function logoutUser() {
 
       const url = `${constants.urls.API_SECURITY}/logout`;
       const data = { email: JSON.parse(localStorage.getItem('user')).email };
-<<<<<<< HEAD
-      await httpRequest('POST', url, data);
-=======
+
       const config = { hideToaster: true };
       await httpRequest('POST', url, data, config);
-
-      localStorage.removeItem('user');
-      localStorage.removeItem('token');
->>>>>>> Add config to toaster
     } catch (error) {
       console.error(error);
     }
