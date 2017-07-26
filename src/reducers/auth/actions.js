@@ -39,10 +39,11 @@ export function loginUser(creds) {
 
     try {
       const url = `${constants.urls.API_SECURITY}/access_token`;
+      const config = { successMessage: 'Bienvenido a Yachay' };
       const {
         data: { token },
         meta,
-      } = await httpRequest('POST', url, toSend);
+      } = await httpRequest('POST', url, toSend, config);
 
       if (meta.ok) {
         const { user } = jwtDecode(token);
@@ -70,7 +71,15 @@ export function logoutUser() {
 
       const url = `${constants.urls.API_SECURITY}/logout`;
       const data = { email: JSON.parse(localStorage.getItem('user')).email };
+<<<<<<< HEAD
       await httpRequest('POST', url, data);
+=======
+      const config = { hideToaster: true };
+      await httpRequest('POST', url, data, config);
+
+      localStorage.removeItem('user');
+      localStorage.removeItem('token');
+>>>>>>> Add config to toaster
     } catch (error) {
       console.error(error);
     }

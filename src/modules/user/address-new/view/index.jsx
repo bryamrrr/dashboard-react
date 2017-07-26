@@ -10,7 +10,7 @@ import constants from '../../../../extra/constants';
 
 import NewAddressForm from '../new-address-form';
 import Hexagon from '../../../../components/hexagon';
-import LoadingSpin from '../../../../components/loading-spin';
+import LoadingIcon from '../../../../components/loading-icon';
 
 import { setRoute } from '../../../../reducers/routes/actions';
 
@@ -70,7 +70,7 @@ class UserAddressNew extends Component {
 
     return (
       <div>
-        {(this.state.fetchingData && <LoadingSpin />)}
+        {(this.state.fetchingData && <LoadingIcon />)}
         {(!this.state.fetchingData &&
           <div>
             <div className={styles.title}>

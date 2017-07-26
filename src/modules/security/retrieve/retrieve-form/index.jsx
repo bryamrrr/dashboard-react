@@ -56,10 +56,9 @@ class ResetForm extends Component {
       password: values.get('password'),
       token: this.context.router.route.match.params.token,
     };
+    const config = { successMessage: 'Tu contraseña ha sido actualizada' };
+    await httpRequest('PUT', url, data, config);
 
-    await httpRequest('PUT', url, data);
-
-    console.log('todo bien');
     this.context.router.history.push('/login');
   }
 

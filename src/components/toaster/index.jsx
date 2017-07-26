@@ -6,9 +6,7 @@ import styles from './styles.css';
 function Toaster(props) {
   return (
     <div className={`${styles.container} ${styles[props.type]} ${styles.show}`}>
-      <div>
-        {props.message}
-      </div>
+      {props.message}
     </div>
   );
 }

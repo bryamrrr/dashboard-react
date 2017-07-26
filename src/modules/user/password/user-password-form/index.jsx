@@ -10,8 +10,6 @@ import constants from '../../../../extra/constants';
 import FormInput from '../../../../components/form-input';
 import FormButton from '../../../../components/form-button';
 
-import { showToaster } from '../../../../reducers/toaster/actions';
-
 import styles from './styles.css';
 
 class UserPasswordForm extends Component {
@@ -38,14 +36,15 @@ class UserPasswordForm extends Component {
     };
 
     const url = `${constants.urls.API_SECURITY}/change_password/${this.props.user.id}`;
-    await httpRequest('PUT', url, data);
+    const config = { successMessage: 'La constraseña ha sido actualizada' };
+    const response = await httpRequest('PUT', url, data, config);
 
     this.setState({ loading: false });
 
-    this.props.showToaster('success', 'La constraseña ha sido actualizada');
-
-    const urlRedirect = '/inicio';
-    this.context.router.history.push(urlRedirect);
+    if (response.meta.ok) {
+      const urlRedirect = '/inicio';
+      this.context.router.history.push(urlRedirect);
+    }
   }
 
   renderField(field) {
@@ -149,7 +148,6 @@ UserPasswordForm.propTypes = {
   ])).isRequired,
   initialize: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  showToaster: PropTypes.func.isRequired,
 };
 
 UserPasswordForm.contextTypes = {
@@ -168,4 +166,4 @@ const UserPasswordReduxForm = reduxForm({
   validate,
 })(UserPasswordForm);
 
-export default connect(mapStateToProps, { showToaster })(UserPasswordReduxForm);
+export default connect(mapStateToProps)(UserPasswordReduxForm);

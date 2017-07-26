@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { connect } from 'react-redux';
-
 import { Field, reduxForm } from 'redux-form/immutable';
 
 import httpRequest from '../../../../extra/http-request';
@@ -10,8 +8,6 @@ import constants from '../../../../extra/constants';
 
 import FormInput from '../../../../components/form-input';
 import FormButton from '../../../../components/form-button';
-
-import { showToaster } from '../../../../reducers/toaster/actions';
 
 import regex from '../../../../regex';
 
@@ -80,9 +76,10 @@ class SignupForm extends Component {
       password: values.get('password'),
     };
 
-    await httpRequest('POST', url, data);
+    const config = { successMessage: 'Usuario creado exitosamente' };
 
-    this.props.showToaster('success', 'Usuario creado exitosamente');
+    await httpRequest('POST', url, data, config);
+
     this.context.router.history.push('/login');
   }
 
@@ -145,7 +142,6 @@ function validate(values) {
 
 SignupForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  showToaster: PropTypes.func.isRequired,
 };
 
 SignupForm.contextTypes = {
@@ -157,4 +153,4 @@ const SignupReduxForm = reduxForm({
   form: 'UserSignup',
 })(SignupForm);
 
-export default connect(null, { showToaster })(SignupReduxForm);
+export default SignupReduxForm;

@@ -12,7 +12,6 @@ import FormButton from '../../../../components/form-button';
 
 import { setLanguage } from '../../../../reducers/translate/actions';
 import { setProfile } from '../../../../reducers/user/actions';
-import { showToaster } from '../../../../reducers/toaster/actions';
 
 import regex from '../../../../extra/regex';
 import httpRequest from '../../../../extra/http-request';
@@ -90,8 +89,8 @@ class UserDataForm extends Component {
     };
 
     const url = `${constants.urls.API_SONQO}/profile`;
-    await httpRequest('PUT', url, profileToSend);
-    this.props.showToaster('success', 'Los datos han sido actualizados');
+    const config = { successMessage: 'Los datos han sido actualizados' };
+    await httpRequest('PUT', url, profileToSend, config);
     this.props.setProfile(profileToSend);
   }
 
@@ -322,5 +321,4 @@ const UserDataReduxForm = reduxForm({
 export default connect(mapStateToProps, {
   setLanguage,
   setProfile,
-  showToaster,
 })(UserDataReduxForm);

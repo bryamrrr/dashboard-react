@@ -1,10 +1,13 @@
 import fetch from 'isomorphic-fetch';
 
-// import store from '../../reducers/store';
+import store from '../../reducers/store';
 
-// import { showToaster } from '../../reducers/toaster/actions';
+import { showToaster } from '../../reducers/toaster/actions';
 
-export default async (method, url, data = {}) => {
+export default async (method, url, data = {}, options = {
+  successMessage: 'Éxito',
+  hideToaster: method === 'GET',
+}) => {
   const token = (typeof localStorage !== 'undefined')
     ? localStorage.getItem('token')
     : '';
@@ -28,22 +31,24 @@ export default async (method, url, data = {}) => {
       data: {},
     };
 
+    response.data = await response.meta.json();
+
     if (response.meta.ok) {
-      response.data = await response.meta.json();
-    } else if (response.meta.status === 401) {
-      if (typeof localStorage !== 'undefined') {
-        localStorage.removeItem('userData');
-        localStorage.removeItem('token');
-        // store.dispatch(showToaster('error', 'Acceso denegado.'));
+      if (!options.hideToaster) {
+        store.dispatch(showToaster('success', options.successMessage));
       }
+    } else if (response.meta.status === 401) {
+      localStorage.removeItem('user');
+      localStorage.removeItem('token');
+      store.dispatch(showToaster('error', response.data.userMessage || 'Acceso denegado.'));
     } else if (response.meta.status === 403) {
-      // store.dispatch(showToaster('error', 'Redireccionando al home.'));
+      store.dispatch(showToaster('error', response.data.userMessage || 'Redireccionando al home.'));
     } else if (response.meta.status === 404) {
-      // store.dispatch(showToaster('error', 'Recurso no encontrado.'));
+      store.dispatch(showToaster('error', response.data.userMessage || 'Recurso no encontrado.'));
     } else if (response.meta.status === 500) {
-      // store.dispatch(showToaster('error', 'Error del servidor.'));
+      store.dispatch(showToaster('error', response.data.userMessage || 'Error del servidor.'));
     } else {
-      // store.dispatch(showToaster('error'));
+      store.dispatch(showToaster('error'));
     }
   } catch (error) {
     console.log('Error unhandled', error);

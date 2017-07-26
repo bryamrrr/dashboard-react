@@ -15,8 +15,6 @@ import FormButton from '../../../../components/form-button';
 
 import regex from '../../../../regex';
 
-import { showToaster } from '../../../../reducers/toaster/actions';
-
 import styles from './styles.css';
 
 class NewContactForm extends Component {
@@ -130,22 +128,26 @@ class NewContactForm extends Component {
     if (values.get('postalCode')) data.postalCode = values.get('postalCode');
     if (!_.isEmpty(this.state.district)) data.ubigeoId = this.state.district.id;
 
+    let response = {};
+
     if (!_.isEmpty(this.props.data)) {
       const url = `${constants.urls.API_SONQO}/contacts/${this.context.router.route.match.params.id}`;
-      await httpRequest('PUT', url, data);
+      const config = { successMessage: 'Contacto actualizado correctamente' };
+      response = await httpRequest('PUT', url, data, config);
 
       this.setState({ sending: false });
-      this.props.showToaster('success', 'Contacto actualizado correctamente');
     } else {
       const url = `${constants.urls.API_SONQO}/contacts`;
-      await httpRequest('POST', url, data);
+      const config = { successMessage: 'Se agregó un nuevo contacto' };
+      response = await httpRequest('POST', url, data, config);
 
       this.setState({ sending: false });
-      this.props.showToaster('success', 'Se agregó un nuevo contacto');
     }
 
-    const urlRedirect = '/usuario/contactos';
-    this.context.router.history.push(urlRedirect);
+    if (response.meta.ok) {
+      const urlRedirect = '/usuario/contactos';
+      this.context.router.history.push(urlRedirect);
+    }
   }
 
   changeDocumentType(documentType) {
@@ -431,4 +433,4 @@ const NewContactReduxForm = reduxForm({
   validate,
 })(NewContactForm);
 
-export default connect(mapStateToProps, { showToaster })(NewContactReduxForm);
+export default connect(mapStateToProps)(NewContactReduxForm);

@@ -14,8 +14,6 @@ import FormInput from '../../../../components/form-input';
 import Combo from '../../../../components/combo';
 import FormButton from '../../../../components/form-button';
 
-import { showToaster } from '../../../../reducers/toaster/actions';
-
 import styles from './styles.css';
 
 class NewAddressForm extends Component {
@@ -114,22 +112,25 @@ class NewAddressForm extends Component {
 
     if (!_.isEmpty(this.state.district)) data.ubigeoId = this.state.district.id;
 
+    let response = {};
     if (!_.isEmpty(this.props.data)) {
       const url = `${constants.urls.API_SONQO}/addresses/${this.context.router.route.match.params.id}`;
-      await httpRequest('PUT', url, data);
+      const config = { successMessage: 'Actualizado correctamente' };
+      response = await httpRequest('PUT', url, data, config);
 
       this.setState({ sending: false });
-      this.props.showToaster('success', 'Actualizado correctamente');
     } else {
       const url = `${constants.urls.API_SONQO}/addresses`;
-      await httpRequest('POST', url, data);
+      const config = { successMessage: 'Se agregó una nueva dirección' };
+      response = await httpRequest('POST', url, data, config);
 
       this.setState({ sending: false });
-      this.props.showToaster('success', 'Se agregó una nueva dirección');
     }
 
-    const urlRedirect = '/usuario/direcciones';
-    this.context.router.history.push(urlRedirect);
+    if (response.meta.ok) {
+      const urlRedirect = '/usuario/direcciones';
+      this.context.router.history.push(urlRedirect);
+    }
   }
 
   changeCountry(country) {
@@ -344,4 +345,4 @@ const NewAddressReduxForm = reduxForm({
   validate,
 })(NewAddressForm);
 
-export default connect(mapStateToProps, { showToaster })(NewAddressReduxForm);
+export default connect(mapStateToProps)(NewAddressReduxForm);

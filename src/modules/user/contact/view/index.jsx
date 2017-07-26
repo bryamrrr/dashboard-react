@@ -17,7 +17,6 @@ import LoadingIcon from '../../../../components/loading-icon';
 import Modal from '../../../../components/modal';
 
 import { setRoute } from '../../../../reducers/routes/actions';
-import { showToaster } from '../../../../reducers/toaster/actions';
 
 import styles from './styles.css';
 
@@ -99,9 +98,9 @@ class UserContact extends Component {
 
   async deleteContact() {
     const url = `${constants.urls.API_SONQO}/contacts/${this.state.deleteId}`;
-    await httpRequest('DELETE', url);
+    const config = { successMessage: 'Eliminado correctamente' };
+    await httpRequest('DELETE', url, null, config);
     this.setState({ showDelete: false });
-    this.props.showToaster('success', 'Eliminado correctamente');
 
     this.onChangePage(1);
   }
@@ -173,14 +172,10 @@ class UserContact extends Component {
 
 UserContact.propTypes = {
   strings: PropTypes.objectOf(PropTypes.object).isRequired,
-  showToaster: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
   return { strings: state.get('translate').strings };
 }
 
-export default connect(mapStateToProps, {
-  setRoute,
-  showToaster,
-})(UserContact);
+export default connect(mapStateToProps, { setRoute })(UserContact);
