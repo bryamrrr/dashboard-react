@@ -9,7 +9,7 @@ import httpRequest from '../../../../extra/http-request';
 import Hexagon from '../../../../components/hexagon';
 import TableSearch from '../../../../components/table-search';
 import TablePagination from '../../../../components/table-pagination';
-import LoadingSpin from '../../../../components/loading-spin';
+import LoadingIcon from '../../../../components/loading-icon';
 
 import BillTable from '../bill-table';
 
@@ -65,7 +65,7 @@ class UserBill extends Component {
       <div>
         {(this.state.fetchingBills &&
           <div>
-            <LoadingSpin />
+            <LoadingIcon />
           </div>
         )}
         {(!this.state.fetchingBills &&
