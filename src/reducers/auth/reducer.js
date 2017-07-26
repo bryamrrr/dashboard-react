@@ -17,9 +17,11 @@ const AuthRecord = Record({
 
 const UserRecord = Record({
   username: '',
-  first_name: '',
-  last_name: '',
+  status: '',
+  firstName: '',
+  lastName: '',
   email: '',
+  id: '',
 });
 
 const isNode = typeof localStorage === 'undefined';

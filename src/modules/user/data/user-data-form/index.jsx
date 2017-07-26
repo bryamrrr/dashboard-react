@@ -186,7 +186,6 @@ class UserDataForm extends Component {
             <Field
               name="username"
               component={this.renderField}
-              value={this.state.profile.username}
             />
           </article>
           <article>

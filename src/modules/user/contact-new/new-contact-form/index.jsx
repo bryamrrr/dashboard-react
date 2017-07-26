@@ -117,7 +117,7 @@ class NewContactForm extends Component {
       lastname: values.get('lastname'),
       contactTypeId: this.state.contactType.id,
       documentTypeId: this.state.documentType.id,
-      documentId: values.get('document'),
+      documentId: values.get('documentId'),
       email: values.get('email'),
       countryId: this.state.country.id,
       phone: values.get('phone'),
@@ -199,22 +199,28 @@ class NewContactForm extends Component {
 
     let icon = '';
     switch (name) {
-      case 'name' || 'lastname':
+      case 'name':
         icon = 'linearicon-user';
         break;
-      case 'envelope':
+      case 'lastname':
+        icon = 'linearicon-user';
+        break;
+      case 'email':
         icon = 'linearicon-envelope';
         break;
       case 'phone':
         icon = 'linearicon-phone';
         break;
-      case 'profile':
+      case 'documentId':
         icon = 'linearicon-profile';
         break;
       case 'stateCity':
         icon = 'linearicon-flag2';
         break;
-      case 'address' || 'postalCode':
+      case 'address':
+        icon = 'linearicon-map-marker';
+        break;
+      case 'postalCode':
         icon = 'linearicon-map-marker';
         break;
       case 'reference':
@@ -284,7 +290,7 @@ class NewContactForm extends Component {
         </article>
         <article>
           <Field
-            name="document"
+            name="documentId"
             component={this.renderField}
           />
         </article>
@@ -384,6 +390,7 @@ function validate(values) {
   if (!values.get('email')) errors.email = 'Ingresa un correo';
   if (!values.get('phone')) errors.phone = 'Ingresa un teléfono';
   if (!values.get('address')) errors.address = 'Ingresa una dirección';
+  if (!values.get('documentId')) errors.documentId = 'Ingresa un número de documento';
 
   if (!values.get('email')) {
     errors.email = 'Ingresa tu correo electrónico';
