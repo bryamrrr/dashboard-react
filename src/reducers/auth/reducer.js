@@ -6,7 +6,7 @@ import {
 import {
   LOGIN_SUCCESS,
   LOGOUT_SUCCESS,
-  // LOGIN_FAILURE,
+  CONFIRM_EMAIL,
 } from './actions';
 
 const AuthRecord = Record({
@@ -41,6 +41,10 @@ function reducer(state = initialState, action) {
         .set('token', action.payload.token);
     case LOGOUT_SUCCESS:
       return new AuthRecord({ token: '', user: new UserRecord({}) });
+    case CONFIRM_EMAIL: {
+      if (state.user.status) return state.setIn(['user', 'status'], 'validated');
+      return state;
+    }
     default:
       return state;
     // case LOGIN_FAILURE:

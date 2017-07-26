@@ -5,8 +5,8 @@ import constants from '../../extra/constants';
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
-
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+export const CONFIRM_EMAIL = 'CONFIRM_EMAIL';
 
 export function receiveLogin(data) {
   return {
@@ -24,6 +24,10 @@ export function loginError(error) {
 
 export function receiveLogout() {
   return { type: LOGOUT_SUCCESS };
+}
+
+export function confirmEmail() {
+  return { type: CONFIRM_EMAIL };
 }
 
 export function loginUser(creds) {
