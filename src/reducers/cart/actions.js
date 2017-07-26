@@ -84,9 +84,9 @@ export function fetchPackages(itemId, productId) {
   };
 }
 
-export function fetchCart(email) {
+export function fetchCart(email, id) {
   return async (dispatch) => {
-    const url = `${constants.urls.API_CART}/carts?ownerEmail=${email}`;
+    const url = `${constants.urls.API_CART}/carts?ownerEmail=${email}&ownerId={id}`;
     const { data, meta } = await httpRequest('GET', url);
     if (meta.ok) dispatch(setCart(data.results[0]));
   };

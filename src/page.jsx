@@ -47,8 +47,8 @@ import { fetchCart } from './reducers/cart/actions';
 
 class Page extends Component {
   componentWillMount() {
-    const { email } = this.props;
-    if (email !== '') this.props.fetchCart(email);
+    const { email, id } = this.props;
+    if (id !== '') this.props.fetchCart(email, id);
   }
 
   render() {
@@ -104,7 +104,10 @@ Page.propTypes = {
 };
 
 function mapStateToProps(state) {
-  return { email: state.get('auth').user.email };
+  return {
+    email: state.get('auth').user.email,
+    id: state.get('auth').user.id,
+  };
 }
 
 export default withRouter(connect(mapStateToProps, { fetchCart })(Page));
