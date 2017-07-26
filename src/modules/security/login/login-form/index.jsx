@@ -15,13 +15,13 @@ import { loginUser } from '../../../../reducers/auth/actions';
 
 import styles from './styles.css';
 
-function renderUsername(field) {
+function renderEmail(field) {
   return (
     <FormInput
       field={field}
-      name="username"
-      placeholder="Usuario"
-      includeIcon="linearicon-user"
+      name="email"
+      placeholder="Correo electrónico"
+      includeIcon="linearicon-envelope"
     />
   );
 }
@@ -56,8 +56,8 @@ class LoginForm extends Component {
     return (
       <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
         <Field
-          name="username"
-          component={renderUsername}
+          name="email"
+          component={renderEmail}
         />
         <Field
           name="password"
@@ -86,7 +86,7 @@ class LoginForm extends Component {
 function validate(values) {
   const errors = {};
 
-  if (!values.get('username')) errors.username = 'Ingresa tu usuario';
+  if (!values.get('email')) errors.email = 'Ingresa tu correo';
 
   if (!values.get('password')) errors.password = 'Ingresa tu contraseña';
 

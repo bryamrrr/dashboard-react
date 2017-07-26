@@ -1,3 +1,5 @@
+import jwtDecode from 'jwt-decode';
+
 import httpRequest from '../../extra/http-request';
 import constants from '../../extra/constants';
 
@@ -37,22 +39,24 @@ export function loginUser(creds) {
     dispatch(requestLogin(creds));
 
     const toSend = { // FIXME
-      email: creds.username,
-      password: creds.password,
+      email: creds.get('email'),
+      password: creds.get('password'),
     };
 
     try {
       const url = `${constants.urls.API_SECURITY}/access_token`;
       const {
-        data: { user, access_token },
+        data: { token },
         meta,
       } = await httpRequest('POST', url, toSend);
 
       if (meta.ok) {
-        dispatch(receiveLogin({ user, access_token }));
+        const user = jwtDecode(token);
+
+        dispatch(receiveLogin({ user, token }));
 
         localStorage.setItem('user', JSON.stringify(user));
-        localStorage.setItem('token', access_token);
+        localStorage.setItem('token', token);
       } else {
         dispatch(loginError(meta));
       }

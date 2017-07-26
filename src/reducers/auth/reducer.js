@@ -43,7 +43,7 @@ function reducer(state = initialState, action) {
     case LOGIN_SUCCESS:
       return state
         .set('user', new UserRecord(action.payload.user))
-        .set('token', action.payload.access_token);
+        .set('token', action.payload.token);
     // case LOGIN_FAILURE:
     //   return Object.assign({}, state, {
     //     error: 'Error en el login',
