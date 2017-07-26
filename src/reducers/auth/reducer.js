@@ -6,8 +6,8 @@ import {
 import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
+  LOGOUT_SUCCESS,
   // LOGIN_FAILURE,
-  // LOGOUT_SUCCESS,
 } from './actions';
 
 const AuthRecord = Record({
@@ -44,17 +44,14 @@ function reducer(state = initialState, action) {
       return state
         .set('user', new UserRecord(action.payload.user))
         .set('token', action.payload.token);
+    case LOGOUT_SUCCESS:
+      return new AuthRecord({ token: '', user: new UserRecord({}) });
+    default:
+      return state;
     // case LOGIN_FAILURE:
     //   return Object.assign({}, state, {
     //     error: 'Error en el login',
     //   });
-    // case LOGOUT_SUCCESS:
-    //   return {
-    //     token: '',
-    //     user: {},
-    //   };
-    default:
-      return state;
   }
 }
 

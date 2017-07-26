@@ -51,7 +51,7 @@ export function loginUser(creds) {
       } = await httpRequest('POST', url, toSend);
 
       if (meta.ok) {
-        const user = jwtDecode(token);
+        const { user } = jwtDecode(token);
 
         dispatch(receiveLogin({ user, token }));
 
@@ -72,9 +72,10 @@ export function logoutUser() {
       dispatch(receiveLogout());
 
       const url = `${constants.urls.API_SECURITY}/logout`;
-      await httpRequest('POST', url);
+      const data = { email: JSON.parse(localStorage.getItem('user')).email };
+      await httpRequest('POST', url, data);
 
-      localStorage.removeItem('userData');
+      localStorage.removeItem('user');
       localStorage.removeItem('token');
     } catch (error) {
       console.error(error);
