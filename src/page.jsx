@@ -46,7 +46,7 @@ export default function () {
         <PublicRoute path="/login" exact><Login /></PublicRoute>
         <PublicRoute path="/registro" exact><Signup /></PublicRoute>
         <PublicRoute path="/reset" exact><Reset /></PublicRoute>
-        <PublicRoute path="/users/:email/forgotpassword/:hash" exact><Retrieve /></PublicRoute>
+        <PublicRoute path="/change_password/:token" exact><Retrieve /></PublicRoute>
 
         <PrivateRoute path="/inicio" exact><Home /></PrivateRoute>
 

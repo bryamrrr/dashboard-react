@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form/immutable';
 
+import httpRequest from '../../../../extra/http-request';
+import constants from '../../../../extra/constants';
+
 import FormInput from '../../../../components/form-input';
 import FormButton from '../../../../components/form-button';
 import BackLogin from '../../../../components/back-login';
@@ -37,21 +40,27 @@ function renderRepeatPassword(field) {
 }
 
 class ResetForm extends Component {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
 
     this.state = { loading: false };
 
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  onSubmit(values) {
-    console.log('values', values);
-
+  async onSubmit(values) {
     this.setState({ loading: true });
-    setTimeout(() => {
-      this.setState({ loading: false });
-    }, 3000);
+
+    const url = `${constants.urls.API_SECURITY}/token_change_password`;
+    const data = {
+      password: values.get('password'),
+      token: this.context.router.route.match.params.token,
+    };
+
+    await httpRequest('PUT', url, data);
+
+    console.log('todo bien');
+    this.context.router.history.push('/login');
   }
 
   render() {
@@ -84,15 +93,15 @@ class ResetForm extends Component {
 function validate(values) {
   const errors = {};
 
-  if (!values.password) {
+  if (!values.get('password')) {
     errors.password = 'Ingresa una nueva contraseña';
-  } else if (!regex.validate.password.test(values.password)) {
+  } else if (!regex.validate.password.test(values.get('password'))) {
     errors.password = regex.message.password;
   }
 
-  if (!values.repeatPassword) {
+  if (!values.get('repeatPassword')) {
     errors.repeatPassword = 'Ingresa la nueva contraseña una vez más';
-  } else if (values.repeatPassword !== values.password) {
+  } else if (values.get('repeatPassword') !== values.get('password')) {
     errors.repeatPassword = 'Las contraseñas no coinciden';
   }
 
@@ -101,6 +110,10 @@ function validate(values) {
 
 ResetForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
+};
+
+ResetForm.contextTypes = {
+  router: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 export default reduxForm({
