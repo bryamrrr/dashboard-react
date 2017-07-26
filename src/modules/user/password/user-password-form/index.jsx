@@ -10,6 +10,8 @@ import constants from '../../../../extra/constants';
 import FormInput from '../../../../components/form-input';
 import FormButton from '../../../../components/form-button';
 
+import regex from '../../../../regex';
+
 import styles from './styles.css';
 
 class UserPasswordForm extends Component {
@@ -129,7 +131,13 @@ function validate(values) {
   const errors = {};
 
   if (!values.get('currentPassword')) errors.currentPassword = 'Ingresa tu contraseña actual';
-  if (!values.get('newPassword')) errors.newPassword = 'Ingresa una nueva contraseña';
+
+  if (!values.get('newPassword')) {
+    errors.newPassword = 'Ingresa una nueva contraseña';
+  } else if (!regex.validate.password.test(values.get('newPassword'))) {
+    errors.newPassword = regex.message.password;
+  }
+
   if (!values.get('repeatNewPassword')) {
     errors.repeatNewPassword = 'Repite tu nueva contraseña';
   } else if (values.get('newPassword') !== values.get('repeatNewPassword')) {

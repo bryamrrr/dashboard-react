@@ -389,7 +389,14 @@ function validate(values) {
 
   if (!values.get('name')) errors.name = 'Ingresa un nombre';
   if (!values.get('lastname')) errors.lastname = 'Ingresa un apellido';
-  if (!values.get('email')) errors.email = 'Ingresa un correo';
+
+  if (!values.get('email')) {
+    errors.email = 'Ingresa un correo';
+  } else if (!regex.validate.email.test(values.get('email'))) {
+    errors.email = regex.message.email;
+  }
+
+
   if (!values.get('phone')) errors.phone = 'Ingresa un teléfono';
   if (!values.get('address')) errors.address = 'Ingresa una dirección';
   if (!values.get('documentId')) errors.documentId = 'Ingresa un número de documento';
