@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Switch } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 import PublicRoute from './extra/public-route';
 import PrivateRoute from './extra/private-route';
@@ -9,6 +9,7 @@ import Login from './modules/security/login/view';
 import Signup from './modules/security/signup/view';
 import Reset from './modules/security/reset/view';
 import Retrieve from './modules/security/retrieve/view';
+import ConfirmEmail from './modules/security/confirm-email/view';
 
 import Home from './modules/home/view';
 
@@ -43,6 +44,8 @@ export default function () {
   return (
     <main role="application">
       <Switch>
+        <Route path="/confirm/:token"><ConfirmEmail /></Route>
+
         <PublicRoute path="/login" exact><Login /></PublicRoute>
         <PublicRoute path="/registro" exact><Signup /></PublicRoute>
         <PublicRoute path="/reset" exact><Reset /></PublicRoute>
