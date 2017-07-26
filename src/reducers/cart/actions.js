@@ -86,9 +86,16 @@ export function fetchPackages(itemId, productId) {
 
 export function fetchCart(email, id) {
   return async (dispatch) => {
-    const url = `${constants.urls.API_CART}/carts?ownerEmail=${email}&ownerId={id}`;
-    const { data, meta } = await httpRequest('GET', url);
-    if (meta.ok) dispatch(setCart(data.results[0]));
+    const url = `${constants.urls.API_CART}/carts`;
+    const dataToSend = {
+      owner: {
+        email,
+        fk_user_id: id,
+      },
+    };
+
+    const { data, meta } = await httpRequest('POST', url, dataToSend);
+    if (meta.ok) dispatch(setCart(data));
   };
 }
 
