@@ -56,7 +56,7 @@ class Settings extends Component {
             />
           </div>
           <h3 className={styles.title}>
-            {this.props.auth.user.first_name}
+            {this.props.auth.user.username}
           </h3>
           <i className={`${styles.icon} linearicon-chevron-down`} />
         </div>

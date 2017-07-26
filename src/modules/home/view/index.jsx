@@ -17,7 +17,7 @@ class Home extends Component {
   render() {
     return (
       <div className={styles.container}>
-        <h1 className={styles.title}>{this.props.user.first_name}</h1>
+        <h1 className={styles.title}>{this.props.username}</h1>
         <p
           dangerouslySetInnerHTML={{
             __html: this.props.strings.home.description,
@@ -30,16 +30,14 @@ class Home extends Component {
 }
 
 Home.propTypes = {
-  user: PropTypes.shape({
-    first_name: PropTypes.string.isRequired,
-  }).isRequired,
+  username: PropTypes.string.isRequired,
   strings: PropTypes.objectOf(PropTypes.object).isRequired,
   setRoute: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
-    user: state.get('auth').user,
+    username: state.get('auth').user.username,
     strings: state.get('translate').strings,
   };
 }
