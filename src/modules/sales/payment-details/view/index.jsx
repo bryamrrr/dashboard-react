@@ -22,17 +22,40 @@ class PaymentDetails extends Component {
 
     this.state = {
       puadeUrl: '',
+      dataPrivacyUrl: '',
+      contractNameUrl: '',
     };
 
     this.sendPayment = this.sendPayment.bind(this);
   }
 
-  async componentWillMount() {
-    const url = `${constants.urls.API_QUILCA}/documents/7a00049b-2187-4072-af91-b3a2d9f75563/contents/current`;
-    const { data } = await httpRequest('GET', url);
-    const puadeUrl = `${constants.urls.API_QUILCA}/documents/versions/${data.id}/${data.filename}`;
-    console.log(puadeUrl);
-    this.setState({ puadeUrl });
+  componentWillMount() {
+    const urlPuade = `${constants.urls.API_QUILCA}/documents/7a00049b-2187-4072-af91-b3a2d9f75563/contents/current`;
+    const promisePuade = httpRequest('GET', urlPuade);
+
+    const urlDataPrivacy = `${constants.urls.API_QUILCA}/documents/f872ae55-3465-4d48-b41f-517220c138d7/contents/current`;
+    const promiseDataPrivacy = httpRequest('GET', urlDataPrivacy);
+
+    const urlContactName = `${constants.urls.API_QUILCA}/documents/ac97749a-21b8-4b68-b73e-2f82046c1347/contents/current`;
+    const promiseContractName = httpRequest('GET', urlContactName);
+
+    const allPromise = Promise.all([promisePuade, promiseDataPrivacy, promiseContractName]);
+
+    allPromise.then(async (response) => {
+      const dataPuade = response[0].data;
+      const dataDataPrivacy = response[1].data;
+      const dataContractName = response[2].data;
+
+      const puadeUrl = `${constants.urls.API_QUILCA}/documents/versions/${dataPuade.id}/${dataPuade.filename}`;
+      const dataPrivacyUrl = `${constants.urls.API_QUILCA}/documents/versions/${dataDataPrivacy.id}/${dataDataPrivacy.filename}`;
+      const contractNameUrl = `${constants.urls.API_QUILCA}/documents/versions/${dataContractName.id}/${dataContractName.filename}`;
+
+      return this.setState({
+        puadeUrl,
+        dataPrivacyUrl,
+        contractNameUrl,
+      });
+    });
   }
 
   componentDidMount() {
@@ -93,7 +116,7 @@ class PaymentDetails extends Component {
               <p>
                 {this.props.strings.sales.check} <a
                   target="_blank"
-                  rel="noopener noreferrer" href="https://dashboard.yachay.pe/assets/pdfs/Contrato_de_prestacion_de_servicios_2015.pdf"
+                  rel="noopener noreferrer" href={this.state.contractNameUrl}
                   className={styles.link}
                 >
                   {this.props.strings.sales.contractName}
@@ -105,7 +128,7 @@ class PaymentDetails extends Component {
                   PUADE
                 </a> y <a
                   target="_blank"
-                  rel="noopener noreferrer" href="https://dashboard.yachay.pe/assets/pdfs/Contrato_de_prestacion_de_servicios_2015.pdf"
+                  rel="noopener noreferrer" href={this.state.dataPrivacyUrl}
                   className={styles.link}
                 >
                   {this.props.strings.sales.dataPrivacy}
