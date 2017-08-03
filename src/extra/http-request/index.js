@@ -48,7 +48,7 @@ export default async (method, url, data = {}, options = {
     } else if (response.meta.status === 500) {
       store.dispatch(showToaster('error', response.data.userMessage || 'Error del servidor.'));
     } else {
-      store.dispatch(showToaster('error'));
+      store.dispatch(showToaster('error', 'Hubo un error'));
     }
   } catch (error) {
     console.log('Error unhandled', error);

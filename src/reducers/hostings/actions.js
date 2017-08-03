@@ -20,7 +20,7 @@ export function setHostingPrices(data) {
 
 export function fetchHostings() {
   return async (dispatch) => {
-    const url = `${constants.urls.API_MOCKS}/products/hosting`;
+    const url = `${constants.urls.API_SONQO}/products/hosting`;
     const { data: { results } } = await httpRequest('GET', url);
     dispatch(setHostings(results));
   };

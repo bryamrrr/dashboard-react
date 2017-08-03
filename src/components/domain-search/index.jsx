@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
@@ -19,10 +21,20 @@ class DomainSearch extends Component {
       loading: false,
       name: '',
       selected: {},
+      zones: {},
     };
 
     this.changeSelected = this.changeSelected.bind(this);
     this.search = this.search.bind(this);
+  }
+
+  async componentWillMount() {
+    const url = `${constants.urls.API_SONQO}/dnszones`;
+    const { data: { results } } = await httpRequest('GET', url);
+    this.setState({
+      zones: results,
+      selected: results[1],
+    });
   }
 
   onInputChange(name) {
@@ -34,11 +46,11 @@ class DomainSearch extends Component {
   }
 
   async search() {
-    // const { name, selected } = this.state;
-    // const domain = `${name}.${selected.name}`;
+    const { name, selected } = this.state;
+    const domain = `${name}.${selected.name}`;
     this.setState({ loading: true });
 
-    const url = `${constants.urls.API_MOCKS}/domains/search`;
+    const url = `${constants.urls.API_SONQO}/domains/search?name=${domain}`;
     const { data: { results } } = await httpRequest('GET', url);
 
     this.props.getDomains(results);
@@ -46,21 +58,6 @@ class DomainSearch extends Component {
   }
 
   render() {
-    const options = {
-      1: {
-        id: '1',
-        name: '.com.pe',
-      },
-      2: {
-        id: '2',
-        name: '.org.pe',
-      },
-      3: {
-        id: '3',
-        name: '.net.pe',
-      },
-    };
-
     const className = (this.state.loading)
     ? `${styles.button} ${styles.isLoading}`
     : styles.button;
@@ -78,9 +75,10 @@ class DomainSearch extends Component {
           />
         </div>
         <ComboSearch
-          options={options}
+          options={_.mapKeys(this.state.zones, 'id')}
           changeSelected={this.changeSelected}
-          selected={options['1']}
+          selected={this.state.selected}
+          placeholder="Selecciona una opción"
         />
         <button
           onClick={this.search}

@@ -27,6 +27,13 @@ class ComboSearch extends Component {
     this.select = this.select.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      options: nextProps.options,
+      selected: nextProps.selected,
+    });
+  }
+
   onBlur() {
     this.setState({ open: false });
   }
@@ -40,18 +47,20 @@ class ComboSearch extends Component {
     const selected = this.state.options[id];
 
     this.setState({ selected });
-    this.props.changeSelected(selected);
+    this.props.changeSelected(selected, this.props.trackItem);
   }
 
   render() {
     const { selected } = this.state;
-    const { includeIcon } = this.props;
+    const { includeIcon, config } = this.props;
 
-    const options = _.filter(this.state.options, option => option.id !== selected.id);
+    const options = (selected.period)
+      ? _.filter(this.state.options, option => option.id !== selected.period)
+      : _.filter(this.state.options, option => option.id !== selected.id);
 
-    const text = (selected.name)
-      ? selected.name
-      : this.props.placeholder;
+    const text = (selected[config.label])
+      ? selected[config.label]
+      : '';
 
     let className = (this.state.open)
       ? `${styles.container} ${styles.isOpen}`
@@ -82,10 +91,10 @@ class ComboSearch extends Component {
         >
           {_.map(options, item => (
             <li
-              key={item.id}
-              data-id={item.id}
+              key={item[config.key]}
+              data-id={item[config.value]}
             >
-              {item.name}
+              {item[config.label]}
             </li>
           ))}
         </ul>
@@ -96,19 +105,36 @@ class ComboSearch extends Component {
 
 ComboSearch.propTypes = {
   changeSelected: PropTypes.func.isRequired,
-  includeIcon: PropTypes.string,
-  options: PropTypes.objectOf(PropTypes.object).isRequired,
-  placeholder: PropTypes.string,
-  selected: PropTypes.shape({
-    id: PropTypes.string,
-    name: PropTypes.string,
+  config: PropTypes.shape({
+    key: PropTypes.string,
+    value: PropTypes.string,
+    label: PropTypes.string,
   }),
+  includeIcon: PropTypes.string,
+  options: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.array,
+  ]).isRequired,
+  placeholder: PropTypes.string,
+  selected: PropTypes.objectOf(PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.bool,
+    PropTypes.object,
+  ])),
+  trackItem: PropTypes.string,
 };
 
 ComboSearch.defaultProps = {
+  config: {
+    key: 'id',
+    value: 'id',
+    label: 'name',
+  },
   includeIcon: '',
   placeholder: 'Selecciona una opción',
   selected: {},
+  trackItem: null,
 };
 
 export default ComboSearch;

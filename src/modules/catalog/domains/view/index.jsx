@@ -37,6 +37,7 @@ class DomainsCatalog extends Component {
 
   getDomains(domains) {
     this.setState({ domains });
+    console.log(domains);
   }
 
   addToCart() {
