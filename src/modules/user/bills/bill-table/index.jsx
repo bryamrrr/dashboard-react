@@ -25,12 +25,16 @@ function BillTable(props) {
           {props.data.map(item =>
             <tr key={item.id}>
               <td>{item.order.code}</td>
-              <td>{item.paymentDocType.name}</td>
+              <td>{item.paymentDocType.type}</td>
               <td>{item.voucher}</td>
               <td>{item.created.substr(0, 10)}</td>
               <td>{`${item.currency.symbol} ${item.total}`}</td>
               <td className={styles.tdButton}>
-                <ButtonIcon icon="linearicon-eye" />
+                <ButtonIcon
+                  icon="linearicon-eye"
+                  tooltip="Ver documento"
+                  url={`/usuario/comprobantes/${item.id}`}
+                />
               </td>
             </tr>,
           )}
