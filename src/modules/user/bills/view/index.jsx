@@ -7,7 +7,6 @@ import constants from '../../../../extra/constants';
 import httpRequest from '../../../../extra/http-request';
 
 import Hexagon from '../../../../components/hexagon';
-import TableSearch from '../../../../components/table-search';
 import TablePagination from '../../../../components/table-pagination';
 import LoadingIcon from '../../../../components/loading-icon';
 
@@ -22,7 +21,7 @@ class UserBill extends Component {
     super(props);
 
     this.state = {
-      fetchingBills: true,
+      fetchingData: true,
       bills: [],
       metadata: {},
       initialPage: 1,
@@ -38,7 +37,7 @@ class UserBill extends Component {
     const { data: { results, metadata } } = await httpRequest('GET', url);
 
     this.setState({
-      fetchingBills: false,
+      fetchingData: false,
       bills: results,
       metadata,
     });
@@ -53,7 +52,7 @@ class UserBill extends Component {
     const { data: { results, metadata } } = await httpRequest('GET', url);
 
     this.setState({
-      fetchingBills: false,
+      fetchingData: false,
       bills: results,
       metadata,
       initialPage: page,
@@ -63,8 +62,8 @@ class UserBill extends Component {
   render() {
     return (
       <div>
-        {(this.state.fetchingBills && <LoadingIcon />)}
-        {(!this.state.fetchingBills &&
+        {(this.state.fetchingData && <LoadingIcon />)}
+        {(!this.state.fetchingData &&
           <div>
             <div className={styles.title}>
               <Hexagon color="orange">
@@ -72,13 +71,9 @@ class UserBill extends Component {
               </Hexagon>
               <h2>{this.props.strings.userBills.title}</h2>
             </div>
-            <div className={styles.filterContainer}>
-              <div className={styles.searchContainer}>
-                <TableSearch />
-              </div>
-              <div className={styles.buttonContainer} />
+            <div className={styles.tableContainer}>
+              <BillTable data={this.state.bills} />
             </div>
-            <BillTable data={this.state.bills} />
             <TablePagination
               count={this.state.metadata.count}
               onChangePage={this.onChangePage}
