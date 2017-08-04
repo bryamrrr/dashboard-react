@@ -101,6 +101,11 @@ class Page extends Component {
 Page.propTypes = {
   fetchCart: PropTypes.func.isRequired,
   email: PropTypes.string.isRequired,
+  id: PropTypes.string,
+};
+
+Page.defaultProps = {
+  id: '',
 };
 
 function mapStateToProps(state) {

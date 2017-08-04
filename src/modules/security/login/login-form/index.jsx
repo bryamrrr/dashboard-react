@@ -71,13 +71,6 @@ class LoginForm extends Component {
           loading={this.state.loading}
           type="submit"
         />
-
-        <div className={styles.simpleText}>
-          <span>¿No tienes una cuenta? </span>
-          <Link to="/registro">
-            <Anchor text="Regístrate" />
-          </Link>
-        </div>
       </form>
     );
   }
