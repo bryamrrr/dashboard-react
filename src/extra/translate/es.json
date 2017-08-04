@@ -159,7 +159,8 @@
     "content": "Contenido",
     "duration": "Duración",
     "priority": "Prioridad",
-    "registrationDate": "Fecha de registro"
+    "registrationDate": "Fecha de registro",
+    "hour": "Hora"
   },
   "tooltips": {
     "contacts": "Contactos",

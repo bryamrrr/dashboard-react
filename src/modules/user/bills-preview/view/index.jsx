@@ -8,7 +8,7 @@ import LoadingIcon from '../../../../components/loading-icon';
 
 import styles from './styles.css';
 
-class UserContactNew extends Component {
+class BillPreview extends Component {
   constructor(props, context) {
     super(props, context);
 
@@ -44,8 +44,8 @@ class UserContactNew extends Component {
   }
 }
 
-UserContactNew.contextTypes = {
+BillPreview.contextTypes = {
   router: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
-export default UserContactNew;
+export default BillPreview;

@@ -18,14 +18,14 @@
   margin-bottom: 20px;
 }
 
-.searchContainer {
-  width: 50%;
-}
+.searchContainer { width: 50%; }
 
 .buttonContainer {
   width: 25%;
   float: right;
 }
+
+.tableContainer { margin-top: 80px; }
 
 .buttonContainer > div:last-of-type { margin-top: 60px; }
 

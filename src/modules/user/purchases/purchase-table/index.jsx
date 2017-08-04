@@ -23,15 +23,16 @@ function PurchaseTable(props) {
         <tbody>
           {props.data.map(item =>
             <tr key={item.id}>
-              <td>{item.order.code}</td>
+              <td>{item.code}</td>
               <td>{item.created.substr(0, 10)}</td>
-              <td>{item.paymentDocStatus.name}</td>
-              <td>{`${item.currency.symbol} ${parseFloat(item.total).toFixed(2)}`}</td>
+              <td>{item.status.name}</td>
+              <td>{`${item.currency.symbol} ${parseFloat(item.amount).toFixed(2)}`}</td>
               <td className={styles.tdButton}>
-                <ButtonIcon icon="linearicon-eye" tooltip="Ver detalle" />
-                <ButtonIcon icon="linearicon-papers" tooltip="Ver documento" />
-                <ButtonIcon icon="linearicon-cart-full" tooltip="Paga en línea" />
-                <ButtonIcon icon="linearicon-circle-cross" tooltip="Anular" />
+                <ButtonIcon
+                  icon="linearicon-eye"
+                  tooltip="Ver detalle"
+                  url={`/usuario/compras/${item.id}`}
+                />
               </td>
             </tr>,
           )}

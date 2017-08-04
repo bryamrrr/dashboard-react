@@ -41,6 +41,7 @@ import UserContactNew from './modules/user/contact-new/view';
 import UserAddress from './modules/user/address/view';
 import UserAddressNew from './modules/user/address-new/view';
 import UserPurchases from './modules/user/purchases/view';
+import UserPurchasesDetail from './modules/user/purchases-detail/view';
 import UserBills from './modules/user/bills/view';
 import UserBillsPreview from './modules/user/bills-preview/view';
 
@@ -92,6 +93,7 @@ class Page extends Component {
           <PrivateRoute path="/usuario/nueva-direccion" exact><UserAddressNew /></PrivateRoute>
           <PrivateRoute path="/usuario/editar-direccion/:id" exact><UserAddressNew /></PrivateRoute>
           <PrivateRoute path="/usuario/compras" exact><UserPurchases /></PrivateRoute>
+          <PrivateRoute path="/usuario/compras/:id" exact><UserPurchasesDetail /></PrivateRoute>
           <PrivateRoute path="/usuario/comprobantes" exact><UserBills /></PrivateRoute>
           <PrivateRoute path="/usuario/comprobantes/:id" exact><UserBillsPreview /></PrivateRoute>
         </Switch>

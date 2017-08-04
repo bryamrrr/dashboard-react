@@ -9,9 +9,7 @@ import httpRequest from '../../../../extra/http-request';
 import PurchaseTable from '../purchase-table';
 
 import Hexagon from '../../../../components/hexagon';
-import TableSearch from '../../../../components/table-search';
 import TablePagination from '../../../../components/table-pagination';
-import Combo from '../../../../components/combo';
 import LoadingIcon from '../../../../components/loading-icon';
 
 import { setRoute } from '../../../../reducers/routes/actions';
@@ -23,39 +21,49 @@ class UserPurchases extends Component {
     super(props);
 
     this.state = {
-      fetchingPurchases: true,
+      fetchingData: true,
       purchases: [],
+      initialPage: 1,
+      metadata: {},
     };
+
+    this.onChangePage = this.onChangePage.bind(this);
   }
 
   async componentWillMount() {
     this.props.setRoute({ title: 'data' }, { title: 'purchases' });
 
-    const url = `${constants.urls.API_SONQO}/paymentdocs?includes=currency,order,paymentDocStatus`;
-    const { data: { results } } = await httpRequest('GET', url);
+    const url = `${constants.urls.API_SONQO}/orders?includes=currency,status`;
+    const { data: { results, metadata } } = await httpRequest('GET', url);
 
     this.setState({
-      fetchingPurchases: false,
+      fetchingData: false,
       purchases: results,
+      metadata,
+    });
+  }
+
+  async onChangePage(page) {
+    this.setState({ fetchingData: true });
+
+    const offset = (page - 1) * 10;
+
+    const url = `${constants.urls.API_SONQO}/orders?includes=currency,status&offset=${offset}`;
+    const { data: { results, metadata } } = await httpRequest('GET', url);
+
+    this.setState({
+      fetchingData: false,
+      purchases: results,
+      metadata,
+      initialPage: page,
     });
   }
 
   render() {
-    const status = {
-      1: {
-        id: '1',
-        name: 'Pagado',
-      },
-      2: {
-        id: '2',
-        name: 'Pendiente',
-      },
-    };
-
     return (
       <div>
-        {(this.state.fetchingPurchases && <LoadingIcon />)}
-        {(!this.state.fetchingPurchases &&
+        {(this.state.fetchingData && <LoadingIcon />)}
+        {(!this.state.fetchingData &&
           <div>
             <div className={styles.title}>
               <Hexagon color="orange">
@@ -63,20 +71,14 @@ class UserPurchases extends Component {
               </Hexagon>
               <h2>{this.props.strings.userPurchases.title}</h2>
             </div>
-            <div className={styles.filterContainer}>
-              <div className={styles.searchContainer}>
-                <TableSearch />
-              </div>
-              <div className={styles.buttonContainer}>
-                <Combo
-                  includeIcon="linearicon-register"
-                  placeholder={this.props.strings.userPurchases.state}
-                  options={status}
-                />
-              </div>
+            <div className={styles.tableContainer}>
+              <PurchaseTable data={this.state.purchases} />
             </div>
-            <PurchaseTable data={this.state.purchases} />
-            <TablePagination />
+            <TablePagination
+              count={this.state.metadata.count}
+              onChangePage={this.onChangePage}
+              initialPage={this.state.initialPage}
+            />
           </div>
         )}
       </div>
@@ -85,7 +87,6 @@ class UserPurchases extends Component {
 }
 
 UserPurchases.propTypes = {
-  setRoute: PropTypes.func.isRequired,
   strings: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
