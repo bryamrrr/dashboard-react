@@ -45,9 +45,6 @@ function PublicFooter() {
                 <li>
                   <Link to="/login">Ingresar</Link>
                 </li>
-                <li>
-                  <Link to="/registro">Regístrate</Link>
-                </li>
               </ul>
             </div>
           </article>

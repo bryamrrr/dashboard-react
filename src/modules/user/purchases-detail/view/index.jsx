@@ -78,7 +78,7 @@ class PurchaseDetail extends Component {
             <h2>Datos de facturación</h2>
             <div className={styles.lineWrapper}>
               <p>{name}: <strong>{`${this.state.data.customer.name} ${this.state.data.customer.lastname}`}</strong></p>
-              <p>{this.state.data.documentType}:
+              <p>{`${this.state.data.documentType}: `}
                 <strong>{this.state.data.customer.documentId}</strong>
               </p>
               <p>Dirección: <strong>{this.state.data.address}</strong></p>
@@ -99,11 +99,9 @@ class PurchaseDetail extends Component {
                       <td>{item.productName}</td>
                       <td>
                         <ul className={styles.circleList}>
-                          <li>200 GB hosting</li>
-                          <li>100 cuentas</li>
-                          <li>50 sitios web</li>
-                          <li>ilimitados GB transferencia mensual</li>
-                          <li>(El pago es anual)</li>
+                          {item.features.map(feature =>
+                            <li key={feature.id}>200 GB hosting</li>,
+                          )}
                         </ul>
                       </td>
                       <td>{this.state.data.currency.symbol} {item.amount}</td>

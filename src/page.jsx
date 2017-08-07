@@ -9,7 +9,6 @@ import PublicRoute from './extra/public-route';
 import PrivateRoute from './extra/private-route';
 
 import Login from './modules/security/login/view';
-import Signup from './modules/security/signup/view';
 import Reset from './modules/security/reset/view';
 import Retrieve from './modules/security/retrieve/view';
 import ConfirmEmail from './modules/security/confirm-email/view';
@@ -60,7 +59,6 @@ class Page extends Component {
           <Route path="/confirm/:token"><ConfirmEmail /></Route>
 
           <PublicRoute path="/login" exact><Login /></PublicRoute>
-          <PublicRoute path="/registro" exact><Signup /></PublicRoute>
           <PublicRoute path="/reset" exact><Reset /></PublicRoute>
           <PublicRoute path="/change_password/:token" exact><Retrieve /></PublicRoute>
 
