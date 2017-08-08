@@ -96,11 +96,11 @@ class PurchaseDetail extends Component {
                 <tbody>
                   {this.state.data.orderDetails.map(item =>
                     <tr key={item.id}>
-                      <td>{item.productName}</td>
+                      <td>{item.product.name}</td>
                       <td>
                         <ul className={styles.circleList}>
-                          {item.features.map(feature =>
-                            <li key={feature.id}>200 GB hosting</li>,
+                          {item.features.map((feature, $index) =>
+                            <li key={$index}>{feature}</li>,
                           )}
                         </ul>
                       </td>
@@ -127,6 +127,24 @@ class PurchaseDetail extends Component {
               </table>
             </div>
             <h2>Documentos de pago</h2>
+            <div className="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Nro de documento</th>
+                    <th>Fecha de pago</th>
+                    <th>Monto</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{this.state.data.paymentDoc.voucher}</td>
+                    <td>{this.state.data.paymentDoc.created.substr(0, 10)}</td>
+                    <td>{`${this.state.data.currency.symbol} ${this.state.data.paymentDoc.total}`}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
             <p>
               {'Revisa el '}
               <a
