@@ -15,14 +15,16 @@ class DomainsTable extends Component {
   constructor(props, context) {
     super(props, context);
 
-    const domainsData = _.mapKeys(this.props.domains.slice(0), 'productId'); // FIXME remove first item from this array (slice 1)
+    const domainsData = _.mapKeys(this.props.domains.slice(1), 'countryProductId');
+
     const domains = _.map(domainsData, (domain) => {
-      const pricesData = this.props.prices.get(domain.productId);
+      const pricesData = this.props.prices.get(domain.countryProductId);
 
       const prices = (pricesData)
-        ? _.mapKeys(pricesData.prices.buy, 'period')
+        ? _.mapKeys(pricesData.prices.ALTA, 'periodSlug')
         : {};
-      const selected = (Object.keys(prices).length > 0) ? prices['1 Año'] : {};
+
+      const selected = (Object.keys(prices).length > 0) ? prices['ano-1'] : {};
 
       return Object.assign({}, domain, {
         prices,
@@ -30,7 +32,7 @@ class DomainsTable extends Component {
       });
     });
 
-    this.state = { domains: _.mapKeys(domains, 'domain') };
+    this.state = { domains: _.mapKeys(domains, 'name') };
 
     this.changeSelected = this.changeSelected.bind(this);
     this.addToCart = this.addToCart.bind(this);
@@ -43,9 +45,9 @@ class DomainsTable extends Component {
     this.context.router.history.push(url);
   }
 
-  changeSelected(period, trackItem) {
+  changeSelected(periodSlug, trackItem) {
     const newDomainData = _.extend({}, this.state.domains);
-    newDomainData[trackItem].selected = period;
+    newDomainData[trackItem].selected = periodSlug;
 
     this.setState({ domains: newDomainData });
   }
@@ -66,27 +68,27 @@ class DomainsTable extends Component {
                   key={domain.domain}
                 >
                   <td>
-                    <span>{domain.domain}</span>
+                    <span>{domain.name}</span>
                   </td>
                   <td>
                     {(
                       domain.available && Object.keys(domain.prices).length > 0 &&
                       <Combo
                         placeholder="Periodo"
-                        options={domain.prices}
                         selected={domain.selected}
                         config={{
-                          key: 'period',
-                          value: 'period',
-                          label: 'period',
+                          key: 'periodSlug',
+                          value: 'periodSlug',
+                          label: 'periodName',
                         }}
                         changeSelected={this.changeSelected}
-                        trackItem={domain.domain}
+                        trackItem={domain.name}
+                        options={domain.prices}
                       />
                     )}
                   </td>
                   <td>
-                    {(domain.available && `${domain.selected.currencySymbol} ${domain.selected.price}.00`)}
+                    {(domain.available && `${domain.selected.currencySymbol} ${domain.selected.price}`)}
                   </td>
                   <td>
                     {

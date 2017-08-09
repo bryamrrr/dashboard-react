@@ -41,10 +41,10 @@ class DomainsCatalog extends Component {
 
   addToCart() {
     const domain = this.state.domains[0];
-    const pricesData = this.props.prices.get(domain.productId);
+    const pricesData = this.props.prices.get(domain.countryProductId);
 
-    domain.prices = _.mapKeys(pricesData.prices.buy, 'period');
-    domain.selected = domain.prices['1 Año'];
+    domain.prices = _.mapKeys(pricesData.prices.ALTA, 'periodSlug');
+    domain.selected = domain.prices['ano-1'];
     this.props.addProduct(domain, 'Dominio');
     this.props.showToaster('success', this.props.strings.cart.addItem);
 

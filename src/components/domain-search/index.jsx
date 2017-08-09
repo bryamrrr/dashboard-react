@@ -47,10 +47,8 @@ class DomainSearch extends Component {
 
   async search() {
     const { name, selected } = this.state;
-    const domain = `${name}.${selected.name}`;
     this.setState({ loading: true });
-
-    const url = `${constants.urls.API_SONQO}/domains/search?name=${domain}`;
+    const url = `${constants.urls.API_SONQO}/domains/search?name=${name}&tld=${selected.name}`;
     const { data: { results } } = await httpRequest('GET', url);
 
     this.props.getDomains(results);

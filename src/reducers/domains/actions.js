@@ -12,7 +12,7 @@ export function setPrices(data) {
 
 export function fetchPrices() {
   return async (dispatch) => {
-    const url = `${constants.urls.API_SONQO}/prices?type=dominio`;
+    const url = `${constants.urls.API_SONQO}/prices?category_slug=dominios`;
     const { data: { results } } = await httpRequest('GET', url);
     dispatch(setPrices(results));
   };

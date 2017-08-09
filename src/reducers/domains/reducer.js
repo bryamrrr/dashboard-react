@@ -9,7 +9,7 @@ export const initialState = map({});
 function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_PRICES:
-      return state.merge(map(_.mapKeys(action.payload, 'id')));
+      return state.merge(map(_.mapKeys(action.payload, 'countryProductId')));
     default:
       return state;
   }
