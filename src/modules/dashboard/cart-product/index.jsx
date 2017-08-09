@@ -19,7 +19,7 @@ function CartProduct(props) {
     case 'Dominio':
       className = 'orange';
       iconName = 'linearicon-earth';
-      name = props.info.domain;
+      name = props.info.name;
       break;
     default:
       className = 'blue';
@@ -41,7 +41,7 @@ function CartProduct(props) {
         <div className={styles.product}>
           <span className={styles.title}>{name}</span>
           <span className={styles.period}>
-            {props.info.selected.period}
+            {props.info.selected.periodName}
           </span>
         </div>
         <div>
@@ -49,7 +49,7 @@ function CartProduct(props) {
             {props.info.selected.currencySymbol}
           </span>
           <span className={styles.price}>
-            {`${props.info.selected.price}.00`}
+            {`${props.info.selected.price}`}
           </span>
         </div>
       </div>

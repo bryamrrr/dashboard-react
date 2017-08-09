@@ -95,6 +95,7 @@ export function fetchCart(email, id) {
     };
 
     const { data, meta } = await httpRequest('POST', url, dataToSend);
+
     if (meta.ok) dispatch(setCart(data));
   };
 }

@@ -65,7 +65,7 @@ class DomainsTable extends Component {
               return (
                 <tr
                   className={className}
-                  key={domain.domain}
+                  key={domain.name}
                 >
                   <td>
                     <span>{domain.name}</span>
