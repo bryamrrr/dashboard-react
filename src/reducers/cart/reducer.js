@@ -25,7 +25,7 @@ const CartRecord = Record({
   count: 0,
   currencySymbol: 'S/',
   total: 0,
-  id: '',
+  id: '1f8e7a6a-2a87-4973-b836-85f32e7132df',
 });
 
 export const initialState = new CartRecord();

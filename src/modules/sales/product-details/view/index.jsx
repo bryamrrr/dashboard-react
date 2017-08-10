@@ -20,13 +20,16 @@ import styles from './styles.css';
 class ProductDetails extends Component {
   constructor(props, context) {
     super(props, context);
-
     const productId = this.context.router.route.match.params.productId;
+
     this.state = {
       fetchingPackages: true,
       product: this.props.items.get(productId),
       itemId: this.context.router.route.match.params.productId,
     };
+
+    console.log(this.state);
+    console.log(props.items.get(this.state.itemId));
 
     this.changeSelected = this.changeSelected.bind(this);
   }
@@ -34,8 +37,8 @@ class ProductDetails extends Component {
   async componentWillMount() {
     if (this.state.product.packages) return this.setState({ fetchingPackages: false });
 
-    const productId = this.props.items.get(this.state.itemId).get('productId');
-    await this.props.fetchPackages(this.state.itemId, productId);
+    const countryProductId = this.props.items.get(this.state.itemId).get('countryProductId');
+    await this.props.fetchPackages(this.state.itemId, countryProductId);
     return this.setState({ fetchingPackages: false });
   }
 
@@ -47,6 +50,7 @@ class ProductDetails extends Component {
 
   componentWillReceiveProps(nextProps) {
     // const productId = this.state.product.get('productId');
+    console.log(nextProps);
     const product = nextProps.items.get(this.state.itemId);
     if (product) this.setState({ product });
   }
@@ -65,9 +69,7 @@ class ProductDetails extends Component {
   render() {
     const { product } = this.state;
 
-    const name = (product.get('domain'))
-      ? product.get('domain')
-      : product.get('name');
+    const name = (product.get('name'));
 
     let category = product.get('category');
     let icon = '';
@@ -104,22 +106,22 @@ class ProductDetails extends Component {
 
           <div className={styles.productDetail}>
             <div className={styles.period}>
-              <p>Periodo seleccionado: {product.get('selected').period}</p>
+              <p>Periodo seleccionado: {product.get('selected').periodName}</p>
               <Combo
                 placeholder="Periodo"
                 options={product.get('prices')}
                 selected={product.get('selected')}
                 config={{
-                  key: 'period',
-                  value: 'period',
-                  label: 'period',
+                  key: 'periodSlug',
+                  value: 'periodSlug',
+                  label: 'periodName',
                 }}
                 changeSelected={this.changeSelected}
               />
             </div>
 
             <div className={styles.price}>
-              {`${product.get('selected').currencySymbol} ${product.get('selected').price}.00`}
+              {`${product.get('selected').currencySymbol} ${product.get('selected').price}`}
             </div>
           </div>
         </section>

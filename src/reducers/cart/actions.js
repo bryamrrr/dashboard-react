@@ -76,10 +76,11 @@ export function itemDeleted() {
   return { type: ITEM_DELETED };
 }
 
-export function fetchPackages(itemId, productId) {
+export function fetchPackages(itemId, countryProductId) {
   return async (dispatch) => {
-    const url = `${constants.urls.API_MOCKS}/packages/${productId}`;
+    const url = `${constants.urls.API_SONQO}/packages/${countryProductId}`;
     const { data: { results } } = await httpRequest('GET', url);
+    console.log('pacakges', results);
     dispatch(setPackages(itemId, results));
   };
 }
