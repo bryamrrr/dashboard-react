@@ -3,6 +3,8 @@ import jwtDecode from 'jwt-decode';
 import httpRequest from '../../extra/http-request';
 import constants from '../../extra/constants';
 
+import { fetchCart } from '../cart/actions';
+
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
@@ -32,7 +34,7 @@ export function confirmEmail() {
 
 export function loginUser(creds) {
   return async (dispatch) => {
-    const toSend = { // FIXME
+    const toSend = {
       email: creds.get('email'),
       password: creds.get('password'),
     };
@@ -49,6 +51,7 @@ export function loginUser(creds) {
         const { user } = jwtDecode(token);
 
         dispatch(receiveLogin({ user, token }));
+        fetchCart(user.email, user.id)(dispatch);
 
         localStorage.setItem('user', JSON.stringify(user));
         localStorage.setItem('token', token);

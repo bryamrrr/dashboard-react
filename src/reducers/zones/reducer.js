@@ -1,14 +1,11 @@
-import { Map as map } from 'immutable';
+import _ from 'lodash';
 
-export const initialState = map({
-  1: { id: 1, name: 'pe' },
-  2: { id: 2, name: 'com.pe' },
-  3: { id: 3, name: 'net' },
-});
+import SET_ZONES from './actions';
 
-
-function reducer(state = initialState, action) {
+function reducer(state = {}, action) {
   switch (action.type) {
+    case SET_ZONES:
+      return _.mapKeys(action.payload, 'id');
     default:
       return state;
   }

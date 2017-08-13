@@ -49,7 +49,11 @@ import { fetchCart } from './reducers/cart/actions';
 class Page extends Component {
   componentWillMount() {
     const { email, id } = this.props;
-    if (id !== '') this.props.fetchCart(email, id);
+    console.log(this.props);
+    if (id !== '') {
+      console.log('test');
+      this.props.fetchCart(email, id);
+    }
   }
 
   render() {
@@ -102,12 +106,13 @@ class Page extends Component {
 
 Page.propTypes = {
   fetchCart: PropTypes.func.isRequired,
-  email: PropTypes.string.isRequired,
+  email: PropTypes.string,
   id: PropTypes.string,
 };
 
 Page.defaultProps = {
   id: '',
+  email: '',
 };
 
 function mapStateToProps(state) {

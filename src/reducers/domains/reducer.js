@@ -4,9 +4,7 @@ import _ from 'lodash';
 
 import { SET_PRICES } from './actions';
 
-export const initialState = map({});
-
-function reducer(state = initialState, action) {
+function reducer(state = map({}), action) {
   switch (action.type) {
     case SET_PRICES:
       return state.merge(map(_.mapKeys(action.payload, 'countryProductId')));

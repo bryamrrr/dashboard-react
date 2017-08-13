@@ -21,20 +21,19 @@ class DomainSearch extends Component {
       loading: false,
       name: '',
       selected: {},
-      zones: {},
     };
 
     this.changeSelected = this.changeSelected.bind(this);
     this.search = this.search.bind(this);
   }
 
-  async componentWillMount() {
-    const url = `${constants.urls.API_SONQO}/dnszones`;
-    const { data: { results } } = await httpRequest('GET', url);
-    this.setState({
-      zones: results,
-      selected: results[1],
-    });
+  componentWillReceiveProps(nextProps) {
+    if (!_.isEmpty(nextProps.zones)) {
+      const key = Object.keys(nextProps.zones)[0];
+      this.setState({
+        selected: nextProps.zones[key],
+      });
+    }
   }
 
   onInputChange(name) {
@@ -73,7 +72,7 @@ class DomainSearch extends Component {
           />
         </div>
         <ComboSearch
-          options={_.mapKeys(this.state.zones, 'id')}
+          options={this.props.zones}
           changeSelected={this.changeSelected}
           selected={this.state.selected}
           placeholder="Selecciona una opción"
@@ -94,6 +93,7 @@ class DomainSearch extends Component {
 DomainSearch.propTypes = {
   getDomains: PropTypes.func.isRequired,
   strings: PropTypes.objectOf(PropTypes.object).isRequired,
+  zones: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 function mapStateToProps(state) {

@@ -25,7 +25,7 @@ const CartRecord = Record({
   count: 0,
   currencySymbol: 'S/',
   total: 0,
-  id: '1f8e7a6a-2a87-4973-b836-85f32e7132df',
+  id: '',
 });
 
 export const initialState = new CartRecord();
@@ -63,7 +63,7 @@ function reducer(state = initialState, action) {
     }
     case SET_PACKAGES: {
       const item = Object.assign({}, state.get('items').get(action.payload.productId), {
-        packages: _.mapKeys(action.payload.packages, 'id'),
+        packages: _.mapKeys(action.payload.packages, 'periodSlug'),
       });
       return state
         .setIn([
@@ -133,6 +133,7 @@ function reducer(state = initialState, action) {
         id: action.payload.id,
       });
 
+      console.log(cart.set('total', calcTotal(cart.items)));
       return cart.set('total', calcTotal(cart.items));
     }
     default:

@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 
 import DomainSearch from '../../../../components/domain-search';
 import Info from '../../../../components/info';
+import LoadingIcon from '../../../../components/loading-icon';
 import DomainsTable from '../domains-table';
 
 import { addProduct } from '../../../../reducers/cart/actions';
@@ -28,10 +29,6 @@ class DomainsCatalog extends Component {
 
   componentWillMount() {
     this.props.setRoute({ title: 'catalog' }, { title: 'domains' });
-  }
-
-  componentDidMount() {
-    // If store hasn't domain prices, then we make a request
     if (this.props.prices.size === 0) this.props.fetchPrices();
   }
 
@@ -65,6 +62,10 @@ class DomainsCatalog extends Component {
         text = this.props.strings.domainsCatalog.infoError;
         type = 'warning';
       }
+    }
+
+    if (this.props.prices.size === 0 || _.isEmpty(this.props.zones)) {
+      return <LoadingIcon />;
     }
 
     return (
@@ -103,6 +104,7 @@ DomainsCatalog.propTypes = {
   setRoute: PropTypes.func.isRequired,
   showToaster: PropTypes.func.isRequired,
   strings: PropTypes.objectOf(PropTypes.object).isRequired,
+  zones: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 DomainsCatalog.contextTypes = {

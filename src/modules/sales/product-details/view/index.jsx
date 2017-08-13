@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 
-import LoadingSpin from '../../../../components/loading-spin';
+import LoadingIcon from '../../../../components/loading-icon';
 import Combo from '../../../../components/combo';
 import Hexagon from '../../../../components/hexagon';
 import FormButton from '../../../../components/form-button';
@@ -20,26 +20,26 @@ import styles from './styles.css';
 class ProductDetails extends Component {
   constructor(props, context) {
     super(props, context);
-    const productId = this.context.router.route.match.params.productId;
 
     this.state = {
       fetchingPackages: true,
-      product: this.props.items.get(productId),
       itemId: this.context.router.route.match.params.productId,
     };
-
-    console.log(this.state);
-    console.log(props.items.get(this.state.itemId));
 
     this.changeSelected = this.changeSelected.bind(this);
   }
 
   async componentWillMount() {
-    if (this.state.product.packages) return this.setState({ fetchingPackages: false });
+    const product = this.props.items.get(this.state.itemId);
+    if (product && product.packages) return this.setState({ fetchingPackages: false });
 
-    const countryProductId = this.props.items.get(this.state.itemId).get('countryProductId');
-    await this.props.fetchPackages(this.state.itemId, countryProductId);
-    return this.setState({ fetchingPackages: false });
+    if (product && !product.packages) {
+      const countryProductId = product.get('countryProductId');
+      await this.props.fetchPackages(this.state.itemId, countryProductId);
+      return this.setState({ fetchingPackages: false });
+    }
+
+    return undefined;
   }
 
   componentDidMount() {
@@ -48,11 +48,15 @@ class ProductDetails extends Component {
     , 600);
   }
 
-  componentWillReceiveProps(nextProps) {
-    // const productId = this.state.product.get('productId');
-    console.log(nextProps);
+  async componentWillReceiveProps(nextProps) {
     const product = nextProps.items.get(this.state.itemId);
-    if (product) this.setState({ product });
+    if (product && !product.packages) {
+      const countryProductId = product.get('countryProductId');
+      await this.props.fetchPackages(this.state.itemId, countryProductId);
+      return this.setState({ fetchingPackages: false });
+    }
+
+    return undefined;
   }
 
   addToCart(packageData) {
@@ -67,11 +71,15 @@ class ProductDetails extends Component {
   }
 
   render() {
-    const { product } = this.state;
+    let product = {};
 
-    const name = (product.get('name'));
+    if (this.props.items) {
+      product = this.props.items.get(this.state.itemId);
+    }
 
-    let category = product.get('category');
+    const name = product.name || '';
+    let category = product.category || '';
+
     let icon = '';
     let color = '';
     switch (category) {
@@ -91,6 +99,8 @@ class ProductDetails extends Component {
         category = 'Producto';
     }
 
+    if (this.state.fetchingPackages) return <LoadingIcon />;
+
     return (
       <div>
         <section className={styles.productInfo}>
@@ -106,11 +116,11 @@ class ProductDetails extends Component {
 
           <div className={styles.productDetail}>
             <div className={styles.period}>
-              <p>Periodo seleccionado: {product.get('selected').periodName}</p>
+              <p>Periodo seleccionado: {product.selected.periodName}</p>
               <Combo
                 placeholder="Periodo"
-                options={product.get('prices')}
-                selected={product.get('selected')}
+                options={product.prices}
+                selected={product.selected}
                 config={{
                   key: 'periodSlug',
                   value: 'periodSlug',
@@ -121,17 +131,14 @@ class ProductDetails extends Component {
             </div>
 
             <div className={styles.price}>
-              {`${product.get('selected').currencySymbol} ${product.get('selected').price}`}
+              {`${product.selected.currencySymbol} ${product.selected.price}`}
             </div>
           </div>
         </section>
-
-        {(
-          (this.state.fetchingPackages && <LoadingSpin />)
-          ||
-          (!this.state.fetchingPackages && <div className={styles.packages}>
-            <h2>Te puede interesar:</h2>
-            {product.get('packages').valueSeq().map((packageData) => {
+        <div className={styles.packages}>
+          <h2>Te puede interesar:</h2>
+          {(product.packages[product.selected.periodSlug].packagePeriod.length > 0
+            && product.packages[product.selected.periodSlug].packagePeriod.map((packageData) => {
               const price = packageData.prices[0].price;
               const currencySymbol = packageData.prices[0].currencySymbol;
               return (
@@ -157,9 +164,9 @@ class ProductDetails extends Component {
                   </article>
                 </section>
               );
-            })}
-          </div>)
-        )}
+            })
+          )}
+        </div>
       </div>
     );
   }
