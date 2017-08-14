@@ -27,6 +27,15 @@ class DomainSearch extends Component {
     this.search = this.search.bind(this);
   }
 
+  componentWillMount() {
+    if (!_.isEmpty(this.props.zones)) {
+      const key = Object.keys(this.props.zones)[0];
+      this.setState({
+        selected: this.props.zones[key],
+      });
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
     if (!_.isEmpty(nextProps.zones)) {
       const key = Object.keys(nextProps.zones)[0];

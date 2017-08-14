@@ -49,9 +49,7 @@ import { fetchCart } from './reducers/cart/actions';
 class Page extends Component {
   componentWillMount() {
     const { email, id } = this.props;
-    console.log(this.props);
     if (id !== '') {
-      console.log('test');
       this.props.fetchCart(email, id);
     }
   }

@@ -63,7 +63,7 @@ function reducer(state = initialState, action) {
     }
     case SET_PACKAGES: {
       const item = Object.assign({}, state.get('items').get(action.payload.productId), {
-        packages: _.mapKeys(action.payload.packages, 'periodSlug'),
+        packages: _.mapKeys(action.payload.packages, 'slug'),
       });
       return state
         .setIn([

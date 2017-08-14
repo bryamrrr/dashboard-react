@@ -80,7 +80,7 @@ export function fetchPackages(itemId, countryProductId) {
   return async (dispatch) => {
     const url = `${constants.urls.API_SONQO}/packages/${countryProductId}`;
     const { data: { results } } = await httpRequest('GET', url);
-    console.log('pacakges', results);
+    console.log('packages', results);
     dispatch(setPackages(itemId, results));
   };
 }

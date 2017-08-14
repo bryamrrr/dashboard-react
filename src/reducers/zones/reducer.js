@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import SET_ZONES from './actions';
+import { SET_ZONES } from './actions';
 
 function reducer(state = {}, action) {
   switch (action.type) {

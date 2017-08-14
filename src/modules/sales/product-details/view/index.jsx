@@ -34,7 +34,7 @@ class ProductDetails extends Component {
     if (product && product.packages) return this.setState({ fetchingPackages: false });
 
     if (product && !product.packages) {
-      const countryProductId = product.get('countryProductId');
+      const countryProductId = product.countryProductId;
       await this.props.fetchPackages(this.state.itemId, countryProductId);
       return this.setState({ fetchingPackages: false });
     }
@@ -61,6 +61,7 @@ class ProductDetails extends Component {
 
   addToCart(packageData) {
     // It should sends package data with current product data
+    console.log(packageData);
     this.props.addPackage(this.state.itemId, packageData);
     const url = '/catalogo/dominios';
     this.context.router.history.push(url);
@@ -139,19 +140,19 @@ class ProductDetails extends Component {
           <h2>Te puede interesar:</h2>
           {(product.packages[product.selected.periodSlug].packagePeriod.length > 0
             && product.packages[product.selected.periodSlug].packagePeriod.map((packageData) => {
-              const price = packageData.prices[0].price;
-              const currencySymbol = packageData.prices[0].currencySymbol;
+              const price = packageData.price;
+              const currencySymbol = packageData.currencySymbol;
               return (
                 <section key={packageData.id} className={styles.packageContainer}>
                   <article className={styles.item}>
-                    <div className={styles.amount}>{`${currencySymbol} ${price}.00`}</div>
+                    <div className={styles.amount}>{`${currencySymbol} ${price}`}</div>
                     <div className={styles.itemInfo}>
                       <i className="linearicon-papers" />
                       <div className={styles.packageDetail}>
                         <p>Llévate tu producto junto con:</p>
                         {packageData.remainingProducts.map(productData =>
                           <a key={productData.id}>
-                            <span>{productData.name}</span>
+                            <span>{productData.productName}</span>
                           </a>,
                         )}
                       </div>
