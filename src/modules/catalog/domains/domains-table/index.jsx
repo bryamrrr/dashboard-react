@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 
+import DomainsWhois from '../domains-whois';
+
 import Combo from '../../../../components/combo';
 
 import { addProduct } from '../../../../reducers/cart/actions';
@@ -15,7 +17,7 @@ class DomainsTable extends Component {
   constructor(props, context) {
     super(props, context);
 
-    const domainsData = _.mapKeys(this.props.domains.slice(1), 'countryProductId');
+    const domainsData = _.mapKeys(this.props.domains, 'countryProductId');
 
     const domains = _.map(domainsData, (domain) => {
       const pricesData = this.props.prices.get(domain.countryProductId);
@@ -32,10 +34,35 @@ class DomainsTable extends Component {
       });
     });
 
-    this.state = { domains: _.mapKeys(domains, 'name') };
+    this.state = {
+      domains: _.mapKeys(domains, 'name'),
+      domainPaneActive: true,
+    };
 
     this.changeSelected = this.changeSelected.bind(this);
     this.addToCart = this.addToCart.bind(this);
+    this.changeTab = this.changeTab.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const domainsData = _.mapKeys(nextProps.domains, 'countryProductId');
+
+    const domains = _.map(domainsData, (domain) => {
+      const pricesData = nextProps.prices.get(domain.countryProductId);
+
+      const prices = (pricesData)
+      ? _.mapKeys(pricesData.prices.ALTA, 'periodSlug')
+      : {};
+
+      const selected = (Object.keys(prices).length > 0) ? prices['ano-1'] : {};
+
+      return Object.assign({}, domain, {
+        prices,
+        selected,
+      });
+    });
+
+    this.setState({ domains: _.mapKeys(domains, 'name') });
   }
 
   addToCart(domain) {
@@ -52,45 +79,92 @@ class DomainsTable extends Component {
     this.setState({ domains: newDomainData });
   }
 
+  changeTab(tab) {
+    if (tab === 'whois') {
+      this.setState({ domainPaneActive: false });
+    } else {
+      this.setState({ domainPaneActive: true });
+    }
+  }
+
   render() {
+    const domainTabClass = (this.state.domainPaneActive)
+    ? `${styles.tab} ${styles.active}`
+    : styles.tab;
+
+    const whoisTabClass = (!this.state.domainPaneActive)
+    ? `${styles.tab} ${styles.active}`
+    : styles.tab;
+
     return (
-      <div className="table-container">
-        <table>
-          <tbody>
+      <div className={styles.tabData}>
+        <div className={styles.tabHeader}>
+          <div
+            className={domainTabClass}
+            aria-hidden
+            onClick={() => this.changeTab('domain')}
+          >
+            <span>Dominios</span>
+            <div className={styles.clearBorder} />
+          </div>
+          <div
+            className={whoisTabClass}
+            aria-hidden
+            onClick={() => this.changeTab('whois')}
+          >
+            <span>Whois</span>
+            <div className={styles.clearBorder} />
+          </div>
+        </div>
+        {
+          this.state.domainPaneActive &&
+          <div className={styles.tabContent}>
             {_.map(this.state.domains, (domain) => {
               const className = (domain.available)
                 ? ''
                 : styles.disabled;
 
               return (
-                <tr
-                  className={className}
+                <div
+                  className={`${className} ${styles.tabRow}`}
                   key={domain.name}
                 >
-                  <td>
+                  <div className={styles.tabColumn}>
                     <span>{domain.name}</span>
-                  </td>
-                  <td>
+                  </div>
+                  <div className={styles.tabColumn}>
                     {(
                       domain.available && Object.keys(domain.prices).length > 0 &&
-                      <Combo
-                        placeholder="Periodo"
-                        selected={domain.selected}
-                        config={{
-                          key: 'periodSlug',
-                          value: 'periodSlug',
-                          label: 'periodName',
-                        }}
-                        changeSelected={this.changeSelected}
-                        trackItem={domain.name}
-                        options={domain.prices}
-                      />
+                      <div className={styles.comboContainer}>
+                        <Combo
+                          placeholder="Periodo"
+                          selected={domain.selected}
+                          config={{
+                            key: 'periodSlug',
+                            value: 'periodSlug',
+                            label: 'periodName',
+                          }}
+                          changeSelected={this.changeSelected}
+                          trackItem={domain.name}
+                          options={domain.prices}
+                          noPlaceholder="true"
+                        />
+                      </div>
                     )}
-                  </td>
-                  <td>
+                  </div>
+                  <div className={`${styles.tabColumn} ${styles.price}`}>
                     {(domain.available && `${domain.selected.currencySymbol} ${domain.selected.price}`)}
-                  </td>
-                  <td>
+                    {(!domain.available &&
+                      <a
+                        className={styles.tabLink}
+                        onClick={() => this.changeTab('whois')}
+                        aria-hidden
+                      >
+                        whois
+                      </a>
+                    )}
+                  </div>
+                  <div className={styles.tabColumn}>
                     {
                       ((domain.available &&
                         <span
@@ -104,12 +178,18 @@ class DomainsTable extends Component {
                         <span>{this.props.strings.domainsCatalog.notAvailable}</span>
                       ))
                     }
-                  </td>
-                </tr>
+                  </div>
+                </div>
               );
             })}
-          </tbody>
-        </table>
+          </div>
+        }
+        {
+          !this.state.domainPaneActive &&
+          <div className={styles.tabContent}>
+            <DomainsWhois />
+          </div>
+        }
       </div>
     );
   }

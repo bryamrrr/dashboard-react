@@ -19,9 +19,9 @@ function Info(props) {
 
   return (
     <div className={containerClases}>
-      <i className={icon} />
-      <p className={styles.text}>{props.text}</p>
-      {(props.addToCart &&
+      <i className={`${icon} ${styles.boldIcon}`} />
+      <p className={styles.text}>El dominio <b>{props.domain}</b> {props.text}</p>
+      {(props.addToCart && props.addToCart !== '' &&
         <span
           className={styles.link}
           onClick={() => props.addToCart()}
@@ -35,8 +35,12 @@ function Info(props) {
 }
 
 Info.propTypes = {
-  addToCart: PropTypes.func,
+  addToCart: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.string,
+  ]).isRequired,
   text: PropTypes.string.isRequired,
+  domain: PropTypes.string.isRequired,
   type: PropTypes.oneOf(['info', 'warning', 'success', 'error']),
   strings: PropTypes.objectOf(PropTypes.object).isRequired,
 };

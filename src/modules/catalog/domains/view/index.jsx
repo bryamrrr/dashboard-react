@@ -51,16 +51,21 @@ class DomainsCatalog extends Component {
 
   render() {
     const { domains } = this.state;
+    let domain = '';
     let text = '';
     let type = 'info';
+    let funcAddCart = '';
 
     if (domains && domains[0]) {
+      domain = domains[0].name;
       if (domains[0].available) {
         text = this.props.strings.domainsCatalog.infoSuccess;
         type = 'success';
+        funcAddCart = this.addToCart;
       } else {
         text = this.props.strings.domainsCatalog.infoError;
         type = 'warning';
+        funcAddCart = '';
       }
     }
 
@@ -78,7 +83,8 @@ class DomainsCatalog extends Component {
           <Info
             text={text}
             type={type}
-            addToCart={this.addToCart}
+            domain={domain}
+            addToCart={funcAddCart}
           />
         )}
         {(domains && domains.length > 1 &&

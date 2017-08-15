@@ -59,8 +59,8 @@
   },
   "domainsCatalog": {
     "title": "Find the domain your looking for",
-    "infoSuccess": "Domain is available.",
-    "infoError": "Domain is not available",
+    "infoSuccess": "is available.",
+    "infoError": "is not available",
     "period": "period",
     "notAvailable": "Not available",
     "searchDomain": "Search your domain"

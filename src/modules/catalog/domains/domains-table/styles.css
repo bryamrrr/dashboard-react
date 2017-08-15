@@ -6,3 +6,78 @@
 .link:hover { text-decoration: underline; }
 
 .disabled { color: #ccc; }
+
+.tabHeader { display: flex; }
+
+.clearBorder {
+  position: absolute;
+  top: 100%;
+  width: 119px;
+  height: 5px;
+  background-color: white;
+  display: none;
+  left: 0;
+}
+
+.active .clearBorder { display: block; }
+
+.tab {
+  align-items: center;
+  background-color: #fff;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: flex;
+  flex-basis: 120px;
+  font-size: 13px;
+  justify-content: center;
+  padding: 10px;
+  text-transform: uppercase;
+  position: relative;
+}
+
+.tab.active {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border: 1px solid #ddd;
+  border-bottom: 0;
+  box-shadow: 0 0 3px #ddd;
+  cursor: default;
+  color: #ff5a00;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.tabContent {
+  border: 1px solid #ddd;
+  box-shadow: 0px 1px 3px #ddd;
+  padding: 0 10px;
+  font-weight: 300;
+}
+
+.tabRow {
+  align-items: center;
+  border-bottom: 1px dashed #ddd;
+  display: flex;
+  justify-content: space-between;
+  min-height: 40px;
+  padding: 20px 10px;
+}
+
+.tabRow:last-of-type { border-bottom: 0; }
+
+.tabRow .tabColumn { flex: 1; }
+
+.tabRow .tabColumn:nth-child(1) { flex: 3; }
+
+.comboContainer > div { margin: 0; }
+
+.price { padding-left: 10px;}
+
+.tabLink {
+  color: #ff5a00;
+  border-bottom: 1px solid #ffceb3;
+  cursor: pointer;
+  transition: .3s border-color;
+}
+
+.tabLink:hover { border-color: transparent; }

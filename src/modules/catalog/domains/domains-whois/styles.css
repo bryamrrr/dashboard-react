@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.searchContent {
+  padding: 30px 10px;
+  padding-right: 50px;
+  flex: 1;
+}
+
+.infoContent {
+  padding: 20px 0 20px 50px;
+  border-left: 1px solid #ddd;
+  flex: 1;
+}
+
+.infoContent h3 { font-size: 1.7em; }
+
+.responseList {
+  list-style-type: none;
+  padding-left: 0;
+  font-size: 14px;
+}
+
+.responseList li {
+  margin-bottom: 10px;
+  display: flex;
+}
+
+.listHeader {
+  font-weight: 500;
+  width: 150px;
+  padding-right: 10px;
+}
+
+.dnsList span { display: block; }

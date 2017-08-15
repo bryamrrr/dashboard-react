@@ -84,7 +84,10 @@ class Combo extends Component {
           {
             includeIcon !== '' && <i className={`${styles.comboIcon} ${includeIcon}`} />
           }
-          <span className={classLabel}>{this.props.placeholder}</span>
+          {
+            this.props.noPlaceholder === '' &&
+            <span className={classLabel}>{this.props.placeholder}</span>
+          }
           {
             text !== '' && <span>{text}</span>
           }
@@ -129,6 +132,7 @@ Combo.propTypes = {
     PropTypes.object,
   ])),
   trackItem: PropTypes.string,
+  noPlaceholder: PropTypes.string,
 };
 
 Combo.defaultProps = {
@@ -141,6 +145,7 @@ Combo.defaultProps = {
   placeholder: 'Selecciona una opción',
   selected: {},
   trackItem: null,
+  noPlaceholder: '',
 };
 
 export default Combo;
