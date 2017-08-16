@@ -88,7 +88,7 @@ class DomainsWhois extends Component {
               </li>
               <li>
                 <span className={styles.listHeader}>Empresa comercializadora:</span>
-                <span>{this.state.data.owner}</span>
+                <span>{this.state.data.registrar}</span>
               </li>
               <li>
                 <span className={styles.listHeader}>Registros DNS activos:</span>

@@ -10,7 +10,8 @@
       "title": "Catalog",
       "domains": "Domains",
       "hosting": "Hosting",
-      "mails": "Mails"
+      "mails": "Mails",
+      "details": "Product detail"
     },
     "services": {
       "title": "My services",

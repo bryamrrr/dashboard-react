@@ -62,6 +62,7 @@ function reducer(state = initialState, action) {
       return newState.set('total', calcTotal(newState.get('items')));
     }
     case SET_PACKAGES: {
+      console.log('payload', action.payload);
       const item = Object.assign({}, state.get('items').get(action.payload.productId), {
         packages: _.mapKeys(action.payload.packages, 'slug'),
       });
@@ -74,24 +75,32 @@ function reducer(state = initialState, action) {
     case ADD_PACKAGE: {
       const products = Object.assign({},
         _.mapKeys(action.payload.packageData.remainingProducts, (key) => {
-          if (key.productId) return key.productId;
+          if (key.countryProductId) return key.countryProductId;
           return key.id;
         }),
       );
 
-      const productId = state.items.get(action.payload.item).productId
+      const countryProductId = state.items.get(action.payload.item).countryProductId
         || state.items.get(action.payload.item).id;
       const product = {
-        [productId]: state.items.get(action.payload.item),
+        [countryProductId]: state.items.get(action.payload.item),
+      };
+
+      const selectedItem = {
+        periodSlug: action.payload.packageData.periodSlug,
+        price: action.payload.packageData.price,
+        periodId: action.payload.packageData.periodId,
+        periodName: action.payload.packageData.periodName,
+        currencySymbol: action.payload.packageData.currencySymbol,
       };
 
       const data = {
-        period: action.payload.packageData.period,
-        prices: action.payload.packageData.prices,
-        selected: action.payload.packageData.prices[0],
+        period: action.payload.packageData.periodName,
+        selected: selectedItem,
         name: action.payload.packageData.name,
         type: 'package',
         products: Object.assign({}, products, product),
+        fk_item_id: countryProductId,
       };
 
       // Send package (product) to API

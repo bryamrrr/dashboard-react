@@ -44,7 +44,7 @@ class ProductDetails extends Component {
 
   componentDidMount() {
     setTimeout(() =>
-      this.props.setRoute({ title: 'Detalle del producto' }, { title: 'Paquetes' })
+      this.props.setRoute({ title: 'catalog' }, { title: 'details' })
     , 600);
   }
 
@@ -59,10 +59,15 @@ class ProductDetails extends Component {
     return undefined;
   }
 
-  addToCart(packageData) {
+  addToCart(packageData, generalPackageData) {
     // It should sends package data with current product data
-    console.log(packageData);
-    this.props.addPackage(this.state.itemId, packageData);
+    const data = Object.assign({}, packageData, {
+      periodicityId: generalPackageData.periodicityId,
+      periodName: generalPackageData.name,
+      periodSlug: generalPackageData.slug,
+      periodId: generalPackageData.id,
+    });
+    this.props.addPackage(this.state.itemId, data);
     const url = '/catalogo/dominios';
     this.context.router.history.push(url);
   }
@@ -138,13 +143,13 @@ class ProductDetails extends Component {
         </section>
         <div className={styles.packages}>
           <h2>Te puede interesar:</h2>
-          {(product.packages[product.selected.periodSlug].packagePeriod.length > 0
-            && product.packages[product.selected.periodSlug].packagePeriod.map((packageData) => {
-              const price = packageData.price;
-              const currencySymbol = packageData.currencySymbol;
-              return (
-                <section key={packageData.id} className={styles.packageContainer}>
-                  <article className={styles.item}>
+          <section className={styles.packageContainer}>
+            {(product.packages[product.selected.periodSlug].packagePeriod.length > 0
+              && product.packages[product.selected.periodSlug].packagePeriod.map((packageData) => {
+                const price = packageData.price;
+                const currencySymbol = packageData.currencySymbol;
+                return (
+                  <article key={packageData.id} className={styles.item}>
                     <div className={styles.amount}>{`${currencySymbol} ${price}`}</div>
                     <div className={styles.itemInfo}>
                       <i className="linearicon-papers" />
@@ -160,13 +165,16 @@ class ProductDetails extends Component {
                     <FormButton
                       callToAction="Agregar al carrito"
                       includeIcon="linearicon-cart"
-                      onClick={() => this.addToCart(packageData)}
+                      onClick={() => this.addToCart(
+                        packageData,
+                        product.packages[product.selected.periodSlug])
+                      }
                     />
                   </article>
-                </section>
-              );
-            })
-          )}
+                );
+              })
+            )}
+          </section>
         </div>
       </div>
     );
