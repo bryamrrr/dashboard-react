@@ -8,8 +8,12 @@ import styles from './styles.css';
 
 function CatalogCard(props) {
   const item = Object.assign({}, props.info, {
-    selected: props.info.prices.buy[0],
+    selected: props.info.prices.ALTA[0],
   });
+
+  const price = (props.info.finalAmount).toFixed(2);
+  const integerPrice = (price).split('.')[0];
+  const decimalPrice = (price).split('.')[1];
 
   return (
     <Card includeBorder>
@@ -19,16 +23,16 @@ function CatalogCard(props) {
         </header>
         <div className={styles.price}>
           <span className={styles.currency}>{props.info.currencySymbol}</span>
-          <span className={styles.integer}>{props.info.integerPrice}</span>
+          <span className={styles.integer}>{integerPrice}</span>
           <div className={styles.right}>
-            <span className={styles.decimal}>.00</span>
-            <span className={styles.period}>Anual</span>
+            <span className={styles.decimal}>.{decimalPrice}</span>
+            <span className={styles.period}>{props.info.periodicityName}</span>
           </div>
         </div>
         <div className={styles.body}>
-          <ul>
+          {/* <ul>
             {props.info.description.map(data => <li key={data}>{data}</li>)}
-          </ul>
+          </ul> */}
           <FormButton
             callToAction="Agregar al carrito"
             includeIcon="linearicon-cart"

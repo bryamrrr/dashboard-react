@@ -33,7 +33,7 @@ export const initialState = new CartRecord();
 function calcTotal(items) {
   const values = [];
 
-  items.forEach(item => values.push(parseInt(item.selected.price, 10)));
+  items.forEach(item => values.push(parseFloat(item.selected.price)));
 
   return values.reduce((accumulation, current) => accumulation + current, 0);
 }
@@ -142,7 +142,6 @@ function reducer(state = initialState, action) {
         id: action.payload.id,
       });
 
-      console.log(cart.set('total', calcTotal(cart.items)));
       return cart.set('total', calcTotal(cart.items));
     }
     default:

@@ -12,12 +12,14 @@ export const initialState = map({});
 function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_HOSTINGS:
-      return map(_.mapKeys(action.payload, 'id'));
+      return map(_.mapKeys(action.payload, 'countryProductId'));
     case SET_HOSTING_PRICES: {
-      const prices = _.mapKeys(action.payload, 'id');
+      const prices = _.mapKeys(action.payload, 'countryProductId');
+      // return state.merge(map(_.mapKeys(action.payload, 'countryProductId')));
+      // console.log(prices);
       return state.map(product =>
         Object.assign({}, product, {
-          prices: prices[product.id].prices,
+          prices: prices[product.countryProductId].prices,
         }),
       );
     }

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import CatalogCard from '../../catalog-card';
-import LoadingSpin from '../../../../components/loading-spin';
+import LoadingIcon from '../../../../components/loading-icon';
 
 import { setRoute } from '../../../../reducers/routes/actions';
 import { addProduct } from '../../../../reducers/cart/actions';
@@ -44,11 +44,11 @@ class HostingCatalog extends Component {
     return (
       <div className={styles.container}>
         {(
-          (this.state.fetchingHostings && <LoadingSpin />)
+          (this.state.fetchingHostings && <LoadingIcon />)
           ||
           (!this.state.fetchingHostings && this.props.hostings.valueSeq().map(product =>
             <CatalogCard
-              key={product.id}
+              key={product.countryProductId}
               addToCart={this.addToCart}
               info={product}
             />,

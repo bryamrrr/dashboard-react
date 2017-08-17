@@ -20,7 +20,7 @@ export function setHostingPrices(data) {
 
 export function fetchHostings() {
   return async (dispatch) => {
-    const url = `${constants.urls.API_SONQO}/products/hosting`;
+    const url = `${constants.urls.API_SONQO}/products/hosting?period=ano-1&operation=alta`;
     const { data: { results } } = await httpRequest('GET', url);
     dispatch(setHostings(results));
   };
@@ -28,7 +28,7 @@ export function fetchHostings() {
 
 export function fetchHostingPrices() {
   return async (dispatch) => {
-    const url = `${constants.urls.API_MOCKS}/prices?type=hosting`;
+    const url = `${constants.urls.API_SONQO}/prices?category_slug=hosting`;
     const { data: { results } } = await httpRequest('GET', url);
     dispatch(setHostingPrices(results));
   };
