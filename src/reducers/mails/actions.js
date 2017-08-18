@@ -20,7 +20,7 @@ export function setMailPrices(data) {
 
 export function fetchMails() {
   return async (dispatch) => {
-    const url = `${constants.urls.API_SONQO}/products/email`;
+    const url = `${constants.urls.API_SONQO}/products/correo?period=ano-1&operation=alta`;
     const { data: { results } } = await httpRequest('GET', url);
     dispatch(setMails(results));
   };
@@ -28,7 +28,7 @@ export function fetchMails() {
 
 export function fetchMailPrices() {
   return async (dispatch) => {
-    const url = `${constants.urls.API_SONQO}/prices?type=email`;
+    const url = `${constants.urls.API_SONQO}/prices?category_slug=correo`;
     const { data: { results } } = await httpRequest('GET', url);
     dispatch(setMailPrices(results));
   };

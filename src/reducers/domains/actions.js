@@ -14,7 +14,7 @@ export function setPrices(data) {
 
 export function fetchPrices() {
   return async (dispatch) => {
-    const url = `${constants.urls.API_SONQO}/prices?category_slug=dominios`;
+    const url = `${constants.urls.API_SONQO}/prices?category_slug=dominios&limit=10000`;
     const { data: { results } } = await httpRequest('GET', url);
     dispatch(setPrices(results));
     fetchZones()(dispatch);

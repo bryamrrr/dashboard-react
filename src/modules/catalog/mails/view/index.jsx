@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import CatalogCard from '../../catalog-card';
-import LoadingSpin from '../../../../components/loading-spin';
+import LoadingIcon from '../../../../components/loading-icon';
 
 import { setRoute } from '../../../../reducers/routes/actions';
 import { addProduct } from '../../../../reducers/cart/actions';
@@ -42,7 +42,7 @@ class MailsCatalog extends Component {
     return (
       <div className={styles.container}>
         {(
-          (this.state.fetchingMails && <LoadingSpin />)
+          (this.state.fetchingMails && <LoadingIcon />)
           ||
           (!this.state.fetchingMails && this.props.mails.valueSeq().map(product =>
             <CatalogCard

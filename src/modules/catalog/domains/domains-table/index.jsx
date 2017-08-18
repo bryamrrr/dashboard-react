@@ -18,6 +18,7 @@ class DomainsTable extends Component {
     super(props, context);
 
     const domainsData = _.mapKeys(this.props.domains, 'countryProductId');
+    console.log('domainsData', domainsData);
 
     const domains = _.map(domainsData, (domain) => {
       const pricesData = this.props.prices.get(domain.countryProductId);
@@ -34,10 +35,14 @@ class DomainsTable extends Component {
       });
     });
 
+    console.log('domains', domains);
+
     this.state = {
       domains: _.mapKeys(domains, 'name'),
       domainPaneActive: true,
     };
+
+    console.log(this.state.domains);
 
     this.changeSelected = this.changeSelected.bind(this);
     this.addToCart = this.addToCart.bind(this);
@@ -135,6 +140,7 @@ class DomainsTable extends Component {
                   <div className={styles.tabColumn}>
                     {(
                       domain.available && Object.keys(domain.prices).length > 0 &&
+                      domain.selected &&
                       <div className={styles.comboContainer}>
                         <Combo
                           placeholder="Periodo"
@@ -153,7 +159,9 @@ class DomainsTable extends Component {
                     )}
                   </div>
                   <div className={`${styles.tabColumn} ${styles.price}`}>
-                    {(domain.available && `${domain.selected.currencySymbol} ${domain.selected.price}`)}
+                    {(domain.available && domain.selected &&
+                      `${domain.selected.currencySymbol} ${domain.selected.price}`
+                    )}
                     {(!domain.available &&
                       <a
                         className={styles.tabLink}
@@ -166,14 +174,13 @@ class DomainsTable extends Component {
                   </div>
                   <div className={styles.tabColumn}>
                     {
-                      ((domain.available &&
-                        <span
-                          className={styles.link}
+                      ((domain.available && domain.selected &&
+                        <button
+                          className={styles.addCart}
                           onClick={() => this.addToCart(domain)}
-                          aria-hidden
                         >
                           {this.props.strings.others.addToCart}
-                        </span>)
+                        </button>)
                       || (!domain.available &&
                         <span>{this.props.strings.domainsCatalog.notAvailable}</span>
                       ))
