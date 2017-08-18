@@ -9,7 +9,7 @@ import DomainsWhois from '../domains-whois';
 
 import Combo from '../../../../components/combo';
 
-import { addProduct } from '../../../../reducers/cart/actions';
+import { fetchProductFromBackend } from '../../../../reducers/cart/actions';
 
 import styles from './styles.css';
 
@@ -18,7 +18,6 @@ class DomainsTable extends Component {
     super(props, context);
 
     const domainsData = _.mapKeys(this.props.domains, 'countryProductId');
-    console.log('domainsData', domainsData);
 
     const domains = _.map(domainsData, (domain) => {
       const pricesData = this.props.prices.get(domain.countryProductId);
@@ -35,14 +34,10 @@ class DomainsTable extends Component {
       });
     });
 
-    console.log('domains', domains);
-
     this.state = {
       domains: _.mapKeys(domains, 'name'),
       domainPaneActive: true,
     };
-
-    console.log(this.state.domains);
 
     this.changeSelected = this.changeSelected.bind(this);
     this.addToCart = this.addToCart.bind(this);
@@ -71,10 +66,8 @@ class DomainsTable extends Component {
   }
 
   addToCart(domain) {
-    this.props.addProduct(domain, 'Dominio');
-
-    const url = `/detalle-producto/item${this.props.cart.count + 1}/paquetes`;
-    this.context.router.history.push(url);
+    const push = this.context.router.history.push;
+    this.props.fetchProductFromBackend(domain, 'Dominio', push);
   }
 
   changeSelected(periodSlug, trackItem) {
@@ -203,9 +196,8 @@ class DomainsTable extends Component {
 }
 
 DomainsTable.propTypes = {
-  addProduct: PropTypes.func.isRequired,
+  fetchProductFromBackend: PropTypes.func.isRequired,
   domains: PropTypes.arrayOf(PropTypes.object).isRequired,
-  cart: PropTypes.shape({ count: PropTypes.number }).isRequired,
   prices: PropTypes.objectOf(PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.bool,
@@ -225,4 +217,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { addProduct })(DomainsTable);
+export default connect(mapStateToProps, { fetchProductFromBackend })(DomainsTable);

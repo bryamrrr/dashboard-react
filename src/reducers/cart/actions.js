@@ -21,12 +21,11 @@ export function closeCart() {
   return { type: CLOSE_CART };
 }
 
-export function addProduct(item, category) {
+export function addProduct(item) {
   return {
     type: ADD_PRODUCT,
     payload: {
       item,
-      category,
     },
   };
 }
@@ -94,8 +93,8 @@ export function fetchCart(email, id) {
         fk_user_id: id,
       },
     };
-
-    const { data, meta } = await httpRequest('POST', url, dataToSend);
+    const config = { hideToaster: true };
+    const { data, meta } = await httpRequest('POST', url, dataToSend, config);
 
     if (meta.ok) {
       dispatch(setCart(data));
@@ -107,7 +106,29 @@ export function deleteItemFromBackend(itemId) {
   return async (dispatch) => {
     const cartId = store.getState().get('cart').id;
     const url = `${constants.urls.API_CART}/carts/${cartId}/items/${itemId}`;
-    httpRequest('DELETE', url);
+    const config = { successMessage: 'Producto eliminado correctamente' };
+    httpRequest('DELETE', url, null, config);
     dispatch(itemDeleted());
+  };
+}
+
+export function fetchProductFromBackend(item, category, push) {
+  return async (dispatch) => {
+    const cartId = store.getState().get('cart').id;
+
+    const productData = Object.assign({}, item, {
+      type: 'product',
+      category,
+      fk_item_id: item.id || item.countryProductId,
+    });
+
+    const url = `${constants.urls.API_CART}/carts/${cartId}/items`;
+    const config = { successMessage: 'Producto agregado al carrito' };
+    const { data, meta } = await httpRequest('POST', url, productData, config);
+    const urlPush = `/detalle-producto/${data.id}/paquetes`;
+    if (meta.ok) {
+      dispatch(addProduct(data));
+      if (push) push(urlPush);
+    }
   };
 }

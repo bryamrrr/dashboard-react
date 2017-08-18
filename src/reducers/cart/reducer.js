@@ -45,24 +45,13 @@ function reducer(state = initialState, action) {
     case CLOSE_CART:
       return state.set('isOpen', false);
     case ADD_PRODUCT: {
-      const productData = Object.assign({}, action.payload.item, {
-        type: 'product',
-        category: action.payload.category,
-        fk_item_id: action.payload.item.id || action.payload.item.countryProductId,
-      });
-
-      // Send product to API
-      const url = `${constants.urls.API_CART}/carts/${state.id}/items`;
-      httpRequest('POST', url, productData);
-
       const newState = state
-        .setIn(['items', `item${state.count + 1}`], productData)
+        .setIn(['items', action.payload.item.id], action.payload.item)
         .set('count', state.count + 1);
 
       return newState.set('total', calcTotal(newState.get('items')));
     }
     case SET_PACKAGES: {
-      console.log('payload', action.payload);
       const item = Object.assign({}, state.get('items').get(action.payload.productId), {
         packages: _.mapKeys(action.payload.packages, 'slug'),
       });

@@ -32,7 +32,6 @@ export default async (method, url, data = {}, options = {
     };
 
     response.data = await response.meta.json();
-
     if (response.meta.ok) {
       if (!options.hideToaster) {
         store.dispatch(showToaster('success', options.successMessage));
