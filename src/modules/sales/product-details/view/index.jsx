@@ -10,7 +10,7 @@ import FormButton from '../../../../components/form-button';
 
 import { setRoute } from '../../../../reducers/routes/actions';
 import {
-  addPackage,
+  addPackageToBackend,
   fetchPackages,
   selectPeriod,
 } from '../../../../reducers/cart/actions';
@@ -34,7 +34,7 @@ class ProductDetails extends Component {
     if (product && product.packages) return this.setState({ fetchingPackages: false });
 
     if (product && !product.packages) {
-      const countryProductId = product.countryProductId;
+      const countryProductId = product.fk_item_id;
       await this.props.fetchPackages(this.state.itemId, countryProductId);
       return this.setState({ fetchingPackages: false });
     }
@@ -51,11 +51,10 @@ class ProductDetails extends Component {
   async componentWillReceiveProps(nextProps) {
     const product = nextProps.items.get(this.state.itemId);
     if (product && !product.packages) {
-      const countryProductId = product.get('countryProductId');
+      const countryProductId = product.get('fk_item_id');
       await this.props.fetchPackages(this.state.itemId, countryProductId);
       return this.setState({ fetchingPackages: false });
     }
-
     return undefined;
   }
 
@@ -67,9 +66,8 @@ class ProductDetails extends Component {
       periodSlug: generalPackageData.slug,
       periodId: generalPackageData.id,
     });
-    this.props.addPackage(this.state.itemId, data);
-    const url = '/catalogo/dominios';
-    this.context.router.history.push(url);
+    const push = this.context.router.history.push;
+    this.props.addPackageToBackend(this.state.itemId, data, push);
   }
 
   changeSelected(period) {
@@ -141,20 +139,20 @@ class ProductDetails extends Component {
             </div>
           </div>
         </section>
-        <div className={styles.packages}>
-          <h2>Te puede interesar:</h2>
-          <section className={styles.packageContainer}>
-            {(product.packages[product.selected.periodSlug].packagePeriod.length > 0
-              && product.packages[product.selected.periodSlug].packagePeriod.map((packageData) => {
-                const price = packageData.price;
+        {(product.packages[product.selected.periodSlug].packagePeriod.length > 0 &&
+          <div className={styles.packages}>
+            <h2>Te puede interesar:</h2>
+            <section className={styles.packageContainer}>
+              {(product.packages[product.selected.periodSlug].packagePeriod.map((packageData) => {
+                const price = (packageData.price - product.selected.price).toFixed(2);
                 const currencySymbol = packageData.currencySymbol;
                 return (
                   <article key={packageData.id} className={styles.item}>
-                    <div className={styles.amount}>{`${currencySymbol} ${price}`}</div>
+                    <div className={styles.amount}>{`+ ${currencySymbol} ${price}`}</div>
                     <div className={styles.itemInfo}>
                       <i className="linearicon-papers" />
                       <div className={styles.packageDetail}>
-                        <p>Llévate tu producto junto con:</p>
+                        <p>{`Llévate tu ${category} junto con:`}</p>
                         {packageData.remainingProducts.map(productData =>
                           <a key={productData.id}>
                             <span>{productData.productName}</span>
@@ -172,10 +170,10 @@ class ProductDetails extends Component {
                     />
                   </article>
                 );
-              })
-            )}
-          </section>
-        </div>
+              }))}
+            </section>
+          </div>
+        )}
       </div>
     );
   }
@@ -188,7 +186,7 @@ ProductDetails.propTypes = {
     PropTypes.object,
   ])).isRequired,
   fetchPackages: PropTypes.func.isRequired,
-  addPackage: PropTypes.func.isRequired,
+  addPackageToBackend: PropTypes.func.isRequired,
   selectPeriod: PropTypes.func.isRequired,
   setRoute: PropTypes.func.isRequired,
 };
@@ -205,7 +203,7 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
   setRoute,
-  addPackage,
+  addPackageToBackend,
   fetchPackages,
   selectPeriod,
 })(ProductDetails);

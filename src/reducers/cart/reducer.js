@@ -16,9 +16,6 @@ import {
   SET_CART,
 } from './actions';
 
-import constants from '../../extra/constants';
-import httpRequest from '../../extra/http-request';
-
 const CartRecord = Record({
   isOpen: false,
   items: map(),
@@ -62,43 +59,9 @@ function reducer(state = initialState, action) {
         ], item);
     }
     case ADD_PACKAGE: {
-      const products = Object.assign({},
-        _.mapKeys(action.payload.packageData.remainingProducts, (key) => {
-          if (key.countryProductId) return key.countryProductId;
-          return key.id;
-        }),
-      );
-
-      const countryProductId = state.items.get(action.payload.item).countryProductId
-        || state.items.get(action.payload.item).id;
-      const product = {
-        [countryProductId]: state.items.get(action.payload.item),
-      };
-
-      const selectedItem = {
-        periodSlug: action.payload.packageData.periodSlug,
-        price: action.payload.packageData.price,
-        periodId: action.payload.packageData.periodId,
-        periodName: action.payload.packageData.periodName,
-        currencySymbol: action.payload.packageData.currencySymbol,
-      };
-
-      const data = {
-        period: action.payload.packageData.periodName,
-        selected: selectedItem,
-        name: action.payload.packageData.name,
-        type: 'package',
-        products: Object.assign({}, products, product),
-        fk_item_id: countryProductId,
-      };
-
-      // Send package (product) to API
-      const url = `${constants.urls.API_CART}/carts/${state.id}/items`;
-      httpRequest('POST', url, data);
-
       const items = state.get('items')
         .delete(action.payload.item)
-        .set(`package${state.count}`, data);
+        .set(action.payload.item, action.payload.packageData);
 
       const newState = state.set('items', items);
 

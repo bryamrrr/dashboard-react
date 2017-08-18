@@ -10,10 +10,9 @@ import Info from '../../../../components/info';
 import LoadingIcon from '../../../../components/loading-icon';
 import DomainsTable from '../domains-table';
 
-import { addProduct } from '../../../../reducers/cart/actions';
+import { fetchProductFromBackend } from '../../../../reducers/cart/actions';
 import { fetchPrices } from '../../../../reducers/domains/actions';
 import { setRoute } from '../../../../reducers/routes/actions';
-import { showToaster } from '../../../../reducers/toaster/actions';
 
 import styles from './styles.css';
 
@@ -42,11 +41,9 @@ class DomainsCatalog extends Component {
 
     domain.prices = _.mapKeys(pricesData.prices.ALTA, 'periodSlug');
     domain.selected = domain.prices['ano-1'];
-    this.props.addProduct(domain, 'Dominio');
-    this.props.showToaster('success', this.props.strings.cart.addItem);
 
-    const url = `/detalle-producto/item${this.props.cart.count + 1}/paquetes`;
-    this.context.router.history.push(url);
+    const push = this.context.router.history.push;
+    this.props.fetchProductFromBackend(domain, 'Dominio', push);
   }
 
   render() {
@@ -104,11 +101,9 @@ DomainsCatalog.propTypes = {
     PropTypes.bool,
     PropTypes.object,
   ])).isRequired,
-  addProduct: PropTypes.func.isRequired,
-  cart: PropTypes.shape({ count: PropTypes.number }).isRequired,
+  fetchProductFromBackend: PropTypes.func.isRequired,
   fetchPrices: PropTypes.func.isRequired,
   setRoute: PropTypes.func.isRequired,
-  showToaster: PropTypes.func.isRequired,
   strings: PropTypes.objectOf(PropTypes.object).isRequired,
   zones: PropTypes.objectOf(PropTypes.object).isRequired,
 };
@@ -127,8 +122,7 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, {
-  addProduct,
+  fetchProductFromBackend,
   fetchPrices,
   setRoute,
-  showToaster,
 })(DomainsCatalog);

@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import constants from '../../extra/constants';
 import httpRequest from '../../extra/http-request';
 
@@ -79,7 +81,6 @@ export function fetchPackages(itemId, countryProductId) {
   return async (dispatch) => {
     const url = `${constants.urls.API_SONQO}/packages/${countryProductId}`;
     const { data: { results } } = await httpRequest('GET', url);
-    console.log('packages', results);
     dispatch(setPackages(itemId, results));
   };
 }
@@ -128,6 +129,59 @@ export function fetchProductFromBackend(item, category, push) {
     const urlPush = `/detalle-producto/${data.id}/paquetes`;
     if (meta.ok) {
       dispatch(addProduct(data));
+      if (push) push(urlPush);
+    }
+  };
+}
+
+export function addPackageToBackend(item, packageData, push) {
+  return async (dispatch) => {
+    const state = store.getState();
+    const cartId = state.get('cart').id;
+    const itemId = state.get('cart').items.get(item).id;
+
+    const products = Object.assign({},
+      _.mapKeys(packageData.remainingProducts, (key) => {
+        if (key.countryProductId) return key.countryProductId;
+        return key.id;
+      }),
+    );
+
+    const countryProductId = state.get('cart').items.get(item).fk_item_id
+      || state.get('cart').items.get(item).id;
+    const product = {
+      [countryProductId]: state.get('cart').items.get(item),
+    };
+
+    const selectedItem = {
+      periodSlug: packageData.periodSlug,
+      price: packageData.price,
+      periodId: packageData.periodId,
+      periodName: packageData.periodName,
+      currencySymbol: packageData.currencySymbol,
+    };
+
+    const dataToSend = {
+      period: packageData.periodName,
+      selected: selectedItem,
+      name: packageData.name,
+      type: 'package',
+      products: Object.assign({}, products, product),
+      fk_item_id: countryProductId,
+    };
+
+    // Send package (product) to API
+    const url = `${constants.urls.API_CART}/carts/${cartId}/items`;
+    const config = { successMessage: 'Paquete agregado al carrito de compras' };
+    const { data, meta } = await httpRequest('POST', url, dataToSend, config);
+
+    const urlPush = '/catalogo/dominios';
+    if (meta.ok) {
+      // Delete single item to cart
+      const urlDelete = `${constants.urls.API_CART}/carts/${cartId}/items/${itemId}`;
+      const configDelete = { hideToaster: true };
+      httpRequest('DELETE', urlDelete, null, configDelete);
+      dispatch(addPackage(item, data));
       if (push) push(urlPush);
     }
   };
