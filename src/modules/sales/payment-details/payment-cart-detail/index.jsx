@@ -9,26 +9,35 @@ import styles from './styles.css';
 function PaymentCartDetail(props) {
   return (
     <div className={styles.container}>
-      {(props.cartInfo.items.size > 0 &&
-        props.cartInfo.items.entrySeq().map((data) => {
-          const key = data[0];
-          const item = data[1];
-          if (item.type === 'product') {
+      <div>
+        {(props.cartInfo.items.size > 0 &&
+          props.cartInfo.items.entrySeq().map((data) => {
+            const key = data[0];
+            const item = data[1];
+            if (item.type === 'product') {
+              return (
+                <PaymentCartProduct
+                  key={key}
+                  info={item}
+                />
+              );
+            }
             return (
-              <PaymentCartProduct
+              <PaymentCartPackage
                 key={key}
                 info={item}
               />
             );
-          }
-          return (
-            <PaymentCartPackage
-              key={key}
-              info={item}
-            />
-          );
-        })
-      )}
+          })
+        )}
+      </div>
+      <div className={styles.total}>
+        <span className={styles.text}>Total:</span>
+        <div>
+          <span>{props.cartInfo.currencySymbol}</span>
+          <span className={styles.amount}>{(props.cartInfo.total).toFixed(2)}</span>
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,0 +1,22 @@
+.total {
+  align-items: flex-end;
+  background-color: #388c4c;
+  color: white;
+  display: flex;
+  font-weight: 300;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.text {
+  font-size: 15px;
+  font-weight: 300;
+  text-transform: uppercase;
+}
+
+.amount {
+  font-size: 32px;
+  font-weight: bold;
+  line-height: 32px;
+  margin-left: 10px;
+}

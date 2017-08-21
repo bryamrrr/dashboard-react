@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 
 import { setRoute } from '../../../../reducers/routes/actions';
 
+import { closeCart } from '../../../../reducers/cart/actions';
+
 import constants from '../../../../extra/constants';
 import httpRequest from '../../../../extra/http-request';
 
@@ -30,6 +32,7 @@ class PaymentDetails extends Component {
   }
 
   componentWillMount() {
+    this.props.closeCart();
     const urlPuade = `${constants.urls.API_QUILCA}/documents/7a00049b-2187-4072-af91-b3a2d9f75563/contents/current`;
     const promisePuade = httpRequest('GET', urlPuade);
 
@@ -160,6 +163,7 @@ PaymentDetails.propTypes = {
     items: PropTypes.object,
     total: PropTypes.number,
   }).isRequired,
+  closeCart: PropTypes.func.isRequired,
 };
 
 PaymentDetails.contextTypes = {
@@ -174,4 +178,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { setRoute })(PaymentDetails);
+export default connect(mapStateToProps, { setRoute, closeCart })(PaymentDetails);
