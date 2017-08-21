@@ -33,6 +33,7 @@ class PaymentDetails extends Component {
 
   componentWillMount() {
     this.props.closeCart();
+
     const urlPuade = `${constants.urls.API_QUILCA}/documents/7a00049b-2187-4072-af91-b3a2d9f75563/contents/current`;
     const promisePuade = httpRequest('GET', urlPuade);
 

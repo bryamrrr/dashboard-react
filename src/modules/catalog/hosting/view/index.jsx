@@ -7,8 +7,7 @@ import CatalogCard from '../../catalog-card';
 import LoadingIcon from '../../../../components/loading-icon';
 
 import { setRoute } from '../../../../reducers/routes/actions';
-import { addProduct } from '../../../../reducers/cart/actions';
-import { showToaster } from '../../../../reducers/toaster/actions';
+import { fetchProductFromBackend } from '../../../../reducers/cart/actions';
 import {
   fetchHostings,
   fetchHostingPrices,
@@ -36,8 +35,7 @@ class HostingCatalog extends Component {
   }
 
   addToCart(item) {
-    this.props.addProduct(item, 'Hosting');
-    this.props.showToaster('success', this.props.strings.cart.addItem);
+    this.props.fetchProductFromBackend(item, 'Hosting');
   }
 
   render() {
@@ -65,10 +63,8 @@ HostingCatalog.propTypes = {
     PropTypes.bool,
     PropTypes.object,
   ])).isRequired,
-  addProduct: PropTypes.func.isRequired,
+  fetchProductFromBackend: PropTypes.func.isRequired,
   fetchHostingPrices: PropTypes.func.isRequired,
-  showToaster: PropTypes.func.isRequired,
-  strings: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 function mapStateToProps(state) {
@@ -80,8 +76,7 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
   setRoute,
-  addProduct,
+  fetchProductFromBackend,
   fetchHostings,
   fetchHostingPrices,
-  showToaster,
 })(HostingCatalog);

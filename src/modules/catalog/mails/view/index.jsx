@@ -7,7 +7,7 @@ import CatalogCard from '../../catalog-card';
 import LoadingIcon from '../../../../components/loading-icon';
 
 import { setRoute } from '../../../../reducers/routes/actions';
-import { addProduct } from '../../../../reducers/cart/actions';
+import { fetchProductFromBackend } from '../../../../reducers/cart/actions';
 import {
   fetchMails,
   fetchMailPrices,
@@ -35,7 +35,7 @@ class MailsCatalog extends Component {
   }
 
   addToCart(item) {
-    this.props.addProduct(item, 'Email'); // Name 'Email' its a backend definition
+    this.props.fetchProductFromBackend(item, 'Email'); // Name 'Email' its a backend definition
   }
 
   render() {
@@ -63,7 +63,7 @@ MailsCatalog.propTypes = {
     PropTypes.bool,
     PropTypes.object,
   ])).isRequired,
-  addProduct: PropTypes.func.isRequired,
+  fetchProductFromBackend: PropTypes.func.isRequired,
   fetchMailPrices: PropTypes.func.isRequired,
 };
 
@@ -73,7 +73,7 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
   setRoute,
-  addProduct,
+  fetchProductFromBackend,
   fetchMails,
   fetchMailPrices,
 })(MailsCatalog);

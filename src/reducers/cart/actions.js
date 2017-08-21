@@ -124,7 +124,7 @@ export function fetchProductFromBackend(item, category, push) {
     });
 
     const url = `${constants.urls.API_CART}/carts/${cartId}/items`;
-    const config = { successMessage: 'Producto agregado al carrito' };
+    const config = { successMessage: 'Producto agregado al carrito de compras' };
     const { data, meta } = await httpRequest('POST', url, productData, config);
     const urlPush = `/detalle-producto/${data.id}/paquetes`;
     if (meta.ok) {

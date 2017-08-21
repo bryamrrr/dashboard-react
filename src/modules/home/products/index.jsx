@@ -2,6 +2,7 @@ import React from 'react';
 import PropType from 'prop-types';
 
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import Card from '../../../components/card';
 import Hexagon from '../../../components/hexagon';
@@ -11,7 +12,7 @@ import styles from './styles.css';
 function Products(props) {
   return (
     <section className={styles.container}>
-      <article>
+      <Link to="/catalogo/dominios" >
         <Card
           color="#f7a80d"
           includeBorder
@@ -24,8 +25,8 @@ function Products(props) {
             {props.strings.home.domains.description}
           </p>
         </Card>
-      </article>
-      <article>
+      </Link>
+      <Link to="/catalogo/hosting">
         <Card
           color="#f44336"
           includeBorder
@@ -40,8 +41,8 @@ function Products(props) {
             }}
           />
         </Card>
-      </article>
-      <article>
+      </Link>
+      <Link to="/catalogo/correos">
         <Card
           color="#1e88e5"
           includeBorder
@@ -54,7 +55,7 @@ function Products(props) {
             {props.strings.home.mails.description}
           </p>
         </Card>
-      </article>
+      </Link>
     </section>
   );
 }
