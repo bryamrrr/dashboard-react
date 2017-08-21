@@ -143,7 +143,7 @@ class PaymentDetails extends Component {
         </div>
         <div className={styles.cartContainer}>
           <h2>{this.props.strings.cart.title}</h2>
-          <PaymentCartDetail />
+          <PaymentCartDetail cartInfo={this.props.cartInfo} />
         </div>
       </div>
     );
@@ -154,6 +154,12 @@ PaymentDetails.propTypes = {
   setRoute: PropTypes.func.isRequired,
   context: PropTypes.string.isRequired,
   strings: PropTypes.objectOf(PropTypes.object).isRequired,
+  cartInfo: PropTypes.shape({
+    currencySymbol: PropTypes.string,
+    isOpen: PropTypes.bool,
+    items: PropTypes.object,
+    total: PropTypes.number,
+  }).isRequired,
 };
 
 PaymentDetails.contextTypes = {
@@ -164,6 +170,7 @@ function mapStateToProps(state) {
   return {
     context: state.get('context'),
     strings: state.get('translate').strings,
+    cartInfo: state.get('cart'),
   };
 }
 

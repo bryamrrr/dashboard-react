@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Hexagon from '../../../components/hexagon';
+import Hexagon from '../../../../components/hexagon';
 
 import styles from './styles.css';
 
-function CartProduct(props) {
+function PaymentCartProduct(props) {
   let className = '';
   let iconName = '';
   let name = '';
@@ -33,42 +33,29 @@ function CartProduct(props) {
   return (
     <div
       className={`${styles.container} ${styles[className]}`}
-      onClick={() => props.showPackages(props.itemId)}
-      aria-hidden
     >
       <Hexagon color={className}>
         <i className={iconName} />
       </Hexagon>
-      <div className={styles.info}>
-        <div className={styles.product}>
-          <span className={styles.title}>{name}</span>
-          <span className={styles.period}>
-            {props.info.selected.periodName}
-          </span>
-        </div>
-        <div>
-          <span className={styles.currency}>
-            {props.info.selected.currencySymbol}
-          </span>
-          <span className={styles.price}>
-            {parsePrice}
-          </span>
-        </div>
+      <div className={styles.product}>
+        <span className={styles.title}>{name}</span>
+        <span className={styles.period}>
+          {props.info.selected.periodName}
+        </span>
       </div>
-      <button
-        className={styles.close}
-        onClick={(e) => {
-          e.stopPropagation();
-          props.deleteItem(props.itemId);
-        }}
-      >
-        <i className="linearicon-cross" />
-      </button>
+      <div className={styles.priceContainer}>
+        <span className={styles.currency}>
+          {props.info.selected.currencySymbol}
+        </span>
+        <span className={styles.price}>
+          {parsePrice}
+        </span>
+      </div>
     </div>
   );
 }
 
-CartProduct.propTypes = {
+PaymentCartProduct.propTypes = {
   info: PropTypes.objectOf(PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.string,
@@ -76,9 +63,6 @@ CartProduct.propTypes = {
     PropTypes.bool,
     PropTypes.object,
   ])).isRequired,
-  deleteItem: PropTypes.func.isRequired,
-  showPackages: PropTypes.func.isRequired,
-  itemId: PropTypes.string.isRequired,
 };
 
-export default CartProduct;
+export default PaymentCartProduct;

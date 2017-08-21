@@ -88,7 +88,7 @@ function reducer(state = initialState, action) {
       const cart = new CartRecord({
         isOpen: false,
         items: map(items),
-        count: 0,
+        count: action.payload.items.length,
         currencySymbol: action.payload.currencySymbol || 'S/',
         total: 0,
         id: action.payload.id,

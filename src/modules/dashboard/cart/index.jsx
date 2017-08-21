@@ -90,7 +90,7 @@ class Cart extends Component {
             <span className={styles.text}>Total:</span>
             <div>
               <span>{this.props.cartInfo.currencySymbol}</span>
-              <span className={styles.amount}>{this.props.cartInfo.total}</span>
+              <span className={styles.amount}>{(this.props.cartInfo.total).toFixed(2)}</span>
             </div>
           </div>
           <div className={buttonClass}>

@@ -25,7 +25,10 @@
 .logo {
   display: inline-block;
   width: 220px;
+  text-align: center;
 }
+
+.logo a { display: inline-block; }
 
 .logo img {
   display: block;

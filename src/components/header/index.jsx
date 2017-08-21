@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import BreadCrumb from '../../components/bread-crumb';
 import Settings from '../../modules/dashboard/settings';
@@ -13,10 +14,12 @@ function Header(props) {
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
-        <img
-          src={`${props.context}/images/logo.png`}
-          alt=""
-        />
+        <Link to="/inicio">
+          <img
+            src={`${props.context}/images/logo.png`}
+            alt="Logo Yachay"
+          />
+        </Link>
       </div>
       <i className={`${styles.icon} linearicon-options`} />
       <BreadCrumb />

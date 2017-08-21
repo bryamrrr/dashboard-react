@@ -2,22 +2,16 @@ import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Hexagon from '../../../components/hexagon';
+import Hexagon from '../../../../components/hexagon';
 
 import styles from './styles.css';
 
-function CartPackage(props) {
+function PaymentCartPackage(props) {
   const parsePrice = (parseFloat(props.info.selected.price)).toFixed(2);
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
         <div className={styles.header}>{props.info.name}</div>
-        <button
-          className={styles.close}
-          onClick={() => props.deleteItem(props.itemId)}
-        >
-          <i className="linearicon-cross" />
-        </button>
         {_.map(props.info.products, (product, index) => {
           const key = `${product.countryProductId}-${index}`;
 
@@ -65,7 +59,7 @@ function CartPackage(props) {
   );
 }
 
-CartPackage.propTypes = {
+PaymentCartPackage.propTypes = {
   info: PropTypes.objectOf(PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.string,
@@ -73,8 +67,6 @@ CartPackage.propTypes = {
     PropTypes.bool,
     PropTypes.object,
   ])).isRequired,
-  deleteItem: PropTypes.func.isRequired,
-  itemId: PropTypes.string.isRequired,
 };
 
-export default CartPackage;
+export default PaymentCartPackage;
