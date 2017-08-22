@@ -33,7 +33,7 @@ class UserData extends Component {
   componentWillMount() {
     this.props.setRoute({ title: 'data' }, { title: 'user' });
 
-    const urlCountries = `${constants.urls.API_SONQO}/countries?limit=all`;
+    const urlCountries = `${constants.urls.API_SONQO}/countries`;
     const promiseCountries = httpRequest('GET', urlCountries);
 
     const urlDocumentTypes = `${constants.urls.API_SONQO}/documenttypes`;
