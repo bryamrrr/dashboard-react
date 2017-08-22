@@ -30,9 +30,9 @@ function CatalogCard(props) {
           </div>
         </div>
         <div className={styles.body}>
-          {/* <ul>
-            {props.info.description.map(data => <li key={data}>{data}</li>)}
-          </ul> */}
+          <ul>
+            {props.info.description.map((data, $index) => <li key={$index}>{data}</li>)}
+          </ul>
           <FormButton
             callToAction="Agregar al carrito"
             includeIcon="linearicon-cart"

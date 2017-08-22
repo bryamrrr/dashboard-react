@@ -45,11 +45,12 @@ class MailsCatalog extends Component {
           (this.state.fetchingMails && <LoadingIcon />)
           ||
           (!this.state.fetchingMails && this.props.mails.valueSeq().map(product =>
-            <CatalogCard
-              key={product.id}
-              addToCart={this.addToCart}
-              info={product}
-            />,
+            <div className={styles.card} key={product.countryProductId}>
+              <CatalogCard
+                addToCart={this.addToCart}
+                info={product}
+              />
+            </div>,
           ))
         )}
       </div>

@@ -4,7 +4,8 @@
   justify-content: space-around;
 }
 
-.container article {
+.container > .card {
   flex-basis: 270px;
   margin: 20px 0;
+  box-sizing: border-box;
 }

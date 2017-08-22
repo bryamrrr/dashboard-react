@@ -45,11 +45,12 @@ class HostingCatalog extends Component {
           (this.state.fetchingHostings && <LoadingIcon />)
           ||
           (!this.state.fetchingHostings && this.props.hostings.valueSeq().map(product =>
-            <CatalogCard
-              key={product.countryProductId}
-              addToCart={this.addToCart}
-              info={product}
-            />,
+            <div className={styles.card} key={product.countryProductId}>
+              <CatalogCard
+                addToCart={this.addToCart}
+                info={product}
+              />
+            </div>,
           ))
         )}
       </div>

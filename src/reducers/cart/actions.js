@@ -107,7 +107,7 @@ export function deleteItemFromBackend(itemId) {
   return async (dispatch) => {
     const cartId = store.getState().get('cart').id;
     const url = `${constants.urls.API_CART}/carts/${cartId}/items/${itemId}`;
-    const config = { successMessage: 'Producto eliminado correctamente' };
+    const config = { successMessage: 'Producto eliminado correctamente del carrito' };
     httpRequest('DELETE', url, null, config);
     dispatch(itemDeleted());
   };

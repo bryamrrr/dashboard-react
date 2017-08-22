@@ -1,6 +1,4 @@
-.container {
-  text-align: center;
-}
+.container { text-align: center; }
 
 .header {
   font-size: 20px;
@@ -24,9 +22,7 @@
   margin-right: 5px;
 }
 
-.integer {
-  font-size: 36px;
-}
+.integer { font-size: 36px; }
 
 .right {
   display: inline-block;
@@ -59,10 +55,18 @@
   font-size: 15px;
   font-weight: 300;
   margin-bottom: 12px;
+  position: relative;
+  padding-left: 15px;
 }
 
 .body li:before {
-  content: "• ";
-  color: #ff5a00;
-  margin-right: 8px;
+  background-color: #ff5a00;
+  border-radius: 50%;
+  content: '';
+  display: block;
+  height: 6px;
+  left: 0;
+  position: absolute;
+  top: 8px;
+  width: 6px;
 }
